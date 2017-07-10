@@ -1,0 +1,4564 @@
+<?xml version= "1.0" encoding="UTF8"?>
+<cardset>
+    <card>
+        <faceOne>
+            <faceOneText>to lead</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἄγω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to go</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>βαίνω</faceTwoText>
+            <faceTwoText>εἶμι</faceTwoText>
+            <faceTwoText>ἔρχομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to throw</faceOneText>
+            <faceOneText>to smite</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>βάλλω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to give</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δίδωμι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to be</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>εἰμί</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to speak</faceOneText>
+            <faceOneText>to say</faceOneText>
+            <faceOneText>to declare</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>εἶπον</faceTwoText>
+            <faceTwoText>φημί</faceTwoText>
+            
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to have</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἔχω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to set</faceOneText>
+            <faceOneText>to stand</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἵστημι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to see</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὁράω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to make</faceOneText>
+            <faceOneText>to put</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τίθημι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to take</faceOneText>
+            <faceOneText>to choose</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>αἱρέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to exchange</faceOneText>
+            <faceOneText>to answer</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀμείβω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to speak</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>αὐδάω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to become</faceOneText>
+            <faceOneText>to be born</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>γίγνομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to will</faceOneText>
+            <faceOneText>to wish</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐθέλω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to move about</faceOneText>
+            <faceOneText>to be busy</faceOneText>
+            <faceOneText>to follow</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἕπω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to let go</faceOneText>
+            <faceOneText>to send</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἵημι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to come to</faceOneText>
+            <faceOneText>to reach</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἱκνέομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to lie</faceOneText>
+            <faceOneText>to be place</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κεῖμαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to kill</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κτείνω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to leave</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>λείπω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to remain</faceOneText>
+            <faceOneText>to wait</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μένω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to know</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>οἶδα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to lose</faceOneText>
+            <faceOneText>to destroy</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὄλλυμι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to arouse</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὄρνυμι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to persuade</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πείθω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to fall</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πίπτω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to bear</faceOneText>
+            <faceOneText>to bring</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>φέρω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to flee</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>φεύγω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to speak aloud</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>φωνέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to pour</faceOneText>
+            <faceOneText>to shed</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>χέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to harangue</faceOneText>
+            <faceOneText>to speak</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀγορεύω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to dart</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀίσσω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to hear</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀκούω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to ward off</faceOneText>
+            <faceOneText>to defend</faceOneText>
+            <faceOneText>to assist</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀμύνω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card>
+        <faceOne>
+            <faceOneText>to bid</faceOneText>
+            <faceOneText>to command</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀνώγω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v040">
+        <faceOne>
+            <faceOneText>to begin</faceOneText>
+            <faceOneText>to lead</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἄρχω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v041">
+        <faceOne>
+            <faceOneText>to come to know</faceOneText>
+            <faceOneText>to know</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>γιγνώσκω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v042">
+        <faceOne>
+            <faceOneText>to subdue</faceOneText>
+            <faceOneText>to tame</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δάμνημι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v043">
+        <faceOne>
+            <faceOneText>to dread</faceOneText>
+            <faceOneText>to fear</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δείδω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v044">
+        <faceOne>
+            <faceOneText>to accept</faceOneText>
+            <faceOneText>to receive</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δέχομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v045">
+        <faceOne>
+            <faceOneText>to be able</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δύναμαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v046">
+        <faceOne>
+            <faceOneText>to enter</faceOneText>
+            <faceOneText>to put on</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δύω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v047">
+        <faceOne>
+            <faceOneText>to let</faceOneText>
+            <faceOneText>to permit</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐάω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v048">
+        <faceOne>
+            <faceOneText>to sit down</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἕζομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v049">
+        <faceOne>
+            <faceOneText>to say</faceOneText>
+            <faceOneText>to declare</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>εἴρω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v050">
+        <faceOne>
+            <faceOneText>to strike</faceOneText>
+            <faceOneText>to drive</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐλάω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v051">
+        <faceOne>
+            <faceOneText>to be like</faceOneText>
+            <faceOneText>to befit</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἔοικα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v052">
+        <faceOne>
+            <faceOneText>to draw</faceOneText>
+            <faceOneText>to drag off</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐρύω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v053">
+        <faceOne>
+            <faceOneText>to pray</faceOneText>
+            <faceOneText>to vow</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>εὔχομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v054">
+        <faceOne>
+            <faceOneText>to sit</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἧμαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v055">
+        <faceOne>
+            <faceOneText>to die</faceOneText>
+            <faceOneText>to be killed</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>θνήσκω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v056">
+        <faceOne>
+            <faceOneText>to arrive at</faceOneText>
+            <faceOneText>to reach</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἱκάνω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v057">
+        <faceOne>
+            <faceOneText>to call</faceOneText>
+            <faceOneText>to summon</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>καλέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v058">
+        <faceOne>
+            <faceOneText>to cover</faceOneText>
+            <faceOneText>to hide</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>καλύπτω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v059">
+        <faceOne>
+            <faceOneText>to urge</faceOneText>
+            <faceOneText>to command</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κελεύω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v060">
+        <faceOne>
+            <faceOneText>to go</faceOneText>
+            <faceOneText>to go away</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κίω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v061">
+        <faceOne>
+            <faceOneText>to hearken</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κλύω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v062">
+        <faceOne>
+            <faceOneText>to take</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>λαμβάνω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v063">
+        <faceOne>
+            <faceOneText>to gather</faceOneText>
+            <faceOneText>to tell</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>λέγω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v064">
+        <faceOne>
+            <faceOneText>to loose</faceOneText>
+            <faceOneText>to release</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>λύω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v065">
+        <faceOne>
+            <faceOneText>to fight</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μάχομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v066">
+        <faceOne>
+            <faceOneText>to be eager</faceOneText>
+            <faceOneText>to press on</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μέμαα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v067">
+        <faceOne>
+            <faceOneText>to remind</faceOneText>
+            <faceOneText>to recall</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μιμνήσκω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v068">
+        <faceOne>
+            <faceOneText>to dwell</faceOneText>
+            <faceOneText>to inhabit</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ναίω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v069">
+        <faceOne>
+            <faceOneText>to go</faceOneText>
+            <faceOneText>to return</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>νέομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v070">
+        <faceOne>
+            <faceOneText>to perceive</faceOneText>
+            <faceOneText>to think</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>νοέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v071">
+        <faceOne>
+            <faceOneText>to depart</faceOneText>
+            <faceOneText>to be gone</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>οἴχομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v072">
+        <faceOne>
+            <faceOneText>to think</faceOneText>
+            <faceOneText>to expect</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὀίω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v073">
+        <faceOne>
+            <faceOneText>to urge on</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὀτρύνω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v074">
+        <faceOne>
+            <faceOneText>to suffer</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πάσχω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v075">
+        <faceOne>
+            <faceOneText>to stop</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>παύω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v076">
+        <faceOne>
+            <faceOneText>to be</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πέλω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v077">
+        <faceOne>
+            <faceOneText>to send</faceOneText>
+            <faceOneText>to escort</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πέμπω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v078">
+        <faceOne>
+            <faceOneText>to breathe</faceOneText>
+            <faceOneText>to be prudent</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πνείω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v079">
+        <faceOne>
+            <faceOneText>to work</faceOneText>
+            <faceOneText>to offer</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ῥέζω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v080">
+        <faceOne>
+            <faceOneText>to drive</faceOneText>
+            <faceOneText>to start</faceOneText>
+            <faceOneText>to rush</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>σεύω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v081">
+        <faceOne>
+            <faceOneText>to end</faceOneText>
+            <faceOneText>to complete</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τελέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v082">
+        <faceOne>
+            <faceOneText>to delight</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τέρπω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v083">
+        <faceOne>
+            <faceOneText>to make</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τεύχω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v084">
+        <faceOne>
+            <faceOneText>to bring forth</faceOneText>
+            <faceOneText>to beget</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τίκτω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v085">
+        <faceOne>
+            <faceOneText>to turn</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τρέπω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v086">
+        <faceOne>
+            <faceOneText>to show</faceOneText>
+            <faceOneText>to reveal</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>φαίνω</faceTwoText>
+            <faceTwoText>φάω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v087">
+        <faceOne>
+            <faceOneText>to point out</faceOneText>
+            <faceOneText>to show</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>φράζομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v088">
+        <faceOne>
+            <faceOneText>to think</faceOneText>
+            <faceOneText>to intend</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>φρονέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v089">
+        <faceOne>
+            <faceOneText>to rejoice</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>χαίρω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v090">
+        <faceOne>
+            <faceOneText>to collect</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀγείρω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v091">
+        <faceOne>
+            <faceOneText>to leap</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἅλλομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v092">
+        <faceOne>
+            <faceOneText>to be king</faceOneText>
+            <faceOneText>to rule</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀνάσσω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v093">
+        <faceOne>
+            <faceOneText>to fasten</faceOneText>
+            <faceOneText>to lay hold of</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἅπτω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v094">
+        <faceOne>
+            <faceOneText>to fit together</faceOneText>
+            <faceOneText>to fit</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀραρίσκω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v095">
+        <faceOne>
+            <faceOneText>to grieve</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἄχνυμαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v096">
+        <faceOne>
+            <faceOneText>to distribute</faceOneText>
+            <faceOneText>to feast</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δαίνυμι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v097">
+        <faceOne>
+            <faceOneText>to bind</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v098">
+        <faceOne>
+            <faceOneText>to awake</faceOneText>
+            <faceOneText>to rouse</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐγείρω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v099">
+        <faceOne>
+            <faceOneText>to eat</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἔδω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v100">
+        <faceOne>
+            <faceOneText>to see</faceOneText>
+            <faceOneText>to seem</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>εἴδομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v101">
+        <faceOne>
+            <faceOneText>to ask</faceOneText>
+            <faceOneText>to inquire</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>εἴρομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v102">
+        <faceOne>
+            <faceOneText>to drag</faceOneText>
+            <faceOneText>to draw</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἕλκω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v103">
+        <faceOne>
+            <faceOneText>to hope</faceOneText>
+            <faceOneText>to make hope</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἔλπω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v104">
+        <faceOne>
+            <faceOneText>to clothe</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἕννυμι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v105">
+        <faceOne>
+            <faceOneText>to do</faceOneText>
+            <faceOneText>to sacrafice</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἔρδω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v106">
+        <faceOne>
+            <faceOneText>to hold back</faceOneText>
+            <faceOneText>to restrain</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐρύκω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v107">
+        <faceOne>
+            <faceOneText>to sleep</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>εὕδω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v108">
+        <faceOne>
+            <faceOneText>to find</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>εὑρίσκω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v109">
+        <faceOne>
+            <faceOneText>to live</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ζώω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v110">
+        <faceOne>
+            <faceOneText>to say</faceOneText>
+            <faceOneText>to speak</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἠμί</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v111">
+        <faceOne>
+            <faceOneText>to run</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>θέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v112">
+        <faceOne>
+            <faceOneText>to sit</faceOneText>
+            <faceOneText>to cause to sit</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἵζω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v113">
+        <faceOne>
+            <faceOneText>to hold</faceOneText>
+            <faceOneText>to check</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἴσχω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v114">
+        <faceOne>
+            <faceOneText>to burn</faceOneText>
+            <faceOneText>to kindle</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>καίω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v115">
+        <faceOne>
+            <faceOneText>to command</faceOneText>
+            <faceOneText>to exhort</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κέλομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v116">
+        <faceOne>
+            <faceOneText>to find</faceOneText>
+            <faceOneText>to light upon</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κιχάνω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v117">
+        <faceOne>
+            <faceOneText>to weep</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κλαίω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v118">
+        <faceOne>
+            <faceOneText>to lean</faceOneText>
+            <faceOneText>to sink</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κλίνω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v119">
+        <faceOne>
+            <faceOneText>to separate</faceOneText>
+            <faceOneText>to decide</faceOneText>
+            <faceOneText>to select</faceOneText>
+
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κρίνω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v120">
+        <faceOne>
+            <faceOneText>to escape</faceOneText>
+            <faceOneText>to notice</faceOneText>
+            <faceOneText>to forget</faceOneText>
+
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>λανθάνω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v121">
+        <faceOne>
+            <faceOneText>to pray</faceOneText>
+            <faceOneText>to entreat</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>λίσσομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v122">
+        <faceOne>
+            <faceOneText>to fight</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μαχέομαι</faceTwoText>
+            <faceTwoText>μάρναμαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v124">
+        <faceOne>
+            <faceOneText>to be going</faceOneText>
+            <faceOneText>to be about</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μέλλω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v125">
+        <faceOne>
+            <faceOneText>to concern</faceOneText>
+            <faceOneText>to interest</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μέλω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v126">
+        <faceOne>
+            <faceOneText>to remain</faceOneText>
+            <faceOneText>to await</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μίμνω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v127">
+        <faceOne>
+            <faceOneText>to mix</faceOneText>
+            <faceOneText>to mingle</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μίσγω</faceTwoText>
+            <faceTwoText>μίγνυμι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v128">
+        <faceOne>
+            <faceOneText>to relate</faceOneText>
+            <faceOneText>to tell</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μυθέομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v129">
+        <faceOne>
+            <faceOneText>to distribute</faceOneText>
+            <faceOneText>to pasture</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>νέμω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v130">
+        <faceOne>
+            <faceOneText>to return</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>νοστέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v131">
+        <faceOne>
+            <faceOneText>to lament</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὀδύρομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v132">
+        <faceOne>
+            <faceOneText>to name</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὀνομάζω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v133">
+        <faceOne>
+            <faceOneText>to attend</faceOneText>
+            <faceOneText>to bestow</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὀπάζω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v134">
+        <faceOne>
+            <faceOneText>to set in motion</faceOneText>
+            <faceOneText>to rush</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὁρμάω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v135">
+        <faceOne>
+            <faceOneText>to spring</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὀρούω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v136">
+        <faceOne>
+            <faceOneText>to try</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πειράω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v137">
+        <faceOne>
+            <faceOneText>to sack</faceOneText>
+            <faceOneText>to waste</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πέρθω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v138">
+        <faceOne>
+            <faceOneText>to fly</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πέτομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v139">
+        <faceOne>
+            <faceOneText>to fill</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πίμπλημι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v140">
+        <faceOne>
+            <faceOneText>to drink</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πίνω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v141">
+        <faceOne>
+            <faceOneText>to strike</faceOneText>
+            <faceOneText>to smite</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πλήσσω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v142">
+        <faceOne>
+            <faceOneText>to make</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ποιέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v143">
+        <faceOne>
+            <faceOneText>to war</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πολεμίζω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v144">
+        <faceOne>
+            <faceOneText>to bring to pass</faceOneText>
+            <faceOneText>to give</faceOneText>
+            <faceOneText>to grant</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πόρον</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v145">
+        <faceOne>
+            <faceOneText>to learn</faceOneText>
+            <faceOneText>to ascertain</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πυνθάνομαι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v146">
+        <faceOne>
+            <faceOneText>to flow</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ῥέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v147">
+        <faceOne>
+            <faceOneText>to break</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ῥήγνυμι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v148">
+        <faceOne>
+            <faceOneText>to save</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>σαόω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v149">
+        <faceOne>
+            <faceOneText>to turn</faceOneText>
+            <faceOneText>to twist</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>στρέφω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v150">
+        <faceOne>
+            <faceOneText>to cut</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τἀμνω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v151">
+        <faceOne>
+            <faceOneText>to stretch</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τανύω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v152">
+        <faceOne>
+            <faceOneText>to enjoin</faceOneText>
+            <faceOneText>to charge</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐπιτέλλω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v153">
+        <faceOne>
+            <faceOneText>to value</faceOneText>
+            <faceOneText>to honor</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τίω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v154">
+        <faceOne>
+            <faceOneText>to endure</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τλάω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v155">
+        <faceOne>
+            <faceOneText>to nourish</faceOneText>
+            <faceOneText>to rear</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τρέφω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v156">
+        <faceOne>
+            <faceOneText>to kill</faceOneText>
+            <faceOneText>to slay</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἔπεφνον</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v157">
+        <faceOne>
+            <faceOneText>to waste away</faceOneText>
+            <faceOneText>to perish</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>φθίνω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v158">
+        <faceOne>
+            <faceOneText>to love</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>φιλέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v159">
+        <faceOne>
+            <faceOneText>to bear</faceOneText>
+            <faceOneText>to carry</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>φορέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v160">
+        <faceOne>
+            <faceOneText>to enrage</faceOneText>
+            <faceOneText>to anger</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>χολόω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="v161">
+        <faceOne>
+            <faceOneText>to thrust</faceOneText>
+            <faceOneText>to drive</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὠθέω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>verb</tag>
+        </tags>
+    </card>
+    <card hv="n001">
+        <faceOne>
+            <faceOneText>man</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀνήρ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n002">
+        <faceOne>
+            <faceOneText>god</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>θεός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n003">
+        <faceOne>
+            <faceOneText>heart</faceOneText>
+            <faceOneText>soul</faceOneText>
+            <faceOneText>life</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>θυμός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n004">
+        <faceOne>
+            <faceOneText>ship</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>νηῦς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n005">
+        <faceOne>
+            <faceOneText>son</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>υἱός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n006">
+        <faceOne>
+            <faceOneText>hand</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>Χείρ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n007">
+        <faceOne>
+            <faceOneText>lord</faceOneText>
+            <faceOneText>king</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἄναξ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n008">
+        <faceOne>
+            <faceOneText>earth</faceOneText>
+            <faceOneText>land</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>γαῖα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n009">
+        <faceOne>
+            <faceOneText>old man</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>γέρων</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n010">
+        <faceOne>
+            <faceOneText>woman</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>γυνή</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n011">
+        <faceOne>
+            <faceOneText>beam</faceOneText>
+            <faceOneText>tree</faceOneText>
+            <faceOneText>spear</faceOneText>
+
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δόρυ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n012">
+        <faceOne>
+            <faceOneText>house</faceOneText>
+            <faceOneText>room</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δῶμα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n013">
+        <faceOne>
+            <faceOneText>spear</faceOneText>
+            <faceOneText>lance</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἔγχος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n014">
+        <faceOne>
+            <faceOneText>word</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἔπος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n015">
+        <faceOne>
+            <faceOneText>work</faceOneText>
+            <faceOneText>deed</faceOneText>
+            <faceOneText>thing</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἔργον</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n016">
+        <faceOne>
+            <faceOneText>companion</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἕταρος</faceTwoText>
+            <faceTwoText>ἕταιρος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n017">
+        <faceOne>
+            <faceOneText>horse</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἵππος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n018">
+        <faceOne>
+            <faceOneText>people</faceOneText>
+            <faceOneText>hose</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>λαός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n019">
+        <faceOne>
+            <faceOneText>hall</faceOneText>
+            <faceOneText>dining hall</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μέγαρον</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n020">
+        <faceOne>
+            <faceOneText>mother</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μήτηρ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n021">
+        <faceOne>
+            <faceOneText>suitor</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μνηστήρ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n022">
+        <faceOne>
+            <faceOneText>word</faceOneText>
+            <faceOneText>saying</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μῦθος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n023">
+        <faceOne>
+            <faceOneText>stranger</faceOneText>
+            <faceOneText>guest</faceOneText>
+            <faceOneText>host</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ξεῖνος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n024">
+        <faceOne>
+            <faceOneText>child</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>παῖς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n025">
+        <faceOne>
+            <faceOneText>father</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πατήρ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n026">
+        <faceOne>
+            <faceOneText>war</faceOneText>
+            <faceOneText>battle</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πόλεμος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n027">
+        <faceOne>
+            <faceOneText>city</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πόλις</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n028">
+        <faceOne>
+            <faceOneText>foot</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πούς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n029">
+        <faceOne>
+            <faceOneText>diaphragm</faceOneText>
+            <faceOneText>mind</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>φρήν</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n030">
+        <faceOne>
+            <faceOneText>copper</faceOneText>
+            <faceOneText>bronze</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>χαλκός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n031">
+        <faceOne>
+            <faceOneText>blood</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>αἷμα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n032">
+        <faceOne>
+            <faceOneText>wife</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἄλοχος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n033">
+        <faceOne>
+            <faceOneText>salt (m.)</faceOneText>
+            <faceOneText>sea (f.)</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἅλς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n034">
+        <faceOne>
+            <faceOneText>wind</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἄνεμος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n035">
+        <faceOne>
+            <faceOneText>man</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἄνθρωπος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n036">
+        <faceOne>
+            <faceOneText>city</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἄστυ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n037">
+        <faceOne>
+            <faceOneText>king</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>βασιλεύς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n038">
+        <faceOne>
+            <faceOneText>force</faceOneText>
+            <faceOneText>violence</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>βίη</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n039">
+        <faceOne>
+            <faceOneText>cow</faceOneText>
+            <faceOneText>ox</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>βοῦς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n040">
+        <faceOne>
+            <faceOneText>knee</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>γόνυ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n041">
+        <faceOne>
+            <faceOneText>tear</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δάκρυ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n042">
+        <faceOne>
+            <faceOneText>people</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δῆμος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n043">
+        <faceOne>
+            <faceOneText>house</faceOneText>
+            <faceOneText>home</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δόμος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n044">
+        <faceOne>
+            <faceOneText>gift</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δῶρον</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n045">
+        <faceOne>
+            <faceOneText>sun</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἠέλιος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n046">
+        <faceOne>
+            <faceOneText>day</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἦμαρ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n047">
+        <faceOne>
+            <faceOneText>hero</faceOneText>
+            <faceOneText>warrior</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἥρως</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n048">
+        <faceOne>
+            <faceOneText>dawn</faceOneText>
+            <faceOneText>morning</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἠώς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n049">
+        <faceOne>
+            <faceOneText>sea</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>θάλασσα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n050">
+        <faceOne>
+            <faceOneText>death</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>θάνατος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n051">
+        <faceOne>
+            <faceOneText>goddess</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>θεά</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n052">
+        <faceOne>
+            <faceOneText>head</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κεφαλή</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n053">
+        <faceOne>
+            <faceOneText>hut</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κλισίη</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n054">
+        <faceOne>
+            <faceOneText>young girl</faceOneText>
+            <faceOneText>daughter</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κούρη</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n055">
+        <faceOne>
+            <faceOneText>wave</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κῦμα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n056">
+        <faceOne>
+            <faceOneText>dog</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κύων</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n057">
+        <faceOne>
+            <faceOneText>fight</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μάχη</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n058">
+        <faceOne>
+            <faceOneText>might</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μένος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n059">
+        <faceOne>
+            <faceOneText>part</faceOneText>
+            <faceOneText>fate</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μοῖρα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n060">
+        <faceOne>
+            <faceOneText>mind</faceOneText>
+            <faceOneText>thought</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>νόος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n061">
+        <faceOne>
+            <faceOneText>night</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>νύξ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n062">
+        <faceOne>
+            <faceOneText>house</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>οἶκος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n063">
+        <faceOne>
+            <faceOneText>wine</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>οἶνος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n064">
+        <faceOne>
+            <faceOneText>eye</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὀφθαλμός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n065">
+        <faceOne>
+            <faceOneText>plain</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πεδίον</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n066">
+        <faceOne>
+            <faceOneText>sea</faceOneText>
+            <faceOneText>deep</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πόντος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n067">
+        <faceOne>
+            <faceOneText>river</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ποταμός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n068">
+        <faceOne>
+            <faceOneText>fire</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πῦρ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n069">
+        <faceOne>
+            <faceOneText>breast</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>στῆθος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n070">
+        <faceOne>
+            <faceOneText>wall</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τεῖχος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n071">
+        <faceOne>
+            <faceOneText>arms</faceOneText>
+            <faceOneText>armor</faceOneText>
+            <faceOneText>tackle</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τεῦχος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n072">
+        <faceOne>
+            <faceOneText>bow</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τόξον</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n073">
+        <faceOne>
+            <faceOneText>water</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὕδωρ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n074">
+        <faceOne>
+            <faceOneText>sleep</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὕπνος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n075">
+        <faceOne>
+            <faceOneText>skin</faceOneText>
+            <faceOneText>body</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>χρώς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="n076">
+        <faceOne>
+            <faceOneText>shoulder</faceOneText>
+            <faceOneText>bronze</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὦμος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>noun</tag>
+        </tags>
+    </card>
+    <card hv="m001">
+        <faceOne>
+            <faceOneText>but</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀλλά</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m002">
+        <faceOne>
+            <faceOneText>other</faceOneText>
+            <faceOneText>another</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἄλλος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m003">
+        <faceOne>
+            <faceOneText>so then</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἄρα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m004">
+        <faceOne>
+            <faceOneText>but</faceOneText>
+            <faceOneText>however</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>αὐτάρ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m005">
+        <faceOne>
+            <faceOneText>self</faceOneText>
+            <faceOneText>same</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>αὐτός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m006">
+        <faceOne>
+            <faceOneText>for</faceOneText>
+            <faceOneText>namely</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>γάρ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m007">
+        <faceOne>
+            <faceOneText>at least</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>γέ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m008">
+        <faceOne>
+            <faceOneText>but</faceOneText>
+            <faceOneText>and</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δέ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m009">
+        <faceOne>
+            <faceOneText>now indeed</faceOneText>
+            <faceOneText>really</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δή</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>interjection</tag>
+        </tags>
+    </card>
+    <card hv="m010">
+        <faceOne>
+            <faceOneText>I</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐγώ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m011">
+        <faceOne>
+            <faceOneText>if</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>εἰ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m012">
+        <faceOne>
+            <faceOneText>into</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐς</faceTwoText>
+            <faceTwoText>εἰς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m013">
+        <faceOne>
+            <faceOneText>out</faceOneText>
+            <faceOneText>out of</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐκ</faceTwoText>
+            <faceTwoText>ἐξ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m014">
+        <faceOne>
+            <faceOneText>in</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐνί</faceTwoText>
+            <faceTwoText>ἐν</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m015">
+        <faceOne>
+            <faceOneText>there</faceOneText>
+            <faceOneText>where</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἔνθα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m016">
+        <faceOne>
+            <faceOneText>when</faceOneText>
+            <faceOneText>since</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐπεί</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m017">
+        <faceOne>
+            <faceOneText>upon</faceOneText>
+            <faceOneText>on</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐπί</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m018">
+        <faceOne>
+            <faceOneText>or</faceOneText>
+            <faceOneText>than</faceOneText>
+            <faceOneText>whether</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἠέ</faceTwoText>
+            <faceTwoText>ἤ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m019">
+        <faceOne>
+            <faceOneText>In truth</faceOneText>
+            <faceOneText>pray?</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἦ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>interjection</tag>
+        </tags>
+    </card>
+    <card hv="m020">
+        <faceOne>
+            <faceOneText>and</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἠδέ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m021">
+        <faceOne>
+            <faceOneText>and</faceOneText>
+            <faceOneText>also</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>καί</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m022">
+        <faceOne>
+            <faceOneText>down</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κατά</faceTwoText>
+            <faceTwoText>κάδ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m023">
+        <faceOne>
+            <faceOneText>(Anticipatory or potential particle)</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κέ</faceTwoText>
+            <faceTwoText>ἄν</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>particle</tag>
+        </tags>
+    </card>
+    <card hv="m024">
+        <faceOne>
+            <faceOneText>very</faceOneText>
+            <faceOneText>quite</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μάλα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m025">
+        <faceOne>
+            <faceOneText>great</faceOneText>
+            <faceOneText>large</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μέγας</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m026">
+        <faceOne>
+            <faceOneText>indeed</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μέν</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m027">
+        <faceOne>
+            <faceOneText>not</faceOneText>
+            <faceOneText>lest</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μή</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m028">
+        <faceOne>
+            <faceOneText>him</faceOneText>
+            <faceOneText>her</faceOneText>
+            <faceOneText>it</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μίν</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m029">
+        <faceOne>
+            <faceOneText>now</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>νῦν</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m030">
+        <faceOne>
+            <faceOneText>this</faceOneText>
+            <faceOneText>he</faceOneText>
+            <faceOneText>the</faceOneText>
+            <faceOneText>who</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὁ</faceTwoText>
+            <faceTwoText>ἡ</faceTwoText>
+            <faceTwoText>τό</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m031">
+        <faceOne>
+            <faceOneText>he</faceOneText>
+            <faceOneText>this</faceOneText>
+            <faceOneText>who</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὅς</faceTwoText>
+            <faceTwoText>ἥ</faceTwoText>
+            <faceTwoText>ὅ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m032">
+        <faceOne>
+            <faceOneText>when</faceOneText>
+            <faceOneText>since</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὅτε</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m033">
+        <faceOne>
+            <faceOneText>not</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>οὐ</faceTwoText>
+            <faceTwoText>οὐκ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m034">
+        <faceOne>
+            <faceOneText>him</faceOneText>
+            <faceOneText>her</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>οὗ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m035">
+        <faceOne>
+            <faceOneText>nor</faceOneText>
+            <faceOneText>not even</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>οὐδέ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m036">
+        <faceOne>
+            <faceOneText>beside</faceOneText>
+            <faceOneText>by</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>παρά</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m037">
+        <faceOne>
+            <faceOneText>every</faceOneText>
+            <faceOneText>all</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πᾶς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m038">
+        <faceOne>
+            <faceOneText>very</faceOneText>
+            <faceOneText>at least</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>περ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m039">
+        <faceOne>
+            <faceOneText>much</faceOneText>
+            <faceOneText>many</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πολλός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m040">
+        <faceOne>
+            <faceOneText>thou</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>σύ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m041">
+        <faceOne>
+            <faceOneText>someone</faceOneText>
+            <faceOneText>anyone</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τὶς</faceTwoText>
+            <faceTwoText>τὶ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m042">
+        <faceOne>
+            <faceOneText>dear</faceOneText>
+            <faceOneText>own</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>φίλος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m043">
+        <faceOne>
+            <faceOneText>as</faceOneText>
+            <faceOneText>how</faceOneText>
+            <faceOneText>when</faceOneText>
+            <faceOneText>that</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὡς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m044">
+        <faceOne>
+            <faceOneText>thus</faceOneText>
+            <faceOneText>so</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὥς</faceTwoText>
+            <faceTwoText>ὧς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    
+    <card hv="m045">
+        <faceOne>
+            <faceOneText>deathless</faceOneText>
+            <faceOneText>immortal</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀθάνατος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m046">
+        <faceOne>
+            <faceOneText>at the same time</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἅμα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>expression</tag>
+        </tags>
+    </card>
+    <card hv="m047">
+        <faceOne>
+            <faceOneText>on both sides</faceOneText>
+            <faceOneText>about</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀμφί</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m049">
+        <faceOne>
+            <faceOneText>up</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀνά</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m050">
+        <faceOne>
+            <faceOneText>from</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀπό</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m051">
+        <faceOne>
+            <faceOneText>best</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἄριστος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m052">
+        <faceOne>
+            <faceOneText>again</faceOneText>
+            <faceOneText>but</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>αὖτε</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m053">
+        <faceOne>
+            <faceOneText>through</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>διά</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m054">
+        <faceOne>
+            <faceOneText>divine</faceOneText>
+            <faceOneText>glorious</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δῖος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m055">
+        <faceOne>
+            <faceOneText>each</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἕκαστος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m056">
+        <faceOne>
+            <faceOneText>my</faceOneText>
+            <faceOneText>mine</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐμός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m057">
+        <faceOne>
+            <faceOneText>his</faceOneText>
+            <faceOneText>her</faceOneText>
+            <faceOneText>own</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἑός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m058">
+        <faceOne>
+            <faceOneText>thereupon</faceOneText>
+            <faceOneText>then</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἔπειτα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m059">
+        <faceOne>
+            <faceOneText>still</faceOneText>
+            <faceOneText>yet</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἔτι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m060">
+        <faceOne>
+            <faceOneText>well</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>εὖ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m061">
+        <faceOne>
+            <faceOneText>we</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἡμεῖς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m062">
+        <faceOne>
+            <faceOneText>bad</faceOneText>
+            <faceOneText>cowardly</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κακός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m063">
+        <faceOne>
+            <faceOneText>beautiful</faceOneText>
+            <faceOneText>fine</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>καλός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m064">
+        <faceOne>
+            <faceOneText>among</faceOneText>
+            <faceOneText>after</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μετά</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m065">
+        <faceOne>
+            <faceOneText>this</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὅδε</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m066">
+        <faceOne>
+            <faceOneText>how great</faceOneText>
+            <faceOneText>how many</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὅσος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>expression</tag>
+        </tags>
+    </card>
+    <card hv="m067">
+        <faceOne>
+            <faceOneText>who</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὅς τε</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m068">
+        <faceOne>
+            <faceOneText>neither</faceOneText>
+            <faceOneText>nor</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>οὔτε</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m069">
+        <faceOne>
+            <faceOneText>this</faceOneText>
+            <faceOneText>that</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>οὗτος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m070">
+        <faceOne>
+            <faceOneText>while</faceOneText>
+            <faceOneText>until</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὄφρα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m071">
+        <faceOne>
+            <faceOneText>around</faceOneText>
+            <faceOneText>about</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>περί</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m072">
+        <faceOne>
+            <faceOneText>ever</faceOneText>
+            <faceOneText>once</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ποτέ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m073">
+        <faceOne>
+            <faceOneText>thereto</faceOneText>
+            <faceOneText>to</faceOneText>
+            <faceOneText>toward</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πρός</faceTwoText>
+            <faceTwoText>προτί</faceTwoText>
+            <faceTwoText>ποτί</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m074">
+        <faceOne>
+            <faceOneText>thy</faceOneText>
+            <faceOneText>thine</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>σός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m075">
+        <faceOne>
+            <faceOneText>along with</faceOneText>
+            <faceOneText>with</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>σύν</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m076">
+        <faceOne>
+            <faceOneText>themselves</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>σφεἶς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m077">
+        <faceOne>
+            <faceOneText>then</faceOneText>
+            <faceOneText>at that time</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τότε</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m078">
+        <faceOne>
+            <faceOneText>under</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὑπό</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m079">
+        <faceOne>
+            <faceOneText>oh</faceOneText>
+            <faceOneText>o</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὦ</faceTwoText>
+            <faceTwoText>ὤ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>interjection</tag>
+        </tags>
+    </card>
+    <card hv="m080">
+        <faceOne>
+            <faceOneText>good</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀγαθός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m081">
+        <faceOne>
+            <faceOneText>if</faceOneText>
+            <faceOneText>whether</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>αἴ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m082">
+        <faceOne>
+            <faceOneText>always</faceOneText>
+            <faceOneText>ever</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>αἰεί</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m083">
+        <faceOne>
+            <faceOneText>forthwith</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>αἶψα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m084">
+        <faceOne>
+            <faceOneText>one another</faceOneText>
+            <faceOneText>each other</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀλλήλων</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>expression</tag>
+        </tags>
+    </card>
+    <card hv="m085">
+        <faceOne>
+            <faceOneText>blameless</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀμύμων</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m086">
+        <faceOne>
+            <faceOneText>both</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀμφοτέρω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m087">
+        <faceOne>
+            <faceOneText>all</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἅπας</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m088">
+        <faceOne>
+            <faceOneText>but</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἀτάρ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m089">
+        <faceOne>
+            <faceOneText>again</faceOneText>
+            <faceOneText>on the other hand</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>αὖ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m090">
+        <faceOne>
+            <faceOneText>straightway</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>αὐτίκα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m091">
+        <faceOne>
+            <faceOneText>again</faceOneText>
+            <faceOneText>back again</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>αὖτις</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m092">
+        <faceOne>
+            <faceOneText>back</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἄψ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>preposition</tag>
+        </tags>
+    </card>
+    <card hv="m093">
+        <faceOne>
+            <faceOneText>mortal</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>βροτός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m094">
+        <faceOne>
+            <faceOneText>two</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>δύο</faceTwoText>
+            <faceTwoText>δύω</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m095">
+        <faceOne>
+            <faceOneText>hither</faceOneText>
+            <faceOneText>here</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐνθάδε</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m096">
+        <faceOne>
+            <faceOneText>good</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἐσθλός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m097">
+        <faceOne>
+            <faceOneText>broad</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>εὐρύς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m098">
+        <faceOne>
+            <faceOneText>already</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>now</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m099">
+        <faceOne>
+            <faceOneText>swift</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>θοός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m100">
+        <faceOne>
+            <faceOneText>where</faceOneText>
+            <faceOneText>in order that</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ἵνα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m101">
+        <faceOne>
+            <faceOneText>that</faceOneText>
+            <faceOneText>that one</faceOneText>
+            <faceOneText>he</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κεῖνος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m102">
+        <faceOne>
+            <faceOneText>mighty</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>κρατερός</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m103">
+        <faceOne>
+            <faceOneText>mostly</faceOneText>
+            <faceOneText>especially</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μάλιστα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m104">
+        <faceOne>
+            <faceOneText>greatly</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μέγα</faceTwoText>
+            <faceTwoText>μεγάλα</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m105">
+        <faceOne>
+            <faceOneText>dark</faceOneText>
+            <faceOneText>black</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μέλας</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m106">
+        <faceOne>
+            <faceOneText>middle</faceOneText>
+            <faceOneText>the middle of</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μέσος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m107">
+        <faceOne>
+            <faceOneText>but not</faceOneText>
+            <faceOneText>nor</faceOneText>
+            <faceOneText>not even</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>μηδέ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m108">
+        <faceOne>
+            <faceOneText>now</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>νύ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m109">
+        <faceOne>
+            <faceOneText>where</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὅθι</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m110">
+        <faceOne>
+            <faceOneText>alone</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>οἶος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m111">
+        <faceOne>
+            <faceOneText>of what sort</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>οἷος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m112">
+        <faceOne>
+            <faceOneText>sharp</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὀξύς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m113">
+        <faceOne>
+            <faceOneText>whoever</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὅστις</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m114">
+        <faceOne>
+            <faceOneText>before</faceOneText>
+            <faceOneText>formerly</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πάρος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m115">
+        <faceOne>
+            <faceOneText>native</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πατρίς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m116">
+        <faceOne>
+            <faceOneText>much</faceOneText>
+            <faceOneText>many</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πολύς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m117">
+        <faceOne>
+            <faceOneText>much</faceOneText>
+            <faceOneText>very</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πολύ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m118">
+        <faceOne>
+            <faceOneText>anywhere</faceOneText>
+            <faceOneText>somewhere</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πού</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m119">
+        <faceOne>
+            <faceOneText>before</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πρίν</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m120">
+        <faceOne>
+            <faceOneText>first</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πρῶτον</faceTwoText>
+            <faceTwoText>πρῶτα</faceTwoText>
+            <faceTwoText>πρῶτος</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m122">
+        <faceOne>
+            <faceOneText>winged</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πτερόεις</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+    <card hv="m123">
+        <faceOne>
+            <faceOneText>yet</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>πώ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m124">
+        <faceOne>
+            <faceOneText>who?</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τίς</faceTwoText>
+            <faceTwoText>τί</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m125">
+        <faceOne>
+            <faceOneText>then</faceOneText>
+            <faceOneText>therefore</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>τῶ</faceTwoText>
+            <faceTwoText>τῷ</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>conjunction</tag>
+        </tags>
+    </card>
+    <card hv="m126">
+        <faceOne>
+            <faceOneText>you</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὑμεἶς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>pronoun</tag>
+        </tags>
+    </card>
+    <card hv="m127">
+        <faceOne>
+            <faceOneText>so</faceOneText>
+            <faceOneText>thus</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὧδε</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adverb</tag>
+        </tags>
+    </card>
+    <card hv="m128">
+        <faceOne>
+            <faceOneText>swift</faceOneText>
+        </faceOne>
+        <faceTwo>
+            <faceTwoText>ὠκύς</faceTwoText>
+        </faceTwo>
+        <tags>
+            <tag>homeric greek</tag>
+            <tag>adjective</tag>
+        </tags>
+    </card>
+</cardset>

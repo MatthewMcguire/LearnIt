@@ -1,4 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CardStack" representedClassName="CardStackManagedObject" syncable="YES" codeGenerationType="class">
+        <attribute name="isActive" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isKnown" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="studyToday" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="timeCreated" attributeType="Date" defaultDateTimeInterval="520285440" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="timeUpdated" attributeType="Date" defaultDateTimeInterval="520285500" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="uniqueID" attributeType="String" minValueString="1" syncable="YES"/>
+        <relationship name="cardToStats" maxCount="1" deletionRule="Nullify" destinationEntity="CardStats" inverseName="statsToCard" inverseEntity="CardStats" syncable="YES"/>
+        <relationship name="cardToTags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="tagToCards" inverseEntity="Tag" syncable="YES"/>
+        <relationship name="faceOne" toMany="YES" deletionRule="Nullify" destinationEntity="Face" inverseName="toCardsSideOne" inverseEntity="Face" syncable="YES"/>
+        <relationship name="faceTwo" toMany="YES" deletionRule="Nullify" destinationEntity="Face" inverseName="toCardsSideTwo" inverseEntity="Face" syncable="YES"/>
+    </entity>
+    <entity name="CardStats" representedClassName="CardStatsManagedObject" syncable="YES" codeGenerationType="class">
+        <attribute name="difficultyRating" attributeType="Float" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="idealInterval" optional="YES" attributeType="Float" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lastAnsweredCorrect" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="numberTimesCorrect" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="numberTimesForgotten" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="numberTimesIncorrect" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="statsToCard" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CardStack" inverseName="cardToStats" inverseEntity="CardStack" syncable="YES"/>
+    </entity>
+    <entity name="Face" representedClassName="FaceManagedObject" syncable="YES" codeGenerationType="class">
+        <attribute name="enabled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="faceText" attributeType="String" minValueString="1" syncable="YES"/>
+        <attribute name="timesUsed" optional="YES" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="toCardsSideOne" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CardStack" inverseName="faceOne" inverseEntity="CardStack" syncable="YES"/>
+        <relationship name="toCardsSideTwo" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CardStack" inverseName="faceTwo" inverseEntity="CardStack" syncable="YES"/>
+    </entity>
+    <entity name="Learner" representedClassName="LearnerManagedObject" syncable="YES" codeGenerationType="class">
+        <attribute name="correctAnswerShownPause" attributeType="Float" defaultValueString="4" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="daysActive" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="maxCardsInHand" attributeType="Integer 32" defaultValueString="20" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" minValueString="1" defaultValueString="Rufus" syncable="YES"/>
+        <attribute name="studyTodayLastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalPoints" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Tag" representedClassName="TagManagedObject" syncable="YES" codeGenerationType="class">
+        <attribute name="enabled" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="tagText" optional="YES" attributeType="String" minValueString="1" syncable="YES"/>
+        <attribute name="timesUsed" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="tagToCards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CardStack" inverseName="cardToTags" inverseEntity="CardStack" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CardStack" positionX="-63" positionY="-18" width="128" height="195"/>
+        <element name="CardStats" positionX="-27" positionY="99" width="128" height="150"/>
+        <element name="Face" positionX="-54" positionY="36" width="128" height="120"/>
+        <element name="Learner" positionX="-36" positionY="72" width="128" height="135"/>
+        <element name="Tag" positionX="-18" positionY="126" width="128" height="105"/>
+    </elements>
 </model>

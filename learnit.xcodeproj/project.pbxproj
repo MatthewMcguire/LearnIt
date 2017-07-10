@@ -7,15 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B9217CC41F0E9DE1000F1798 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */; };
+		B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */; };
+		B934A5141F058B6100A696E8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934A5131F058B6100A696E8 /* Model.swift */; };
 		B98419641F0192810027B2B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98419631F0192810027B2B9 /* AppDelegate.swift */; };
 		B98419661F0192810027B2B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98419651F0192810027B2B9 /* ViewController.swift */; };
 		B98419691F0192810027B2B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B98419671F0192810027B2B9 /* Main.storyboard */; };
 		B984196C1F0192810027B2B9 /* learnit.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B984196A1F0192810027B2B9 /* learnit.xcdatamodeld */; };
 		B984196E1F0192810027B2B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B984196D1F0192810027B2B9 /* Assets.xcassets */; };
 		B98419711F0192810027B2B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B984196F1F0192810027B2B9 /* LaunchScreen.storyboard */; };
+		B98419791F0192990027B2B9 /* sampleWelsh.xml in Resources */ = {isa = PBXBuildFile; fileRef = B98419781F0192990027B2B9 /* sampleWelsh.xml */; };
+		B9AFF1AB1F0FEC4E0013A1AD /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */; };
+		B9C2A6161F10102B00E5E917 /* sampleGreek.xml in Resources */ = {isa = PBXBuildFile; fileRef = B9C2A6151F10102B00E5E917 /* sampleGreek.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
+		B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataDomus.swift; sourceTree = "<group>"; };
+		B934A5131F058B6100A696E8 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B98419601F0192810027B2B9 /* learnit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = learnit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B98419631F0192810027B2B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B98419651F0192810027B2B9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +33,9 @@
 		B984196D1F0192810027B2B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B98419701F0192810027B2B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B98419721F0192810027B2B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B98419781F0192990027B2B9 /* sampleWelsh.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sampleWelsh.xml; sourceTree = "<group>"; };
+		B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
+		B9C2A6151F10102B00E5E917 /* sampleGreek.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sampleGreek.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +68,19 @@
 		B98419621F0192810027B2B9 /* learnit */ = {
 			isa = PBXGroup;
 			children = (
+				B98419781F0192990027B2B9 /* sampleWelsh.xml */,
+				B9C2A6151F10102B00E5E917 /* sampleGreek.xml */,
 				B98419631F0192810027B2B9 /* AppDelegate.swift */,
 				B98419651F0192810027B2B9 /* ViewController.swift */,
+				B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */,
+				B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */,
+				B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */,
 				B98419671F0192810027B2B9 /* Main.storyboard */,
 				B984196D1F0192810027B2B9 /* Assets.xcassets */,
 				B984196F1F0192810027B2B9 /* LaunchScreen.storyboard */,
 				B98419721F0192810027B2B9 /* Info.plist */,
 				B984196A1F0192810027B2B9 /* learnit.xcdatamodeld */,
+				B934A5131F058B6100A696E8 /* Model.swift */,
 			);
 			path = learnit;
 			sourceTree = "<group>";
@@ -127,9 +145,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9C2A6161F10102B00E5E917 /* sampleGreek.xml in Resources */,
 				B98419711F0192810027B2B9 /* LaunchScreen.storyboard in Resources */,
 				B984196E1F0192810027B2B9 /* Assets.xcassets in Resources */,
 				B98419691F0192810027B2B9 /* Main.storyboard in Resources */,
+				B98419791F0192990027B2B9 /* sampleWelsh.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +160,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B934A5141F058B6100A696E8 /* Model.swift in Sources */,
 				B98419661F0192810027B2B9 /* ViewController.swift in Sources */,
+				B9217CC41F0E9DE1000F1798 /* AddCardViewController.swift in Sources */,
+				B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */,
+				B9AFF1AB1F0FEC4E0013A1AD /* ConfigurationViewController.swift in Sources */,
 				B984196C1F0192810027B2B9 /* learnit.xcdatamodeld in Sources */,
 				B98419641F0192810027B2B9 /* AppDelegate.swift in Sources */,
 			);
@@ -308,6 +332,7 @@
 				B98419771F0192810027B2B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
