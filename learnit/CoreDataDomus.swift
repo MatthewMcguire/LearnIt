@@ -14,6 +14,8 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
     var manObjContext : NSManagedObjectContext!
     var currentLearner: LearnerManagedObject?
     var fetchedItems : NSFetchedResultsController<CardStackManagedObject>!
+    var fetchedTagItems : NSFetchedResultsController<TagManagedObject>!
+    
     
     override init()
     {
@@ -36,6 +38,27 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         do {
             try fetchedItems.performFetch()
 
+        }
+        catch
+        {
+            fatalError("Error fetching objects from the persistent store")
+        }
+    }
+    
+    func refreshFetchedTagsController()
+    {
+        if loq == true {print("Obtaining a fetched results controller of Tag items")}
+        let quaestioTertiusDecimus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
+//        quaestioTertiusDecimus.predicate = NSPredicate(format: "isActive == YES")
+        let sortKey1 = NSSortDescriptor(key: "timesUsed", ascending: false)
+        let sortKey2 = NSSortDescriptor(key: "tagText", ascending: true)
+        quaestioTertiusDecimus.sortDescriptors = [sortKey1, sortKey2]
+        fetchedTagItems = NSFetchedResultsController(fetchRequest: quaestioTertiusDecimus , managedObjectContext: manObjContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedTagItems.delegate = self
+        
+        do {
+            try fetchedTagItems.performFetch()
+            
         }
         catch
         {
@@ -86,7 +109,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                 let queryResult = try manObjContext?.fetch(quaestioNull)
                 if queryResult?.count != 0
                 {
-                    var learner = queryResult?.first!
+                    let learner = queryResult?.first!
                     learner?.correctAnswerShownPause = currentIdentity.correctAnswerShownPause
                     learner?.maxCardsInHand = currentIdentity.maxCardsInHand
                     saveContext()
@@ -236,7 +259,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         }
         return numCards
     }
- 
+     // MARK: TODO - this function will add duplicate cards, and it shouldn't! -
     func addNewObj(card : CardObject)
     {
         let aNewCard = NSEntityDescription.insertNewObject(forEntityName: "CardStack", into: manObjContext!) as! CardStackManagedObject
@@ -298,7 +321,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                 let faceQueryResult = try manObjContext.fetch(quaestioQuintusDecius)
                 if faceQueryResult.count == 0
                 {
-                    var newFaceObject = NSEntityDescription.insertNewObject(forEntityName: "Face", into: manObjContext!) as! FaceManagedObject
+                    let newFaceObject = NSEntityDescription.insertNewObject(forEntityName: "Face", into: manObjContext!) as! FaceManagedObject
                     newFaceObject.faceText = trimmedFace
                     newFaceObject.enabled = true
                     newFaceObject.timesUsed = 1
@@ -306,7 +329,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                 }
                 else
                 {
-                    var toUpdate : FaceManagedObject = faceQueryResult.first!
+                    let toUpdate : FaceManagedObject = faceQueryResult.first!
                     var scratchValue = toUpdate.timesUsed
                     scratchValue += 1
                     toUpdate.timesUsed = scratchValue
@@ -322,6 +345,129 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         {
             fatalError("Couldn't fetch Faces objects from Core Data")
         }
+        
+        // Pause for a moment and see if there is already another card with the same face one and face two connections
+        // If so, this card is a duplicate and shouldn't be added. Instead, the existing card's tags should be a union
+        // of those tags it already has and the ones in the 'new card to be added'
+        
+        // Goal: find any cardstack item with the same face one and face two objects
+        // It seems the simplest way to do this is to get the set of cardsstack objects that are linked
+        // to each face object of the 'newly added'. Then if the intersection of these sets has a Card *other* than
+        // the newly added one, it is a duplicate. In this case, update the tags of the found Card as needed and move on.
+        
+        // create a set of face objects to test
+        var faceObjects = Set<FaceManagedObject>(aNewCard.faceOne! as! Set)
+        faceObjects = faceObjects.union(aNewCard.faceTwo! as! Set)
+
+        // create a set to hold the intersection of all associated Cardstack objects
+        // then fill it by looking at the toCardsSideOne and toCardsSideTo sets associated 
+        // with these
+        var cardsInCommon = Set<CardStackManagedObject>()
+        for fo in faceObjects
+        {
+            if let assocCardsArray = fo.toCardsSideOne?.allObjects
+            {
+                let assocCardsSet = Set<CardStackManagedObject>(assocCardsArray as! [CardStackManagedObject])
+                if assocCardsSet.count > 0
+                {
+                    if cardsInCommon.isEmpty
+                    {
+                        cardsInCommon = cardsInCommon.union(assocCardsSet)
+                    }
+                    else
+                    {
+                        cardsInCommon = cardsInCommon.intersection(assocCardsSet)
+                    }
+                }
+            }
+            if let assocCardsArray = fo.toCardsSideTwo?.allObjects
+            {
+                let assocCardsSet = Set<CardStackManagedObject>(assocCardsArray as! [CardStackManagedObject])
+                if assocCardsSet.count > 0
+                {
+                    if cardsInCommon.isEmpty
+                    {
+                        cardsInCommon = cardsInCommon.union(assocCardsSet)
+                    }
+                    else
+                    {
+                        cardsInCommon = cardsInCommon.intersection(assocCardsSet)
+                    }
+                }
+            }
+        }
+        
+        // now we have a set of cardstack Objects with identical face one and face two objects
+        // first, throw out the newly-added object if its in the set.
+        cardsInCommon.remove(aNewCard)
+        if cardsInCommon.count > 1
+        {
+            fatalError("We have a problem. There are two existing cards with the same face one and face two")
+        }
+        
+        // if there is a card remaining in the set, use it instead of creating a new one
+        if cardsInCommon.count > 0
+        {
+            manObjContext.delete(aNewCard)
+            if let oldCard = cardsInCommon.first
+            {
+                // create the set of given tags for the newly-added card
+                aSet.removeAll()
+                aSet = Set(card.tags!.components(separatedBy: ","))
+                
+                // prepare to look for existing tag objects
+                let quaestioQuartus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
+                
+                do
+                {
+                    // begin with the set of existing tag objects for the old card
+                    var aSetOfTags = Set<TagManagedObject>(oldCard.cardToTags as! Set)
+                    
+                    // for each tag in the set of strings, look for any TagMO and insert it into the set
+                    // or, if it doesn't already exist, make a new one and insert it into the set as well
+                    for aTag in aSet
+                    {
+                        var trimmedTag = aTag.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+                        trimmedTag = trimmedTag.replacingOccurrences(of: "##", with: ",")
+                        quaestioQuartus.predicate = NSPredicate(format: "tagText like[cd] %@", trimmedTag)
+                        
+                        let tagQueryResult = try manObjContext.fetch(quaestioQuartus)
+                        if tagQueryResult.count == 0
+                        {
+                            let newTagObject = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: manObjContext!) as! TagManagedObject
+                            newTagObject.tagText = trimmedTag
+                            newTagObject.enabled = true
+                            newTagObject.timesUsed = 1
+                            aSetOfTags.insert(newTagObject)
+                        }
+                        else
+                        {
+                            let toUpdate : TagManagedObject = tagQueryResult.first!
+                            if !aSetOfTags.contains(toUpdate)
+                            {
+                                var scratchValue = toUpdate.timesUsed
+                                scratchValue += 1
+                                toUpdate.timesUsed = scratchValue
+                                aSetOfTags.insert(toUpdate)
+                            }
+
+                            print ("Tag: \(String(describing: toUpdate.tagText)) is used \(toUpdate.timesUsed) times")
+                        }
+                    }
+                    oldCard.cardToTags = aSetOfTags as NSSet
+                    
+                }
+                catch
+                {
+                    fatalError("Couldn't fetch Tag objects from Core Data")
+                }
+            }
+            saveContext()
+            refreshFetchedTagsController()
+            refreshFetchedResultsController()
+            return
+        }
+        
         
         // connect existing or add new tags to the card object
         // create the set of given tags
@@ -344,7 +490,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                 let tagQueryResult = try manObjContext.fetch(quaestioQuartus)
                 if tagQueryResult.count == 0
                 {
-                    var newTagObject = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: manObjContext!) as! TagManagedObject
+                    let newTagObject = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: manObjContext!) as! TagManagedObject
                     newTagObject.tagText = trimmedTag
                     newTagObject.enabled = true
                     newTagObject.timesUsed = 1
@@ -352,7 +498,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                 }
                 else
                 {
-                    var toUpdate : TagManagedObject = tagQueryResult.first!
+                    let toUpdate : TagManagedObject = tagQueryResult.first!
                     var scratchValue = toUpdate.timesUsed
                     scratchValue += 1
                     toUpdate.timesUsed = scratchValue
@@ -377,7 +523,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         aNewCard.studyToday = card.studyToday!
         
         // create a set of empty stats for the card
-        var newStatsObject = NSEntityDescription.insertNewObject(forEntityName: "CardStats", into: manObjContext!) as! CardStatsManagedObject
+        let newStatsObject = NSEntityDescription.insertNewObject(forEntityName: "CardStats", into: manObjContext!) as! CardStatsManagedObject
         newStatsObject.numberTimesIncorrect = 0
         newStatsObject.numberTimesForgotten = 0
         newStatsObject.numberTimesCorrect = 0
@@ -386,6 +532,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         aNewCard.cardToStats = newStatsObject
         
         saveContext()
+        refreshFetchedTagsController()
         refreshFetchedResultsController()
     }
  
@@ -430,6 +577,9 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                     default:
                         cardStats.idealInterval *= cardStats.difficultyRating
                     }
+                    
+                    // update Last Answered Correct
+                    cardStats.lastAnsweredCorrect = NSDate()
                 }
                 else
                 {
@@ -483,7 +633,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
 
                     // update difficulty rating
                     cardStats.difficultyRating = max(cardStats.difficultyRating, Float(1.3))
-                    var q = max(5.0 - distance, 0.0)
+                    let q = max(5.0 - distance, 0.0)
                     
                     cardStats.difficultyRating += (-0.8 + (0.28 * q) - 0.02 * q * q)
                     cardStats.difficultyRating = max(cardStats.difficultyRating, Float(1.3))
@@ -528,10 +678,22 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
     {
         return fetchedItems!.sections!.count
     }
+    
+    func numberOfTagSections() -> Int
+    {
+        let returnValue = fetchedTagItems!.sections!.count
+        return returnValue
+    }
  
     func numberOfRowsInTblVwSection(section : Int) -> Int
     {
         return fetchedItems!.sections![section].numberOfObjects
+    }
+ 
+    func numberOfTagRows(section: Int) -> Int
+    {
+        let returnValue = fetchedTagItems!.sections![section].numberOfObjects
+        return returnValue
     }
     
     func getCellItemInfo(indexPath : IndexPath) -> CardObject
@@ -558,6 +720,79 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         let onCardForCellMOTags = oneCardForCellManagedObject.cardToTags as! Set<TagManagedObject>
         returnString = getStringFromMOSet(setGlob: onCardForCellMOTags)
         return returnString
+    }
+    
+    func getTagTextForCell(indexPath : IndexPath) -> String
+    {
+        var returnString : String
+        let oneTagForTagManagedObject = fetchedTagItems!.sections?[indexPath.section].objects?[indexPath.row] as! TagManagedObject
+        returnString = oneTagForTagManagedObject.tagText!
+        return returnString
+    }
+    
+    func getTagCountForCell(indexPath : IndexPath) -> Int32
+    {
+        var returnValue : Int32
+        let oneTagForTagManagedObject = fetchedTagItems!.sections?[indexPath.section].objects?[indexPath.row] as! TagManagedObject
+        returnValue = oneTagForTagManagedObject.timesUsed
+        return returnValue
+    }
+    
+    func getEnabledStateForTag(indexPath: IndexPath) -> Bool
+    {
+        var returnValue : Bool
+        let oneTagForTagManagedObject = fetchedTagItems!.sections?[indexPath.section].objects?[indexPath.row] as! TagManagedObject
+        returnValue = oneTagForTagManagedObject.enabled
+        return returnValue
+    }
+    func tagEnabled(set: Bool, indexPath: IndexPath)
+    {
+        // first get the tag
+        let tagToUpdate = fetchedTagItems!.sections?[indexPath.section].objects?[indexPath.row] as! TagManagedObject
+        
+        // second, set the tag object enabled flag
+        tagToUpdate.enabled = set
+        
+        // third, set the card active state based on the tag status change above
+        setCardActiveStateByTagActiveState(tag: tagToUpdate, state: set)
+        refreshFetchedResultsController()
+    }
+    
+    
+    func setCardActiveStateByTagActiveState(tag : TagManagedObject, state : Bool)
+    {
+        if state == false
+        {
+            // logic: any card with this tag should be made inactive, since the tag is disabled
+            let cardsForTagManagedObject = tag.tagToCards as! Set<CardStackManagedObject>
+            for card in cardsForTagManagedObject
+            {
+                card.isActive = false
+            }
+        }
+        else
+        {
+            // logic: for each card, set to active if all its tags are now active
+            let cardsForTagManagedObject = tag.tagToCards as! Set<CardStackManagedObject>
+            for card in cardsForTagManagedObject
+            {
+                let itsTags = card.cardToTags
+                var activateIt = true
+                for aTag in itsTags!
+                {
+                    if (aTag as! TagManagedObject).enabled == false
+                    {
+                        activateIt = false
+                    }
+                }
+                if activateIt == true
+                {
+                    card.isActive = true
+                }
+                
+            }
+        }
+        saveContext()
     }
     
     
@@ -631,8 +866,8 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
  
     func cardObjFromCardMO(cardMO : CardStackManagedObject) -> CardObject
     {
-        var returnedCard = CardObject()
-        returnedCard.uniqueID = cardMO.uniqueID
+        let returnedCard = CardObject()
+        returnedCard.uniqueID = cardMO.uniqueID!
         returnedCard.isActive = cardMO.isActive
         returnedCard.isKnown = cardMO.isKnown
         returnedCard.studyToday = cardMO.studyToday
@@ -643,6 +878,13 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         returnedCard.tags = getStringFromMOSet(setGlob: cardMO.cardToTags as! Set<NSManagedObject>)
         returnedCard.faceOneAsSet = getSetFromMOSet(setGlob: cardMO.faceOne as! Set<NSManagedObject>)
         returnedCard.faceTwoAsSet = getSetFromMOSet(setGlob: cardMO.faceTwo as! Set<NSManagedObject>)
+        returnedCard.diffRating = cardMO.cardToStats?.difficultyRating
+        returnedCard.idealInterval = cardMO.cardToStats?.idealInterval
+        returnedCard.numForgot = Int((cardMO.cardToStats?.numberTimesForgotten)!)
+        returnedCard.numIncorr = Int((cardMO.cardToStats?.numberTimesIncorrect)!)
+        returnedCard.numCorr = Int((cardMO.cardToStats?.numberTimesCorrect)!)
+        returnedCard.lastAnswerCorrect = cardMO.cardToStats?.lastAnsweredCorrect
+        
         return returnedCard
     }
     
@@ -706,8 +948,10 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
             fatalError("Couldn't CardStats info from Core Data")
         }
         saveContext()
+        refreshFetchedTagsController()
 }
  
+    // MARK: TODO - this function doesn't reuse existing face or tag items (or maintain their use stats) -
     func updateItem(indexPath : IndexPath, withValues : CardObject)
     {
         let oneCard : CardStackManagedObject = fetchedItems.sections![indexPath.section].objects![indexPath.row] as! CardStackManagedObject
@@ -756,9 +1000,25 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
  
     func deleteItem(indexPath : IndexPath)
     {
-        let oneCard = fetchedItems.sections?[indexPath.section].objects?[indexPath.row]
-        manObjContext.delete(oneCard as! NSManagedObject)
+        // this is the item in the fetched results controller that will be deleted from Core Data
+        let oneCard = fetchedItems.sections?[indexPath.section].objects?[indexPath.row] as! CardStackManagedObject
+        
+        
+        // before deleting, we should decrement the number of times each of its tags has been used
+//        let quaestioQuartusDecimus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
+        let aSetOfTags = oneCard.cardToTags
+        // for each tag in the set of strings, look for a corresponding TagMO and link it, or make a new one if not
+        for aTag in aSetOfTags!
+        {
+            let at = aTag as! TagManagedObject
+            at.timesUsed -= 1
+        }
         saveContext()
+
+        
+        manObjContext.delete(oneCard as NSManagedObject)
+        saveContext()
+        refreshFetchedTagsController()
     }
  
     // MARK: - Helper Functions -

@@ -7,14 +7,14 @@
         <attribute name="timeCreated" attributeType="Date" defaultDateTimeInterval="520285440" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="timeUpdated" attributeType="Date" defaultDateTimeInterval="520285500" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="uniqueID" attributeType="String" minValueString="1" syncable="YES"/>
-        <relationship name="cardToStats" maxCount="1" deletionRule="Nullify" destinationEntity="CardStats" inverseName="statsToCard" inverseEntity="CardStats" syncable="YES"/>
+        <relationship name="cardToStats" maxCount="1" deletionRule="Cascade" destinationEntity="CardStats" inverseName="statsToCard" inverseEntity="CardStats" syncable="YES"/>
         <relationship name="cardToTags" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="tagToCards" inverseEntity="Tag" syncable="YES"/>
         <relationship name="faceOne" toMany="YES" deletionRule="Nullify" destinationEntity="Face" inverseName="toCardsSideOne" inverseEntity="Face" syncable="YES"/>
         <relationship name="faceTwo" toMany="YES" deletionRule="Nullify" destinationEntity="Face" inverseName="toCardsSideTwo" inverseEntity="Face" syncable="YES"/>
     </entity>
     <entity name="CardStats" representedClassName="CardStatsManagedObject" syncable="YES" codeGenerationType="class">
         <attribute name="difficultyRating" attributeType="Float" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="idealInterval" optional="YES" attributeType="Float" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="idealInterval" attributeType="Float" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="lastAnsweredCorrect" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="numberTimesCorrect" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="numberTimesForgotten" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>

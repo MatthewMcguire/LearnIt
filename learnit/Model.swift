@@ -10,7 +10,7 @@ import UIKit
 
 class CardObject: NSObject {
     
-    var uniqueID : String?
+    var uniqueID : String
     var isActive : Bool?
     var isKnown : Bool?
     var studyToday : Bool?
@@ -22,6 +22,12 @@ class CardObject: NSObject {
     var faceOneAsSet : Set<String>?
     var faceTwoAsSet : Set<String>?
     var tagsAsSet : Set<String>?
+    var diffRating : Float?
+    var idealInterval : Float?
+    var numCorr : Int?
+    var numIncorr : Int?
+    var numForgot : Int?
+    var lastAnswerCorrect : NSDate?
     
     override init() {
         

@@ -14,6 +14,21 @@ var oggiQueue : Array<String>?
 let loq = true
 // loq = loquacity. If true, the console will report most app activity for sake of debugging.
 
+enum greekDiacrits : String
+{
+    case acute = "´"
+    case acuteSmooth = "῎"
+    case acuteRough = "῞"
+    case grave = "`"
+    case graveSmooth = "῍"
+    case graveRough = "῝"
+    case circumf = "῀"
+    case circumfSmooth = "῏"
+    case circumfRough = "῟"
+    case Smooth = "᾽"
+    case Rough = "῾"
+    
+}
 
 class ViewController: UIViewController {
     @IBOutlet weak var faceOneLabel: UILabel!
@@ -24,7 +39,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var forPointsLabel: UILabel!
     @IBOutlet weak var showHintButton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
-    @IBOutlet weak var hintField: UITextField!
+    @IBOutlet weak var hintLabel: KerningLabel!
     @IBOutlet weak var feedbackView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
@@ -82,6 +97,7 @@ class ViewController: UIViewController {
     @IBAction func enteredAnswer(_ sender: Any) {
         view.endEditing(true)
         self.assessResponse()
+        updateForPointsIndicator()
     }
     
     func storageSetup()
@@ -95,6 +111,7 @@ class ViewController: UIViewController {
         else
         {
             negozioGrande!.refreshFetchedResultsController()
+            negozioGrande!.refreshFetchedTagsController()
         }
 
     }
@@ -119,6 +136,9 @@ class ViewController: UIViewController {
             print("Cards were added to the queue for the day")
         }
     }
+//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        <#code#>
+//    }
     
     func updateCounter()
     {
@@ -141,7 +161,8 @@ class ViewController: UIViewController {
     func updateTotalPoints()
     {
         let totalPoints = negozioGrande!.getUserTotalPoints()
-        pointsLabel.text = "\(totalPoints) pts."
+        let ptsString = String(format: "%.1f pts.", totalPoints)
+        pointsLabel.text = ptsString
         if loq == true {print("Updated total points lable to \(totalPoints)")}
     }
     
@@ -159,9 +180,13 @@ class ViewController: UIViewController {
                 currentPlaceInQueue = 0
                 currentCard = negozioGrande!.getCardWithID(uniqueID: oggiQueue![currentPlaceInQueue])
             }
+            if currentPlaceInQueue >= queueSize
+            {
+                currentPlaceInQueue = queueSize - 1
+            }
         }
         showACard()
-        hintField.text = " "
+        hintLabel.text = " "
 
         UIView.animate(withDuration: 1.5, delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
             self.faceTwoField.text = ""
@@ -176,6 +201,11 @@ class ViewController: UIViewController {
     {
         if loq == true {print("Assessing the response:")}
         let givenAnswer = faceTwoField.text?.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+        if givenAnswer?.characters.count == 0
+        {
+            processIncorrectAnswer(uniqueID: (currentCard?.uniqueID)!, distance: 10.0)
+            return
+        }
         var closestBestAnswer : String = "                 "
         // calculate distance from a correct answer
         var shortestDistance = 1000 // to begin, obviously way higher than any plausible input
@@ -233,11 +263,12 @@ class ViewController: UIViewController {
                         if loq == true {print("\tThe answer seems to include greek. Adding the special characters...")}
                         showGreekToolbar(status: true)
                     }
+                    else
+                    {
+                         showGreekToolbar(status: false)
+                    }
                 }
-                else
-                {
-                    faceTwoField.inputAccessoryView = nil
-                }
+
             }
             else
             {
@@ -265,7 +296,8 @@ class ViewController: UIViewController {
     func updateForPointsIndicator()
     {
         if loq == true {print("Updating the 'for points' indicator.")}
-        forPointsLabel.text = "for \(String(describing: currentAnswerValue)) points"
+        let ptsString = String(format: "for %.1f points", currentAnswerValue)
+        forPointsLabel.text = ptsString
     }
     
     func isMarkedCorrect (storedAnswer:String, dist dis : Int )->Bool
@@ -337,13 +369,15 @@ class ViewController: UIViewController {
             }, completion: nil)
         }
         // update statistics for the card
-        negozioGrande!.updateCardAnsweredINCorrect(uniqueID: currentCard!.uniqueID!, distance: dist)
+        negozioGrande!.updateCardAnsweredINCorrect(uniqueID: currentCard!.uniqueID, distance: dist)
         // move to next card & show it
         updatePlaceInQueue()
         refreshCardShown()
-        self.feedbackView.layer.backgroundColor = UIColor.white.cgColor
+        self.feedbackView.backgroundColor = UIColor.white
+        self.messageLabel.backgroundColor = UIColor.white
         UIView.animate(withDuration: 0.5, delay: 0.0, options:UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.feedbackView.layer.backgroundColor = UIColor.red.cgColor
+            self.feedbackView.backgroundColor = UIColor.red
+            self.messageLabel.backgroundColor = UIColor.red
         }, completion: nil)
 //        if loq == true {print("\tSetting the message and feedback panel back to normal size")}
         UIView.animate(withDuration: TimeInterval(correctAnswerShownPause), delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
@@ -361,7 +395,9 @@ class ViewController: UIViewController {
         updateTotalPoints()
         
         // notify the learner
-        messageLabel.text = "Correct:  \(currentCard?.faceTwo! ?? " ")"
+        let ptsStr = String(format:"%.1f", currentAnswerValue)
+        
+        messageLabel.text = "Yes (" + ptsStr + " pts): \(currentCard?.faceTwo! ?? " ")"
         if loq == true {print("\tAdding this text to the message label\(String(describing: messageLabel.text))")}
         if messageLabel.text!.characters.count > 25
         {
@@ -373,7 +409,7 @@ class ViewController: UIViewController {
         }
         
         // update statistics for the card
-        negozioGrande!.updateCardAnsweredCorrect(uniqueID: currentCard!.uniqueID!, distance: dist)
+        negozioGrande!.updateCardAnsweredCorrect(uniqueID: currentCard!.uniqueID, distance: dist)
         
         // remove the card from the stack of today's cards
         if let removeElementHere = oggiQueue!.index(of: (currentCard?.uniqueID)!)
@@ -391,10 +427,12 @@ class ViewController: UIViewController {
 
         refreshCardShown()
         updateCounter()
-        self.feedbackView.layer.backgroundColor = UIColor.white.cgColor
+        self.messageLabel.backgroundColor = UIColor.white
+        self.feedbackView.backgroundColor = UIColor.white
         
         UIView.animate(withDuration: 0.5, delay: 0.0, options:UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.feedbackView.layer.backgroundColor = UIColor.green.cgColor
+            self.messageLabel.backgroundColor = UIColor.green
+            self.feedbackView.backgroundColor = UIColor.green
         }, completion: nil)
         if loq == true {print("\tSetting the message and feedback panel back to normal size")}
         UIView.animate(withDuration: TimeInterval(correctAnswerShownPause), delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
@@ -493,6 +531,10 @@ class ViewController: UIViewController {
         {
             circumstance = "Stage Five"
         }
+        else if (hintLevel == 5) && (hintLength > 15)
+        {
+            circumstance = "Stage Six"
+        }
         
         var hintText = ""
         switch circumstance {
@@ -504,15 +546,15 @@ class ViewController: UIViewController {
                 let stri : String.Index = hintAnswer!.index(hintAnswer!.startIndex, offsetBy: i)
                 if hintAnswer?[stri] == " "
                 {
-                    hintText += " "
+                    hintText += "  "
                 }
                 else
                 {
-                    hintText += " _"
+                    hintText += "_"
                 }
             }
             currentAnswerValue = currentAnswerValue * 0.75
-            hintField.text = hintText
+            hintLabel.text = hintText
         case "Stage Two":
             hintLevel = 2
             // show the first letter of the answer
@@ -523,18 +565,17 @@ class ViewController: UIViewController {
                 let stri : String.Index = hintAnswer!.index(hintAnswer!.startIndex, offsetBy: i)
                 if hintAnswer?[stri] == " "
                 {
-                    hintText += " "
+                    hintText += "  "
                 }
                 else
                 {
-                    hintText += " _"
+                    hintText += "_"
                 }
             }
             // show the last letter of the answer
-            hintText += " "
             hintText += String(hintAnswer![hintAnswer!.index(hintAnswer!.endIndex, offsetBy: -1)])
             currentAnswerValue = currentAnswerValue * 0.75
-            hintField.text = hintText
+            hintLabel.text = hintText
         case "Stage Three":
             hintLevel = 3
             // show the first letter of the answer
@@ -546,25 +587,31 @@ class ViewController: UIViewController {
                 // But reveal the actual letter for every third letter
                 if (i % 3) == 0
                 {
-                    hintText += String(hintAnswer![stri])
+                    if hintAnswer?[stri] == " "
+                    {
+                        hintText += "  "
+                    }
+                    else
+                    {
+                        hintText += String(hintAnswer![stri])
+                    }
                 }
                 else
                 {
                     if hintAnswer?[stri] == " "
                     {
-                        hintText += " "
+                        hintText += "  "
                     }
                     else
                     {
-                        hintText += " _"
+                        hintText += "_"
                     }
                 }
             }
             // show the last letter of the answer
-            hintText += " "
             hintText += String(hintAnswer![hintAnswer!.index(hintAnswer!.endIndex, offsetBy: -1)])
             currentAnswerValue = currentAnswerValue * 0.75
-            hintField.text = hintText
+            hintLabel.text = hintText
         case "Stage Four":
             hintLevel = 4
             // show the first letter of the answer
@@ -576,25 +623,31 @@ class ViewController: UIViewController {
                 // But reveal the actual letter for every third or fourth letter
                 if ((i % 3) == 0) || ((i % 4) == 0)
                 {
-                    hintText += String(hintAnswer![stri])
+                    if hintAnswer?[stri] == " "
+                    {
+                        hintText += "  "
+                    }
+                    else
+                    {
+                        hintText += String(hintAnswer![stri])
+                    }
                 }
                 else
                 {
                     if hintAnswer?[stri] == " "
                     {
-                        hintText += " "
+                        hintText += "  "
                     }
                     else
                     {
-                        hintText += " _"
+                        hintText += "_"
                     }
                 }
             }
             // show the last letter of the answer
-            hintText += " "
             hintText += String(hintAnswer![hintAnswer!.index(hintAnswer!.endIndex, offsetBy: -1)])
             currentAnswerValue = currentAnswerValue * 0.75
-            hintField.text = hintText
+            hintLabel.text = hintText
         case "Stage Five":
             hintLevel = 5
             // show the first letter of the answer
@@ -604,30 +657,74 @@ class ViewController: UIViewController {
             {
                 let stri : String.Index = hintAnswer!.index(hintAnswer!.startIndex, offsetBy: i)
                 // But reveal the actual letter for every other letter
-                if (i % 2) == 0
+                if ((i % 3) == 0) || ((i % 2) == 0)
                 {
-                    hintText += String(hintAnswer![stri])
+                    if hintAnswer?[stri] == " "
+                    {
+                        hintText += "  "
+                    }
+                    else
+                    {
+                        hintText += String(hintAnswer![stri])
+                    }
                 }
                 else
                 {
                     if hintAnswer?[stri] == " "
                     {
-                        hintText += " "
+                        hintText += "  "
                     }
                     else
                     {
-                        hintText += " _"
+                      hintText += "_"
                     }
                 }
             }
             // show the last letter of the answer
-            hintText += " "
             hintText += String(hintAnswer![hintAnswer!.index(hintAnswer!.endIndex, offsetBy: -1)])
             currentAnswerValue = currentAnswerValue * 0.75
-            hintField.text = hintText
+            hintLabel.text = hintText
+        case "Stage Six":
+            hintLevel = 6
+            // show the first letter of the answer
+            hintText += String(hintAnswer![hintAnswer!.startIndex])
+            // show a space where there's a space in the answer, and an _ where there's a letter in the answer
+            for i in 1..<(hintLength - 1)
+            {
+                let stri : String.Index = hintAnswer!.index(hintAnswer!.startIndex, offsetBy: i)
+                // But reveal the actual letter for every other letter
+                if ((i % 3) == 0) || ((i % 2) == 0) || ((i % 5) == 0)  || ((i % 7) == 0)  || ((i % 17) == 0)
+                {
+                    if hintAnswer?[stri] == " "
+                    {
+                        hintText += "  "
+                    }
+                    else
+                    {
+                        hintText += String(hintAnswer![stri])
+                    }
+                }
+                else
+                {
+                    if hintAnswer?[stri] == " "
+                    {
+                        hintText += "  "
+                    }
+                    else
+                    {
+                        hintText += "_"
+                    }
+                }
+            }
+            // show the last letter of the answer
+            hintText += String(hintAnswer![hintAnswer!.index(hintAnswer!.endIndex, offsetBy: -1)])
+            currentAnswerValue = currentAnswerValue * 0.75
+            hintLabel.text = hintText
         default:
             if loq == true {print("maximum hintage is shown!")}
         }
+        let attHintText = NSAttributedString(string: hintLabel.text!, attributes: [NSKernAttributeName : 2.0])
+        hintLabel.attributedText = attHintText
         if loq == true {print("Hint level is now: \(hintLevel).")}
         updateForPointsIndicator()
     }
@@ -660,8 +757,242 @@ class ViewController: UIViewController {
         else
         {
             if loq == true {print("Showing the Greek diacriticals toolbar:")}
+            let barSize : CGRect = CGRect(x: 0.0, y: 0.0, width: CGFloat((view.window?.frame.size.width)!*0.5), height: 34.0)
+            let greekInputTool = UIToolbar(frame: barSize)
+            if UI_USER_INTERFACE_IDIOM() == .pad
+            {
+                greekInputTool.tintColor = UIColor(red: 0.6, green: 0.6, blue: 0.64, alpha: 1.0)
+            }
+            else
+            {
+                greekInputTool.tintColor = UIColor.darkText
+            }
+            greekInputTool.isTranslucent = true
+            greekInputTool.barTintColor = UIColor.groupTableViewBackground
+            let diacritSize = CGFloat(24.0)
+            let diacritFont = "Avenir-Black"
+            let uiFontName = UIFont(name: diacritFont, size: diacritSize)
+            let diacritFontAttribs =  [NSFontAttributeName:uiFontName]
+            var barButtonArray = Array<UIBarButtonItem>()
+//            let diacritArray = ["´","῎","῞","`","῍","῝","῀","῏","῟","᾽","῾"]
+            let diacritArray = [greekDiacrits.acute,greekDiacrits.acuteSmooth, greekDiacrits.acuteRough,
+                        greekDiacrits.grave, greekDiacrits.graveSmooth, greekDiacrits.graveRough,
+                        greekDiacrits.circumf,greekDiacrits.circumfSmooth,greekDiacrits.circumfRough,
+                        greekDiacrits.Smooth, greekDiacrits.Rough]
+            for diacrit in diacritArray
+            {
+                barButtonArray.append(UIBarButtonItem(title: diacrit.rawValue, style: .plain, target: self, action:#selector(barButtonAddText(sender:))))
+                barButtonArray.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
+            }
+            barButtonArray.removeLast() // we have appended one too many flexible spaces!
             
+            // give each diacritical button with a symbol a more visible font style
+            for barButt in barButtonArray
+            {
+                if barButt.action != nil
+                {
+                    barButt.setTitleTextAttributes(diacritFontAttribs, for: .normal)
+                }
+            }
+            
+            // Make a nice wee toolbar out of these buttons
+
+            greekInputTool.items = barButtonArray
+            let greekDiacriticsBox = UIView(frame: barSize)
+            greekDiacriticsBox.addSubview(greekInputTool)
+            greekInputTool.autoresizingMask = .flexibleWidth
+            faceTwoField.inputAccessoryView = greekDiacriticsBox
+            var r = greekInputTool.frame
+            r.origin.y += 6
+            greekInputTool.frame = r
         }
+        if faceTwoField.isFirstResponder == true
+        {
+            faceTwoField.reloadInputViews()
+        }
+    }
+    
+    @IBAction func barButtonAddText(sender: UIBarButtonItem)
+    {
+        if faceTwoField.isFirstResponder == true
+        {
+            if let justBefore = faceTwoField.selectedTextRange
+            {
+                if let f2Text = faceTwoField.text
+                {
+                    if f2Text.characters.count > 0
+                    {
+                        let endPoint = justBefore.start
+                        let startPoint = faceTwoField.position(from: endPoint, offset: -1)
+                        let startToEndPoint = faceTwoField.textRange(from: startPoint!, to: endPoint)
+                        let letterBeforeCursor = faceTwoField.text(in: startToEndPoint!)
+                        let replaceWithText = getReplacementSymbol(letter: letterBeforeCursor!, diacrit: greekDiacrits(rawValue: sender.title!)!)
+                        faceTwoField.deleteBackward()
+                        faceTwoField.insertText(replaceWithText)
+                    }
+                }
+            }
+        }
+    }
+    
+    func getReplacementSymbol(letter: String, diacrit : greekDiacrits) -> String
+    {
+        var returnValue = letter
+        switch letter {
+        case "α":
+            switch diacrit {
+            case .acute:
+                returnValue = "ά"
+            case .acuteRough:
+                returnValue = "ἅ"
+            case .acuteSmooth:
+                returnValue = "ἄ"
+            case .grave:
+                returnValue = "ὰ"
+            case .graveRough:
+                returnValue = "ἃ"
+            case .graveSmooth:
+                returnValue = "ἂ"
+            case .circumf:
+                returnValue = "ᾶ"
+            case .circumfRough:
+                returnValue = "ἇ"
+            case .circumfSmooth:
+                returnValue = "ἆ"
+            case .Rough:
+                returnValue = "ἁ"
+            case .Smooth:
+                returnValue = "ἀ"
+            }
+        case "ε":
+            switch diacrit {
+            case .acute:
+                returnValue = "έ"
+            case .acuteRough:
+                returnValue = "ἕ"
+            case .acuteSmooth:
+                returnValue = "ἔ"
+            case .grave:
+                returnValue = "ὲ"
+            case .graveRough:
+                returnValue = "ἓ"
+            case .graveSmooth:
+                returnValue = "ἒ"
+            case .circumf:
+                returnValue = "ε"
+            case .circumfRough:
+                returnValue = "ε"
+            case .circumfSmooth:
+                returnValue = "ε"
+            case .Rough:
+                returnValue = "ἑ"
+            case .Smooth:
+                returnValue = "ἐ"
+            }
+        case "ι":
+            switch diacrit {
+            case .acute:
+                returnValue = "ί"
+            case .acuteRough:
+                returnValue = "ἵ"
+            case .acuteSmooth:
+                returnValue = "ἴ"
+            case .grave:
+                returnValue = "ὶ"
+            case .graveRough:
+                returnValue = "ἳ"
+            case .graveSmooth:
+                returnValue = "ἲ"
+            case .circumf:
+                returnValue = "ῖ"
+            case .circumfRough:
+                returnValue = "ἷ"
+            case .circumfSmooth:
+                returnValue = "ἶ"
+            case .Rough:
+                returnValue = "ἱ"
+            case .Smooth:
+                returnValue = "ἰ"
+            }
+        case "ο":
+            switch diacrit {
+            case .acute:
+                returnValue = "ό"
+            case .acuteRough:
+                returnValue = "ὅ"
+            case .acuteSmooth:
+                returnValue = "ὄ"
+            case .grave:
+                returnValue = "ὸ"
+            case .graveRough:
+                returnValue = "ὃ"
+            case .graveSmooth:
+                returnValue = "ὂ"
+            case .circumf:
+                returnValue = "ο"
+            case .circumfRough:
+                returnValue = "ο"
+            case .circumfSmooth:
+                returnValue = "ο"
+            case .Rough:
+                returnValue = "ὁ"
+            case .Smooth:
+                returnValue = "ὀ"
+            }
+        case "ω":
+            switch diacrit {
+            case .acute:
+                returnValue = "ώ"
+            case .acuteRough:
+                returnValue = "ὥ"
+            case .acuteSmooth:
+                returnValue = "ὤ"
+            case .grave:
+                returnValue = "ὼ"
+            case .graveRough:
+                returnValue = "ὣ"
+            case .graveSmooth:
+                returnValue = "ὢ"
+            case .circumf:
+                returnValue = "ῶ"
+            case .circumfRough:
+                returnValue = "ὧ"
+            case .circumfSmooth:
+                returnValue = "ὦ"
+            case .Rough:
+                returnValue = "ὡ"
+            case .Smooth:
+                returnValue = "ὠ"
+            }
+        case "η":
+            switch diacrit {
+            case .acute:
+                returnValue = "ή"
+            case .acuteRough:
+                returnValue = "ἥ"
+            case .acuteSmooth:
+                returnValue = "ἤ"
+            case .grave:
+                returnValue = "ὴ"
+            case .graveRough:
+                returnValue = "ἣ"
+            case .graveSmooth:
+                returnValue = "ἢ"
+            case .circumf:
+                returnValue = "ῆ"
+            case .circumfRough:
+                returnValue = "ἧ"
+            case .circumfSmooth:
+                returnValue = "ἦ"
+            case .Rough:
+                returnValue = "ἡ"
+            case .Smooth:
+                returnValue = "ἠ"
+            }
+        default:
+            returnValue = letter
+        }
+        return returnValue
     }
 
     @IBAction func unwindToMain(sender : UIStoryboardSegue)
@@ -673,32 +1004,63 @@ class ViewController: UIViewController {
     {
         let borderWidth : CGFloat = 2.5
         let cornerRadius : CGFloat = 9.0
-        let buttonInsideDGray = UIColor.darkGray.cgColor
-        let buttonBorderLGray = UIColor.black.cgColor
-        let buttonBorderBlack = UIColor.black.cgColor
-        let buttonInsideLGray = UIColor.init(red: 0.4, green: 0.4, blue: 0.4, alpha: 1.0).cgColor
+//        let buttonInsideDGray = UIColor.darkGray.cgColor
+//        let buttonBorderLGray = UIColor.black.cgColor
+//        let buttonBorderBlack = UIColor.black.cgColor
+//        let buttonInsideLGray = UIColor.init(red: 0.4, green: 0.4, blue: 0.4, alpha: 1.0).cgColor
+        
+        let bOfVenus_green = UIColor.init(red: (168.0/255), green: (192.0/255), blue: (168.0/255), alpha: 1.0)
+        let bOfVenus_red = UIColor.init(red: (212.0/255), green: (126.0/255), blue: (115.0/255), alpha: 1.0)
+        let bOfVenus_blue = UIColor.init(red: (120.0/255), green: (144.0/255), blue: (144.0/255), alpha: 1.0)
+        let bOfVenus_dark = UIColor.init(red: (48.0/255), green: (24.0/255), blue: (24.0/255), alpha: 1.0)
+        let bOfVenus_beige = UIColor.init(red: (240.0/255), green: (240.0/255), blue: (216.0/255), alpha: 1.0)
+//        let ermine_choco2 = UIColor.init(red: (32.0/255), green: (20.0/255), blue: (8.0/255), alpha: 1.0).cgColor
+//        let ermine_canoe_red = UIColor.init(red: (144.0/255), green: (36.0/255), blue: (11.0/255), alpha: 1.0).cgColor
+//        let ermine_renn_orange = UIColor.init(red: (238.0/255), green: (152.0/255), blue: (35.0/255), alpha: 1.0).cgColor
+//        let ermine_breaking_glass = UIColor.init(red: (254.0/255), green: (226.0/255), blue: (181.0/255), alpha: 1.0).cgColor
+//        let ermine_pistache_green = UIColor.init(red: (208.0/255), green: (226.0/255), blue: (177.0/255), alpha: 1.0).cgColor
+
         
         
         let buttnsType1 : Array<UIButton> = [showHintButton, skipButton]
         let buttnsType2 : Array<UIButton> = [addButton, browseButton, configureButton, statisticsButton]
         
+        view!.backgroundColor = bOfVenus_beige
+        
+        faceOneLabel.backgroundColor = bOfVenus_blue
+        messageLabel.backgroundColor = bOfVenus_beige
+        faceTwoField.backgroundColor = bOfVenus_blue
+        hintLabel.backgroundColor = bOfVenus_beige
+        forPointsLabel.textColor = bOfVenus_red
+        tagLabel.textColor = bOfVenus_red
+        pointsLabel.textColor = bOfVenus_red
+        cardsKnownLabel.textColor = bOfVenus_red
+//        cardsKnownLabel.font
+        
         for b in buttnsType1
         {
             b.layer.borderWidth = borderWidth
-            b.layer.borderColor = buttonBorderBlack
+            b.layer.borderColor = bOfVenus_dark.cgColor
             b.layer.cornerRadius = cornerRadius
-            b.layer.backgroundColor = buttonInsideLGray
+            b.layer.backgroundColor = bOfVenus_green.cgColor
             b.tintColor = UIColor.white
         }
         for b in buttnsType2
         {
             b.layer.borderWidth = borderWidth
-            b.layer.borderColor = buttonBorderLGray
+            b.layer.borderColor = bOfVenus_dark.cgColor
             b.layer.cornerRadius = cornerRadius
-            b.layer.backgroundColor = buttonInsideDGray
+            b.layer.backgroundColor = bOfVenus_blue.cgColor
             b.tintColor = UIColor.white
         }
     }
 
 }
 
+class KerningLabel: UILabel {
+    func addKerning(kerningValue: Double) {
+        let attributedString = self.attributedText as! NSMutableAttributedString
+        attributedString.addAttribute(NSKernAttributeName, value: kerningValue, range: NSMakeRange(0, attributedString.length))
+        self.attributedText = attributedString
+}
+}

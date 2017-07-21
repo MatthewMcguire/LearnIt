@@ -8,8 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		B9217CC41F0E9DE1000F1798 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */; };
+		B92A66171F1426C900DB3DAA /* BrowseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92A66161F1426C900DB3DAA /* BrowseTableViewController.swift */; };
+		B92A66191F14287A00DB3DAA /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92A66181F14287A00DB3DAA /* CardDetailViewController.swift */; };
 		B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */; };
 		B934A5141F058B6100A696E8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934A5131F058B6100A696E8 /* Model.swift */; };
+		B965FC781F1BDFB8009E8633 /* sampleWelshDuolingo.xml in Resources */ = {isa = PBXBuildFile; fileRef = B965FC771F1BDFB8009E8633 /* sampleWelshDuolingo.xml */; };
+		B97AC31D1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97AC31C1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift */; };
 		B98419641F0192810027B2B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98419631F0192810027B2B9 /* AppDelegate.swift */; };
 		B98419661F0192810027B2B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98419651F0192810027B2B9 /* ViewController.swift */; };
 		B98419691F0192810027B2B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B98419671F0192810027B2B9 /* Main.storyboard */; };
@@ -23,8 +27,12 @@
 
 /* Begin PBXFileReference section */
 		B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
+		B92A66161F1426C900DB3DAA /* BrowseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseTableViewController.swift; path = ../BrowseTableViewController.swift; sourceTree = "<group>"; };
+		B92A66181F14287A00DB3DAA /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataDomus.swift; sourceTree = "<group>"; };
 		B934A5131F058B6100A696E8 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		B965FC771F1BDFB8009E8633 /* sampleWelshDuolingo.xml */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; path = sampleWelshDuolingo.xml; sourceTree = "<group>"; };
+		B97AC31C1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewController.swift; sourceTree = "<group>"; };
 		B98419601F0192810027B2B9 /* learnit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = learnit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B98419631F0192810027B2B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B98419651F0192810027B2B9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,18 +77,22 @@
 			isa = PBXGroup;
 			children = (
 				B98419781F0192990027B2B9 /* sampleWelsh.xml */,
+				B965FC771F1BDFB8009E8633 /* sampleWelshDuolingo.xml */,
 				B9C2A6151F10102B00E5E917 /* sampleGreek.xml */,
 				B98419631F0192810027B2B9 /* AppDelegate.swift */,
 				B98419651F0192810027B2B9 /* ViewController.swift */,
 				B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */,
 				B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */,
+				B92A66181F14287A00DB3DAA /* CardDetailViewController.swift */,
+				B92A66161F1426C900DB3DAA /* BrowseTableViewController.swift */,
+				B97AC31C1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift */,
 				B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */,
 				B98419671F0192810027B2B9 /* Main.storyboard */,
 				B984196D1F0192810027B2B9 /* Assets.xcassets */,
-				B984196F1F0192810027B2B9 /* LaunchScreen.storyboard */,
 				B98419721F0192810027B2B9 /* Info.plist */,
 				B984196A1F0192810027B2B9 /* learnit.xcdatamodeld */,
 				B934A5131F058B6100A696E8 /* Model.swift */,
+				B984196F1F0192810027B2B9 /* LaunchScreen.storyboard */,
 			);
 			path = learnit;
 			sourceTree = "<group>";
@@ -148,6 +160,7 @@
 				B9C2A6161F10102B00E5E917 /* sampleGreek.xml in Resources */,
 				B98419711F0192810027B2B9 /* LaunchScreen.storyboard in Resources */,
 				B984196E1F0192810027B2B9 /* Assets.xcassets in Resources */,
+				B965FC781F1BDFB8009E8633 /* sampleWelshDuolingo.xml in Resources */,
 				B98419691F0192810027B2B9 /* Main.storyboard in Resources */,
 				B98419791F0192990027B2B9 /* sampleWelsh.xml in Resources */,
 			);
@@ -163,6 +176,9 @@
 				B934A5141F058B6100A696E8 /* Model.swift in Sources */,
 				B98419661F0192810027B2B9 /* ViewController.swift in Sources */,
 				B9217CC41F0E9DE1000F1798 /* AddCardViewController.swift in Sources */,
+				B92A66171F1426C900DB3DAA /* BrowseTableViewController.swift in Sources */,
+				B97AC31D1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift in Sources */,
+				B92A66191F14287A00DB3DAA /* CardDetailViewController.swift in Sources */,
 				B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */,
 				B9AFF1AB1F0FEC4E0013A1AD /* ConfigurationViewController.swift in Sources */,
 				B984196C1F0192810027B2B9 /* learnit.xcdatamodeld in Sources */,
