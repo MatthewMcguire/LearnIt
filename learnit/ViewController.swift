@@ -75,6 +75,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         if loq == true {print("viewWillAppear triggered...")}
         if loq == true {print("\tUpdate counter, update place in queue, and refresh card shown.")}
+        self.view.endEditing(true)
         updateCounter()
         refreshCardShown()
     }
@@ -757,54 +758,58 @@ class ViewController: UIViewController {
         else
         {
             if loq == true {print("Showing the Greek diacriticals toolbar:")}
-            let barSize : CGRect = CGRect(x: 0.0, y: 0.0, width: CGFloat((view.window?.frame.size.width)!*0.5), height: 34.0)
-            let greekInputTool = UIToolbar(frame: barSize)
-            if UI_USER_INTERFACE_IDIOM() == .pad
+            if let windowWidth = view.window
             {
-                greekInputTool.tintColor = UIColor(red: 0.6, green: 0.6, blue: 0.64, alpha: 1.0)
-            }
-            else
-            {
-                greekInputTool.tintColor = UIColor.darkText
-            }
-            greekInputTool.isTranslucent = true
-            greekInputTool.barTintColor = UIColor.groupTableViewBackground
-            let diacritSize = CGFloat(24.0)
-            let diacritFont = "Avenir-Black"
-            let uiFontName = UIFont(name: diacritFont, size: diacritSize)
-            let diacritFontAttribs =  [NSFontAttributeName:uiFontName]
-            var barButtonArray = Array<UIBarButtonItem>()
-//            let diacritArray = ["´","῎","῞","`","῍","῝","῀","῏","῟","᾽","῾"]
-            let diacritArray = [greekDiacrits.acute,greekDiacrits.acuteSmooth, greekDiacrits.acuteRough,
-                        greekDiacrits.grave, greekDiacrits.graveSmooth, greekDiacrits.graveRough,
-                        greekDiacrits.circumf,greekDiacrits.circumfSmooth,greekDiacrits.circumfRough,
-                        greekDiacrits.Smooth, greekDiacrits.Rough]
-            for diacrit in diacritArray
-            {
-                barButtonArray.append(UIBarButtonItem(title: diacrit.rawValue, style: .plain, target: self, action:#selector(barButtonAddText(sender:))))
-                barButtonArray.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
-            }
-            barButtonArray.removeLast() // we have appended one too many flexible spaces!
-            
-            // give each diacritical button with a symbol a more visible font style
-            for barButt in barButtonArray
-            {
-                if barButt.action != nil
+                let barSize : CGRect = CGRect(x: 0.0, y: 0.0, width: CGFloat((windowWidth.frame.size.width)*0.5), height: 34.0)
+                let greekInputTool = UIToolbar(frame: barSize)
+                if UI_USER_INTERFACE_IDIOM() == .pad
                 {
-                    barButt.setTitleTextAttributes(diacritFontAttribs, for: .normal)
+                    greekInputTool.tintColor = UIColor(red: 0.6, green: 0.6, blue: 0.64, alpha: 1.0)
                 }
+                else
+                {
+                    greekInputTool.tintColor = UIColor.darkText
+                }
+                greekInputTool.isTranslucent = true
+                greekInputTool.barTintColor = UIColor.groupTableViewBackground
+                let diacritSize = CGFloat(24.0)
+                let diacritFont = "Avenir-Black"
+                let uiFontName = UIFont(name: diacritFont, size: diacritSize)
+                let diacritFontAttribs =  [NSFontAttributeName:uiFontName]
+                var barButtonArray = Array<UIBarButtonItem>()
+                //            let diacritArray = ["´","῎","῞","`","῍","῝","῀","῏","῟","᾽","῾"]
+                let diacritArray = [greekDiacrits.acute,greekDiacrits.acuteSmooth, greekDiacrits.acuteRough,
+                                    greekDiacrits.grave, greekDiacrits.graveSmooth, greekDiacrits.graveRough,
+                                    greekDiacrits.circumf,greekDiacrits.circumfSmooth,greekDiacrits.circumfRough,
+                                    greekDiacrits.Smooth, greekDiacrits.Rough]
+                for diacrit in diacritArray
+                {
+                    barButtonArray.append(UIBarButtonItem(title: diacrit.rawValue, style: .plain, target: self, action:#selector(barButtonAddText(sender:))))
+                    barButtonArray.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
+                }
+                barButtonArray.removeLast() // we have appended one too many flexible spaces!
+                
+                // give each diacritical button with a symbol a more visible font style
+                for barButt in barButtonArray
+                {
+                    if barButt.action != nil
+                    {
+                        barButt.setTitleTextAttributes(diacritFontAttribs, for: .normal)
+                    }
+                }
+                
+                // Make a nice wee toolbar out of these buttons
+                
+                greekInputTool.items = barButtonArray
+                let greekDiacriticsBox = UIView(frame: barSize)
+                greekDiacriticsBox.addSubview(greekInputTool)
+                greekInputTool.autoresizingMask = .flexibleWidth
+                faceTwoField.inputAccessoryView = greekDiacriticsBox
+                var r = greekInputTool.frame
+                r.origin.y += 6
+                greekInputTool.frame = r
             }
-            
-            // Make a nice wee toolbar out of these buttons
 
-            greekInputTool.items = barButtonArray
-            let greekDiacriticsBox = UIView(frame: barSize)
-            greekDiacriticsBox.addSubview(greekInputTool)
-            greekInputTool.autoresizingMask = .flexibleWidth
-            faceTwoField.inputAccessoryView = greekDiacriticsBox
-            var r = greekInputTool.frame
-            r.origin.y += 6
-            greekInputTool.frame = r
         }
         if faceTwoField.isFirstResponder == true
         {
