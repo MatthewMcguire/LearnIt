@@ -164,12 +164,12 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         let elimTrashChars = CharacterSet.whitespacesAndNewlines
-        var globToAdd = string.trimmingCharacters(in: elimTrashChars)
-        globToAdd.replacingOccurrences(of: "\"", with: "")
-        globToAdd.replacingOccurrences(of: ",", with: "##")
+        let materialToAdd = string.trimmingCharacters(in: elimTrashChars).replacingOccurrences(of: "\"", with: "").replacingOccurrences(of: ",", with: "##")
+//        globToAdd.replacingOccurrences(of: "\"", with: "")
+//        globToAdd.replacingOccurrences(of: ",", with: "##")
         if currentElement != nil
         {
-            currentElement! += globToAdd
+            currentElement! += materialToAdd
         }
     }
 

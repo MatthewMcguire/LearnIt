@@ -21,6 +21,7 @@
 		B984196E1F0192810027B2B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B984196D1F0192810027B2B9 /* Assets.xcassets */; };
 		B98419711F0192810027B2B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B984196F1F0192810027B2B9 /* LaunchScreen.storyboard */; };
 		B98419791F0192990027B2B9 /* sampleWelsh.xml in Resources */ = {isa = PBXBuildFile; fileRef = B98419781F0192990027B2B9 /* sampleWelsh.xml */; };
+		B997F55D1F240F6000053F29 /* SmartLanguageUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B997F55C1F240F6000053F29 /* SmartLanguageUITextField.swift */; };
 		B9AFF1AB1F0FEC4E0013A1AD /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */; };
 		B9C2A6161F10102B00E5E917 /* sampleGreek.xml in Resources */ = {isa = PBXBuildFile; fileRef = B9C2A6151F10102B00E5E917 /* sampleGreek.xml */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		B98419701F0192810027B2B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B98419721F0192810027B2B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B98419781F0192990027B2B9 /* sampleWelsh.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sampleWelsh.xml; sourceTree = "<group>"; };
+		B997F55C1F240F6000053F29 /* SmartLanguageUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartLanguageUITextField.swift; sourceTree = "<group>"; };
 		B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		B9C2A6151F10102B00E5E917 /* sampleGreek.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sampleGreek.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +90,7 @@
 				B97AC31C1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift */,
 				B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */,
 				B98419671F0192810027B2B9 /* Main.storyboard */,
+				B997F55C1F240F6000053F29 /* SmartLanguageUITextField.swift */,
 				B984196D1F0192810027B2B9 /* Assets.xcassets */,
 				B98419721F0192810027B2B9 /* Info.plist */,
 				B984196A1F0192810027B2B9 /* learnit.xcdatamodeld */,
@@ -177,6 +180,7 @@
 				B98419661F0192810027B2B9 /* ViewController.swift in Sources */,
 				B9217CC41F0E9DE1000F1798 /* AddCardViewController.swift in Sources */,
 				B92A66171F1426C900DB3DAA /* BrowseTableViewController.swift in Sources */,
+				B997F55D1F240F6000053F29 /* SmartLanguageUITextField.swift in Sources */,
 				B97AC31D1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift in Sources */,
 				B92A66191F14287A00DB3DAA /* CardDetailViewController.swift in Sources */,
 				B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */,

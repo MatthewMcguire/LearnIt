@@ -34,7 +34,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var faceOneLabel: UILabel!
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var cardsKnownLabel: UILabel!
-    @IBOutlet weak var faceTwoField: UITextField!
+    @IBOutlet weak var AnswerField: SmartLanguageUITextField!
+
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var forPointsLabel: UILabel!
     @IBOutlet weak var showHintButton: UIButton!
@@ -78,6 +79,7 @@ class ViewController: UIViewController {
         self.view.endEditing(true)
         updateCounter()
         refreshCardShown()
+        faceOneLabel.isUserInteractionEnabled = true
     }
 
     @IBAction func hintButtonPress(_ sender: Any) {
@@ -94,11 +96,17 @@ class ViewController: UIViewController {
 
     @IBAction func beginTypingAnswer(_ sender: Any) {
         self.messageLabel.text = " "
+        
     }
     @IBAction func enteredAnswer(_ sender: Any) {
         view.endEditing(true)
         self.assessResponse()
         updateForPointsIndicator()
+    }
+    
+    
+    @IBAction func dismissKeyb(_ sender: Any) {
+        view.endEditing(true)
     }
     
     func storageSetup()
@@ -127,7 +135,6 @@ class ViewController: UIViewController {
             if loq == true {print("\t maxCardsInHand: \(maxCardsInHand)")}
             if loq == true {print("\t correctAnswerShownPause: \(correctAnswerShownPause)")}
         }
-        
     }
     
     func updateStudyToday()
@@ -137,9 +144,7 @@ class ViewController: UIViewController {
             print("Cards were added to the queue for the day")
         }
     }
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        <#code#>
-//    }
+
     
     func updateCounter()
     {
@@ -186,22 +191,20 @@ class ViewController: UIViewController {
                 currentPlaceInQueue = queueSize - 1
             }
         }
-        showACard()
         hintLabel.text = " "
-
         UIView.animate(withDuration: 1.5, delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.faceTwoField.text = ""
+            self.AnswerField.text = ""
             }, completion: nil)
         hintLevel = 0
         hintAnswer = currentCard?.faceTwoAsSet?.first
         updateTotalPoints()
-        
+        showACard()
     }
  
     func assessResponse()
     {
         if loq == true {print("Assessing the response:")}
-        let givenAnswer = faceTwoField.text?.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+        let givenAnswer = AnswerField.text?.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
         if givenAnswer?.characters.count == 0
         {
             processIncorrectAnswer(uniqueID: (currentCard?.uniqueID)!, distance: 10.0)
@@ -251,7 +254,7 @@ class ViewController: UIViewController {
                 if loq == true {print("\tQueue size is \(queueSize)")}
                 skipButton.isEnabled = true
                 showHintButton.isEnabled = true
-                faceTwoField.isEnabled = true
+                AnswerField.isEnabled = true
                 let uniqueID = oggiQueue?[currentPlaceInQueue]
                 currentCard = negozioGrande!.getCardWithID(uniqueID: uniqueID!)
                 faceOneLabel.text = currentCard?.faceOne
@@ -262,11 +265,15 @@ class ViewController: UIViewController {
                     if answerContainsGreek(risposta: fTwo) == true
                     {
                         if loq == true {print("\tThe answer seems to include greek. Adding the special characters...")}
+                        AnswerField.preferredLang = "el"
                         showGreekToolbar(status: true)
+                        
                     }
                     else
                     {
-                         showGreekToolbar(status: false)
+                        AnswerField.preferredLang = "en"
+                        showGreekToolbar(status: false)
+                        
                     }
                 }
 
@@ -276,7 +283,7 @@ class ViewController: UIViewController {
                 if loq == true {print("\tQueue size is \(queueSize) so disabling interface.")}
                 skipButton.isEnabled = false
                 showHintButton.isEnabled = false
-                faceTwoField.isEnabled = false
+                AnswerField.isEnabled = false
                 faceOneLabel.text = "-- All caught up --"
                 tagLabel.text = " "
                 messageLabel.text = " "
@@ -753,7 +760,7 @@ class ViewController: UIViewController {
         if status == false
         {
             if loq == true {print("Hiding the Greek diacriticals toolbar:")}
-            faceTwoField.inputAccessoryView = nil
+            AnswerField.inputAccessoryView = nil
         }
         else
         {
@@ -804,36 +811,36 @@ class ViewController: UIViewController {
                 let greekDiacriticsBox = UIView(frame: barSize)
                 greekDiacriticsBox.addSubview(greekInputTool)
                 greekInputTool.autoresizingMask = .flexibleWidth
-                faceTwoField.inputAccessoryView = greekDiacriticsBox
+                AnswerField.inputAccessoryView = greekDiacriticsBox
                 var r = greekInputTool.frame
                 r.origin.y += 6
                 greekInputTool.frame = r
             }
 
         }
-        if faceTwoField.isFirstResponder == true
+        if AnswerField.isFirstResponder == true
         {
-            faceTwoField.reloadInputViews()
+            AnswerField.reloadInputViews()
         }
     }
     
     @IBAction func barButtonAddText(sender: UIBarButtonItem)
     {
-        if faceTwoField.isFirstResponder == true
+        if AnswerField.isFirstResponder == true
         {
-            if let justBefore = faceTwoField.selectedTextRange
+            if let justBefore = AnswerField.selectedTextRange
             {
-                if let f2Text = faceTwoField.text
+                if let f2Text = AnswerField.text
                 {
                     if f2Text.characters.count > 0
                     {
                         let endPoint = justBefore.start
-                        let startPoint = faceTwoField.position(from: endPoint, offset: -1)
-                        let startToEndPoint = faceTwoField.textRange(from: startPoint!, to: endPoint)
-                        let letterBeforeCursor = faceTwoField.text(in: startToEndPoint!)
+                        let startPoint = AnswerField.position(from: endPoint, offset: -1)
+                        let startToEndPoint = AnswerField.textRange(from: startPoint!, to: endPoint)
+                        let letterBeforeCursor = AnswerField.text(in: startToEndPoint!)
                         let replaceWithText = getReplacementSymbol(letter: letterBeforeCursor!, diacrit: greekDiacrits(rawValue: sender.title!)!)
-                        faceTwoField.deleteBackward()
-                        faceTwoField.insertText(replaceWithText)
+                        AnswerField.deleteBackward()
+                        AnswerField.insertText(replaceWithText)
                     }
                 }
             }
@@ -1034,7 +1041,7 @@ class ViewController: UIViewController {
         
         faceOneLabel.backgroundColor = bOfVenus_blue
         messageLabel.backgroundColor = bOfVenus_beige
-        faceTwoField.backgroundColor = bOfVenus_blue
+        AnswerField.backgroundColor = bOfVenus_blue
         hintLabel.backgroundColor = bOfVenus_beige
         forPointsLabel.textColor = bOfVenus_red
         tagLabel.textColor = bOfVenus_red

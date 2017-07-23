@@ -259,7 +259,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         }
         return numCards
     }
-     // MARK: TODO - this function will add duplicate cards, and it shouldn't! -
+   
     func addNewObj(card : CardObject)
     {
         let aNewCard = NSEntityDescription.insertNewObject(forEntityName: "CardStack", into: manObjContext!) as! CardStackManagedObject
@@ -346,7 +346,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
             fatalError("Couldn't fetch Faces objects from Core Data")
         }
         
-        // Pause for a moment and see if there is already another card with the same face one and face two connections
+        // Before going further, check if there is already another card with the same face one and face two connections
         // If so, this card is a duplicate and shouldn't be added. Instead, the existing card's tags should be a union
         // of those tags it already has and the ones in the 'new card to be added'
         
@@ -528,7 +528,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         newStatsObject.numberTimesForgotten = 0
         newStatsObject.numberTimesCorrect = 0
         newStatsObject.difficultyRating = 1.3
-        newStatsObject.idealInterval = 1.0
+        newStatsObject.idealInterval = 0.1 // a card, once learned, should be repeated the next day
         aNewCard.cardToStats = newStatsObject
         
         saveContext()

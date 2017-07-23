@@ -590,6 +590,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="εἶπον" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="Jfx-GX-7bK">
                                 <rect key="frame" x="26" y="60" width="323" height="90"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="90" id="nDy-Te-opM"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="prY-wl-G3c"/>
@@ -597,6 +598,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="AEH-1c-YPI" appends="YES" id="SEo-DX-2xP"/>
+                                </connections>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X of Y are known" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2HR-ek-1C2">
                                 <rect key="frame" x="26" y="35" width="120.5" height="18"/>
@@ -610,7 +614,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="answer" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NOP-S7-jux">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="answer" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NOP-S7-jux" customClass="SmartLanguageUITextField" customModule="learnit" customModuleProvider="target">
                                 <rect key="frame" x="26" y="156" width="323" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" priority="750" constant="90" id="1nx-da-yKw"/>
@@ -791,12 +795,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="AnswerField" destination="NOP-S7-jux" id="VN5-Mh-aQJ"/>
                         <outlet property="addButton" destination="30R-1K-nlr" id="JkN-Fe-uCv"/>
                         <outlet property="browseButton" destination="ngG-4t-XfR" id="4fY-E0-55x"/>
                         <outlet property="cardsKnownLabel" destination="2HR-ek-1C2" id="EJf-S4-GHW"/>
                         <outlet property="configureButton" destination="XKa-hq-6fD" id="7dU-b5-LbX"/>
                         <outlet property="faceOneLabel" destination="Jfx-GX-7bK" id="ESm-nF-ZnL"/>
-                        <outlet property="faceTwoField" destination="NOP-S7-jux" id="Q1g-Tv-OEM"/>
                         <outlet property="feedbackHeight" destination="b6j-Xo-oIA" id="yPd-cv-bLC"/>
                         <outlet property="feedbackView" destination="WrY-ZX-bIw" id="Ujc-JC-icj"/>
                         <outlet property="forPointsLabel" destination="I1g-SF-a8k" id="kNZ-dd-ff4"/>
@@ -811,6 +815,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="AEH-1c-YPI">
+                    <connections>
+                        <action selector="dismissKeyb:" destination="BYZ-38-t0r" id="9Sb-GP-hIK"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-847.20000000000005" y="67.916041979010501"/>
         </scene>
