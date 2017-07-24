@@ -34,7 +34,7 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
     
     @IBAction func importWelshPress(_ sender: Any) {
         if loq == true {print("Importing sample Welsh language cards.")}
-        addCardsViaXML(fileName: "sampleWelshDuolingo")
+        addCardsViaXML(fileName: "sampleWelsh")
     }
     
     @IBAction func resetPointsPress(_ sender: Any) {
