@@ -219,7 +219,7 @@ class ViewController: UIViewController {
             for aCorrectAnswer in possibleAnswers
             {
                 let d = levenshteinDistanceFrom(source: aCorrectAnswer, target: givenAnswer!)
-                if loq == true {print("\tDistance from \(givenAnswer) to \(aCorrectAnswer) is \(d).")}
+                if loq == true {print("\tDistance from \(givenAnswer?.description ?? "answer you typed") to \(aCorrectAnswer.description) is \(d).")}
                 if d < shortestDistance
                 {
                     shortestDistance = d
@@ -801,7 +801,7 @@ class ViewController: UIViewController {
                 {
                     if barButt.action != nil
                     {
-                        barButt.setTitleTextAttributes(diacritFontAttribs, for: .normal)
+                        barButt.setTitleTextAttributes((diacritFontAttribs as Any as! [String : Any]), for: .normal)
                     }
                 }
                 

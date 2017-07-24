@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
-		B92A66161F1426C900DB3DAA /* BrowseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseTableViewController.swift; path = ../BrowseTableViewController.swift; sourceTree = "<group>"; };
+		B92A66161F1426C900DB3DAA /* BrowseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseTableViewController.swift; path = "/Users/gmcguire/Box Sync/objCWork/learnit/learnit/BrowseTableViewController.swift"; sourceTree = "<absolute>"; };
 		B92A66181F14287A00DB3DAA /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataDomus.swift; sourceTree = "<group>"; };
 		B934A5131F058B6100A696E8 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
