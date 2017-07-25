@@ -27,3 +27,8 @@ Xcode 8.3 or later
 ## Runtime Requirements
 
 iOS 9.0 or later
+
+Main screen: 
+![alt text][screen01]
+
+[screen01]: https://github.com/MatthewMcguire/LearnIt/blob/master/learnit/screen_01.PNG "Main screen"
