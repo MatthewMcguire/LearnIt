@@ -22,6 +22,14 @@
 		B98419711F0192810027B2B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B984196F1F0192810027B2B9 /* LaunchScreen.storyboard */; };
 		B997F55D1F240F6000053F29 /* SmartLanguageUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B997F55C1F240F6000053F29 /* SmartLanguageUITextField.swift */; };
 		B9A4F9331F26891B0045185B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B9A4F9321F26891B0045185B /* README.md */; };
+		B9A4F9361F27F5EF0045185B /* screen_01.PNG in Resources */ = {isa = PBXBuildFile; fileRef = B9A4F9351F27F5EF0045185B /* screen_01.PNG */; };
+		B9A4F93E1F27F65E0045185B /* screen_08.PNG in Resources */ = {isa = PBXBuildFile; fileRef = B9A4F9371F27F65E0045185B /* screen_08.PNG */; };
+		B9A4F93F1F27F65E0045185B /* screen_07.PNG in Resources */ = {isa = PBXBuildFile; fileRef = B9A4F9381F27F65E0045185B /* screen_07.PNG */; };
+		B9A4F9401F27F65E0045185B /* screen_06.PNG in Resources */ = {isa = PBXBuildFile; fileRef = B9A4F9391F27F65E0045185B /* screen_06.PNG */; };
+		B9A4F9411F27F65E0045185B /* screen_05.PNG in Resources */ = {isa = PBXBuildFile; fileRef = B9A4F93A1F27F65E0045185B /* screen_05.PNG */; };
+		B9A4F9421F27F65E0045185B /* screen_04.PNG in Resources */ = {isa = PBXBuildFile; fileRef = B9A4F93B1F27F65E0045185B /* screen_04.PNG */; };
+		B9A4F9431F27F65E0045185B /* screen_03.PNG in Resources */ = {isa = PBXBuildFile; fileRef = B9A4F93C1F27F65E0045185B /* screen_03.PNG */; };
+		B9A4F9441F27F65E0045185B /* screen_02.PNG in Resources */ = {isa = PBXBuildFile; fileRef = B9A4F93D1F27F65E0045185B /* screen_02.PNG */; };
 		B9AFF1AB1F0FEC4E0013A1AD /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */; };
 		B9C2A6161F10102B00E5E917 /* sampleGreek.xml in Resources */ = {isa = PBXBuildFile; fileRef = B9C2A6151F10102B00E5E917 /* sampleGreek.xml */; };
 /* End PBXBuildFile section */
@@ -44,6 +52,14 @@
 		B98419721F0192810027B2B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B997F55C1F240F6000053F29 /* SmartLanguageUITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartLanguageUITextField.swift; sourceTree = "<group>"; };
 		B9A4F9321F26891B0045185B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B9A4F9351F27F5EF0045185B /* screen_01.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_01.PNG; sourceTree = "<group>"; };
+		B9A4F9371F27F65E0045185B /* screen_08.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_08.PNG; sourceTree = "<group>"; };
+		B9A4F9381F27F65E0045185B /* screen_07.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_07.PNG; sourceTree = "<group>"; };
+		B9A4F9391F27F65E0045185B /* screen_06.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_06.PNG; sourceTree = "<group>"; };
+		B9A4F93A1F27F65E0045185B /* screen_05.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_05.PNG; sourceTree = "<group>"; };
+		B9A4F93B1F27F65E0045185B /* screen_04.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_04.PNG; sourceTree = "<group>"; };
+		B9A4F93C1F27F65E0045185B /* screen_03.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_03.PNG; sourceTree = "<group>"; };
+		B9A4F93D1F27F65E0045185B /* screen_02.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_02.PNG; sourceTree = "<group>"; };
 		B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		B9C2A6151F10102B00E5E917 /* sampleGreek.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sampleGreek.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +95,7 @@
 		B98419621F0192810027B2B9 /* learnit */ = {
 			isa = PBXGroup;
 			children = (
+				B9A4F9341F27F5DC0045185B /* Project screenshots */,
 				B965FC771F1BDFB8009E8633 /* sampleWelsh.xml */,
 				B9C2A6151F10102B00E5E917 /* sampleGreek.xml */,
 				B98419631F0192810027B2B9 /* AppDelegate.swift */,
@@ -98,6 +115,21 @@
 				B984196F1F0192810027B2B9 /* LaunchScreen.storyboard */,
 			);
 			path = learnit;
+			sourceTree = "<group>";
+		};
+		B9A4F9341F27F5DC0045185B /* Project screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				B9A4F9371F27F65E0045185B /* screen_08.PNG */,
+				B9A4F9381F27F65E0045185B /* screen_07.PNG */,
+				B9A4F9391F27F65E0045185B /* screen_06.PNG */,
+				B9A4F93A1F27F65E0045185B /* screen_05.PNG */,
+				B9A4F93B1F27F65E0045185B /* screen_04.PNG */,
+				B9A4F93C1F27F65E0045185B /* screen_03.PNG */,
+				B9A4F93D1F27F65E0045185B /* screen_02.PNG */,
+				B9A4F9351F27F5EF0045185B /* screen_01.PNG */,
+			);
+			name = "Project screenshots";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,11 +192,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9A4F9421F27F65E0045185B /* screen_04.PNG in Resources */,
 				B9A4F9331F26891B0045185B /* README.md in Resources */,
+				B9A4F9411F27F65E0045185B /* screen_05.PNG in Resources */,
+				B9A4F9361F27F5EF0045185B /* screen_01.PNG in Resources */,
+				B9A4F9401F27F65E0045185B /* screen_06.PNG in Resources */,
 				B9C2A6161F10102B00E5E917 /* sampleGreek.xml in Resources */,
+				B9A4F9441F27F65E0045185B /* screen_02.PNG in Resources */,
+				B9A4F93F1F27F65E0045185B /* screen_07.PNG in Resources */,
 				B98419711F0192810027B2B9 /* LaunchScreen.storyboard in Resources */,
+				B9A4F93E1F27F65E0045185B /* screen_08.PNG in Resources */,
 				B984196E1F0192810027B2B9 /* Assets.xcassets in Resources */,
 				B965FC781F1BDFB8009E8633 /* sampleWelsh.xml in Resources */,
+				B9A4F9431F27F65E0045185B /* screen_03.PNG in Resources */,
 				B98419691F0192810027B2B9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
