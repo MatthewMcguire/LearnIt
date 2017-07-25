@@ -57,6 +57,7 @@ class ViewController: UIViewController {
     var currentPlaceInQueue: Int = 0
     var hintLevel : Int = 0
     var hintAnswer: String?
+    var maxAnswerValue : Float = 10.0
     var currentAnswerValue : Float = 10.0
     
     override func viewDidLoad() {
@@ -77,8 +78,10 @@ class ViewController: UIViewController {
         if loq == true {print("viewWillAppear triggered...")}
         if loq == true {print("\tUpdate counter, update place in queue, and refresh card shown.")}
         self.view.endEditing(true)
+        self.refreshLearnerPreferences()
         updateCounter()
         refreshCardShown()
+        updateForPointsIndicator()
         faceOneLabel.isUserInteractionEnabled = true
     }
 
@@ -131,6 +134,8 @@ class ViewController: UIViewController {
         {
             maxCardsInHand = Int(currentL.maxCardsInHand)
             correctAnswerShownPause = currentL.correctAnswerShownPause
+            currentAnswerValue = currentL.maximumAnswerValue
+            maxAnswerValue = currentL.maximumAnswerValue
             if loq == true {print("Refreshing learner preferences...")}
             if loq == true {print("\t maxCardsInHand: \(maxCardsInHand)")}
             if loq == true {print("\t correctAnswerShownPause: \(correctAnswerShownPause)")}
@@ -259,7 +264,7 @@ class ViewController: UIViewController {
                 currentCard = negozioGrande!.getCardWithID(uniqueID: uniqueID!)
                 faceOneLabel.text = currentCard?.faceOne
                 tagLabel.text = currentCard?.tags
-                currentAnswerValue = 8.0
+                currentAnswerValue = maxAnswerValue
                 if let fTwo = currentCard?.faceTwo
                 {
                     if answerContainsGreek(risposta: fTwo) == true

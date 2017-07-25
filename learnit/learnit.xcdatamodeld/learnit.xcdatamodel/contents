@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CardStack" representedClassName="CardStackManagedObject" syncable="YES" codeGenerationType="class">
         <attribute name="isActive" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isKnown" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
@@ -32,6 +32,7 @@
         <attribute name="correctAnswerShownPause" attributeType="Float" defaultValueString="4" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="daysActive" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="maxCardsInHand" attributeType="Integer 32" defaultValueString="20" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="maximumAnswerValue" attributeType="Float" defaultValueString="10" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" minValueString="1" defaultValueString="Rufus" syncable="YES"/>
         <attribute name="studyTodayLastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="totalPoints" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -46,7 +47,7 @@
         <element name="CardStack" positionX="-63" positionY="-18" width="128" height="195"/>
         <element name="CardStats" positionX="-27" positionY="99" width="128" height="150"/>
         <element name="Face" positionX="-54" positionY="36" width="128" height="120"/>
-        <element name="Learner" positionX="-36" positionY="72" width="128" height="135"/>
+        <element name="Learner" positionX="-36" positionY="72" width="128" height="150"/>
         <element name="Tag" positionX="-18" positionY="126" width="128" height="105"/>
     </elements>
 </model>

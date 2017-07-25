@@ -82,6 +82,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                 aNewLearner.studyTodayLastUpdated = NSDate.distantPast as NSDate
                 aNewLearner.correctAnswerShownPause = 3.5
                 aNewLearner.maxCardsInHand = 20
+                aNewLearner.maximumAnswerValue = 10.0
                 currentLearner = aNewLearner
                 saveContext()
                 if loq == true {print("\tNo learner found, so creating a new one with default settings.")}
@@ -112,6 +113,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                     let learner = queryResult?.first!
                     learner?.correctAnswerShownPause = currentIdentity.correctAnswerShownPause
                     learner?.maxCardsInHand = currentIdentity.maxCardsInHand
+                    learner?.maximumAnswerValue = currentIdentity.maximumAnswerValue
                     saveContext()
                     if loq == true {print("Updating learner settings.")}
                 }

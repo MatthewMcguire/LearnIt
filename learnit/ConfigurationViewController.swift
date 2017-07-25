@@ -20,6 +20,7 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
         {
             answerPauseField.text = String(cl.correctAnswerShownPause)
             maxCardsInHandField.text = String(cl.maxCardsInHand)
+            maxAnswerValueField.text = String(cl.maximumAnswerValue)
         }
         resetPointsButton.isEnabled = true
         deleteCardsButton.isEnabled = true
@@ -53,6 +54,14 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
         negozioGrande!.updateUserInfo()
         hideKeyboard()
     }
+    @IBAction func maximumAnswerValueEntered(_ sender: Any) {
+        if Float (maxAnswerValueField.text!)! > 0.0
+        {
+            negozioGrande!.currentLearner?.maximumAnswerValue = Float(maxAnswerValueField.text!)!
+        }
+        negozioGrande!.updateUserInfo()
+        hideKeyboard()
+    }
 
     @IBAction func answerPauseEntered(_ sender: Any) {
         if Float (answerPauseField.text!)! > 0.0
@@ -77,6 +86,7 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
   
     @IBOutlet weak var answerPauseField: UITextField!
     @IBOutlet weak var maxCardsInHandField: UITextField!
+    @IBOutlet weak var maxAnswerValueField: UITextField!
 
     @IBOutlet weak var resetPointsButton: UIButton!
     @IBOutlet weak var resetCardsButton: UIButton!
