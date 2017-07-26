@@ -28,6 +28,31 @@ Xcode 8.3 or later
 
 iOS 9.0 or later
 
-Main screen: <img src="/learnit/screen_01.PNG" width="150">
+## Sample Screenshots
+(taken from iphone SE)
+
+Main screen:
+<img src="/learnit/screen_01.PNG" width="200">
+
+Adding a new card:
+<img src="/learnit/screen_02.PNG" width="200">
+
+Browsing existing cards:
+<img src="/learnit/screen_04.PNG" width="200">
+
+Editing and showing detail of a particular card:
+<img src="/learnit/screen_03.PNG" width="200">
+
+Browsing all tags in use. Cards with such tags are made active/inactive by tapping:
+<img src="/learnit/screen_05.PNG" width="200">
+
+Configuration for learner:
+<img src="/learnit/screen_06.PNG" width="200">
+
+Main screen, showing hint:
+<img src="/learnit/screen_07.PNG" width="200">
+
+Main screen, showing correct answer feedback:
+<img src="/learnit/screen_08.PNG" width="200">
 
 
