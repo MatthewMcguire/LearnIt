@@ -28,6 +28,6 @@ Xcode 8.3 or later
 
 iOS 9.0 or later
 
-Main screen: 
-![test image size](/screen_01.PNG){:height="50%" width="50%"}
+Main screen: <img src="/learnit/screen_01.PNG" width="150">
+
 
