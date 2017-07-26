@@ -29,6 +29,6 @@ Xcode 8.3 or later
 iOS 9.0 or later
 
 Main screen: 
-![alt text][screen01 | width=100]
+![alt text][screen01]
 
-[screen01]: https://github.com/MatthewMcguire/LearnIt/blob/master/learnit/screen_01.PNG "Main screen"
+[screen01]: https://github.com/MatthewMcguire/LearnIt/blob/master/learnit/screen_01.PNG "Main screen" width=100
