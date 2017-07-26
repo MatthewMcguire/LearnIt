@@ -32,27 +32,35 @@ iOS 9.0 or later
 (taken from iphone SE)
 
 Main screen:
-<img src="/learnit/screen_01.PNG" width="200">
+
+<img src="/learnit/screen_01.PNG" width="200" style={border: 2px; border-radius: 5px}>
 
 Adding a new card:
-<img src="/learnit/screen_02.PNG" width="200">
+
+<img src="/learnit/screen_02.PNG" width="200" style={border: 2px; border-radius: 5px}>
 
 Browsing existing cards:
-<img src="/learnit/screen_04.PNG" width="200">
+
+<img src="/learnit/screen_04.PNG" width="200" style={border: 2px; border-radius: 5px}>
 
 Editing and showing detail of a particular card:
-<img src="/learnit/screen_03.PNG" width="200">
+
+<img src="/learnit/screen_03.PNG" width="200" style={border: 2px; border-radius: 5px}>
 
 Browsing all tags in use. Cards with such tags are made active/inactive by tapping:
-<img src="/learnit/screen_05.PNG" width="200">
+
+<img src="/learnit/screen_05.PNG" width="200" style={border: 2px; border-radius: 5px}>
 
 Configuration for learner:
-<img src="/learnit/screen_06.PNG" width="200">
+
+<img src="/learnit/screen_06.PNG" width="200" style={border: 2px; border-radius: 5px}>
 
 Main screen, showing hint:
-<img src="/learnit/screen_07.PNG" width="200">
+
+<img src="/learnit/screen_07.PNG" width="200" style={border: 2px; border-radius: 5px}>
 
 Main screen, showing correct answer feedback:
-<img src="/learnit/screen_08.PNG" width="200">
+
+<img src="/learnit/screen_08.PNG" width="200" style={border: 2px; border-radius: 5px}>
 
 
