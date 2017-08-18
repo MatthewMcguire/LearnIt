@@ -23,6 +23,10 @@ class AddCardViewController: UIViewController {
         setUpKeyboards()
         uiSetup()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        prepareKeyboardNotifications()
+    }
     // MARK: - Keyboard management -
     // the next three functions withdraw the keyboard 
     // from view when the return button is pressed
@@ -49,6 +53,7 @@ class AddCardViewController: UIViewController {
         }
     }
     
+
     func saveNewCard()
     {
         // obtain and validate the input fields
@@ -133,8 +138,5 @@ class AddCardViewController: UIViewController {
         view!.backgroundColor = bOfVenus_beige
      }
 
-
- 
-
-
 }
+

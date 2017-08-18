@@ -9,21 +9,27 @@
 import UIKit
 
 class SmartLanguageUITextField: UITextField {
-
-
-    var preferredLang : String?
     
+    /*
+         This subclass offers a simple method of programmatically selecting the
+         keyboard that is shown for a UITextField when it is a first responder.
+         If the preferredLang property of the SmartLanguageUITextField is set to
+         a value that is contained within a primary language code of an available
+         keyboard, the textInputMode value of the control is overridden with the
+         effect of showing the desired keyboard language.
+     */
+    
+    var preferredLang : String?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        self.preferredLang = "en"
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-//        self.preferredLang = "en"
     }
 
-    
+
     override var textInputMode: UITextInputMode? {
         if let language = preferredLang
         {
@@ -34,7 +40,8 @@ class SmartLanguageUITextField: UITextField {
             } else {
                 for tim in UITextInputMode.activeInputModes {
                     if tim.primaryLanguage!.contains(language) {
-                        if loq == true {print("UITextInputMode.textInputMode = \(tim)")}
+                        if loq == true {print("UITextInputMode.textInputMode.primaryLanguage = \(tim.primaryLanguage)")}
+                        
                         return tim
                     }
                 }
@@ -44,6 +51,5 @@ class SmartLanguageUITextField: UITextField {
         return super.textInputMode
   
     }
-
-    
+   
 }

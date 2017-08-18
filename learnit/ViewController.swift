@@ -12,23 +12,9 @@ var negozioGrande : CoreDataDomus?
 var oggiQueue : Array<String>?
 
 let loq = true
-// loq = loquacity. If true, the console will report most app activity for sake of debugging.
+// loq -> 'loquacity'. If true, the console will report most app activity for sake of debugging.
 
-enum greekDiacrits : String
-{
-    case acute = "´"
-    case acuteSmooth = "῎"
-    case acuteRough = "῞"
-    case grave = "`"
-    case graveSmooth = "῍"
-    case graveRough = "῝"
-    case circumf = "῀"
-    case circumfSmooth = "῏"
-    case circumfRough = "῟"
-    case Smooth = "᾽"
-    case Rough = "῾"
-    
-}
+
 
 class ViewController: UIViewController {
     @IBOutlet weak var faceOneLabel: UILabel!
@@ -52,7 +38,6 @@ class ViewController: UIViewController {
     
     var maxCardsInHand : Int = 5
     var correctAnswerShownPause : Float = 5.0
-    
     var currentCard : CardObject?
     var currentPlaceInQueue: Int = 0
     var hintLevel : Int = 0
@@ -67,11 +52,12 @@ class ViewController: UIViewController {
         self.updateStudyToday()
         self.uiSetup()
         self.updateTotalPoints()
+        prepareKeyboardNotifications()
         
-        if oggiQueue  == nil
-        {
-            self.refreshCardShown()
-        }
+//        if oggiQueue  == nil
+//        {
+//            self.refreshCardShown()
+//        }
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -80,9 +66,14 @@ class ViewController: UIViewController {
         self.view.endEditing(true)
         self.refreshLearnerPreferences()
         updateCounter()
-        refreshCardShown()
+        
         updateForPointsIndicator()
         faceOneLabel.isUserInteractionEnabled = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        AnswerField.preferredLang = nil
+        refreshCardShown()
     }
 
     @IBAction func hintButtonPress(_ sender: Any) {
@@ -271,14 +262,11 @@ class ViewController: UIViewController {
                     {
                         if loq == true {print("\tThe answer seems to include greek. Adding the special characters...")}
                         AnswerField.preferredLang = "el"
-                        showGreekToolbar(status: true)
-                        
+
                     }
                     else
                     {
                         AnswerField.preferredLang = "en"
-                        showGreekToolbar(status: false)
-                        
                     }
                 }
 
@@ -454,7 +442,7 @@ class ViewController: UIViewController {
 
     }
     
-    
+    // this is a helper function for the Levenshtein Distance calculation
     class Array2D {
         var cols:Int, rows:Int
         var matrix: [Int]
@@ -484,6 +472,8 @@ class ViewController: UIViewController {
         }
     }
     
+    //  common metric for calculating the number of edits (insert/delete/replace) to
+    //  go from string a to string b
     func levenshteinDistanceFrom(source aStr:String,target bStr:String) -> Int {
         let a = Array(aStr.utf16)
         let b = Array(bStr.utf16)
@@ -760,257 +750,6 @@ class ViewController: UIViewController {
         }
     }
     
-    func showGreekToolbar(status:Bool) -> Void
-    {
-        if status == false
-        {
-            if loq == true {print("Hiding the Greek diacriticals toolbar:")}
-            AnswerField.inputAccessoryView = nil
-        }
-        else
-        {
-            if loq == true {print("Showing the Greek diacriticals toolbar:")}
-            if let windowWidth = view.window
-            {
-                let barSize : CGRect = CGRect(x: 0.0, y: 0.0, width: CGFloat((windowWidth.frame.size.width)*0.5), height: 34.0)
-                let greekInputTool = UIToolbar(frame: barSize)
-                if UI_USER_INTERFACE_IDIOM() == .pad
-                {
-                    greekInputTool.tintColor = UIColor(red: 0.6, green: 0.6, blue: 0.64, alpha: 1.0)
-                }
-                else
-                {
-                    greekInputTool.tintColor = UIColor.darkText
-                }
-                greekInputTool.isTranslucent = true
-                greekInputTool.barTintColor = UIColor.groupTableViewBackground
-                let diacritSize = CGFloat(24.0)
-                let diacritFont = "Avenir-Black"
-                let uiFontName = UIFont(name: diacritFont, size: diacritSize)
-                let diacritFontAttribs =  [NSFontAttributeName:uiFontName]
-                var barButtonArray = Array<UIBarButtonItem>()
-                //            let diacritArray = ["´","῎","῞","`","῍","῝","῀","῏","῟","᾽","῾"]
-                let diacritArray = [greekDiacrits.acute,greekDiacrits.acuteSmooth, greekDiacrits.acuteRough,
-                                    greekDiacrits.grave, greekDiacrits.graveSmooth, greekDiacrits.graveRough,
-                                    greekDiacrits.circumf,greekDiacrits.circumfSmooth,greekDiacrits.circumfRough,
-                                    greekDiacrits.Smooth, greekDiacrits.Rough]
-                for diacrit in diacritArray
-                {
-                    barButtonArray.append(UIBarButtonItem(title: diacrit.rawValue, style: .plain, target: self, action:#selector(barButtonAddText(sender:))))
-                    barButtonArray.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
-                }
-                barButtonArray.removeLast() // we have appended one too many flexible spaces!
-                
-                // give each diacritical button with a symbol a more visible font style
-                for barButt in barButtonArray
-                {
-                    if barButt.action != nil
-                    {
-                        barButt.setTitleTextAttributes((diacritFontAttribs as Any as! [String : Any]), for: .normal)
-                    }
-                }
-                
-                // Make a nice wee toolbar out of these buttons
-                
-                greekInputTool.items = barButtonArray
-                let greekDiacriticsBox = UIView(frame: barSize)
-                greekDiacriticsBox.addSubview(greekInputTool)
-                greekInputTool.autoresizingMask = .flexibleWidth
-                AnswerField.inputAccessoryView = greekDiacriticsBox
-                var r = greekInputTool.frame
-                r.origin.y += 6
-                greekInputTool.frame = r
-            }
-
-        }
-        if AnswerField.isFirstResponder == true
-        {
-            AnswerField.reloadInputViews()
-        }
-    }
-    
-    @IBAction func barButtonAddText(sender: UIBarButtonItem)
-    {
-        if AnswerField.isFirstResponder == true
-        {
-            if let justBefore = AnswerField.selectedTextRange
-            {
-                if let f2Text = AnswerField.text
-                {
-                    if f2Text.characters.count > 0
-                    {
-                        let endPoint = justBefore.start
-                        let startPoint = AnswerField.position(from: endPoint, offset: -1)
-                        let startToEndPoint = AnswerField.textRange(from: startPoint!, to: endPoint)
-                        let letterBeforeCursor = AnswerField.text(in: startToEndPoint!)
-                        let replaceWithText = getReplacementSymbol(letter: letterBeforeCursor!, diacrit: greekDiacrits(rawValue: sender.title!)!)
-                        AnswerField.deleteBackward()
-                        AnswerField.insertText(replaceWithText)
-                    }
-                }
-            }
-        }
-    }
-    
-    func getReplacementSymbol(letter: String, diacrit : greekDiacrits) -> String
-    {
-        var returnValue = letter
-        switch letter {
-        case "α":
-            switch diacrit {
-            case .acute:
-                returnValue = "ά"
-            case .acuteRough:
-                returnValue = "ἅ"
-            case .acuteSmooth:
-                returnValue = "ἄ"
-            case .grave:
-                returnValue = "ὰ"
-            case .graveRough:
-                returnValue = "ἃ"
-            case .graveSmooth:
-                returnValue = "ἂ"
-            case .circumf:
-                returnValue = "ᾶ"
-            case .circumfRough:
-                returnValue = "ἇ"
-            case .circumfSmooth:
-                returnValue = "ἆ"
-            case .Rough:
-                returnValue = "ἁ"
-            case .Smooth:
-                returnValue = "ἀ"
-            }
-        case "ε":
-            switch diacrit {
-            case .acute:
-                returnValue = "έ"
-            case .acuteRough:
-                returnValue = "ἕ"
-            case .acuteSmooth:
-                returnValue = "ἔ"
-            case .grave:
-                returnValue = "ὲ"
-            case .graveRough:
-                returnValue = "ἓ"
-            case .graveSmooth:
-                returnValue = "ἒ"
-            case .circumf:
-                returnValue = "ε"
-            case .circumfRough:
-                returnValue = "ε"
-            case .circumfSmooth:
-                returnValue = "ε"
-            case .Rough:
-                returnValue = "ἑ"
-            case .Smooth:
-                returnValue = "ἐ"
-            }
-        case "ι":
-            switch diacrit {
-            case .acute:
-                returnValue = "ί"
-            case .acuteRough:
-                returnValue = "ἵ"
-            case .acuteSmooth:
-                returnValue = "ἴ"
-            case .grave:
-                returnValue = "ὶ"
-            case .graveRough:
-                returnValue = "ἳ"
-            case .graveSmooth:
-                returnValue = "ἲ"
-            case .circumf:
-                returnValue = "ῖ"
-            case .circumfRough:
-                returnValue = "ἷ"
-            case .circumfSmooth:
-                returnValue = "ἶ"
-            case .Rough:
-                returnValue = "ἱ"
-            case .Smooth:
-                returnValue = "ἰ"
-            }
-        case "ο":
-            switch diacrit {
-            case .acute:
-                returnValue = "ό"
-            case .acuteRough:
-                returnValue = "ὅ"
-            case .acuteSmooth:
-                returnValue = "ὄ"
-            case .grave:
-                returnValue = "ὸ"
-            case .graveRough:
-                returnValue = "ὃ"
-            case .graveSmooth:
-                returnValue = "ὂ"
-            case .circumf:
-                returnValue = "ο"
-            case .circumfRough:
-                returnValue = "ο"
-            case .circumfSmooth:
-                returnValue = "ο"
-            case .Rough:
-                returnValue = "ὁ"
-            case .Smooth:
-                returnValue = "ὀ"
-            }
-        case "ω":
-            switch diacrit {
-            case .acute:
-                returnValue = "ώ"
-            case .acuteRough:
-                returnValue = "ὥ"
-            case .acuteSmooth:
-                returnValue = "ὤ"
-            case .grave:
-                returnValue = "ὼ"
-            case .graveRough:
-                returnValue = "ὣ"
-            case .graveSmooth:
-                returnValue = "ὢ"
-            case .circumf:
-                returnValue = "ῶ"
-            case .circumfRough:
-                returnValue = "ὧ"
-            case .circumfSmooth:
-                returnValue = "ὦ"
-            case .Rough:
-                returnValue = "ὡ"
-            case .Smooth:
-                returnValue = "ὠ"
-            }
-        case "η":
-            switch diacrit {
-            case .acute:
-                returnValue = "ή"
-            case .acuteRough:
-                returnValue = "ἥ"
-            case .acuteSmooth:
-                returnValue = "ἤ"
-            case .grave:
-                returnValue = "ὴ"
-            case .graveRough:
-                returnValue = "ἣ"
-            case .graveSmooth:
-                returnValue = "ἢ"
-            case .circumf:
-                returnValue = "ῆ"
-            case .circumfRough:
-                returnValue = "ἧ"
-            case .circumfSmooth:
-                returnValue = "ἦ"
-            case .Rough:
-                returnValue = "ἡ"
-            case .Smooth:
-                returnValue = "ἠ"
-            }
-        default:
-            returnValue = letter
-        }
-        return returnValue
-    }
 
     @IBAction func unwindToMain(sender : UIStoryboardSegue)
     {
@@ -1021,23 +760,14 @@ class ViewController: UIViewController {
     {
         let borderWidth : CGFloat = 2.5
         let cornerRadius : CGFloat = 9.0
-//        let buttonInsideDGray = UIColor.darkGray.cgColor
-//        let buttonBorderLGray = UIColor.black.cgColor
-//        let buttonBorderBlack = UIColor.black.cgColor
-//        let buttonInsideLGray = UIColor.init(red: 0.4, green: 0.4, blue: 0.4, alpha: 1.0).cgColor
+
         
         let bOfVenus_green = UIColor.init(red: (168.0/255), green: (192.0/255), blue: (168.0/255), alpha: 1.0)
         let bOfVenus_red = UIColor.init(red: (212.0/255), green: (126.0/255), blue: (115.0/255), alpha: 1.0)
         let bOfVenus_blue = UIColor.init(red: (120.0/255), green: (144.0/255), blue: (144.0/255), alpha: 1.0)
         let bOfVenus_dark = UIColor.init(red: (48.0/255), green: (24.0/255), blue: (24.0/255), alpha: 1.0)
         let bOfVenus_beige = UIColor.init(red: (240.0/255), green: (240.0/255), blue: (216.0/255), alpha: 1.0)
-//        let ermine_choco2 = UIColor.init(red: (32.0/255), green: (20.0/255), blue: (8.0/255), alpha: 1.0).cgColor
-//        let ermine_canoe_red = UIColor.init(red: (144.0/255), green: (36.0/255), blue: (11.0/255), alpha: 1.0).cgColor
-//        let ermine_renn_orange = UIColor.init(red: (238.0/255), green: (152.0/255), blue: (35.0/255), alpha: 1.0).cgColor
-//        let ermine_breaking_glass = UIColor.init(red: (254.0/255), green: (226.0/255), blue: (181.0/255), alpha: 1.0).cgColor
-//        let ermine_pistache_green = UIColor.init(red: (208.0/255), green: (226.0/255), blue: (177.0/255), alpha: 1.0).cgColor
 
-        
         
         let buttnsType1 : Array<UIButton> = [showHintButton, skipButton]
         let buttnsType2 : Array<UIButton> = [addButton, browseButton, configureButton, statisticsButton]
@@ -1052,7 +782,6 @@ class ViewController: UIViewController {
         tagLabel.textColor = bOfVenus_red
         pointsLabel.textColor = bOfVenus_red
         cardsKnownLabel.textColor = bOfVenus_red
-//        cardsKnownLabel.font
         
         for b in buttnsType1
         {
@@ -1081,3 +810,6 @@ class KerningLabel: UILabel {
         self.attributedText = attributedString
 }
 }
+
+
+

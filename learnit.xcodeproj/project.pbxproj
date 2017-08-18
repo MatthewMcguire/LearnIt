@@ -13,6 +13,7 @@
 		B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */; };
 		B934A5141F058B6100A696E8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934A5131F058B6100A696E8 /* Model.swift */; };
 		B965FC781F1BDFB8009E8633 /* sampleWelsh.xml in Resources */ = {isa = PBXBuildFile; fileRef = B965FC771F1BDFB8009E8633 /* sampleWelsh.xml */; };
+		B96605791F43567600300A36 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96605781F43567600300A36 /* ViewControllerExtension.swift */; };
 		B97AC31D1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97AC31C1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift */; };
 		B98419641F0192810027B2B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98419631F0192810027B2B9 /* AppDelegate.swift */; };
 		B98419661F0192810027B2B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98419651F0192810027B2B9 /* ViewController.swift */; };
@@ -41,6 +42,7 @@
 		B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataDomus.swift; sourceTree = "<group>"; };
 		B934A5131F058B6100A696E8 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B965FC771F1BDFB8009E8633 /* sampleWelsh.xml */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; path = sampleWelsh.xml; sourceTree = "<group>"; };
+		B96605781F43567600300A36 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		B97AC31C1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewController.swift; sourceTree = "<group>"; };
 		B98419601F0192810027B2B9 /* learnit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = learnit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B98419631F0192810027B2B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,14 +102,15 @@
 				B9C2A6151F10102B00E5E917 /* sampleGreek.xml */,
 				B98419631F0192810027B2B9 /* AppDelegate.swift */,
 				B98419651F0192810027B2B9 /* ViewController.swift */,
+				B96605781F43567600300A36 /* ViewControllerExtension.swift */,
 				B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */,
 				B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */,
 				B92A66181F14287A00DB3DAA /* CardDetailViewController.swift */,
 				B92A66161F1426C900DB3DAA /* BrowseTableViewController.swift */,
 				B97AC31C1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift */,
 				B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */,
-				B98419671F0192810027B2B9 /* Main.storyboard */,
 				B997F55C1F240F6000053F29 /* SmartLanguageUITextField.swift */,
+				B98419671F0192810027B2B9 /* Main.storyboard */,
 				B984196D1F0192810027B2B9 /* Assets.xcassets */,
 				B98419721F0192810027B2B9 /* Info.plist */,
 				B984196A1F0192810027B2B9 /* learnit.xcdatamodeld */,
@@ -224,6 +227,7 @@
 				B97AC31D1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift in Sources */,
 				B92A66191F14287A00DB3DAA /* CardDetailViewController.swift in Sources */,
 				B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */,
+				B96605791F43567600300A36 /* ViewControllerExtension.swift in Sources */,
 				B9AFF1AB1F0FEC4E0013A1AD /* ConfigurationViewController.swift in Sources */,
 				B984196C1F0192810027B2B9 /* learnit.xcdatamodeld in Sources */,
 				B98419641F0192810027B2B9 /* AppDelegate.swift in Sources */,
@@ -353,6 +357,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = R9K7A7S59D;
 				INFOPLIST_FILE = learnit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mm.learnit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -366,6 +371,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = R9K7A7S59D;
 				INFOPLIST_FILE = learnit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = mm.learnit;
 				PRODUCT_NAME = "$(TARGET_NAME)";

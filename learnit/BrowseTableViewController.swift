@@ -36,7 +36,7 @@ class BrowseTableViewController: UITableViewController {
         
     }
 
-    func backButtonPressed()
+    @objc func backButtonPressed()
     {
         
          performSegue(withIdentifier: "BrowseToMainSegue", sender: self)
