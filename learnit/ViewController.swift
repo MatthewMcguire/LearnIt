@@ -256,19 +256,19 @@ class ViewController: UIViewController {
                 faceOneLabel.text = currentCard?.faceOne
                 tagLabel.text = currentCard?.tags
                 currentAnswerValue = maxAnswerValue
-                if let fTwo = currentCard?.faceTwo
-                {
-                    if answerContainsGreek(risposta: fTwo) == true
-                    {
-                        if loq == true {print("\tThe answer seems to include greek. Adding the special characters...")}
-                        AnswerField.preferredLang = "el"
-
-                    }
-                    else
-                    {
-                        AnswerField.preferredLang = "en"
-                    }
-                }
+//                if let fTwo = currentCard?.faceTwo
+//                {
+//                    if answerContainsGreek(risposta: fTwo) == true
+//                    {
+//                        if loq == true {print("\tThe answer seems to include greek. Adding the special characters...")}
+//                        AnswerField.preferredLang = "el"
+//
+//                    }
+//                    else
+//                    {
+//                        AnswerField.preferredLang = "en"
+//                    }
+//                }
 
             }
             else

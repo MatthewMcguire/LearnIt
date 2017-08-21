@@ -195,98 +195,92 @@ extension UIViewController
 //        }
     }
     
+    
     func getReplacementSymbol(letter: String, diacrit : greekDiacrits) -> String
     {
-        var returnValue = letter
-        switch letter {
-        case "α":
-            switch diacrit {
-            case .acute:        returnValue = "ά"
-            case .acuteRough:   returnValue = "ἅ"
-            case .acuteSmooth:  returnValue = "ἄ"
-            case .grave:        returnValue = "ὰ"
-            case .graveRough:   returnValue = "ἃ"
-            case .graveSmooth:  returnValue = "ἂ"
-            case .circumf:      returnValue = "ᾶ"
-            case .circumfRough: returnValue = "ἇ"
-            case .circumfSmooth: returnValue = "ἆ"
-            case .Rough:        returnValue = "ἁ"
-            case .Smooth:       returnValue = "ἀ"
-            }
-        case "ε":
-            switch diacrit {
-            case .acute:        returnValue = "έ"
-            case .acuteRough:   returnValue = "ἕ"
-            case .acuteSmooth:  returnValue = "ἔ"
-            case .grave:        returnValue = "ὲ"
-            case .graveRough:   returnValue = "ἓ"
-            case .graveSmooth:  returnValue = "ἒ"
-            case .circumf:      returnValue = "ε"
-            case .circumfRough: returnValue = "ε"
-            case .circumfSmooth: returnValue = "ε"
-            case .Rough:        returnValue = "ἑ"
-            case .Smooth:       returnValue = "ἐ"
-            }
-        case "ι":
-            switch diacrit {
-            case .acute:        returnValue = "ί"
-            case .acuteRough:   returnValue = "ἵ"
-            case .acuteSmooth:  returnValue = "ἴ"
-            case .grave:        returnValue = "ὶ"
-            case .graveRough:   returnValue = "ἳ"
-            case .graveSmooth:  returnValue = "ἲ"
-            case .circumf:      returnValue = "ῖ"
-            case .circumfRough: returnValue = "ἷ"
-            case .circumfSmooth:returnValue = "ἶ"
-            case .Rough:        returnValue = "ἱ"
-            case .Smooth:       returnValue = "ἰ"
-            }
-        case "ο":
-            switch diacrit {
-            case .acute:        returnValue = "ό"
-            case .acuteRough:   returnValue = "ὅ"
-            case .acuteSmooth:  returnValue = "ὄ"
-            case .grave:        returnValue = "ὸ"
-            case .graveRough:   returnValue = "ὃ"
-            case .graveSmooth:  returnValue = "ὂ"
-            case .circumf:      returnValue = "ο"
-            case .circumfRough: returnValue = "ο"
-            case .circumfSmooth:returnValue = "ο"
-            case .Rough:        returnValue = "ὁ"
-            case .Smooth:       returnValue = "ὀ"
-            }
-        case "ω":
-            switch diacrit {
-            case .acute:        returnValue = "ώ"
-            case .acuteRough:   returnValue = "ὥ"
-            case .acuteSmooth:  returnValue = "ὤ"
-            case .grave:        returnValue = "ὼ"
-            case .graveRough:   returnValue = "ὣ"
-            case .graveSmooth:  returnValue = "ὢ"
-            case .circumf:      returnValue = "ῶ"
-            case .circumfRough: returnValue = "ὧ"
-            case .circumfSmooth:returnValue = "ὦ"
-            case .Rough:        returnValue = "ὡ"
-            case .Smooth:       returnValue = "ὠ"
-            }
-        case "η":
-            switch diacrit {
-            case .acute:        returnValue = "ή"
-            case .acuteRough:   returnValue = "ἥ"
-            case .acuteSmooth:  returnValue = "ἤ"
-            case .grave:        returnValue = "ὴ"
-            case .graveRough:   returnValue = "ἣ"
-            case .graveSmooth:  returnValue = "ἢ"
-            case .circumf:      returnValue = "ῆ"
-            case .circumfRough: returnValue = "ἧ"
-            case .circumfSmooth:returnValue = "ἦ"
-            case .Rough:        returnValue = "ἡ"
-            case .Smooth:       returnValue = "ἠ"
-            }
-        default:
-            returnValue = letter
+        let toRough : Dictionary = ["α" : "\u{1F00}",
+                       "ε" : "\u{1F10}",
+                       "ι" : "\u{1F30}",
+                       "ο" : "\u{1F40}",
+                       "ω" : "\u{1F60}",
+                       "η" : "\u{1F20}",
+                       "υ" : "\u{1F50}",
+                       "Α" : "\u{1F08}",
+                       "Ε" : "\u{1F18}",
+                       "Ι" : "\u{1F38}",
+                       "Ο" : "\u{1F48}",
+                       "Ω" : "\u{1F68}",
+                       "Η" : "\u{1F28}"/*,
+                       "Υ" : "\u{1F58}"*/
+                       ]
+        let toSmooth : Dictionary = ["α" : "\u{1F01}",
+                       "ε" : "\u{1F11}",
+                       "ι" : "\u{1F31}",
+                       "ο" : "\u{1F41}",
+                       "ω" : "\u{1F61}",
+                       "η" : "\u{1F21}",
+                       "υ" : "\u{1F51}",
+                       "Α" : "\u{1F09}",
+                       "Ε" : "\u{1F19}",
+                       "Ι" : "\u{1F39}",
+                       "Ο" : "\u{1F49}",
+                       "Ω" : "\u{1F69}",
+                       "Η" : "\u{1F29}",
+                       "Υ" : "\u{1F59}"
+        ]
+        var graphemeCluster = letter
+        var mod : greekDiacrits = diacrit
+//        if [greekDiacrits.acute,greekDiacrits.grave,greekDiacrits.Rough,
+//            greekDiacrits.Smooth, greekDiacrits.circumf].contains(diacrit)
+//        {
+//            mod = diacrit
+//        }
+        if [greekDiacrits.acuteRough, greekDiacrits.acuteSmooth].contains(diacrit)
+        {
+            mod = greekDiacrits.acute
         }
-        return returnValue
+        if [greekDiacrits.graveRough, greekDiacrits.graveSmooth].contains(diacrit)
+        {
+            mod = greekDiacrits.grave
+        }
+        if [greekDiacrits.circumfRough, greekDiacrits.circumfSmooth].contains(diacrit)
+        {
+            mod = greekDiacrits.circumf
+        }
+        if [greekDiacrits.acuteRough, greekDiacrits.graveRough,greekDiacrits.circumfRough].contains(diacrit)
+        {
+            if let val = toRough[graphemeCluster]
+            {
+                graphemeCluster = val
+            }
+        }
+        if [greekDiacrits.acuteSmooth, greekDiacrits.graveSmooth,greekDiacrits.circumfSmooth].contains(diacrit)
+        {
+            if let val = toSmooth[graphemeCluster]
+            {
+                graphemeCluster = val
+            }
+        }
+        graphemeCluster = addMark(letter: graphemeCluster, mark: mod )
+        return graphemeCluster
+
+    }
+    
+    // for adding (rough, smooth, accent, grave) to the character
+    func addMark(letter: String, mark : greekDiacrits) -> String
+    {
+        var returnChar = letter
+        if mark == greekDiacrits.acute
+            { returnChar += "\u{0301}"}
+        if mark == greekDiacrits.grave
+            { returnChar += "\u{0300}"}
+        if mark == greekDiacrits.Rough
+            { returnChar += "\u{0314}"}
+        if mark == greekDiacrits.Smooth
+            { returnChar += "\u{0313}"}
+        if mark == greekDiacrits.circumf
+            { returnChar += "\u{0342}"}
+        return returnChar
     }
     
 }
