@@ -192,7 +192,7 @@ class ViewController: UIViewController {
             self.AnswerField.text = ""
             }, completion: nil)
         hintLevel = 0
-        hintAnswer = currentCard?.faceTwoAsSet?.first
+        hintAnswer = currentCard?.faceTwoAsSet.first
         updateTotalPoints()
         showACard()
     }
@@ -359,7 +359,7 @@ class ViewController: UIViewController {
         if loq == true {print("Processing the response as 'Incorrect'...")}
         feedbackView.alpha = 1.0
         // notify the learner
-        messageLabel.text = "Wrong:  \(currentCard?.faceTwo! ?? " ")"
+        messageLabel.text = "Wrong:  \(currentCard?.faceTwo ?? " ")"
         if loq == true {print("\tAdding this text to the message label\(String(describing: messageLabel.text))")}
         if messageLabel.text!.characters.count > 25
         {
@@ -398,7 +398,7 @@ class ViewController: UIViewController {
         // notify the learner
         let ptsStr = String(format:"%.1f", currentAnswerValue)
         
-        messageLabel.text = "Yes (" + ptsStr + " pts): \(currentCard?.faceTwo! ?? " ")"
+        messageLabel.text = "Yes (" + ptsStr + " pts): \(currentCard?.faceTwo ?? " ")"
         if loq == true {print("\tAdding this text to the message label\(String(describing: messageLabel.text))")}
         if messageLabel.text!.characters.count > 25
         {

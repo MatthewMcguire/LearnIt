@@ -268,7 +268,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         
         // Break up elements of Face One and add as distinct MOs
         // - Divide the full string into a set of strings
-        var aSet : Set<String> = Set(card.faceOne!.components(separatedBy: ","))
+        var aSet : Set<String> = Set(card.faceOne.components(separatedBy: ","))
         
          // create a set of FacesMO objects
         if loq == true {print("Adding a new card to Core Data...")}
@@ -312,7 +312,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
              // Do the same thing for Face Two
             
             aSet.removeAll()
-            aSet = Set(card.faceTwo!.components(separatedBy: ","))
+            aSet = Set(card.faceTwo.components(separatedBy: ","))
             aSetOfFaces.removeAll()
             for aFace in aSet
             {
@@ -415,7 +415,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
             {
                 // create the set of given tags for the newly-added card
                 aSet.removeAll()
-                aSet = Set(card.tags!.components(separatedBy: ","))
+                aSet = Set(card.tags.components(separatedBy: ","))
                 
                 // prepare to look for existing tag objects
                 let quaestioQuartus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
@@ -474,7 +474,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         // connect existing or add new tags to the card object
         // create the set of given tags
         aSet.removeAll()
-        aSet = Set(card.tags!.components(separatedBy: ","))
+        aSet = Set(card.tags.components(separatedBy: ","))
         
          // prepare to look for existing tag objects
         let quaestioQuartus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
@@ -518,11 +518,11 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         
         // add the set of tags to the new card
         aNewCard.uniqueID = card.uniqueID
-        aNewCard.isActive = card.isActive!
-        aNewCard.isKnown = card.isKnown!
+        aNewCard.isActive = card.isActive
+        aNewCard.isKnown = card.isKnown
         aNewCard.timeCreated = card.timeCreated
         aNewCard.timeUpdated = card.timeUpdated
-        aNewCard.studyToday = card.studyToday!
+        aNewCard.studyToday = card.studyToday
         
         // create a set of empty stats for the card
         let newStatsObject = NSEntityDescription.insertNewObject(forEntityName: "CardStats", into: manObjContext!) as! CardStatsManagedObject
@@ -873,8 +873,8 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         returnedCard.isActive = cardMO.isActive
         returnedCard.isKnown = cardMO.isKnown
         returnedCard.studyToday = cardMO.studyToday
-        returnedCard.timeCreated = cardMO.timeCreated
-        returnedCard.timeUpdated = cardMO.timeUpdated
+        returnedCard.timeCreated = cardMO.timeCreated!
+        returnedCard.timeUpdated = cardMO.timeUpdated!
         returnedCard.faceOne = getStringFromMOSet(setGlob: cardMO.faceOne as! Set<NSManagedObject>)
         returnedCard.faceTwo = getStringFromMOSet(setGlob: cardMO.faceTwo as! Set<NSManagedObject>)
         returnedCard.tags = getStringFromMOSet(setGlob: cardMO.cardToTags as! Set<NSManagedObject>)
@@ -960,7 +960,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         oneCard.timeUpdated = NSDate()
         
          // UPDATE FACE ONE
-        var stringSet = Set(withValues.faceOne!.components(separatedBy: ","))
+        var stringSet = Set(withValues.faceOne.components(separatedBy: ","))
         var setOfFaces = Set<FaceManagedObject>()
          // for each string, create a FaceMO Managed Obj and add to the set
         for faceOneValue in stringSet
@@ -972,7 +972,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         oneCard.faceOne = setOfFaces as NSSet
         
         // UPDATE FACE TWO
-        stringSet = Set(withValues.faceTwo!.components(separatedBy: ","))
+        stringSet = Set(withValues.faceTwo.components(separatedBy: ","))
         setOfFaces.removeAll()
         setOfFaces = Set<FaceManagedObject>()
         // for each string, create a FaceMO Managed Obj and add to the set
@@ -985,7 +985,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         oneCard.faceTwo = setOfFaces as NSSet
         
         // UPDATE TAGS
-        stringSet = Set(withValues.tags!.components(separatedBy: ","))
+        stringSet = Set(withValues.tags.components(separatedBy: ","))
         setOfFaces.removeAll()
         var setOfTags = Set<TagManagedObject>()
         // for each string, create a FaceMO Managed Obj and add to the set

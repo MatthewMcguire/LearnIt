@@ -10,18 +10,18 @@ import UIKit
 
 class CardObject: NSObject {
     
-    var uniqueID : String
-    var isActive : Bool?
-    var isKnown : Bool?
-    var studyToday : Bool?
-    var timeCreated : NSDate?
-    var timeUpdated : NSDate?
-    var faceOne : String?
-    var faceTwo : String?
-    var tags : String?
-    var faceOneAsSet : Set<String>?
-    var faceTwoAsSet : Set<String>?
-    var tagsAsSet : Set<String>?
+    var uniqueID : String = UUID().uuidString
+    var isActive : Bool = true
+    var isKnown : Bool = false
+    var studyToday : Bool = false
+    var timeCreated : NSDate = NSDate()
+    var timeUpdated : NSDate = NSDate()
+    var faceOne : String = " "
+    var faceTwo : String = " "
+    var tags : String = " "
+    var faceOneAsSet : Set<String>  = Set()
+    var faceTwoAsSet : Set<String> = Set()
+    var tagsAsSet : Set<String> = Set()
     var diffRating : Float?
     var idealInterval : Float?
     var numCorr : Int?
@@ -29,23 +29,20 @@ class CardObject: NSObject {
     var numForgot : Int?
     var lastAnswerCorrect : NSDate?
     
-    override init() {
-        
-        let uuid = UUID()
-        let uuidStr = uuid.uuidString
-        uniqueID = uuidStr
-        isActive = true
-        isKnown = false
-        studyToday = false
-        timeCreated = NSDate()
-        timeUpdated = NSDate()
-        faceOne = " "
-        faceTwo = " "
-        tags = " "
-        faceOneAsSet = Set()
-        faceOneAsSet = Set()
-        tagsAsSet = Set()
+    func hasFacesAndTags() -> Bool
+    {
+        if faceOne.characters.count > 0 &&
+            faceTwo.characters.count > 0 &&
+            tags.characters.count > 0
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
     }
+    
 }
 
 class TagObject: NSObject {

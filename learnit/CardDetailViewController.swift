@@ -47,9 +47,9 @@ class CardDetailViewController: UIViewController {
             faceOneField.text = cc.faceOne
             faceTwoField.text = cc.faceTwo
             tagsField.text = cc.tags
-            isActiveSwitch.isOn = cc.isActive!
-            isKnownSwitch.isOn = cc.isKnown!
-            studyTodaySwitch.isOn = cc.studyToday!
+            isActiveSwitch.isOn = cc.isActive
+            isKnownSwitch.isOn = cc.isKnown
+            studyTodaySwitch.isOn = cc.studyToday
             if let ccdif = cc.diffRating
             {
                 difficultyField.text = String(format:"%.2f", ccdif)

@@ -11,7 +11,7 @@ import UIKit
 class ConfigurationViewController: UIViewController, XMLParserDelegate {
 
     var aNewCard : CardObject?
-    var currentElement : String?
+    var currentElement : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,53 +119,38 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
         switch elementName {
         case "card":
             aNewCard = CardObject()
-            if aNewCard != nil
-            {
-                aNewCard!.isKnown = false
-                aNewCard!.isActive = true
-                aNewCard!.studyToday = false
-            }
         case "faceOne":
-        if aNewCard != nil
+            if let newCrd = aNewCard
             {
-                aNewCard!.faceOne = ""
+                newCrd.faceOne = ""
                 currentElement = ""
             }
         case "faceOneText":
-            if aNewCard != nil && currentElement != nil
+            if currentElement.characters.count > 0
             {
-                if currentElement!.characters.count > 0
-                {
-                    currentElement! += ", "
-                }
+                currentElement += ", "
             }
         case "faceTwo":
-            if aNewCard != nil
+            if let newCrd = aNewCard
             {
-                aNewCard!.faceTwo = ""
+                newCrd.faceTwo = ""
                 currentElement = ""
             }
         case "faceTwoText":
-            if aNewCard != nil && currentElement != nil
+            if currentElement.characters.count > 0
             {
-                if currentElement!.characters.count > 0
-                {
-                    currentElement! += ", "
-                }
+                currentElement += ", "
             }
         case "tags":
-            if aNewCard != nil
+            if let newCrd = aNewCard
             {
-                aNewCard!.tags = ""
+                newCrd.tags = ""
                 currentElement = ""
             }
         case "tag":
-            if aNewCard != nil && currentElement != nil
+            if currentElement.characters.count > 0
             {
-                if currentElement!.characters.count > 0
-                {
-                    currentElement! += ", "
-                }
+                currentElement += ", "
             }
         default:
             print("Unknown XML tag. This is not anticipated or handled.")
@@ -175,44 +160,37 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         let elimTrashChars = CharacterSet.whitespacesAndNewlines
         let materialToAdd = string.trimmingCharacters(in: elimTrashChars).replacingOccurrences(of: "\"", with: "").replacingOccurrences(of: ",", with: "##")
-//        globToAdd.replacingOccurrences(of: "\"", with: "")
-//        globToAdd.replacingOccurrences(of: ",", with: "##")
-        if currentElement != nil
-        {
-            currentElement! += materialToAdd
-        }
+        currentElement += materialToAdd
     }
 
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         switch elementName {
         case "card":
-            if aNewCard != nil
+            if let newCrd = aNewCard
             {
-                if aNewCard!.faceOne!.characters.count > 0 &&
-                aNewCard!.faceTwo!.characters.count > 0 &&
-                aNewCard!.tags!.characters.count > 0
+                if newCrd.hasFacesAndTags()
                 {
-                    negozioGrande!.addNewObj(card: aNewCard!)
+                    negozioGrande!.addNewObj(card: newCrd)
                 }
             }
         case "faceOne":
-            if aNewCard != nil && currentElement != nil
+            if let newCrd = aNewCard
             {
-                aNewCard!.faceOne = currentElement!
+                newCrd.faceOne = currentElement
             }
         case "faceOneText":
             print("\tClosing the 'faceOneText' tag.")
         case "faceTwo":
-            if aNewCard != nil && currentElement != nil
+            if let newCrd = aNewCard
             {
-                aNewCard!.faceTwo = currentElement!
+                newCrd.faceTwo = currentElement
             }
         case "faceTwoText":
             print("\tClosing the 'faceTwoText' tag.")
         case "tags":
-            if aNewCard != nil && currentElement != nil
+            if let newCrd = aNewCard
             {
-                aNewCard!.tags = currentElement!
+                newCrd.tags = currentElement
             }
         case "tag":
             print("\tClosing the 'tag' tag.")
