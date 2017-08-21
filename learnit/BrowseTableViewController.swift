@@ -27,20 +27,9 @@ class BrowseTableViewController: UITableViewController {
         
     }
 
-    func addTheBackButton()
-    {
-        let segmentBarItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.done, target: self, action:#selector(backButtonPressed))
-        segmentBarItem.tintColor = UIColor.blue
-        segmentBarItem.style = UIBarButtonItemStyle(rawValue: Int(UIFontWeightRegular))!
-        self.navigationItem.leftBarButtonItem = segmentBarItem
-        
-    }
 
-    @objc func backButtonPressed()
-    {
-        
-         performSegue(withIdentifier: "BrowseToMainSegue", sender: self)
-    }
+
+
     
 
     // MARK: - Table view data source

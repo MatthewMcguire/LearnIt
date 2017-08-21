@@ -19,21 +19,6 @@ class StatisticsTableViewController: UITableViewController {
 
     }
 
-    func addTheBackButton()
-    {
-        let segmentBarItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.done, target: self, action:#selector(backButtonPressed))
-        segmentBarItem.tintColor = UIColor.blue
-        segmentBarItem.style = UIBarButtonItemStyle(rawValue: Int(UIFontWeightRegular))!
-        self.navigationItem.leftBarButtonItem = segmentBarItem
-        
-    }
-    
-    func backButtonPressed()
-    {
-        
-        performSegue(withIdentifier: "StatsToMainSegue", sender: self)
-    }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {

@@ -11,6 +11,26 @@ import UIKit
 extension UIViewController
 {
 
+    func addTheBackButton()
+    {
+        let segmentBarItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.done, target: self, action:#selector(self.backButtonPressed))
+        segmentBarItem.tintColor = UIColor.blue
+        segmentBarItem.style = UIBarButtonItemStyle(rawValue: Int(UIFontWeightRegular))!
+        self.navigationItem.leftBarButtonItem = segmentBarItem
+    }
+    
+    @objc func backButtonPressed()
+    {
+        if self is BrowseTableViewController
+        {
+            performSegue(withIdentifier: "BrowseToMainSegue", sender: self)
+        }
+        if self is StatisticsTableViewController
+        {
+            performSegue(withIdentifier: "StatsToMainSegue", sender: self)
+        }
+    }
+    
     func prepareKeyboardNotifications()
     {
         NotificationCenter.default.addObserver(self, selector: #selector(changeInputMode(notification:)), name: Notification.Name.UITextInputCurrentInputModeDidChange, object: nil)
