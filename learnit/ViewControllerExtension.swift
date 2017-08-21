@@ -201,153 +201,87 @@ extension UIViewController
         switch letter {
         case "α":
             switch diacrit {
-            case .acute:
-                returnValue = "ά"
-            case .acuteRough:
-                returnValue = "ἅ"
-            case .acuteSmooth:
-                returnValue = "ἄ"
-            case .grave:
-                returnValue = "ὰ"
-            case .graveRough:
-                returnValue = "ἃ"
-            case .graveSmooth:
-                returnValue = "ἂ"
-            case .circumf:
-                returnValue = "ᾶ"
-            case .circumfRough:
-                returnValue = "ἇ"
-            case .circumfSmooth:
-                returnValue = "ἆ"
-            case .Rough:
-                returnValue = "ἁ"
-            case .Smooth:
-                returnValue = "ἀ"
+            case .acute:        returnValue = "ά"
+            case .acuteRough:   returnValue = "ἅ"
+            case .acuteSmooth:  returnValue = "ἄ"
+            case .grave:        returnValue = "ὰ"
+            case .graveRough:   returnValue = "ἃ"
+            case .graveSmooth:  returnValue = "ἂ"
+            case .circumf:      returnValue = "ᾶ"
+            case .circumfRough: returnValue = "ἇ"
+            case .circumfSmooth: returnValue = "ἆ"
+            case .Rough:        returnValue = "ἁ"
+            case .Smooth:       returnValue = "ἀ"
             }
         case "ε":
             switch diacrit {
-            case .acute:
-                returnValue = "έ"
-            case .acuteRough:
-                returnValue = "ἕ"
-            case .acuteSmooth:
-                returnValue = "ἔ"
-            case .grave:
-                returnValue = "ὲ"
-            case .graveRough:
-                returnValue = "ἓ"
-            case .graveSmooth:
-                returnValue = "ἒ"
-            case .circumf:
-                returnValue = "ε"
-            case .circumfRough:
-                returnValue = "ε"
-            case .circumfSmooth:
-                returnValue = "ε"
-            case .Rough:
-                returnValue = "ἑ"
-            case .Smooth:
-                returnValue = "ἐ"
+            case .acute:        returnValue = "έ"
+            case .acuteRough:   returnValue = "ἕ"
+            case .acuteSmooth:  returnValue = "ἔ"
+            case .grave:        returnValue = "ὲ"
+            case .graveRough:   returnValue = "ἓ"
+            case .graveSmooth:  returnValue = "ἒ"
+            case .circumf:      returnValue = "ε"
+            case .circumfRough: returnValue = "ε"
+            case .circumfSmooth: returnValue = "ε"
+            case .Rough:        returnValue = "ἑ"
+            case .Smooth:       returnValue = "ἐ"
             }
         case "ι":
             switch diacrit {
-            case .acute:
-                returnValue = "ί"
-            case .acuteRough:
-                returnValue = "ἵ"
-            case .acuteSmooth:
-                returnValue = "ἴ"
-            case .grave:
-                returnValue = "ὶ"
-            case .graveRough:
-                returnValue = "ἳ"
-            case .graveSmooth:
-                returnValue = "ἲ"
-            case .circumf:
-                returnValue = "ῖ"
-            case .circumfRough:
-                returnValue = "ἷ"
-            case .circumfSmooth:
-                returnValue = "ἶ"
-            case .Rough:
-                returnValue = "ἱ"
-            case .Smooth:
-                returnValue = "ἰ"
+            case .acute:        returnValue = "ί"
+            case .acuteRough:   returnValue = "ἵ"
+            case .acuteSmooth:  returnValue = "ἴ"
+            case .grave:        returnValue = "ὶ"
+            case .graveRough:   returnValue = "ἳ"
+            case .graveSmooth:  returnValue = "ἲ"
+            case .circumf:      returnValue = "ῖ"
+            case .circumfRough: returnValue = "ἷ"
+            case .circumfSmooth:returnValue = "ἶ"
+            case .Rough:        returnValue = "ἱ"
+            case .Smooth:       returnValue = "ἰ"
             }
         case "ο":
             switch diacrit {
-            case .acute:
-                returnValue = "ό"
-            case .acuteRough:
-                returnValue = "ὅ"
-            case .acuteSmooth:
-                returnValue = "ὄ"
-            case .grave:
-                returnValue = "ὸ"
-            case .graveRough:
-                returnValue = "ὃ"
-            case .graveSmooth:
-                returnValue = "ὂ"
-            case .circumf:
-                returnValue = "ο"
-            case .circumfRough:
-                returnValue = "ο"
-            case .circumfSmooth:
-                returnValue = "ο"
-            case .Rough:
-                returnValue = "ὁ"
-            case .Smooth:
-                returnValue = "ὀ"
+            case .acute:        returnValue = "ό"
+            case .acuteRough:   returnValue = "ὅ"
+            case .acuteSmooth:  returnValue = "ὄ"
+            case .grave:        returnValue = "ὸ"
+            case .graveRough:   returnValue = "ὃ"
+            case .graveSmooth:  returnValue = "ὂ"
+            case .circumf:      returnValue = "ο"
+            case .circumfRough: returnValue = "ο"
+            case .circumfSmooth:returnValue = "ο"
+            case .Rough:        returnValue = "ὁ"
+            case .Smooth:       returnValue = "ὀ"
             }
         case "ω":
             switch diacrit {
-            case .acute:
-                returnValue = "ώ"
-            case .acuteRough:
-                returnValue = "ὥ"
-            case .acuteSmooth:
-                returnValue = "ὤ"
-            case .grave:
-                returnValue = "ὼ"
-            case .graveRough:
-                returnValue = "ὣ"
-            case .graveSmooth:
-                returnValue = "ὢ"
-            case .circumf:
-                returnValue = "ῶ"
-            case .circumfRough:
-                returnValue = "ὧ"
-            case .circumfSmooth:
-                returnValue = "ὦ"
-            case .Rough:
-                returnValue = "ὡ"
-            case .Smooth:
-                returnValue = "ὠ"
+            case .acute:        returnValue = "ώ"
+            case .acuteRough:   returnValue = "ὥ"
+            case .acuteSmooth:  returnValue = "ὤ"
+            case .grave:        returnValue = "ὼ"
+            case .graveRough:   returnValue = "ὣ"
+            case .graveSmooth:  returnValue = "ὢ"
+            case .circumf:      returnValue = "ῶ"
+            case .circumfRough: returnValue = "ὧ"
+            case .circumfSmooth:returnValue = "ὦ"
+            case .Rough:        returnValue = "ὡ"
+            case .Smooth:       returnValue = "ὠ"
             }
         case "η":
             switch diacrit {
-            case .acute:
-                returnValue = "ή"
-            case .acuteRough:
-                returnValue = "ἥ"
-            case .acuteSmooth:
-                returnValue = "ἤ"
-            case .grave:
-                returnValue = "ὴ"
-            case .graveRough:
-                returnValue = "ἣ"
-            case .graveSmooth:
-                returnValue = "ἢ"
-            case .circumf:
-                returnValue = "ῆ"
-            case .circumfRough:
-                returnValue = "ἧ"
-            case .circumfSmooth:
-                returnValue = "ἦ"
-            case .Rough:
-                returnValue = "ἡ"
-            case .Smooth:
-                returnValue = "ἠ"
+            case .acute:        returnValue = "ή"
+            case .acuteRough:   returnValue = "ἥ"
+            case .acuteSmooth:  returnValue = "ἤ"
+            case .grave:        returnValue = "ὴ"
+            case .graveRough:   returnValue = "ἣ"
+            case .graveSmooth:  returnValue = "ἢ"
+            case .circumf:      returnValue = "ῆ"
+            case .circumfRough: returnValue = "ἧ"
+            case .circumfSmooth:returnValue = "ἦ"
+            case .Rough:        returnValue = "ἡ"
+            case .Smooth:       returnValue = "ἠ"
             }
         default:
             returnValue = letter
