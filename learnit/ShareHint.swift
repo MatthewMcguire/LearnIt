@@ -13,6 +13,17 @@ func shareHint(hintAnswer: String, hintLevel: inout Int, answerValue: inout Floa
     // gradually offer more detailed hints as the button is pressed
     
     let hintLength:Int = hintAnswer.characters.count
+    var hintText = ""
+    
+    enum circumstance : Int
+    {
+        case StageOne = 1
+        case StageTwo = 2
+        case StageThree = 3
+        case StageFour = 4
+        case StageFive = 5
+    }
+    /*
     var circumstance : String = ""
     if hintLevel == 0
     {
@@ -39,7 +50,7 @@ func shareHint(hintAnswer: String, hintLevel: inout Int, answerValue: inout Floa
         circumstance = "Stage Six"
     }
     
-    var hintText = ""
+    
     switch circumstance {
     case "Stage One":
         hintLevel = 1
@@ -221,7 +232,7 @@ func shareHint(hintAnswer: String, hintLevel: inout Int, answerValue: inout Floa
         if loq == true {print("maximum hintage is shown!")}
     }
         if loq == true {print("Hint level is now: \(hintLevel).")}
-    
+    */
     return hintText
 }
 
