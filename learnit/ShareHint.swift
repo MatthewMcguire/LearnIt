@@ -6,49 +6,51 @@
 //  Copyright © 2017 Matthew McGuire. All rights reserved.
 //
 
-import UIKit
+enum circumstance : Int
+{
+    case StageZero = 0
+    case StageOne = 1
+    case StageTwo = 2
+    case StageThree = 3
+    case StageFour = 4
+}
+
 
 func shareHint(hintAnswer: String, hintLevel: inout Int, answerValue: inout Float) -> String
 {
     // gradually offer more detailed hints as the button is pressed
+    // the function will return an empty string if there is no further hint
+    // level available
     
     let hintLength:Int = hintAnswer.characters.count
     var hintText = ""
+    let maxHintLength = [2,4,7,14,14]
     
-    enum circumstance : Int
-    {
-        case StageOne = 1
-        case StageTwo = 2
-        case StageThree = 3
-        case StageFour = 4
-        case StageFive = 5
-    }
+    // If for some reason the hint length is not in the expected range, return nothing
+    guard ((hintLevel >= 0) && (hintLevel <= 4))
+        else { return hintText }
+    
+    // if the length of the answer is not long enough (according to maxHintLength array)
+    // don't go to the next hint level
+    if hintLength < maxHintLength[hintLevel]
+        { return hintText }
+
+    hintText = underscoreForLetters(hintAnswer: hintAnswer)
+    
+    // go to the next hint level and reduce the value of a correct answer
+    hintLevel += 1
+    answerValue *= 0.75
+    return hintText
+}
+
+func underscoreForLetters(hintAnswer: String) -> String
+{
+    var returnAnswer = hintAnswer.replacingOccurrences(of: "\\w", with: "_", options: .regularExpression)
+    returnAnswer = returnAnswer.replacingOccurrences(of: "\\W", with: "  ", options: .regularExpression)
+    return returnAnswer
+}
     /*
-    var circumstance : String = ""
-    if hintLevel == 0
-    {
-        circumstance = "Stage One"
-    }
-    else if (hintLevel == 1) && (hintLength > 3)
-    {
-        circumstance = "Stage Two"
-    }
-    else if (hintLevel == 2) && (hintLength > 5)
-    {
-        circumstance = "Stage Three"
-    }
-    else if (hintLevel == 3) && (hintLength > 8)
-    {
-        circumstance = "Stage Four"
-    }
-    else if (hintLevel == 4) && (hintLength > 15)
-    {
-        circumstance = "Stage Five"
-    }
-    else if (hintLevel == 5) && (hintLength > 15)
-    {
-        circumstance = "Stage Six"
-    }
+
     
     
     switch circumstance {
@@ -233,6 +235,5 @@ func shareHint(hintAnswer: String, hintLevel: inout Int, answerValue: inout Floa
     }
         if loq == true {print("Hint level is now: \(hintLevel).")}
     */
-    return hintText
-}
+
 
