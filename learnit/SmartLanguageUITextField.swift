@@ -40,7 +40,7 @@ class SmartLanguageUITextField: UITextField {
             } else {
                 for tim in UITextInputMode.activeInputModes {
                     if tim.primaryLanguage!.contains(language) {
-                        if loq == true {print("UITextInputMode.textInputMode.primaryLanguage = \(tim.primaryLanguage)")}
+                        if loq == true {print("UITextInputMode.textInputMode.primaryLanguage = \(String(describing: tim.primaryLanguage))")}
                         
                         return tim
                     }

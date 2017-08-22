@@ -43,26 +43,27 @@ extension UIViewController
         let uiObj = findFirstResponder(in: view)// as? SmartLanguageUITextField!
         if uiObj != nil
         {
-            let inpLang = uiObj!.textInputMode?.primaryLanguage
-            if loq == true {print("\tI detect the primary language of this field is set to \(String(describing: inpLang)).")}
-            if inpLang!.prefix(2) == "el"
+            if let inpMode = uiObj!.textInputMode
             {
-
-                if loq == true {print("\tThe user is employing the greek keyboard.")}
-                showGreekToolbar(status: true, onThis:uiObj! as! UITextField)
-//                if let theTextField = uiObj as! SmartLanguageUITextField?
-//                {
+                let inpLang = inpMode.primaryLanguage
+                if loq == true {print("\tI detect the primary language of this field is set to \(String(describing: inpLang)).")}
+                if inpLang!.prefix(2) == "el"
+                {
+                    if loq == true {print("\tThe user is employing the greek keyboard.")}
+                    showGreekToolbar(status: true, onThis:uiObj! as! UITextField)
+//                  if let theTextField = uiObj as! SmartLanguageUITextField?
+//                  {
 //                    theTextField.preferredLang = nil
-//                }
-            }
-            else
-            {
-                if loq == true {print("\tThe user is employing a non-greek keyboard.")}
-                showGreekToolbar(status: false, onThis:uiObj! as! UITextField)
+//                  }
+                }
+                else
+                {
+                    if loq == true {print("\tThe user is employing a non-greek keyboard.")}
+                    showGreekToolbar(status: false, onThis:uiObj! as! UITextField)
+                }
             }
         }
     }
-    
     func findFirstResponder(in view: UIView) -> UIView? {
         for subview in view.subviews {
             if subview.isFirstResponder {

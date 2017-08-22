@@ -14,6 +14,7 @@
 		B934A5141F058B6100A696E8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934A5131F058B6100A696E8 /* Model.swift */; };
 		B965FC781F1BDFB8009E8633 /* sampleWelsh.xml in Resources */ = {isa = PBXBuildFile; fileRef = B965FC771F1BDFB8009E8633 /* sampleWelsh.xml */; };
 		B96605791F43567600300A36 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96605781F43567600300A36 /* ViewControllerExtension.swift */; };
+		B966057B1F4C7D5E00300A36 /* ShareHint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B966057A1F4C7D5E00300A36 /* ShareHint.swift */; };
 		B97AC31D1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97AC31C1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift */; };
 		B98419641F0192810027B2B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98419631F0192810027B2B9 /* AppDelegate.swift */; };
 		B98419661F0192810027B2B9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98419651F0192810027B2B9 /* ViewController.swift */; };
@@ -43,6 +44,7 @@
 		B934A5131F058B6100A696E8 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B965FC771F1BDFB8009E8633 /* sampleWelsh.xml */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; path = sampleWelsh.xml; sourceTree = "<group>"; };
 		B96605781F43567600300A36 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
+		B966057A1F4C7D5E00300A36 /* ShareHint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareHint.swift; sourceTree = "<group>"; };
 		B97AC31C1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewController.swift; sourceTree = "<group>"; };
 		B98419601F0192810027B2B9 /* learnit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = learnit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B98419631F0192810027B2B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				B9C2A6151F10102B00E5E917 /* sampleGreek.xml */,
 				B98419631F0192810027B2B9 /* AppDelegate.swift */,
 				B98419651F0192810027B2B9 /* ViewController.swift */,
+				B966057A1F4C7D5E00300A36 /* ShareHint.swift */,
 				B96605781F43567600300A36 /* ViewControllerExtension.swift */,
 				B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */,
 				B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */,
@@ -162,7 +165,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Matthew McGuire";
 				TargetAttributes = {
 					B984195F1F0192810027B2B9 = {
@@ -228,6 +231,7 @@
 				B92A66191F14287A00DB3DAA /* CardDetailViewController.swift in Sources */,
 				B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */,
 				B96605791F43567600300A36 /* ViewControllerExtension.swift in Sources */,
+				B966057B1F4C7D5E00300A36 /* ShareHint.swift in Sources */,
 				B9AFF1AB1F0FEC4E0013A1AD /* ConfigurationViewController.swift in Sources */,
 				B984196C1F0192810027B2B9 /* learnit.xcdatamodeld in Sources */,
 				B98419641F0192810027B2B9 /* AppDelegate.swift in Sources */,
@@ -266,7 +270,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -274,7 +280,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -317,7 +327,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -325,7 +337,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
