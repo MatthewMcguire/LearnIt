@@ -16,7 +16,7 @@ class CoreDataManagement: NSObject {
     init(manObjContext: NSManagedObjectContext) {
         self.context = manObjContext
     }
-    
+
     fileprivate func getFaceObj(aFace: String, query : NSFetchRequest<FaceManagedObject>, aSetOfFaces: inout Set<FaceManagedObject>) throws {
         var trimmedFace = aFace.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
         trimmedFace = trimmedFace.replacingOccurrences(of: "##", with: ",")
@@ -24,20 +24,27 @@ class CoreDataManagement: NSObject {
         
         let faceQueryResult = try context.fetch(query)
         if faceQueryResult.count == 0 {
-            let newFaceObject = NSEntityDescription.insertNewObject(forEntityName: "Face", into: context) as! FaceManagedObject
-            newFaceObject.faceText = trimmedFace
-            newFaceObject.enabled = true
-            newFaceObject.timesUsed = 1
-            aSetOfFaces.insert(newFaceObject)
+            aSetOfFaces.insert(makeNewFaceObj(trimmedFace))
         }
         else {
-            let toUpdate : FaceManagedObject = faceQueryResult.first!
-            var scratchValue = toUpdate.timesUsed
-            scratchValue += 1
-            toUpdate.timesUsed = scratchValue
-            aSetOfFaces.insert(toUpdate)
-            print ("Face: \(String(describing: toUpdate.faceText)) is used \(toUpdate.timesUsed) times")
+            aSetOfFaces.insert(reuseFaceObj(faceQueryResult))
         }
+    }
+    
+    fileprivate func makeNewFaceObj(_ trimmedFace: String) -> FaceManagedObject {
+        let newFaceObject = NSEntityDescription.insertNewObject(forEntityName: "Face", into: context) as! FaceManagedObject
+        newFaceObject.faceText = trimmedFace
+        newFaceObject.enabled = true
+        newFaceObject.timesUsed = 1
+        return newFaceObject
+}
+    
+    fileprivate func reuseFaceObj(_ faceQueryResult: [FaceManagedObject]) -> FaceManagedObject {
+        let toUpdate : FaceManagedObject = faceQueryResult.first!
+        var scratchValue = toUpdate.timesUsed
+        scratchValue += 1
+        toUpdate.timesUsed = scratchValue
+        return toUpdate
     }
     
     fileprivate func getCommonCards(faceObjects: Set<FaceManagedObject>, newCard: CardStackManagedObject) -> Set<CardStackManagedObject> {
@@ -77,6 +84,27 @@ class CoreDataManagement: NSObject {
         return commonCards
     }
     
+    fileprivate func getTagObj(_ tagQueryResult: [TagManagedObject], _ trimmedTag: String, _ aSetOfTags: inout Set<TagManagedObject>) {
+        if tagQueryResult.count == 0 {
+            let newTagObject = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: context) as! TagManagedObject
+            newTagObject.tagText = trimmedTag
+            newTagObject.enabled = true
+            newTagObject.timesUsed = 1
+            aSetOfTags.insert(newTagObject)
+        }
+        else {
+            let toUpdate : TagManagedObject = tagQueryResult.first!
+            if !aSetOfTags.contains(toUpdate) {
+                var scratchValue = toUpdate.timesUsed
+                scratchValue += 1
+                toUpdate.timesUsed = scratchValue
+                aSetOfTags.insert(toUpdate)
+            }
+            
+            print ("Tag: \(String(describing: toUpdate.tagText)) is used \(toUpdate.timesUsed) times")
+        }
+    }
+    
     fileprivate func useExistingCard(_ cardsInCommon: Set<CardStackManagedObject>, _ aSet: inout Set<String>, _ card: CardObject) {
         if let oldCard = cardsInCommon.first {
             // create the set of given tags for the newly-added card
@@ -98,24 +126,7 @@ class CoreDataManagement: NSObject {
                     quaestioQuartus.predicate = NSPredicate(format: "tagText like[cd] %@", trimmedTag)
                     
                     let tagQueryResult = try context.fetch(quaestioQuartus)
-                    if tagQueryResult.count == 0 {
-                        let newTagObject = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: context) as! TagManagedObject
-                        newTagObject.tagText = trimmedTag
-                        newTagObject.enabled = true
-                        newTagObject.timesUsed = 1
-                        aSetOfTags.insert(newTagObject)
-                    }
-                    else {
-                        let toUpdate : TagManagedObject = tagQueryResult.first!
-                        if !aSetOfTags.contains(toUpdate) {
-                            var scratchValue = toUpdate.timesUsed
-                            scratchValue += 1
-                            toUpdate.timesUsed = scratchValue
-                            aSetOfTags.insert(toUpdate)
-                        }
-                        
-                        print ("Tag: \(String(describing: toUpdate.tagText)) is used \(toUpdate.timesUsed) times")
-                    }
+                    getTagObj(tagQueryResult, trimmedTag, &aSetOfTags)
                 }
                 oldCard.cardToTags = aSetOfTags as NSSet
                 
