@@ -8,14 +8,11 @@
 
 import UIKit
 
-class CardObject: NSObject {
-    
-    var uniqueID : String = UUID().uuidString
+struct cardProperties
+{
     var isActive : Bool = true
     var isKnown : Bool = false
     var studyToday : Bool = false
-    var timeCreated : NSDate = NSDate()
-    var timeUpdated : NSDate = NSDate()
     var faceOne : String = " "
     var faceTwo : String = " "
     var tags : String = " "
@@ -24,21 +21,28 @@ class CardObject: NSObject {
     var tagsAsSet : Set<String> = Set()
     var diffRating : Float?
     var idealInterval : Float?
-    var numCorr : Int?
-    var numIncorr : Int?
-    var numForgot : Int?
-    var lastAnswerCorrect : NSDate?
+    var numCorr : Int = 0
+    var numIncorr : Int = 0
+    var numForgot : Int = 0
+    var lastAnswerCorrect : NSDate? 
+}
+
+class CardObject: NSObject {
+    
+    var uniqueID : String = UUID().uuidString
+    var cardInfo = cardProperties()
+    var timeCreated : NSDate = NSDate()
+    var timeUpdated : NSDate = NSDate()
     
     func hasFacesAndTags() -> Bool
     {
-        if faceOne.characters.count > 0 &&
-            faceTwo.characters.count > 0 &&
-            tags.characters.count > 0
+        if cardInfo.faceOne.characters.count > 0 &&
+            cardInfo.faceTwo.characters.count > 0 &&
+            cardInfo.tags.characters.count > 0
         {
             return true
         }
-        else
-        {
+        else {
             return false
         }
     }

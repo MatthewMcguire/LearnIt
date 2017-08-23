@@ -109,7 +109,7 @@ class CoreDataManagement: NSObject {
         if let oldCard = cardsInCommon.first {
             // create the set of given tags for the newly-added card
             aSet.removeAll()
-            aSet = Set(card.tags.components(separatedBy: ","))
+            aSet = Set(card.cardInfo.tags.components(separatedBy: ","))
             
             // prepare to look for existing tag objects
             let quaestioQuartus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
@@ -143,7 +143,7 @@ class CoreDataManagement: NSObject {
         
         // Break up elements of Face One and add as distinct MOs
         // - Divide the full string into a set of strings
-        var aSet : Set<String> = Set(card.faceOne.components(separatedBy: ","))
+        var aSet : Set<String> = Set(card.cardInfo.faceOne.components(separatedBy: ","))
         
         // create a set of FacesMO objects
         // prepare to look for existing FaceMO objects
@@ -160,7 +160,7 @@ class CoreDataManagement: NSObject {
             
             // Do the same thing for Face Two
             aSet.removeAll()
-            aSet = Set(card.faceTwo.components(separatedBy: ","))
+            aSet = Set(card.cardInfo.faceTwo.components(separatedBy: ","))
             aSetOfFaces.removeAll()
             for aFace in aSet {
                 try getFaceObj(aFace: aFace, query: quaestioQuartusDecius, aSetOfFaces: &aSetOfFaces)
@@ -205,7 +205,7 @@ class CoreDataManagement: NSObject {
         // connect existing or add new tags to the card object
         // create the set of given tags
         aSet.removeAll()
-        aSet = Set(card.tags.components(separatedBy: ","))
+        aSet = Set(card.cardInfo.tags.components(separatedBy: ","))
         
         // prepare to look for existing tag objects
         let quaestioQuartus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
@@ -244,11 +244,11 @@ class CoreDataManagement: NSObject {
         
         // add the set of tags to the new card
         newCard.uniqueID = card.uniqueID
-        newCard.isActive = card.isActive
-        newCard.isKnown = card.isKnown
+        newCard.isActive = card.cardInfo.isActive
+        newCard.isKnown = card.cardInfo.isKnown
         newCard.timeCreated = card.timeCreated
         newCard.timeUpdated = card.timeUpdated
-        newCard.studyToday = card.studyToday
+        newCard.studyToday = card.cardInfo.studyToday
         
         // create a set of empty stats for the card
         let newStatsObject = NSEntityDescription.insertNewObject(forEntityName: "CardStats", into: context) as! CardStatsManagedObject

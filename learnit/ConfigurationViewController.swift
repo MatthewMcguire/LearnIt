@@ -122,7 +122,7 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
         case "faceOne":
             if let newCrd = aNewCard
             {
-                newCrd.faceOne = ""
+                newCrd.cardInfo.faceOne = ""
                 currentElement = ""
             }
         case "faceOneText":
@@ -133,7 +133,7 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
         case "faceTwo":
             if let newCrd = aNewCard
             {
-                newCrd.faceTwo = ""
+                newCrd.cardInfo.faceTwo = ""
                 currentElement = ""
             }
         case "faceTwoText":
@@ -144,7 +144,7 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
         case "tags":
             if let newCrd = aNewCard
             {
-                newCrd.tags = ""
+                newCrd.cardInfo.tags = ""
                 currentElement = ""
             }
         case "tag":
@@ -176,21 +176,21 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
         case "faceOne":
             if let newCrd = aNewCard
             {
-                newCrd.faceOne = currentElement
+                newCrd.cardInfo.faceOne = currentElement
             }
         case "faceOneText":
             print("\tClosing the 'faceOneText' tag.")
         case "faceTwo":
             if let newCrd = aNewCard
             {
-                newCrd.faceTwo = currentElement
+                newCrd.cardInfo.faceTwo = currentElement
             }
         case "faceTwoText":
             print("\tClosing the 'faceTwoText' tag.")
         case "tags":
             if let newCrd = aNewCard
             {
-                newCrd.tags = currentElement
+                newCrd.cardInfo.tags = currentElement
             }
         case "tag":
             print("\tClosing the 'tag' tag.")

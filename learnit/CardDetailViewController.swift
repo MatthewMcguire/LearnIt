@@ -44,13 +44,13 @@ class CardDetailViewController: UIViewController {
         
         if let cc = currentCard
         {
-            faceOneField.text = cc.faceOne
-            faceTwoField.text = cc.faceTwo
-            tagsField.text = cc.tags
-            isActiveSwitch.isOn = cc.isActive
-            isKnownSwitch.isOn = cc.isKnown
-            studyTodaySwitch.isOn = cc.studyToday
-            if let ccdif = cc.diffRating
+            faceOneField.text = cc.cardInfo.faceOne
+            faceTwoField.text = cc.cardInfo.faceTwo
+            tagsField.text = cc.cardInfo.tags
+            isActiveSwitch.isOn = cc.cardInfo.isActive
+            isKnownSwitch.isOn = cc.cardInfo.isKnown
+            studyTodaySwitch.isOn = cc.cardInfo.studyToday
+            if let ccdif = cc.cardInfo.diffRating
             {
                 difficultyField.text = String(format:"%.2f", ccdif)
                 
@@ -59,7 +59,7 @@ class CardDetailViewController: UIViewController {
             {
                 difficultyField.text = "---"
             }
-            if let ccII = cc.idealInterval
+            if let ccII = cc.cardInfo.idealInterval
             {
                 idealIntervalField.text = String(format:"%.2f", ccII)
                 
@@ -68,34 +68,11 @@ class CardDetailViewController: UIViewController {
             {
                 idealIntervalField.text = "---"
             }
-            if let ccnumCor = cc.numCorr
-            {
-                correctTimesField.text = "\(ccnumCor)"
-                
-            }
-            else
-            {
-                correctTimesField.text = "---"
-            }
-            if let ccIncor = cc.numIncorr
-            {
-                incorrectTimesFields.text = "\(ccIncor)"
-                
-            }
-            else
-            {
-                incorrectTimesFields.text = "---"
-            }
-            if let ccnumForg = cc.numForgot
-            {
-                forgottenTimesField.text = "\(ccnumForg)"
-                
-            }
-            else
-            {
-                forgottenTimesField.text = "---"
-            }
-            if let ccLastCorrect = cc.lastAnswerCorrect
+            correctTimesField.text = "\(cc.cardInfo.numCorr)"
+            incorrectTimesFields.text = "\(cc.cardInfo.numIncorr)"
+            forgottenTimesField.text = "\(cc.cardInfo.numForgot)"
+
+            if let ccLastCorrect = cc.cardInfo.lastAnswerCorrect
             {
                 lastCorrectField.text = dateFormatter.string(from: ccLastCorrect as Date)
             }

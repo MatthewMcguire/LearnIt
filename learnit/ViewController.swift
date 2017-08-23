@@ -202,7 +202,7 @@ class ViewController: UIViewController {
             self.AnswerField.text = ""
             }, completion: nil)
         hintLevel = 0
-        hintAnswer = currentCard?.faceTwoAsSet.first
+        hintAnswer = currentCard?.cardInfo.faceTwoAsSet.first
         updateTotalPoints()
         showACard()
     }
@@ -219,7 +219,7 @@ class ViewController: UIViewController {
         var closestBestAnswer : String = "                 "
         // calculate distance from a correct answer
         var shortestDistance = 1000 // to begin, obviously way higher than any plausible input
-        if let possibleAnswers = currentCard?.faceTwoAsSet
+        if let possibleAnswers = currentCard?.cardInfo.faceTwoAsSet
         {
             if loq == true {print("Evaluating the given response...")}
             for aCorrectAnswer in possibleAnswers
@@ -263,8 +263,8 @@ class ViewController: UIViewController {
                 AnswerField.isEnabled = true
                 let uniqueID = oggiQueue?[currentPlaceInQueue]
                 currentCard = negozioGrande!.getCardWithID(uniqueID: uniqueID!)
-                faceOneLabel.text = currentCard?.faceOne
-                tagLabel.text = currentCard?.tags
+                faceOneLabel.text = currentCard?.cardInfo.faceOne
+                tagLabel.text = currentCard?.cardInfo.tags
                 currentAnswerValue = maxAnswerValue
 //                if let fTwo = currentCard?.faceTwo
 //                {
@@ -369,7 +369,7 @@ class ViewController: UIViewController {
         if loq == true {print("Processing the response as 'Incorrect'...")}
         feedbackView.alpha = 1.0
         // notify the learner
-        messageLabel.text = "Wrong:  \(currentCard?.faceTwo ?? " ")"
+        messageLabel.text = "Wrong:  \(currentCard?.cardInfo.faceTwo ?? " ")"
         if loq == true {print("\tAdding this text to the message label\(String(describing: messageLabel.text))")}
         if messageLabel.text!.characters.count > 25
         {
@@ -408,7 +408,7 @@ class ViewController: UIViewController {
         // notify the learner
         let ptsStr = String(format:"%.1f", currentAnswerValue)
         
-        messageLabel.text = "Yes (" + ptsStr + " pts): \(currentCard?.faceTwo ?? " ")"
+        messageLabel.text = "Yes (" + ptsStr + " pts): \(currentCard?.cardInfo.faceTwo ?? " ")"
         if loq == true {print("\tAdding this text to the message label\(String(describing: messageLabel.text))")}
         if messageLabel.text!.characters.count > 25
         {

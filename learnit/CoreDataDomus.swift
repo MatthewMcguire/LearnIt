@@ -604,22 +604,22 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
     {
         let returnedCard = CardObject()
         returnedCard.uniqueID = cardMO.uniqueID!
-        returnedCard.isActive = cardMO.isActive
-        returnedCard.isKnown = cardMO.isKnown
-        returnedCard.studyToday = cardMO.studyToday
+        returnedCard.cardInfo.isActive = cardMO.isActive
+        returnedCard.cardInfo.isKnown = cardMO.isKnown
+        returnedCard.cardInfo.studyToday = cardMO.studyToday
         returnedCard.timeCreated = cardMO.timeCreated!
         returnedCard.timeUpdated = cardMO.timeUpdated!
-        returnedCard.faceOne = getStringFromMOSet(setGlob: cardMO.faceOne as! Set<NSManagedObject>)
-        returnedCard.faceTwo = getStringFromMOSet(setGlob: cardMO.faceTwo as! Set<NSManagedObject>)
-        returnedCard.tags = getStringFromMOSet(setGlob: cardMO.cardToTags as! Set<NSManagedObject>)
-        returnedCard.faceOneAsSet = getSetFromMOSet(setGlob: cardMO.faceOne as! Set<NSManagedObject>)
-        returnedCard.faceTwoAsSet = getSetFromMOSet(setGlob: cardMO.faceTwo as! Set<NSManagedObject>)
-        returnedCard.diffRating = cardMO.cardToStats?.difficultyRating
-        returnedCard.idealInterval = cardMO.cardToStats?.idealInterval
-        returnedCard.numForgot = Int((cardMO.cardToStats?.numberTimesForgotten)!)
-        returnedCard.numIncorr = Int((cardMO.cardToStats?.numberTimesIncorrect)!)
-        returnedCard.numCorr = Int((cardMO.cardToStats?.numberTimesCorrect)!)
-        returnedCard.lastAnswerCorrect = cardMO.cardToStats?.lastAnsweredCorrect
+        returnedCard.cardInfo.faceOne = getStringFromMOSet(setGlob: cardMO.faceOne as! Set<NSManagedObject>)
+        returnedCard.cardInfo.faceTwo = getStringFromMOSet(setGlob: cardMO.faceTwo as! Set<NSManagedObject>)
+        returnedCard.cardInfo.tags = getStringFromMOSet(setGlob: cardMO.cardToTags as! Set<NSManagedObject>)
+        returnedCard.cardInfo.faceOneAsSet = getSetFromMOSet(setGlob: cardMO.faceOne as! Set<NSManagedObject>)
+        returnedCard.cardInfo.faceTwoAsSet = getSetFromMOSet(setGlob: cardMO.faceTwo as! Set<NSManagedObject>)
+        returnedCard.cardInfo.diffRating = cardMO.cardToStats?.difficultyRating
+        returnedCard.cardInfo.idealInterval = cardMO.cardToStats?.idealInterval
+        returnedCard.cardInfo.numForgot = Int((cardMO.cardToStats?.numberTimesForgotten)!)
+        returnedCard.cardInfo.numIncorr = Int((cardMO.cardToStats?.numberTimesIncorrect)!)
+        returnedCard.cardInfo.numCorr = Int((cardMO.cardToStats?.numberTimesCorrect)!)
+        returnedCard.cardInfo.lastAnswerCorrect = cardMO.cardToStats?.lastAnsweredCorrect
         
         return returnedCard
     }
@@ -694,7 +694,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         oneCard.timeUpdated = NSDate()
         
          // UPDATE FACE ONE
-        var stringSet = Set(withValues.faceOne.components(separatedBy: ","))
+        var stringSet = Set(withValues.cardInfo.faceOne.components(separatedBy: ","))
         var setOfFaces = Set<FaceManagedObject>()
          // for each string, create a FaceMO Managed Obj and add to the set
         for faceOneValue in stringSet
@@ -706,7 +706,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         oneCard.faceOne = setOfFaces as NSSet
         
         // UPDATE FACE TWO
-        stringSet = Set(withValues.faceTwo.components(separatedBy: ","))
+        stringSet = Set(withValues.cardInfo.faceTwo.components(separatedBy: ","))
         setOfFaces.removeAll()
         setOfFaces = Set<FaceManagedObject>()
         // for each string, create a FaceMO Managed Obj and add to the set
@@ -719,7 +719,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         oneCard.faceTwo = setOfFaces as NSSet
         
         // UPDATE TAGS
-        stringSet = Set(withValues.tags.components(separatedBy: ","))
+        stringSet = Set(withValues.cardInfo.tags.components(separatedBy: ","))
         setOfFaces.removeAll()
         var setOfTags = Set<TagManagedObject>()
         // for each string, create a FaceMO Managed Obj and add to the set
