@@ -11,11 +11,6 @@ import UIKit
 var negozioGrande : CoreDataDomus?
 var oggiQueue : Array<String>?
 
-let loq = true
-// loq -> 'loquacity'. If true, the console will report most app activity for sake of debugging.
-
-
-
 class ViewController: UIViewController {
     @IBOutlet weak var faceOneLabel: UILabel!
     @IBOutlet weak var pointsLabel: UILabel!
@@ -61,8 +56,6 @@ class ViewController: UIViewController {
         
     }
     override func viewWillAppear(_ animated: Bool) {
-        if loq == true {print("viewWillAppear triggered...")}
-        if loq == true {print("\tUpdate counter, update place in queue, and refresh card shown.")}
         self.view.endEditing(true)
         self.refreshLearnerPreferences()
         updateCounter()
@@ -88,11 +81,9 @@ class ViewController: UIViewController {
             hintLabel.attributedText = attHintText
             updateForPointsIndicator()
         }
-        if loq == true {print("Share Hint button pressed.")}
     }
 
     @IBAction func skipButtonPress(_ sender: Any) {
-        if loq == true {print("Skip button pressed.")}
         updatePlaceInQueue()
         refreshCardShown()
     }
@@ -115,14 +106,11 @@ class ViewController: UIViewController {
     
     func storageSetup()
     {
-        if loq == true {print("Setting up core data...")}
         negozioGrande = CoreDataDomus()
-        if negozioGrande == nil
-        {
+        if negozioGrande == nil  {
             fatalError("Error creating Core Data Object")
         }
-        else
-        {
+        else  {
             negozioGrande!.refreshFetchedResultsController()
             negozioGrande!.refreshFetchedTagsController()
         }
@@ -131,15 +119,11 @@ class ViewController: UIViewController {
     
     func refreshLearnerPreferences()
     {
-        if let currentL = negozioGrande!.currentLearner
-        {
+        if let currentL = negozioGrande!.currentLearner  {
             maxCardsInHand = Int(currentL.maxCardsInHand)
             correctAnswerShownPause = currentL.correctAnswerShownPause
             currentAnswerValue = currentL.maximumAnswerValue
             maxAnswerValue = currentL.maximumAnswerValue
-            if loq == true {print("Refreshing learner preferences...")}
-            if loq == true {print("\t maxCardsInHand: \(maxCardsInHand)")}
-            if loq == true {print("\t correctAnswerShownPause: \(correctAnswerShownPause)")}
         }
     }
     
@@ -157,15 +141,8 @@ class ViewController: UIViewController {
         // obtain the total number of active cards and the number to
         // review or learn today, and show in the 'cards known' label
         
-        let numCards = negozioGrande!.howManyActiveCards()
-        let numKnownCards = negozioGrande!.howManyActiveKnownCards()
-        if loq == true
-        {
-            print("\tThere are \(numCards) active cards.")
-            print("Updating counter:")
-            print("\tThere are \(numKnownCards) known active cards.")
-        }
-
+        let numCards = howManyActiveCards(context: negozioGrande!.manObjContext)
+        let numKnownCards = howManyActiveKnownCards(context: negozioGrande!.manObjContext)
         let counterLabelText = "known: \(numKnownCards)/\(numCards)"
         cardsKnownLabel.text = counterLabelText
     }
@@ -175,18 +152,14 @@ class ViewController: UIViewController {
         let totalPoints = negozioGrande!.getUserTotalPoints()
         let ptsString = String(format: "%.1f pts.", totalPoints)
         pointsLabel.text = ptsString
-        if loq == true {print("Updated total points lable to \(totalPoints)")}
     }
     
     
     func refreshCardShown()
     {
-        if loq == true {print("Refreshing the card shown:")}
         refreshQueue()
         if let queueSize = oggiQueue?.count
         {
-            if loq == true {print("\tQueue size: \(queueSize)")}
-            if loq == true {print("\tCurrent Place In Queue: \(currentPlaceInQueue)")}
             if queueSize > 0 && currentPlaceInQueue < 1
             {
                 currentPlaceInQueue = 0
@@ -209,7 +182,6 @@ class ViewController: UIViewController {
  
     func assessResponse()
     {
-        if loq == true {print("Assessing the response:")}
         let givenAnswer = AnswerField.text?.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
         if givenAnswer?.characters.count == 0
         {
@@ -221,11 +193,9 @@ class ViewController: UIViewController {
         var shortestDistance = 1000 // to begin, obviously way higher than any plausible input
         if let possibleAnswers = currentCard?.cardInfo.faceTwoAsSet
         {
-            if loq == true {print("Evaluating the given response...")}
             for aCorrectAnswer in possibleAnswers
             {
                 let d = levenshteinDistanceFrom(source: aCorrectAnswer, target: givenAnswer!)
-                if loq == true {print("\tDistance from \(givenAnswer?.description ?? "answer you typed") to \(aCorrectAnswer.description) is \(d).")}
                 if d < shortestDistance
                 {
                     shortestDistance = d
@@ -243,21 +213,14 @@ class ViewController: UIViewController {
                 processIncorrectAnswer(uniqueID: (currentCard?.uniqueID)!, distance: Float(shortestDistance))
             }
         }
-        else
-        {
-            if loq == true {print("Can't assess the response when no valid card is shown.")}
-        }
-
     }
     
     func showACard()
     {
-        if loq == true {print("Instructed to show a card...")}
         if let queueSize = oggiQueue?.count
         {
             if queueSize > 0
             {
-                if loq == true {print("\tQueue size is \(queueSize)")}
                 skipButton.isEnabled = true
                 showHintButton.isEnabled = true
                 AnswerField.isEnabled = true
@@ -270,7 +233,7 @@ class ViewController: UIViewController {
 //                {
 //                    if answerContainsGreek(risposta: fTwo) == true
 //                    {
-//                        if loq == true {print("\tThe answer seems to include greek. Adding the special characters...")}
+
 //                        AnswerField.preferredLang = "el"
 //
 //                    }
@@ -283,7 +246,6 @@ class ViewController: UIViewController {
             }
             else
             {
-                if loq == true {print("\tQueue size is \(queueSize) so disabling interface.")}
                 skipButton.isEnabled = false
                 showHintButton.isEnabled = false
                 AnswerField.isEnabled = false
@@ -292,32 +254,23 @@ class ViewController: UIViewController {
                 messageLabel.text = " "
             }
         }
-        else
-        {
-            if loq == true {print("\tCan't do this when the queue doesn't exist!")}
-        }
     }
  
     func refreshQueue()
     {
-        if loq == true {print("Refreshing the learning queue.")}
         oggiQueue = negozioGrande!.refreshLearningQueue()
     }
  
     func updateForPointsIndicator()
     {
-        if loq == true {print("Updating the 'for points' indicator.")}
         let ptsString = String(format: "for %.1f points", currentAnswerValue)
         forPointsLabel.text = ptsString
     }
     
     func isMarkedCorrect (storedAnswer:String, dist dis : Int )->Bool
     {
-        if loq == true {print("Should the response be marked correct?")}
-        
         let len = storedAnswer.characters.count
         var returnVal = false
-        if loq == true {print("\tStored answer is \(len) characters long. Distance of response is \(dis).")}
         switch len {
         case 0...2:
             if dis < 1
@@ -335,19 +288,15 @@ class ViewController: UIViewController {
                 returnVal = true
             }
         }
-        if loq == true {print("\tThus the response is to be marked as \(returnVal)")}
     return returnVal
     }
     
     func updatePlaceInQueue()
     {
-        if loq == true {print("Trying to update the current place in Queue")}
         if let todaysQueue = oggiQueue
         {
 
             let queueSize = todaysQueue.count
-            if loq == true {print("\tQueue size: \(queueSize)")}
-            if loq == true {print("\tOld spot in cue: \(currentPlaceInQueue)")}
             if queueSize > 0
             {
                 currentPlaceInQueue = currentPlaceInQueue + 1
@@ -356,24 +305,16 @@ class ViewController: UIViewController {
                     currentPlaceInQueue = 0
                 }
             }
-            if loq == true {print("\tNew spot in queue: \(currentPlaceInQueue)")}
-        }
-        else
-        {
-            if loq == true {print("\tCannot update place when the queue is nil!")}
         }
     }
     
     func processIncorrectAnswer(uniqueID:String, distance dist: Float)
     {
-        if loq == true {print("Processing the response as 'Incorrect'...")}
         feedbackView.alpha = 1.0
         // notify the learner
         messageLabel.text = "Wrong:  \(currentCard?.cardInfo.faceTwo ?? " ")"
-        if loq == true {print("\tAdding this text to the message label\(String(describing: messageLabel.text))")}
         if messageLabel.text!.characters.count > 25
         {
-//            if loq == true {print("\tMessage is long, so increasing the panel size for a few seconds")}
             UIView.animate(withDuration: 0.5, delay: 0.0, options:UIViewAnimationOptions.curveEaseInOut, animations: {
 //                self.feedbackHeight.constant = CGFloat(50.0)
 //                self.messageHeight.constant = CGFloat(50.0)
@@ -390,32 +331,24 @@ class ViewController: UIViewController {
             self.feedbackView.backgroundColor = UIColor.red
             self.messageLabel.backgroundColor = UIColor.red
         }, completion: nil)
-//        if loq == true {print("\tSetting the message and feedback panel back to normal size")}
         UIView.animate(withDuration: TimeInterval(correctAnswerShownPause), delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
                 self.feedbackView.alpha = 0.0
-            
         }, completion: nil)
     }
     
     func processCorrectAnswer(uniqueID:String, distance dist:Float)
     {
-        if loq == true {print("Processing the response as 'Correct'...")}
         feedbackView.alpha = 1.0
         negozioGrande!.updateUserTotalPoints(addThese: currentAnswerValue)
-        if loq == true {print("\tAnswer was worth \(currentAnswerValue) points.")}
         updateTotalPoints()
         
         // notify the learner
         let ptsStr = String(format:"%.1f", currentAnswerValue)
         
         messageLabel.text = "Yes (" + ptsStr + " pts): \(currentCard?.cardInfo.faceTwo ?? " ")"
-        if loq == true {print("\tAdding this text to the message label\(String(describing: messageLabel.text))")}
         if messageLabel.text!.characters.count > 25
         {
-            if loq == true {print("\tMessage is long, so increasing the panel size for a few seconds")}
             UIView.animate(withDuration: 0.5, delay: 0.0, options:UIViewAnimationOptions.curveEaseInOut, animations: {
-//                self.feedbackHeight.constant = CGFloat(50.0)
-//                self.messageHeight.constant = CGFloat(50.0)
             }, completion: nil)
         }
         
@@ -425,14 +358,12 @@ class ViewController: UIViewController {
         // remove the card from the stack of today's cards
         if let removeElementHere = oggiQueue!.index(of: (currentCard?.uniqueID)!)
         {
-            if loq == true {print("\tRemoving card from spot \(removeElementHere) in current Queue.")}
             oggiQueue!.remove(at: removeElementHere)
         }
         
         // move to next card & show it
         if currentPlaceInQueue >= oggiQueue!.count
         {
-            if loq == true {print("\tCurrent spot was past end of Queue, so setting to zero.")}
             currentPlaceInQueue = 0
         }
 
@@ -445,7 +376,6 @@ class ViewController: UIViewController {
             self.messageLabel.backgroundColor = UIColor.green
             self.feedbackView.backgroundColor = UIColor.green
         }, completion: nil)
-        if loq == true {print("\tSetting the message and feedback panel back to normal size")}
         UIView.animate(withDuration: TimeInterval(correctAnswerShownPause), delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
             self.feedbackView.alpha = 0.0
         }, completion: nil)
@@ -456,7 +386,6 @@ class ViewController: UIViewController {
     class Array2D {
         var cols:Int, rows:Int
         var matrix: [Int]
-        
         
         init(cols:Int, rows:Int) {
             self.cols = cols
@@ -520,16 +449,13 @@ class ViewController: UIViewController {
  
     func answerContainsGreek(risposta: String) -> Bool
     {
-        if loq == true {print("Checking to see if \(risposta) has any greek vowels...")}
         let matchingToGreek : Range? = risposta.rangeOfCharacter(from: CharacterSet.init(charactersIn: "ςερτυθιοπασδφγηξκλζχψωβνμ"))
         if matchingToGreek != nil
         {
-            if loq == true {print("\tAnd it does.")}
             return true
         }
         else
         {
-            if loq == true {print("\tAnd it doesn't.")}
             return false
         }
     }
@@ -537,7 +463,7 @@ class ViewController: UIViewController {
 
     @IBAction func unwindToMain(sender : UIStoryboardSegue)
     {
-        if loq == true {print("Unwinding to the main view...")}
+       // if loq == true {print("Unwinding to the main view...")}
     }
 
     func uiSetup()

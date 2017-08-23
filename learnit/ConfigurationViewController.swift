@@ -29,19 +29,15 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
     }
 
     @IBAction func importHomericGreekPress(_ sender: Any) {
-        if loq == true {print("Importing sample Greek language cards.")}
         addCardsViaXML(fileName: "sampleGreek")
     }
     
     @IBAction func importWelshPress(_ sender: Any) {
-        if loq == true {print("Importing sample Welsh language cards.")}
         addCardsViaXML(fileName: "sampleWelsh")
     }
     
     @IBAction func resetPointsPress(_ sender: Any) {
-        if loq == true {print("Setting the total user points to zero.")}
-        if let currentPoints = negozioGrande?.getUserTotalPoints()
-        {
+        if let currentPoints = negozioGrande?.getUserTotalPoints()  {
             negozioGrande!.updateUserTotalPoints(addThese: (-1 * currentPoints))
         }
         resetPointsButton.isEnabled = false
@@ -51,7 +47,7 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
         {
             negozioGrande!.currentLearner?.maxCardsInHand = Int32(maxCardsInHandField.text!)!
         }
-        negozioGrande!.updateUserInfo()
+        updateUserInfo(context: negozioGrande!.manObjContext)
         hideKeyboard()
     }
     @IBAction func maximumAnswerValueEntered(_ sender: Any) {
@@ -59,7 +55,7 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
         {
             negozioGrande!.currentLearner?.maximumAnswerValue = Float(maxAnswerValueField.text!)!
         }
-        negozioGrande!.updateUserInfo()
+        updateUserInfo(context: negozioGrande!.manObjContext)
         hideKeyboard()
     }
 
@@ -68,19 +64,17 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
         {
             negozioGrande!.currentLearner?.correctAnswerShownPause = Float(answerPauseField.text!)!
         }
-        negozioGrande!.updateUserInfo()
+        updateUserInfo(context: negozioGrande!.manObjContext)
         hideKeyboard()
     }
     
     @IBAction func resetCardsPress(_ sender: Any) {
-        if loq == true {print("Setting the status of all cards to 'unknown'.")}
-        negozioGrande!.updateAllCardsAsUnknown()
+        updateAllCardsAsUnknown(context: negozioGrande!.manObjContext)
         resetCardsButton.isEnabled = false
     }
 
     @IBAction func deleteAllCardsPress(_ sender: Any) {
-        if loq == true {print("Removing all cards and their related fields from Core Data.")}
-        negozioGrande!.clearAllObjectsFromStore()
+        clearAllObjectsFromStore(context: negozioGrande!.manObjContext)
         deleteCardsButton.isEnabled = false
     }
   
@@ -239,7 +233,7 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
             negozioGrande!.currentLearner?.maxCardsInHand = Int32(maxCardsInHandField.text!)!
         }
         
-        negozioGrande!.updateUserInfo()
+        updateUserInfo(context: negozioGrande!.manObjContext)
         self.view.endEditing(true)
         resignFirstResponder()
     }

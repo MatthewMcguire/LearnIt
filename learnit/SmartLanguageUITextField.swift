@@ -33,15 +33,12 @@ class SmartLanguageUITextField: UITextField {
     override var textInputMode: UITextInputMode? {
         if let language = preferredLang
         {
-            if loq == true {print("UITextInputMode.preferredLang = \(language)")}
             if language.isEmpty {
                 return super.textInputMode
                 
             } else {
                 for tim in UITextInputMode.activeInputModes {
                     if tim.primaryLanguage!.contains(language) {
-                        if loq == true {print("UITextInputMode.textInputMode.primaryLanguage = \(String(describing: tim.primaryLanguage))")}
-                        
                         return tim
                     }
                 }

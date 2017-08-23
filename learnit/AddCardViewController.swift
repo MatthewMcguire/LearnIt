@@ -75,10 +75,6 @@ class AddCardViewController: UIViewController {
                     aNewCard.cardInfo.faceTwo = inputFaceTwo
                     aNewCard.cardInfo.tags = inputTags
                     negozioGrande!.addNewObj(card: aNewCard)
-                    if loq == true {print("Adding a new card with:")}
-                    if loq == true {print("\tFace One: \(inputFaceOne).")}
-                    if loq == true {print("\tFace Two: \(inputFaceTwo).")}
-                    if loq == true {print("\tTags: \(inputTags).")}
                 }
             }
             }

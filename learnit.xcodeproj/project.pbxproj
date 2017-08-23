@@ -34,6 +34,8 @@
 		B9A4F9441F27F65E0045185B /* screen_02.PNG in Resources */ = {isa = PBXBuildFile; fileRef = B9A4F93D1F27F65E0045185B /* screen_02.PNG */; };
 		B9AFF1AB1F0FEC4E0013A1AD /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */; };
 		B9C1A2811F4DEB840039C7CF /* CoreDataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C1A2801F4DEB840039C7CF /* CoreDataManagement.swift */; };
+		B9C1A2831F4E183E0039C7CF /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C1A2821F4E183E0039C7CF /* CoreDataHelper.swift */; };
+		B9C1A2851F4E19940039C7CF /* CoreDataGlobalAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C1A2841F4E19940039C7CF /* CoreDataGlobalAction.swift */; };
 		B9C2A6161F10102B00E5E917 /* sampleGreek.xml in Resources */ = {isa = PBXBuildFile; fileRef = B9C2A6151F10102B00E5E917 /* sampleGreek.xml */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +69,8 @@
 		B9A4F93D1F27F65E0045185B /* screen_02.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_02.PNG; sourceTree = "<group>"; };
 		B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		B9C1A2801F4DEB840039C7CF /* CoreDataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagement.swift; sourceTree = "<group>"; };
+		B9C1A2821F4E183E0039C7CF /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		B9C1A2841F4E19940039C7CF /* CoreDataGlobalAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataGlobalAction.swift; sourceTree = "<group>"; };
 		B9C2A6151F10102B00E5E917 /* sampleGreek.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sampleGreek.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +119,8 @@
 				B97AC31C1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift */,
 				B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */,
 				B9C1A2801F4DEB840039C7CF /* CoreDataManagement.swift */,
+				B9C1A2821F4E183E0039C7CF /* CoreDataHelper.swift */,
+				B9C1A2841F4E19940039C7CF /* CoreDataGlobalAction.swift */,
 				B997F55C1F240F6000053F29 /* SmartLanguageUITextField.swift */,
 				B98419671F0192810027B2B9 /* Main.storyboard */,
 				B984196D1F0192810027B2B9 /* Assets.xcassets */,
@@ -225,12 +231,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9C1A2831F4E183E0039C7CF /* CoreDataHelper.swift in Sources */,
 				B934A5141F058B6100A696E8 /* Model.swift in Sources */,
 				B98419661F0192810027B2B9 /* ViewController.swift in Sources */,
 				B9217CC41F0E9DE1000F1798 /* AddCardViewController.swift in Sources */,
 				B92A66171F1426C900DB3DAA /* BrowseTableViewController.swift in Sources */,
 				B997F55D1F240F6000053F29 /* SmartLanguageUITextField.swift in Sources */,
 				B9C1A2811F4DEB840039C7CF /* CoreDataManagement.swift in Sources */,
+				B9C1A2851F4E19940039C7CF /* CoreDataGlobalAction.swift in Sources */,
 				B97AC31D1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift in Sources */,
 				B92A66191F14287A00DB3DAA /* CardDetailViewController.swift in Sources */,
 				B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */,

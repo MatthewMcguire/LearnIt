@@ -21,13 +21,13 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
     {
         super.init()
         self.manObjContext = persistentContainer.viewContext
-        initUserInfo()
+        currentLearner = initUserInfo(context: manObjContext)
+        saveContext()
     }
     
     
     func refreshFetchedResultsController()
     {
-        if loq == true {print("Refreshing the fetched results controller (i.e. list of all active cards)")}
         let quaestioUnus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
         quaestioUnus.predicate = NSPredicate(format: "isActive == YES")
         let sortKey1 = NSSortDescriptor(key: "uniqueID", ascending: true)
@@ -47,7 +47,6 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
     
     func refreshFetchedTagsController()
     {
-        if loq == true {print("Obtaining a fetched results controller of Tag items")}
         let quaestioTertiusDecimus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
 //        quaestioTertiusDecimus.predicate = NSPredicate(format: "isActive == YES")
         let sortKey1 = NSSortDescriptor(key: "timesUsed", ascending: false)
@@ -65,78 +64,12 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
             fatalError("Error fetching objects from the persistent store")
         }
     }
-    
-    func initUserInfo()
-    {
-        if loq == true {print("Looking in Core Data for a learner object...")}
-        let quaestioTertius = NSFetchRequest<NSFetchRequestResult>(entityName: "Learner")
-        do {
-            let queryResult = try manObjContext?.fetch(quaestioTertius) as! [LearnerManagedObject]
-            if queryResult.count == 0
-            {
-                // create a new Learner Object
-                let aNewLearner = NSEntityDescription.insertNewObject(forEntityName: "Learner", into: manObjContext!) as! LearnerManagedObject
-                aNewLearner.name = "Matthew"
-                aNewLearner.totalPoints = 0.0
-                aNewLearner.daysActive = 0
-                aNewLearner.studyTodayLastUpdated = NSDate.distantPast as NSDate
-                aNewLearner.correctAnswerShownPause = 3.5
-                aNewLearner.maxCardsInHand = 20
-                aNewLearner.maximumAnswerValue = 10.0
-                currentLearner = aNewLearner
-                saveContext()
-                if loq == true {print("\tNo learner found, so creating a new one with default settings.")}
-            }
-            else
-            {
-                currentLearner = queryResult.first
-                if loq == true {print("\tFound and loaded a learner.")}
-            }
-        }
-        catch
-        {
-            fatalError("Couldn't fetch learner info from Core Data")
-        }
-
-    }
-    func updateUserInfo()
-    {
-        if let currentIdentity = currentLearner
-        {
-            let quaestioNull = NSFetchRequest<LearnerManagedObject>(entityName: "Learner")
-            quaestioNull.predicate = NSPredicate(format: "name == %@", currentIdentity.name!)
-            do
-            {
-                let queryResult = try manObjContext?.fetch(quaestioNull)
-                if queryResult?.count != 0
-                {
-                    let learner = queryResult?.first!
-                    learner?.correctAnswerShownPause = currentIdentity.correctAnswerShownPause
-                    learner?.maxCardsInHand = currentIdentity.maxCardsInHand
-                    learner?.maximumAnswerValue = currentIdentity.maximumAnswerValue
-                    saveContext()
-                    if loq == true {print("Updating learner settings.")}
-                }
-                else
-                {
-                    if loq == true {print("No learner found, sorry!")}
-                }
-            }
-            catch
-            {
-                fatalError("Couldn't find the learner object in Core Data.")
-            }
-            
-        }
-    }
-    
-    
+ 
     func updateStudyToday() -> Bool
     {
         // 1) Search for cards that should be added to today's queue
         // 2) Add them to the queue
         // 3) Return true if any such cards were found and added.
-        if loq == true {print("Updating the list of which cards should be studied today...")}
         var cardsAddedToQueue = false
         if currentLearner != nil
         {
@@ -148,7 +81,6 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                 currentLearner!.studyTodayLastUpdated = NSDate()
                 currentLearner!.daysActive = currentLearner!.daysActive + 1
                 cardsAddedToQueue = updateStudyTodayFlagOnCards()
-                if loq == true {print("\tThis update is occuring for the first time for this learner.")}
             }
             else
             {
@@ -156,13 +88,12 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                 // update the queue with updateStudyTodayFlagOnCards()
                 let howLongSince = -1.0 * (currentLearner?.studyTodayLastUpdated!.timeIntervalSinceNow)!
                 let sixteenHoursInSeconds = 16 * 60 * 60
-                if loq == true {print("\tIt's been \(Int(howLongSince)) seconds since the Study Today queue was updated.")}
+
                 if Int(howLongSince) > sixteenHoursInSeconds
                 {
                     currentLearner!.studyTodayLastUpdated = NSDate()
                     currentLearner!.daysActive = currentLearner!.daysActive + 1
                     cardsAddedToQueue = updateStudyTodayFlagOnCards()
-                    if loq == true {print("\tSince it's been more than sixteen hours, the queue was updated.")}
                 }
             }
         }
@@ -176,7 +107,6 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         
         let quaestioDuoDecimus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
         quaestioDuoDecimus.predicate = NSPredicate(format: "(isKnown == YES) AND (isActive == YES) AND (studyToday == NO)")
-        if loq == true {print("\tLooking through active, known cards not currently marked as 'study today'.")}
         do {
 //              if a card is currently Active, Known, and marked as StudyToday = NO,...
 //              and if the date it was last answered correctly plus its ideal interval falls today or earlier,
@@ -195,15 +125,13 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                 {
                     shouldStudyNext = NSDate()
                 }
-               
-                if loq == true {print("\tCard \(String(describing: card.uniqueID)) should be studied: \(String(describing: shouldStudyNext))")}
+
                 // shouldStudyNext is the NSDate value for the ideal study-it-again for the card.
                 // if that value is sometime 'today' or it is previous to 'right now' the card is marked as studyToday = true
                 if (NSCalendar.current.isDateInToday(shouldStudyNext! as Date) == true) || (shouldStudyNext!.compare(Date()) != ComparisonResult.orderedDescending)
                 {
                     card.studyToday = true
                     cardsAddedToQueue = true
-                    if loq == true {print("\t\t...and it has been marked as one needing to be studied today.")}
                 }
             }
             saveContext()
@@ -222,44 +150,9 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
     
     func updateUserTotalPoints(addThese: Float)
     {
-        if loq == true {print("Adding \(addThese) points to the learner's total.")}
         let points = currentLearner!.totalPoints
         currentLearner!.totalPoints = points + addThese
         saveContext()
-    }
-    
-    func howManyActiveCards () -> Int
-    {
-        var numCards : Int = 0
-        let quaestioUnDecimus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
-        quaestioUnDecimus.predicate = NSPredicate(format: "(isActive == YES)")
-        quaestioUnDecimus.resultType = NSFetchRequestResultType.countResultType
-        do {
-            numCards = try manObjContext.count(for: quaestioUnDecimus)
-            if loq == true {print("There are \(numCards) active cards.")}
-        }
-        catch
-        {
-            fatalError("Couldn't fetch CardStack count result from Core Data")
-        }
-        return numCards
-    }
- 
-    func howManyActiveKnownCards() -> Int
-    {
-        var numCards : Int = 0
-        let quaestioSecundus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
-        quaestioSecundus.predicate = NSPredicate(format: "(isActive == YES) AND (isKnown == YES)")
-        quaestioSecundus.resultType = NSFetchRequestResultType.countResultType
-        do {
-            numCards = try manObjContext.count(for: quaestioSecundus)
-            if loq == true {print("There are \(numCards) active, known cards.")}
-        }
-        catch
-        {
-            fatalError("Couldn't fetch CardStack count result from Core Data")
-        }
-        return numCards
     }
    
     func addNewObj(card : CardObject)
@@ -390,26 +283,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
             fatalError("Couldn't fetch CardStack object from Core Data")
         }
     }
- 
-    func updateAllCardsAsUnknown()
-    {
-        let quaestioNonus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
-        do
-        {
-            let queryResult = try manObjContext.fetch(quaestioNonus)
-            for toUpdate in queryResult
-            {
-                toUpdate.isKnown = false
-            }
-            saveContext()
-        }
-        catch
-        {
-            fatalError("Couldn't fetch CardStack count result from Core Data")
-        }
-    }
- 
- 
+
     func numberOfSectionsInTblVw() -> Int
     {
         return fetchedItems!.sections!.count
@@ -600,92 +474,6 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         return returnedCard
     }
  
-    func cardObjFromCardMO(cardMO : CardStackManagedObject) -> CardObject
-    {
-        let returnedCard = CardObject()
-        returnedCard.uniqueID = cardMO.uniqueID!
-        returnedCard.cardInfo.isActive = cardMO.isActive
-        returnedCard.cardInfo.isKnown = cardMO.isKnown
-        returnedCard.cardInfo.studyToday = cardMO.studyToday
-        returnedCard.timeCreated = cardMO.timeCreated!
-        returnedCard.timeUpdated = cardMO.timeUpdated!
-        returnedCard.cardInfo.faceOne = getStringFromMOSet(setGlob: cardMO.faceOne as! Set<NSManagedObject>)
-        returnedCard.cardInfo.faceTwo = getStringFromMOSet(setGlob: cardMO.faceTwo as! Set<NSManagedObject>)
-        returnedCard.cardInfo.tags = getStringFromMOSet(setGlob: cardMO.cardToTags as! Set<NSManagedObject>)
-        returnedCard.cardInfo.faceOneAsSet = getSetFromMOSet(setGlob: cardMO.faceOne as! Set<NSManagedObject>)
-        returnedCard.cardInfo.faceTwoAsSet = getSetFromMOSet(setGlob: cardMO.faceTwo as! Set<NSManagedObject>)
-        returnedCard.cardInfo.diffRating = cardMO.cardToStats?.difficultyRating
-        returnedCard.cardInfo.idealInterval = cardMO.cardToStats?.idealInterval
-        returnedCard.cardInfo.numForgot = Int((cardMO.cardToStats?.numberTimesForgotten)!)
-        returnedCard.cardInfo.numIncorr = Int((cardMO.cardToStats?.numberTimesIncorrect)!)
-        returnedCard.cardInfo.numCorr = Int((cardMO.cardToStats?.numberTimesCorrect)!)
-        returnedCard.cardInfo.lastAnswerCorrect = cardMO.cardToStats?.lastAnsweredCorrect
-        
-        return returnedCard
-    }
-    
-    
-    func clearAllObjectsFromStore()
-    {
-        print("Deleting all the cards. Hope you know what you're doing!")
-        let quaestioDecimus_alpha = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
-        do {
-            
-            let queryResult = try manObjContext.fetch(quaestioDecimus_alpha)
-            for qr in queryResult
-            {
-                manObjContext.delete(qr)
-            }
-        }
-        catch
-        {
-            fatalError("Couldn't fetch CardStack info from Core Data")
-        }
-        
-        let quaestioDecimus_beta = NSFetchRequest<FaceManagedObject>(entityName: "Face")
-        do {
-            
-            let queryResult = try manObjContext.fetch(quaestioDecimus_beta)
-            for qr in queryResult
-            {
-                manObjContext.delete(qr)
-            }
-        }
-        catch
-        {
-            fatalError("Couldn't fetch Face info from Core Data")
-        }
-        
-        let quaestioDecimus_gamma = NSFetchRequest<TagManagedObject>(entityName: "Tag")
-        do {
-            
-            let queryResult = try manObjContext.fetch(quaestioDecimus_gamma)
-            for qr in queryResult
-            {
-                manObjContext.delete(qr)
-            }
-        }
-        catch
-        {
-            fatalError("Couldn't fetch Tag info from Core Data")
-        }
-        
-        let quaestioDecimus_delta = NSFetchRequest<CardStatsManagedObject>(entityName: "CardStats")
-        do {
-            
-            let queryResult = try manObjContext.fetch(quaestioDecimus_delta)
-            for qr in queryResult
-            {
-                manObjContext.delete(qr)
-            }
-        }
-        catch
-        {
-            fatalError("Couldn't CardStats info from Core Data")
-        }
-        saveContext()
-        refreshFetchedTagsController()
-}
  
     // MARK: TODO - this function doesn't reuse existing face or tag items (or maintain their use stats) -
     func updateItem(indexPath : IndexPath, withValues : CardObject)
@@ -757,43 +545,6 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         refreshFetchedTagsController()
     }
  
-    // MARK: - Helper Functions -
-    
-    func getStringFromMOSet(setGlob: Set<NSManagedObject>) -> String {
-        var returnString : String = ""
-        for mo in setGlob
-        {
-            if returnString.characters.count > 0
-            {
-                returnString += ", "
-            }
-            if let fmo = mo as? FaceManagedObject
-            {
-                returnString += fmo.faceText!
-            }
-            if let fmo = mo as? TagManagedObject
-            {
-                returnString += fmo.tagText!
-            }
-        }
-        return returnString
-    }
-    
-    func getSetFromMOSet(setGlob: Set<NSManagedObject>) -> Set<String> {
-        var returnSet = Set<String>()
-        for mo in setGlob
-        {
-            if let fmo = mo as? FaceManagedObject
-            {
-                returnSet.insert(fmo.faceText!)
-            }
-            if let fmo = mo as? TagManagedObject
-            {
-                returnSet.insert(fmo.tagText!)
-            }
-        }
-        return returnSet
-    }
  
     // MARK: - Core Data stack
  

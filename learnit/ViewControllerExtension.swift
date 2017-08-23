@@ -46,10 +46,8 @@ extension UIViewController
             if let inpMode = uiObj!.textInputMode
             {
                 let inpLang = inpMode.primaryLanguage
-                if loq == true {print("\tI detect the primary language of this field is set to \(String(describing: inpLang)).")}
                 if inpLang!.prefix(2) == "el"
                 {
-                    if loq == true {print("\tThe user is employing the greek keyboard.")}
                     showGreekToolbar(status: true, onThis:uiObj! as! UITextField)
 //                  if let theTextField = uiObj as! SmartLanguageUITextField?
 //                  {
@@ -58,7 +56,6 @@ extension UIViewController
                 }
                 else
                 {
-                    if loq == true {print("\tThe user is employing a non-greek keyboard.")}
                     showGreekToolbar(status: false, onThis:uiObj! as! UITextField)
                 }
             }
@@ -126,13 +123,11 @@ extension UIViewController
         }
         if status == false
         {
-            if loq == true {print("Hiding the Greek diacriticals toolbar:")}
             toolbarTextField.inputAccessoryView = nil
             toolbarTextField.reloadInputViews()
         }
         else
         {
-            if loq == true {print("Showing the Greek diacriticals toolbar:")}
             if let windowWidth = view.window
             {
                 let barSize : CGRect = CGRect(x: 0.0, y: 0.0, width: CGFloat((windowWidth.frame.size.width)*0.5), height: 34.0)
