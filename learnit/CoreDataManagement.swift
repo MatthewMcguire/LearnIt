@@ -11,8 +11,122 @@ import CoreData
 
 class CoreDataManagement: NSObject {
 
+    var context : NSManagedObjectContext
     
-    func newCard(card : CardObject, context : NSManagedObjectContext)
+    init(manObjContext: NSManagedObjectContext) {
+        self.context = manObjContext
+    }
+    
+    fileprivate func getFaceObj(aFace: String, query : NSFetchRequest<FaceManagedObject>, aSetOfFaces: inout Set<FaceManagedObject>) throws {
+        var trimmedFace = aFace.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+        trimmedFace = trimmedFace.replacingOccurrences(of: "##", with: ",")
+        query.predicate = NSPredicate(format: "faceText like[cd] %@", trimmedFace)
+        
+        let faceQueryResult = try context.fetch(query)
+        if faceQueryResult.count == 0 {
+            let newFaceObject = NSEntityDescription.insertNewObject(forEntityName: "Face", into: context) as! FaceManagedObject
+            newFaceObject.faceText = trimmedFace
+            newFaceObject.enabled = true
+            newFaceObject.timesUsed = 1
+            aSetOfFaces.insert(newFaceObject)
+        }
+        else {
+            let toUpdate : FaceManagedObject = faceQueryResult.first!
+            var scratchValue = toUpdate.timesUsed
+            scratchValue += 1
+            toUpdate.timesUsed = scratchValue
+            aSetOfFaces.insert(toUpdate)
+            print ("Face: \(String(describing: toUpdate.faceText)) is used \(toUpdate.timesUsed) times")
+        }
+    }
+    
+    fileprivate func getCommonCards(faceObjects: Set<FaceManagedObject>, newCard: CardStackManagedObject) -> Set<CardStackManagedObject> {
+        var commonCards = Set<CardStackManagedObject>()
+        for fo in faceObjects {
+            if let assocCardsArray = fo.toCardsSideOne?.allObjects {
+                let assocCardsSet = Set<CardStackManagedObject>(assocCardsArray as! [CardStackManagedObject])
+                if assocCardsSet.count > 0 {
+                    if commonCards.isEmpty {
+                        commonCards = commonCards.union(assocCardsSet)
+                    }
+                    else {
+                        commonCards = commonCards.intersection(assocCardsSet)
+                    }
+                }
+            }
+            if let assocCardsArray = fo.toCardsSideTwo?.allObjects {
+                let assocCardsSet = Set<CardStackManagedObject>(assocCardsArray as! [CardStackManagedObject])
+                if assocCardsSet.count > 0 {
+                    if commonCards.isEmpty {
+                        commonCards = commonCards.union(assocCardsSet)
+                    }
+                    else {
+                        commonCards = commonCards.intersection(assocCardsSet)
+                    }
+                }
+            }
+        }
+        
+        // now we have a set of cardstack Objects with identical face one and face two objects
+        // first, throw out the newly-added object if its in the set.
+        commonCards.remove(newCard)
+        if commonCards.count > 1
+        {
+            fatalError("We have a problem. There are two existing cards with the same face one and face two")
+        }
+        return commonCards
+    }
+    
+    fileprivate func useExistingCard(_ cardsInCommon: Set<CardStackManagedObject>, _ aSet: inout Set<String>, _ card: CardObject) {
+        if let oldCard = cardsInCommon.first {
+            // create the set of given tags for the newly-added card
+            aSet.removeAll()
+            aSet = Set(card.tags.components(separatedBy: ","))
+            
+            // prepare to look for existing tag objects
+            let quaestioQuartus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
+            
+            do {
+                // begin with the set of existing tag objects for the old card
+                var aSetOfTags = Set<TagManagedObject>(oldCard.cardToTags as! Set)
+                
+                // for each tag in the set of strings, look for any TagMO and insert it into the set
+                // or, if it doesn't already exist, make a new one and insert it into the set as well
+                for aTag in aSet {
+                    var trimmedTag = aTag.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+                    trimmedTag = trimmedTag.replacingOccurrences(of: "##", with: ",")
+                    quaestioQuartus.predicate = NSPredicate(format: "tagText like[cd] %@", trimmedTag)
+                    
+                    let tagQueryResult = try context.fetch(quaestioQuartus)
+                    if tagQueryResult.count == 0 {
+                        let newTagObject = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: context) as! TagManagedObject
+                        newTagObject.tagText = trimmedTag
+                        newTagObject.enabled = true
+                        newTagObject.timesUsed = 1
+                        aSetOfTags.insert(newTagObject)
+                    }
+                    else {
+                        let toUpdate : TagManagedObject = tagQueryResult.first!
+                        if !aSetOfTags.contains(toUpdate) {
+                            var scratchValue = toUpdate.timesUsed
+                            scratchValue += 1
+                            toUpdate.timesUsed = scratchValue
+                            aSetOfTags.insert(toUpdate)
+                        }
+                        
+                        print ("Tag: \(String(describing: toUpdate.tagText)) is used \(toUpdate.timesUsed) times")
+                    }
+                }
+                oldCard.cardToTags = aSetOfTags as NSSet
+                
+            }
+            catch {
+                fatalError("Couldn't fetch Tag objects from Core Data")
+            }
+        }
+    }
+    
+    func newCard(card : CardObject)
     {
         let newCard = NSEntityDescription.insertNewObject(forEntityName: "CardStack", into: context) as! CardStackManagedObject
         
@@ -23,76 +137,28 @@ class CoreDataManagement: NSObject {
         // create a set of FacesMO objects
         // prepare to look for existing FaceMO objects
         let quaestioQuartusDecius = NSFetchRequest<FaceManagedObject>(entityName: "Face")
-        let quaestioQuintusDecius = NSFetchRequest<FaceManagedObject>(entityName: "Face")
         
         // for each tag in the set of strings, look for a corresponding TagMO and link it, or make a new one if not
         do {
             var aSetOfFaces = Set<FaceManagedObject>()
-            for aFace in aSet
-            {
-                var trimmedFace = aFace.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-                trimmedFace = trimmedFace.replacingOccurrences(of: "##", with: ",")
-                quaestioQuartusDecius.predicate = NSPredicate(format: "faceText like[cd] %@", trimmedFace)
-                
-                let faceQueryResult = try context.fetch(quaestioQuartusDecius)
-                if faceQueryResult.count == 0
-                {
-                    let newFaceObject = NSEntityDescription.insertNewObject(forEntityName: "Face", into: context) as! FaceManagedObject
-                    newFaceObject.faceText = trimmedFace
-                    newFaceObject.enabled = true
-                    newFaceObject.timesUsed = 1
-                    aSetOfFaces.insert(newFaceObject)
-                }
-                else
-                {
-                    let toUpdate : FaceManagedObject = faceQueryResult.first!
-                    var scratchValue = toUpdate.timesUsed
-                    scratchValue += 1
-                    toUpdate.timesUsed = scratchValue
-                    aSetOfFaces.insert(toUpdate)
-                    print ("Face: \(String(describing: toUpdate.faceText)) is used \(toUpdate.timesUsed) times")
-                }
+            for aFace in aSet {
+                try getFaceObj(aFace: aFace, query: quaestioQuartusDecius, aSetOfFaces: &aSetOfFaces)
             }
             // add the set of FaceMO Managed Objects to the card
             newCard.faceOne = aSetOfFaces as NSSet
             
-            
             // Do the same thing for Face Two
-            
             aSet.removeAll()
             aSet = Set(card.faceTwo.components(separatedBy: ","))
             aSetOfFaces.removeAll()
-            for aFace in aSet
-            {
-                var trimmedFace = aFace.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-                trimmedFace = trimmedFace.replacingOccurrences(of: "##", with: ",")
-                quaestioQuintusDecius.predicate = NSPredicate(format: "faceText like[cd] %@", trimmedFace)
-                
-                let faceQueryResult = try context.fetch(quaestioQuintusDecius)
-                if faceQueryResult.count == 0
-                {
-                    let newFaceObject = NSEntityDescription.insertNewObject(forEntityName: "Face", into: context) as! FaceManagedObject
-                    newFaceObject.faceText = trimmedFace
-                    newFaceObject.enabled = true
-                    newFaceObject.timesUsed = 1
-                    aSetOfFaces.insert(newFaceObject)
-                }
-                else
-                {
-                    let toUpdate : FaceManagedObject = faceQueryResult.first!
-                    var scratchValue = toUpdate.timesUsed
-                    scratchValue += 1
-                    toUpdate.timesUsed = scratchValue
-                    aSetOfFaces.insert(toUpdate)
-                    print ("Face: \(String(describing: toUpdate.faceText)) is used \(toUpdate.timesUsed) times")
-                }
+            for aFace in aSet {
+                try getFaceObj(aFace: aFace, query: quaestioQuartusDecius, aSetOfFaces: &aSetOfFaces)
             }
             // add the set of FaceMO Managed Objects to the card
             newCard.faceTwo = aSetOfFaces as NSSet
             
         }
-        catch
-        {
+        catch {
             fatalError("Couldn't fetch Faces objects from Core Data")
         }
         
@@ -112,106 +178,12 @@ class CoreDataManagement: NSObject {
         // create a set to hold the intersection of all associated Cardstack objects
         // then fill it by looking at the toCardsSideOne and toCardsSideTo sets associated
         // with these
-        var cardsInCommon = Set<CardStackManagedObject>()
-        for fo in faceObjects
-        {
-            if let assocCardsArray = fo.toCardsSideOne?.allObjects
-            {
-                let assocCardsSet = Set<CardStackManagedObject>(assocCardsArray as! [CardStackManagedObject])
-                if assocCardsSet.count > 0
-                {
-                    if cardsInCommon.isEmpty
-                    {
-                        cardsInCommon = cardsInCommon.union(assocCardsSet)
-                    }
-                    else
-                    {
-                        cardsInCommon = cardsInCommon.intersection(assocCardsSet)
-                    }
-                }
-            }
-            if let assocCardsArray = fo.toCardsSideTwo?.allObjects
-            {
-                let assocCardsSet = Set<CardStackManagedObject>(assocCardsArray as! [CardStackManagedObject])
-                if assocCardsSet.count > 0
-                {
-                    if cardsInCommon.isEmpty
-                    {
-                        cardsInCommon = cardsInCommon.union(assocCardsSet)
-                    }
-                    else
-                    {
-                        cardsInCommon = cardsInCommon.intersection(assocCardsSet)
-                    }
-                }
-            }
-        }
-        
-        // now we have a set of cardstack Objects with identical face one and face two objects
-        // first, throw out the newly-added object if its in the set.
-        cardsInCommon.remove(newCard)
-        if cardsInCommon.count > 1
-        {
-            fatalError("We have a problem. There are two existing cards with the same face one and face two")
-        }
+        let cardsInCommon = getCommonCards(faceObjects : faceObjects, newCard : newCard)
         
         // if there is a card remaining in the set, use it instead of creating a new one
-        if cardsInCommon.count > 0
-        {
+        if cardsInCommon.count > 0 {
             context.delete(newCard)
-            if let oldCard = cardsInCommon.first
-            {
-                // create the set of given tags for the newly-added card
-                aSet.removeAll()
-                aSet = Set(card.tags.components(separatedBy: ","))
-                
-                // prepare to look for existing tag objects
-                let quaestioQuartus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
-                
-                do
-                {
-                    // begin with the set of existing tag objects for the old card
-                    var aSetOfTags = Set<TagManagedObject>(oldCard.cardToTags as! Set)
-                    
-                    // for each tag in the set of strings, look for any TagMO and insert it into the set
-                    // or, if it doesn't already exist, make a new one and insert it into the set as well
-                    for aTag in aSet
-                    {
-                        var trimmedTag = aTag.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-                        trimmedTag = trimmedTag.replacingOccurrences(of: "##", with: ",")
-                        quaestioQuartus.predicate = NSPredicate(format: "tagText like[cd] %@", trimmedTag)
-                        
-                        let tagQueryResult = try context.fetch(quaestioQuartus)
-                        if tagQueryResult.count == 0
-                        {
-                            let newTagObject = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: context) as! TagManagedObject
-                            newTagObject.tagText = trimmedTag
-                            newTagObject.enabled = true
-                            newTagObject.timesUsed = 1
-                            aSetOfTags.insert(newTagObject)
-                        }
-                        else
-                        {
-                            let toUpdate : TagManagedObject = tagQueryResult.first!
-                            if !aSetOfTags.contains(toUpdate)
-                            {
-                                var scratchValue = toUpdate.timesUsed
-                                scratchValue += 1
-                                toUpdate.timesUsed = scratchValue
-                                aSetOfTags.insert(toUpdate)
-                            }
-                            
-                            print ("Tag: \(String(describing: toUpdate.tagText)) is used \(toUpdate.timesUsed) times")
-                        }
-                    }
-                    oldCard.cardToTags = aSetOfTags as NSSet
-                    
-                }
-                catch
-                {
-                    fatalError("Couldn't fetch Tag objects from Core Data")
-                }
-            }
+            useExistingCard(cardsInCommon, &aSet, card)
             negozioGrande!.saveContext()
             negozioGrande!.refreshFetchedTagsController()
             negozioGrande!.refreshFetchedResultsController()
@@ -227,27 +199,23 @@ class CoreDataManagement: NSObject {
         // prepare to look for existing tag objects
         let quaestioQuartus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
         
-        do
-        {
+        do {
             var aSetOfTags = Set<TagManagedObject>()
             // for each tag in the set of strings, look for a corresponding TagMO and link it, or make a new one if not
-            for aTag in aSet
-            {
+            for aTag in aSet {
                 var trimmedTag = aTag.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
                 trimmedTag = trimmedTag.replacingOccurrences(of: "##", with: ",")
                 quaestioQuartus.predicate = NSPredicate(format: "tagText like[cd] %@", trimmedTag)
                 
                 let tagQueryResult = try context.fetch(quaestioQuartus)
-                if tagQueryResult.count == 0
-                {
+                if tagQueryResult.count == 0 {
                     let newTagObject = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: context) as! TagManagedObject
                     newTagObject.tagText = trimmedTag
                     newTagObject.enabled = true
                     newTagObject.timesUsed = 1
                     aSetOfTags.insert(newTagObject)
                 }
-                else
-                {
+                else {
                     let toUpdate : TagManagedObject = tagQueryResult.first!
                     var scratchValue = toUpdate.timesUsed
                     scratchValue += 1
@@ -259,8 +227,7 @@ class CoreDataManagement: NSObject {
             newCard.cardToTags = aSetOfTags as NSSet
             
         }
-        catch
-        {
+        catch {
             fatalError("Couldn't fetch Tag objects from Core Data")
         }
         

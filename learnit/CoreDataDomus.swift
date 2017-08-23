@@ -264,8 +264,8 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
    
     func addNewObj(card : CardObject)
     {
-        let helper = CoreDataManagement()
-        helper.newCard(card: card, context: manObjContext)
+        let helper = CoreDataManagement(manObjContext: manObjContext)
+        helper.newCard(card: card)
 
         saveContext()
         refreshFetchedTagsController()
