@@ -33,6 +33,7 @@
 		B9A4F9431F27F65E0045185B /* screen_03.PNG in Resources */ = {isa = PBXBuildFile; fileRef = B9A4F93C1F27F65E0045185B /* screen_03.PNG */; };
 		B9A4F9441F27F65E0045185B /* screen_02.PNG in Resources */ = {isa = PBXBuildFile; fileRef = B9A4F93D1F27F65E0045185B /* screen_02.PNG */; };
 		B9AFF1AB1F0FEC4E0013A1AD /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */; };
+		B9C1A2811F4DEB840039C7CF /* CoreDataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C1A2801F4DEB840039C7CF /* CoreDataManagement.swift */; };
 		B9C2A6161F10102B00E5E917 /* sampleGreek.xml in Resources */ = {isa = PBXBuildFile; fileRef = B9C2A6151F10102B00E5E917 /* sampleGreek.xml */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		B9A4F93C1F27F65E0045185B /* screen_03.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_03.PNG; sourceTree = "<group>"; };
 		B9A4F93D1F27F65E0045185B /* screen_02.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screen_02.PNG; sourceTree = "<group>"; };
 		B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
+		B9C1A2801F4DEB840039C7CF /* CoreDataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagement.swift; sourceTree = "<group>"; };
 		B9C2A6151F10102B00E5E917 /* sampleGreek.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sampleGreek.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +114,7 @@
 				B92A66161F1426C900DB3DAA /* BrowseTableViewController.swift */,
 				B97AC31C1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift */,
 				B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */,
+				B9C1A2801F4DEB840039C7CF /* CoreDataManagement.swift */,
 				B997F55C1F240F6000053F29 /* SmartLanguageUITextField.swift */,
 				B98419671F0192810027B2B9 /* Main.storyboard */,
 				B984196D1F0192810027B2B9 /* Assets.xcassets */,
@@ -227,6 +230,7 @@
 				B9217CC41F0E9DE1000F1798 /* AddCardViewController.swift in Sources */,
 				B92A66171F1426C900DB3DAA /* BrowseTableViewController.swift in Sources */,
 				B997F55D1F240F6000053F29 /* SmartLanguageUITextField.swift in Sources */,
+				B9C1A2811F4DEB840039C7CF /* CoreDataManagement.swift in Sources */,
 				B97AC31D1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift in Sources */,
 				B92A66191F14287A00DB3DAA /* CardDetailViewController.swift in Sources */,
 				B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */,
