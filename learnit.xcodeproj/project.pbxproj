@@ -36,6 +36,7 @@
 		B9C1A2811F4DEB840039C7CF /* CoreDataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C1A2801F4DEB840039C7CF /* CoreDataManagement.swift */; };
 		B9C1A2831F4E183E0039C7CF /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C1A2821F4E183E0039C7CF /* CoreDataHelper.swift */; };
 		B9C1A2851F4E19940039C7CF /* CoreDataGlobalAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C1A2841F4E19940039C7CF /* CoreDataGlobalAction.swift */; };
+		B9C1A2871F4E230D0039C7CF /* LanguageHelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C1A2861F4E230D0039C7CF /* LanguageHelperFunctions.swift */; };
 		B9C2A6161F10102B00E5E917 /* sampleGreek.xml in Resources */ = {isa = PBXBuildFile; fileRef = B9C2A6151F10102B00E5E917 /* sampleGreek.xml */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 		B9C1A2801F4DEB840039C7CF /* CoreDataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagement.swift; sourceTree = "<group>"; };
 		B9C1A2821F4E183E0039C7CF /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
 		B9C1A2841F4E19940039C7CF /* CoreDataGlobalAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataGlobalAction.swift; sourceTree = "<group>"; };
+		B9C1A2861F4E230D0039C7CF /* LanguageHelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageHelperFunctions.swift; sourceTree = "<group>"; };
 		B9C2A6151F10102B00E5E917 /* sampleGreek.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = sampleGreek.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 				B9C2A6151F10102B00E5E917 /* sampleGreek.xml */,
 				B98419631F0192810027B2B9 /* AppDelegate.swift */,
 				B98419651F0192810027B2B9 /* ViewController.swift */,
+				B9C1A2861F4E230D0039C7CF /* LanguageHelperFunctions.swift */,
 				B966057A1F4C7D5E00300A36 /* ShareHint.swift */,
 				B96605781F43567600300A36 /* ViewControllerExtension.swift */,
 				B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */,
@@ -244,6 +247,7 @@
 				B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */,
 				B96605791F43567600300A36 /* ViewControllerExtension.swift in Sources */,
 				B966057B1F4C7D5E00300A36 /* ShareHint.swift in Sources */,
+				B9C1A2871F4E230D0039C7CF /* LanguageHelperFunctions.swift in Sources */,
 				B9AFF1AB1F0FEC4E0013A1AD /* ConfigurationViewController.swift in Sources */,
 				B984196C1F0192810027B2B9 /* learnit.xcdatamodeld in Sources */,
 				B98419641F0192810027B2B9 /* AppDelegate.swift in Sources */,
