@@ -15,7 +15,7 @@ func shareHint(hintAnswer: String, hintLevel: inout Int, answerValue: inout Floa
     
     let hintLength:Int = hintAnswer.characters.count
     var hintText = ""
-    let minHintLength = [0,3,5,7,11,14]
+    let minHintLength = [0,3,5,6,9,13]
     
     // If for some reason the hint length is not in the expected range, return nothing
     guard ((hintLevel >= 0) && (hintLevel < 6))
@@ -38,14 +38,15 @@ func shareHint(hintAnswer: String, hintLevel: inout Int, answerValue: inout Floa
     return hintText
 }
 
-func underscoreForLetters(hintAnswer: String) -> String
+fileprivate func underscoreForLetters(hintAnswer: String) -> String
 {
     var returnAnswer = hintAnswer.replacingOccurrences(of: "\\w", with: "_", options: .regularExpression)
     returnAnswer = returnAnswer.replacingOccurrences(of: "\\W", with: " ", options: .regularExpression)
     return returnAnswer
 }
 
-func revealLetters(answer : String, level : Int) -> String
+
+fileprivate func revealLetters(answer : String, level : Int) -> String
 {
     var hintShown = underscoreForLetters(hintAnswer: answer)
     if level == 0 { return hintShown }
@@ -55,19 +56,24 @@ func revealLetters(answer : String, level : Int) -> String
     hintShown.insert(answer[answer.startIndex], at: hintShown.startIndex)
     hintShown.insert(answer[answer.index(answer.endIndex, offsetBy: -1)], at: hintShown.endIndex)
     if level == 1 {return hintShown }
-    let reveal = [2 : [3], 3 : [3,4], 4 : [3,2], 5 : [3,2,5,7,17]]
+
     for i in 1..<(answer.characters.count - 1)
     {
-        let stri : String.Index = answer.index(answer.startIndex, offsetBy: i)
-        let factors = reveal[level]!
-        for f in factors
-        {
-            if (i % f) == 0
-            {
-                hintShown.remove(at: stri)
-                hintShown.insert(answer[stri], at: stri)
-            }
-        }
+        showFactored(answer, i, level, &hintShown)
     }
     return hintShown
-} 
+}
+
+fileprivate func showFactored(_ answer: String, _ i: Int, _ level: Int, _ hintShown: inout String) {
+    let reveal = [2 : [3], 3 : [3,2], 4 : [3,2,5], 5 : [3,2,5,7,17]]
+    let stri : String.Index = answer.index(answer.startIndex, offsetBy: i)
+    let factors = reveal[level]!
+    for f in factors
+    {
+        if (i % f) == 0
+        {
+            hintShown.remove(at: stri)
+            hintShown.insert(answer[stri], at: stri)
+        }
+    }
+}
