@@ -125,50 +125,33 @@ extension UIViewController
         {
             toolbarTextField.inputAccessoryView = nil
             toolbarTextField.reloadInputViews()
+            return
         }
-        else
+        if let windowWidth = view.window
         {
-            if let windowWidth = view.window
-            {
-                // Make a nice wee toolbar out of these buttons
-                let barSize : CGRect = CGRect(x: 0.0, y: 0.0, width: CGFloat((windowWidth.frame.size.width)*0.5), height: 34.0)
-                let greekInputTool = getToolbar(size: barSize)
-                let greekDiacriticsBox = UIView(frame: barSize)
-                greekDiacriticsBox.addSubview(greekInputTool)
-                greekInputTool.autoresizingMask = .flexibleWidth
-                toolbarTextField.inputAccessoryView = greekDiacriticsBox
-                var r = greekInputTool.frame
-                r.origin.y += 6
-                greekInputTool.frame = r
-            }
+            // Make a nice wee toolbar out of these buttons
+            let barSize : CGRect = CGRect(x: 0.0, y: 0.0, width: CGFloat((windowWidth.frame.size.width)*0.5), height: 34.0)
+            let greekInputTool = getToolbar(size: barSize)
+            let greekDiacriticsBox = UIView(frame: barSize)
+            greekDiacriticsBox.addSubview(greekInputTool)
+            greekInputTool.autoresizingMask = .flexibleWidth
+            toolbarTextField.inputAccessoryView = greekDiacriticsBox
+            var r = greekInputTool.frame
+            r.origin.y += 6
+            greekInputTool.frame = r
         }
-        if toolbarTextField.isFirstResponder == true
-        {
-            toolbarTextField.reloadInputViews()
-        }
-//        else
-//        {
-//            toolbarTextField.inputAccessoryView = nil
-//        }
+
+        toolbarTextField.reloadInputViews()
+
     }
     
     func getToolbar(size: CGRect) -> UIToolbar
     {
-
         let greekInputTool = UIToolbar(frame: size)
-        if UI_USER_INTERFACE_IDIOM() == .pad
-        {
-            greekInputTool.tintColor = UIColor(red: 0.6, green: 0.6, blue: 0.64, alpha: 1.0)
-        }
-        else
-        {
-            greekInputTool.tintColor = UIColor.darkText
-        }
+        greekInputTool.tintColor = UIColor.darkText
         greekInputTool.isTranslucent = true
         greekInputTool.barTintColor = UIColor.groupTableViewBackground
-        let diacritSize = CGFloat(24.0)
-        let diacritFont = "Avenir-Black"
-        let uiFontName = UIFont(name: diacritFont, size: diacritSize)
+        let uiFontName = UIFont(name: "Avenir-Black", size: CGFloat(24.0))
         let diacritFontAttribs =  [NSFontAttributeName:uiFontName]
         var barButtonArray = Array<UIBarButtonItem>()
         let diacritArray = [greekDiacrits.acute,greekDiacrits.acuteSmooth, greekDiacrits.acuteRough,
@@ -177,19 +160,13 @@ extension UIViewController
                             greekDiacrits.Smooth, greekDiacrits.Rough]
         for diacrit in diacritArray
         {
-            barButtonArray.append(UIBarButtonItem(title: diacrit.rawValue, style: .plain, target: self, action:#selector(barButtonAddText(sender:))))
+            let button = UIBarButtonItem(title: diacrit.rawValue, style: .plain, target: self, action:#selector(barButtonAddText(sender:)))
+            button.setTitleTextAttributes((diacritFontAttribs as Any as! [String : Any]), for: .normal)
+            barButtonArray.append(button)
             barButtonArray.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
         }
         barButtonArray.removeLast() // we have appended one too many flexible spaces!
-        
-        // give each diacritical button with a symbol a more visible font style
-        for barButt in barButtonArray
-        {
-            if barButt.action != nil
-            {
-                barButt.setTitleTextAttributes((diacritFontAttribs as Any as! [String : Any]), for: .normal)
-            }
-        }
+
         greekInputTool.items = barButtonArray
         return greekInputTool
     }

@@ -39,6 +39,8 @@ class Array2D {
 
 //  common metric for calculating the number of edits (insert/delete/replace) to
 //  go from string a to string b
+
+
 func levenshteinDistanceFrom(source aStr:String,target bStr:String) -> Int {
     let a = Array(aStr.utf16)
     let b = Array(bStr.utf16)
@@ -52,24 +54,29 @@ func levenshteinDistanceFrom(source aStr:String,target bStr:String) -> Int {
     for j in 1...b.count {
         dist[0, j] = j
     }
-    func minLD(numbers: Int...) -> Int {
-        return numbers.reduce(numbers[0], {$0 < $1 ? $0 : $1})
-    }
+
     for i in 1...a.count {
-        for j in 1...b.count {
-            if a[i-1] == b[j-1] {
-                dist[i, j] = dist[i-1, j-1]  // noop
-            } else {
-                dist[i, j] = minLD(
-                    numbers: dist[i-1, j] + 1,  // deletion
-                    dist[i, j-1] + 1,  // insertion
-                    dist[i-1, j-1] + 1  // substitution
-                )
-            }
+        switcheroo(b: b, a: a, i: i, dist: dist)
+    }
+    return dist[a.count, b.count]
+}
+
+fileprivate func switcheroo(b: [String.UTF16View.Element], a: [String.UTF16View.Element], i: Int, dist: Array2D) {
+    for j in 1...b.count {
+        if a[i-1] == b[j-1] {
+            dist[i, j] = dist[i-1, j-1]  // noop
+        } else {
+            dist[i, j] = minLD(
+                numbers: dist[i-1, j] + 1,  // deletion
+                dist[i, j-1] + 1,  // insertion
+                dist[i-1, j-1] + 1  // substitution
+            )
         }
     }
-    
-    return dist[a.count, b.count]
+}
+
+func minLD(numbers: Int...) -> Int {
+    return numbers.reduce(numbers[0], {$0 < $1 ? $0 : $1})
 }
 
 
