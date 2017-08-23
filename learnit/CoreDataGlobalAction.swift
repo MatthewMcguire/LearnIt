@@ -11,54 +11,24 @@ import CoreData
 
 func clearAllObjectsFromStore(context: NSManagedObjectContext)
 {
-    print("Deleting all the cards. Hope you know what you're doing!")
-    let quaestioDecimus_alpha = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
-    do {
-        
-        let queryResult = try context.fetch(quaestioDecimus_alpha)
-        for qr in queryResult  {
-            context.delete(qr)
+    let quaestio = [NSFetchRequest<CardStackManagedObject>(entityName: "CardStack"),
+                    NSFetchRequest<FaceManagedObject>(entityName: "Face"),
+                     NSFetchRequest<TagManagedObject>(entityName: "Tag"),
+                     NSFetchRequest<CardStatsManagedObject>(entityName: "CardStats")]
+    for q in quaestio
+    {
+        do {
+            
+            let queryResult = try context.fetch(q as! NSFetchRequest<NSFetchRequestResult>)
+            for qr in queryResult  {
+                context.delete(qr as! NSManagedObject)
+            }
+        }
+        catch  {
+            fatalError("Couldn't fetch CardStack info from Core Data")
         }
     }
-    catch  {
-        fatalError("Couldn't fetch CardStack info from Core Data")
-    }
-    
-    let quaestioDecimus_beta = NSFetchRequest<FaceManagedObject>(entityName: "Face")
-    do {
-        
-        let queryResult = try context.fetch(quaestioDecimus_beta)
-        for qr in queryResult  {
-            context.delete(qr)
-        }
-    }
-    catch  {
-        fatalError("Couldn't fetch Face info from Core Data")
-    }
-    
-    let quaestioDecimus_gamma = NSFetchRequest<TagManagedObject>(entityName: "Tag")
-    do {
-        
-        let queryResult = try context.fetch(quaestioDecimus_gamma)
-        for qr in queryResult  {
-            context.delete(qr)
-        }
-    }
-    catch  {
-        fatalError("Couldn't fetch Tag info from Core Data")
-    }
-    
-    let quaestioDecimus_delta = NSFetchRequest<CardStatsManagedObject>(entityName: "CardStats")
-    do {
-        
-        let queryResult = try context.fetch(quaestioDecimus_delta)
-        for qr in queryResult {
-            context.delete(qr)
-        }
-    }
-    catch {
-        fatalError("Couldn't CardStats info from Core Data")
-    }
+
     negozioGrande!.saveContext()
     negozioGrande!.refreshFetchedTagsController()
 }
@@ -74,7 +44,7 @@ func updateAllCardsAsUnknown(context: NSManagedObjectContext)
         negozioGrande!.saveContext()
     }
     catch  {
-        fatalError("Couldn't fetch CardStack count result from Core Data")
+        fatalError("Couldn't fetch from Core Data")
     }
 }
 
