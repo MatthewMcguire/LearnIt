@@ -6,15 +6,6 @@
 //  Copyright © 2017 Matthew McGuire. All rights reserved.
 //
 
-enum circumstance : Int
-{
-    case StageZero = 0
-    case StageOne = 1
-    case StageTwo = 2
-    case StageThree = 3
-    case StageFour = 4
-}
-
 
 func shareHint(hintAnswer: String, hintLevel: inout Int, answerValue: inout Float) -> String
 {
@@ -24,18 +15,22 @@ func shareHint(hintAnswer: String, hintLevel: inout Int, answerValue: inout Floa
     
     let hintLength:Int = hintAnswer.characters.count
     var hintText = ""
-    let maxHintLength = [2,4,7,14,14]
+    let minHintLength = [0,3,5,7,11,14]
     
     // If for some reason the hint length is not in the expected range, return nothing
-    guard ((hintLevel >= 0) && (hintLevel <= 4))
+    guard ((hintLevel >= 0) && (hintLevel < 6))
         else { return hintText }
     
     // if the length of the answer is not long enough (according to maxHintLength array)
     // don't go to the next hint level
-    if hintLength < maxHintLength[hintLevel]
+    if hintLength < minHintLength[hintLevel]
         { return hintText }
 
-    hintText = underscoreForLetters(hintAnswer: hintAnswer)
+    
+    // generate the hint to be shared with the learner
+    hintText = revealLetters(answer: hintAnswer, level: hintLevel)
+    // broaden the spaces for clarity in the hints
+    hintText = hintText.replacingOccurrences(of: "\\W", with: "  ", options: .regularExpression)
     
     // go to the next hint level and reduce the value of a correct answer
     hintLevel += 1
@@ -46,194 +41,33 @@ func shareHint(hintAnswer: String, hintLevel: inout Int, answerValue: inout Floa
 func underscoreForLetters(hintAnswer: String) -> String
 {
     var returnAnswer = hintAnswer.replacingOccurrences(of: "\\w", with: "_", options: .regularExpression)
-    returnAnswer = returnAnswer.replacingOccurrences(of: "\\W", with: "  ", options: .regularExpression)
+    returnAnswer = returnAnswer.replacingOccurrences(of: "\\W", with: " ", options: .regularExpression)
     return returnAnswer
 }
-    /*
 
+func revealLetters(answer : String, level : Int) -> String
+{
+    var hintShown = underscoreForLetters(hintAnswer: answer)
+    if level == 0 { return hintShown }
     
-    
-    switch circumstance {
-    case "Stage One":
-        hintLevel = 1
-        for i in 0..<hintLength
+    // reveal the first and last letters of the answer
+    hintShown = String(hintShown.dropLast().dropFirst())
+    hintShown.insert(answer[answer.startIndex], at: hintShown.startIndex)
+    hintShown.insert(answer[answer.index(answer.endIndex, offsetBy: -1)], at: hintShown.endIndex)
+    if level == 1 {return hintShown }
+    let reveal = [2 : [3], 3 : [3,4], 4 : [3,2], 5 : [3,2,5,7,17]]
+    for i in 1..<(answer.characters.count - 1)
+    {
+        let stri : String.Index = answer.index(answer.startIndex, offsetBy: i)
+        let factors = reveal[level]!
+        for f in factors
         {
-            // show a space where there's a space in the answer, and an _ where there's a letter in the answer
-            let stri : String.Index = hintAnswer.index(hintAnswer.startIndex, offsetBy: i)
-            if hintAnswer[stri] == " "
+            if (i % f) == 0
             {
-                hintText += "  "
-            }
-            else
-            {
-                hintText += "_"
+                hintShown.remove(at: stri)
+                hintShown.insert(answer[stri], at: stri)
             }
         }
-        answerValue = answerValue * 0.75
-    case "Stage Two":
-        hintLevel = 2
-        // show the first letter of the answer
-        hintText += String(hintAnswer[hintAnswer.startIndex])
-        // show a space where there's a space in the answer, and an _ where there's a letter in the answer
-        for i in 1..<(hintLength - 1)
-        {
-            let stri : String.Index = hintAnswer.index(hintAnswer.startIndex, offsetBy: i)
-            if hintAnswer[stri] == " "
-            {
-                hintText += "  "
-            }
-            else
-            {
-                hintText += "_"
-            }
-        }
-        // show the last letter of the answer
-        hintText += String(hintAnswer[hintAnswer.index(hintAnswer.endIndex, offsetBy: -1)])
-        answerValue = answerValue * 0.75
-    case "Stage Three":
-        hintLevel = 3
-        // show the first letter of the answer
-        hintText += String(hintAnswer[hintAnswer.startIndex])
-        // show a space where there's a space in the answer, and an _ where there's a letter in the answer
-        for i in 1..<(hintLength - 1)
-        {
-            let stri : String.Index = hintAnswer.index(hintAnswer.startIndex, offsetBy: i)
-            // But reveal the actual letter for every third letter
-            if (i % 3) == 0
-            {
-                if hintAnswer[stri] == " "
-                {
-                    hintText += "  "
-                }
-                else
-                {
-                    hintText += String(hintAnswer[stri])
-                }
-            }
-            else
-            {
-                if hintAnswer[stri] == " "
-                {
-                    hintText += "  "
-                }
-                else
-                {
-                    hintText += "_"
-                }
-            }
-        }
-        // show the last letter of the answer
-        hintText += String(hintAnswer[hintAnswer.index(hintAnswer.endIndex, offsetBy: -1)])
-        answerValue = answerValue * 0.75
-    case "Stage Four":
-        hintLevel = 4
-        // show the first letter of the answer
-        hintText += String(hintAnswer[hintAnswer.startIndex])
-        // show a space where there's a space in the answer, and an _ where there's a letter in the answer
-        for i in 1..<(hintLength - 1)
-        {
-            let stri : String.Index = hintAnswer.index(hintAnswer.startIndex, offsetBy: i)
-            // But reveal the actual letter for every third or fourth letter
-            if ((i % 3) == 0) || ((i % 4) == 0)
-            {
-                if hintAnswer[stri] == " "
-                {
-                    hintText += "  "
-                }
-                else
-                {
-                    hintText += String(hintAnswer[stri])
-                }
-            }
-            else
-            {
-                if hintAnswer[stri] == " "
-                {
-                    hintText += "  "
-                }
-                else
-                {
-                    hintText += "_"
-                }
-            }
-        }
-        // show the last letter of the answer
-        hintText += String(hintAnswer[hintAnswer.index(hintAnswer.endIndex, offsetBy: -1)])
-        answerValue = answerValue * 0.75
-    case "Stage Five":
-        hintLevel = 5
-        // show the first letter of the answer
-        hintText += String(hintAnswer[hintAnswer.startIndex])
-        // show a space where there's a space in the answer, and an _ where there's a letter in the answer
-        for i in 1..<(hintLength - 1)
-        {
-            let stri : String.Index = hintAnswer.index(hintAnswer.startIndex, offsetBy: i)
-            // But reveal the actual letter for every other letter
-            if ((i % 3) == 0) || ((i % 2) == 0)
-            {
-                if hintAnswer[stri] == " "
-                {
-                    hintText += "  "
-                }
-                else
-                {
-                    hintText += String(hintAnswer[stri])
-                }
-            }
-            else
-            {
-                if hintAnswer[stri] == " "
-                {
-                    hintText += "  "
-                }
-                else
-                {
-                    hintText += "_"
-                }
-            }
-        }
-        // show the last letter of the answer
-        hintText += String(hintAnswer[hintAnswer.index(hintAnswer.endIndex, offsetBy: -1)])
-        answerValue = answerValue * 0.75
-    case "Stage Six":
-        hintLevel = 6
-        // show the first letter of the answer
-        hintText += String(hintAnswer[hintAnswer.startIndex])
-        // show a space where there's a space in the answer, and an _ where there's a letter in the answer
-        for i in 1..<(hintLength - 1)
-        {
-            let stri : String.Index = hintAnswer.index(hintAnswer.startIndex, offsetBy: i)
-            // But reveal the actual letter for every other letter
-            if ((i % 3) == 0) || ((i % 2) == 0) || ((i % 5) == 0)  || ((i % 7) == 0)  || ((i % 17) == 0)
-            {
-                if hintAnswer[stri] == " "
-                {
-                    hintText += "  "
-                }
-                else
-                {
-                    hintText += String(hintAnswer[stri])
-                }
-            }
-            else
-            {
-                if hintAnswer[stri] == " "
-                {
-                    hintText += "  "
-                }
-                else
-                {
-                    hintText += "_"
-                }
-            }
-        }
-        // show the last letter of the answer
-        hintText += String(hintAnswer[hintAnswer.index(hintAnswer.endIndex, offsetBy: -1)])
-        answerValue = answerValue * 0.75
-    default:
-        if loq == true {print("maximum hintage is shown!")}
     }
-        if loq == true {print("Hint level is now: \(hintLevel).")}
-    */
-
-
+    return hintShown
+} 
