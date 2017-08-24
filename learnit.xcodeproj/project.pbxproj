@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B901588C1F4F1D6400634485 /* ParseXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = B901588B1F4F1D6400634485 /* ParseXML.swift */; };
 		B9217CC41F0E9DE1000F1798 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */; };
 		B92A66171F1426C900DB3DAA /* BrowseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92A66161F1426C900DB3DAA /* BrowseTableViewController.swift */; };
 		B92A66191F14287A00DB3DAA /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92A66181F14287A00DB3DAA /* CardDetailViewController.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B901588B1F4F1D6400634485 /* ParseXML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseXML.swift; sourceTree = "<group>"; };
 		B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
 		B92A66161F1426C900DB3DAA /* BrowseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseTableViewController.swift; path = "/Users/gmcguire/Box Sync/objCWork/learnit/learnit/BrowseTableViewController.swift"; sourceTree = "<absolute>"; };
 		B92A66181F14287A00DB3DAA /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				B96605781F43567600300A36 /* ViewControllerExtension.swift */,
 				B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */,
 				B9AFF1AA1F0FEC4E0013A1AD /* ConfigurationViewController.swift */,
+				B901588B1F4F1D6400634485 /* ParseXML.swift */,
 				B92A66181F14287A00DB3DAA /* CardDetailViewController.swift */,
 				B92A66161F1426C900DB3DAA /* BrowseTableViewController.swift */,
 				B97AC31C1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift */,
@@ -249,6 +252,7 @@
 				B966057B1F4C7D5E00300A36 /* ShareHint.swift in Sources */,
 				B9C1A2871F4E230D0039C7CF /* LanguageHelperFunctions.swift in Sources */,
 				B9AFF1AB1F0FEC4E0013A1AD /* ConfigurationViewController.swift in Sources */,
+				B901588C1F4F1D6400634485 /* ParseXML.swift in Sources */,
 				B984196C1F0192810027B2B9 /* learnit.xcdatamodeld in Sources */,
 				B98419641F0192810027B2B9 /* AppDelegate.swift in Sources */,
 			);

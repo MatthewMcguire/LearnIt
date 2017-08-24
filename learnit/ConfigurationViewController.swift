@@ -8,10 +8,8 @@
 
 import UIKit
 
-class ConfigurationViewController: UIViewController, XMLParserDelegate {
+class ConfigurationViewController: UIViewController {
 
-    var aNewCard : CardObject?
-    var currentElement : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +27,13 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
     }
 
     @IBAction func importHomericGreekPress(_ sender: Any) {
-        addCardsViaXML(fileName: "sampleGreek")
+        let getXML = ParseXML()
+        getXML.addCardsViaXML(fileName: "sampleGreek")
     }
     
     @IBAction func importWelshPress(_ sender: Any) {
-        addCardsViaXML(fileName: "sampleWelsh")
+        let getXML = ParseXML()
+        getXML.addCardsViaXML(fileName: "sampleWelsh")
     }
     
     @IBAction func resetPointsPress(_ sender: Any) {
@@ -43,29 +43,14 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
         resetPointsButton.isEnabled = false
     }
     @IBAction func maxCardsEntered(_ sender: Any) {
-        if Int(maxCardsInHandField.text!)! > 0
-        {
-            negozioGrande!.currentLearner?.maxCardsInHand = Int32(maxCardsInHandField.text!)!
-        }
-        updateUserInfo(context: negozioGrande!.manObjContext)
-        hideKeyboard()
+        storeValsHideKeyboard()
     }
     @IBAction func maximumAnswerValueEntered(_ sender: Any) {
-        if Float (maxAnswerValueField.text!)! > 0.0
-        {
-            negozioGrande!.currentLearner?.maximumAnswerValue = Float(maxAnswerValueField.text!)!
-        }
-        updateUserInfo(context: negozioGrande!.manObjContext)
-        hideKeyboard()
+        storeValsHideKeyboard()
     }
 
     @IBAction func answerPauseEntered(_ sender: Any) {
-        if Float (answerPauseField.text!)! > 0.0
-        {
-            negozioGrande!.currentLearner?.correctAnswerShownPause = Float(answerPauseField.text!)!
-        }
-        updateUserInfo(context: negozioGrande!.manObjContext)
-        hideKeyboard()
+        storeValsHideKeyboard()
     }
     
     @IBAction func resetCardsPress(_ sender: Any) {
@@ -85,130 +70,13 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
     @IBOutlet weak var resetPointsButton: UIButton!
     @IBOutlet weak var resetCardsButton: UIButton!
     @IBOutlet weak var deleteCardsButton: UIButton!
-    
-    /*
-    // MARK: - Navigation
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    }
-    */
-    
-    // MARK: - XML Import -
-    func addCardsViaXML(fileName : String) -> Void
-    {
-        if let myResource = Bundle.main.url(forResource: fileName, withExtension: "xml")
-        {
-            if let simpleParser = XMLParser.init(contentsOf: myResource)
-            {
-                simpleParser.delegate = self
-                simpleParser.parse()
-            }
-        }
-    }
-    func parserDidStartDocument(_ parser: XMLParser) {
-        print("XML Parsing has begun.")
-    }
-    
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-        switch elementName {
-        case "card":
-            aNewCard = CardObject()
-        case "faceOne":
-            if let newCrd = aNewCard
-            {
-                newCrd.cardInfo.faceOne = ""
-                currentElement = ""
-            }
-        case "faceOneText":
-            if currentElement.characters.count > 0
-            {
-                currentElement += ", "
-            }
-        case "faceTwo":
-            if let newCrd = aNewCard
-            {
-                newCrd.cardInfo.faceTwo = ""
-                currentElement = ""
-            }
-        case "faceTwoText":
-            if currentElement.characters.count > 0
-            {
-                currentElement += ", "
-            }
-        case "tags":
-            if let newCrd = aNewCard
-            {
-                newCrd.cardInfo.tags = ""
-                currentElement = ""
-            }
-        case "tag":
-            if currentElement.characters.count > 0
-            {
-                currentElement += ", "
-            }
-        default:
-            print("Unknown XML tag. This is not anticipated or handled.")
-        }
-    }
-    
-    func parser(_ parser: XMLParser, foundCharacters string: String) {
-        let elimTrashChars = CharacterSet.whitespacesAndNewlines
-        let materialToAdd = string.trimmingCharacters(in: elimTrashChars).replacingOccurrences(of: "\"", with: "").replacingOccurrences(of: ",", with: "##")
-        currentElement += materialToAdd
-    }
-
-    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        switch elementName {
-        case "card":
-            if let newCrd = aNewCard
-            {
-                if newCrd.hasFacesAndTags()
-                {
-                    negozioGrande!.addNewObj(card: newCrd)
-                }
-            }
-        case "faceOne":
-            if let newCrd = aNewCard
-            {
-                newCrd.cardInfo.faceOne = currentElement
-            }
-        case "faceOneText":
-            print("\tClosing the 'faceOneText' tag.")
-        case "faceTwo":
-            if let newCrd = aNewCard
-            {
-                newCrd.cardInfo.faceTwo = currentElement
-            }
-        case "faceTwoText":
-            print("\tClosing the 'faceTwoText' tag.")
-        case "tags":
-            if let newCrd = aNewCard
-            {
-                newCrd.cardInfo.tags = currentElement
-            }
-        case "tag":
-            print("\tClosing the 'tag' tag.")
-            
-        default:
-            print("Unknown XML tag. This is not anticipated or handled.")
-        }
-    }
-    func parserDidEndDocument(_ parser: XMLParser) {
-        if parser.parserError != nil
-        {
-            print("XML processing is completed.")
-        }
-        else
-        {
-            print("An error occurred during XML processing.")
-        }
-    }
     
         // MARK: - Keyboard customization -
     
     func addDoneKeyToDecimalKeyboard()
     {
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action:#selector(ConfigurationViewController.hideKeyboard))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action:#selector(ConfigurationViewController.storeValsHideKeyboard))
         let buttonSpace = UIBarButtonItem(barButtonSystemItem:.flexibleSpace, target:nil , action: nil)
         let keyboardItems = [buttonSpace,doneButton,buttonSpace]
         let toolbar = UIToolbar()
@@ -220,14 +88,16 @@ class ConfigurationViewController: UIViewController, XMLParserDelegate {
         answerPauseField.inputAccessoryView = toolbar
     }
     
-    func hideKeyboard()
+    func storeValsHideKeyboard()
     {
         if Float (answerPauseField.text!)! > 0.0
         {
             negozioGrande!.currentLearner?.correctAnswerShownPause = Float(answerPauseField.text!)!
-            
         }
-        
+        if Int(maxCardsInHandField.text!)! > 0
+        {
+            negozioGrande!.currentLearner?.maxCardsInHand = Int32(maxCardsInHandField.text!)!
+        }
         if Int(maxCardsInHandField.text!)! > 0
         {
             negozioGrande!.currentLearner?.maxCardsInHand = Int32(maxCardsInHandField.text!)!
