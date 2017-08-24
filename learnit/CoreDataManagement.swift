@@ -208,55 +208,50 @@ class CoreDataManagement: NSObject {
         aSet = Set(card.cardInfo.tags.components(separatedBy: ","))
         
         // prepare to look for existing tag objects
-        let quaestioQuartus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
-        
-        do {
-            var aSetOfTags = Set<TagManagedObject>()
-            // for each tag in the set of strings, look for a corresponding TagMO and link it, or make a new one if not
-            for aTag in aSet {
-                var trimmedTag = aTag.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-                trimmedTag = trimmedTag.replacingOccurrences(of: "##", with: ",")
-                quaestioQuartus.predicate = NSPredicate(format: "tagText like[cd] %@", trimmedTag)
-                
-                let tagQueryResult = try context.fetch(quaestioQuartus)
-                if tagQueryResult.count == 0 {
-                    let newTagObject = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: context) as! TagManagedObject
-                    newTagObject.tagText = trimmedTag
-                    newTagObject.enabled = true
-                    newTagObject.timesUsed = 1
-                    aSetOfTags.insert(newTagObject)
-                }
-                else {
-                    let toUpdate : TagManagedObject = tagQueryResult.first!
-                    var scratchValue = toUpdate.timesUsed
-                    scratchValue += 1
-                    toUpdate.timesUsed = scratchValue
-                    aSetOfTags.insert(toUpdate)
-                    print ("Tag: \(String(describing: toUpdate.tagText)) is used \(toUpdate.timesUsed) times")
-                }
-            }
-            newCard.cardToTags = aSetOfTags as NSSet
-            
-        }
-        catch {
-            fatalError("Couldn't fetch Tag objects from Core Data")
-        }
+        newCard.cardToTags = getTagSet(aSet) as NSSet
         
         // add the set of tags to the new card
-        newCard.uniqueID = card.uniqueID
-        newCard.isActive = card.cardInfo.isActive
-        newCard.isKnown = card.cardInfo.isKnown
-        newCard.timeCreated = card.timeCreated
-        newCard.timeUpdated = card.timeUpdated
-        newCard.studyToday = card.cardInfo.studyToday
+        card.copyCardProperties(newCard: newCard)
         
         // create a set of empty stats for the card
-        let newStatsObject = NSEntityDescription.insertNewObject(forEntityName: "CardStats", into: context) as! CardStatsManagedObject
-        newStatsObject.numberTimesIncorrect = 0
-        newStatsObject.numberTimesForgotten = 0
-        newStatsObject.numberTimesCorrect = 0
-        newStatsObject.difficultyRating = 1.3
-        newStatsObject.idealInterval = 0.1 // a card, once learned, should be repeated the next day
-        newCard.cardToStats = newStatsObject
+        newCard.cardToStats = getNewStatsObj(context)
     }
+
+fileprivate func getTagSet(_ aSet : Set<String>) -> Set<TagManagedObject>
+{
+    let quaestio = NSFetchRequest<TagManagedObject>(entityName: "Tag")
+    do {
+        var aSetOfTags = Set<TagManagedObject>()
+        // for each tag in the set of strings, look for a corresponding TagMO and link it, or make a new one if not
+        for aTag in aSet {
+            var trimmedTag = aTag.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+            trimmedTag = trimmedTag.replacingOccurrences(of: "##", with: ",")
+            quaestio.predicate = NSPredicate(format: "tagText like[cd] %@", trimmedTag)
+            
+            let tagQueryResult = try context.fetch(quaestio)
+            if tagQueryResult.count == 0 {
+                let newTagObject = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: context) as! TagManagedObject
+                newTagObject.tagText = trimmedTag
+                newTagObject.enabled = true
+                newTagObject.timesUsed = 1
+                aSetOfTags.insert(newTagObject)
+            }
+            else {
+                let toUpdate : TagManagedObject = tagQueryResult.first!
+                var scratchValue = toUpdate.timesUsed
+                scratchValue += 1
+                toUpdate.timesUsed = scratchValue
+                aSetOfTags.insert(toUpdate)
+                print ("Tag: \(String(describing: toUpdate.tagText)) is used \(toUpdate.timesUsed) times")
+            }
+        }
+        return aSetOfTags
+        
+    }
+    catch {
+        fatalError("Couldn't fetch Tag objects from Core Data")
+    }
+
 }
+}
+

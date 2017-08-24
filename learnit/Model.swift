@@ -47,6 +47,16 @@ class CardObject: NSObject {
         }
     }
     
+    func copyCardProperties(newCard ns : CardStackManagedObject)
+    {
+        ns.uniqueID = uniqueID
+        ns.isActive = cardInfo.isActive
+        ns.isKnown = cardInfo.isKnown
+        ns.timeCreated = timeCreated
+        ns.timeUpdated = timeUpdated
+        ns.studyToday = cardInfo.studyToday
+    }
+    
 }
 
 class TagObject: NSObject {

@@ -69,3 +69,16 @@ func getStringFromMOSet(setGlob: Set<NSManagedObject>) -> String {
     return returnString
 }
 
+func getNewStatsObj(_ context: NSManagedObjectContext) -> CardStatsManagedObject
+{
+    // create a set of empty stats for the card
+    let newStatsObject = NSEntityDescription.insertNewObject(forEntityName: "CardStats", into: context) as! CardStatsManagedObject
+    newStatsObject.numberTimesIncorrect = 0
+    newStatsObject.numberTimesForgotten = 0
+    newStatsObject.numberTimesCorrect = 0
+    newStatsObject.difficultyRating = 1.3
+    newStatsObject.idealInterval = 0.1 // a card, once learned, should be repeated the next day
+    return newStatsObject
+}
+
+
