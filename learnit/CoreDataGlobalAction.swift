@@ -129,3 +129,49 @@ func updateUserInfo(context: NSManagedObjectContext)
     }
 }
 
+func refreshLearningQueue() -> Array<String> {
+    
+    /*
+     The Learning Queue is an array of Unique ID strings that correspond to the cards that
+     should be shown to the learner on the current day. It is comprised of all cards marked as
+     due for study today, and also of all cards not currently known.
+     */
+    var currentlearningQueue = Array<String>()
+    guard let context = negozioGrande?.manObjContext
+    else
+    {
+        return currentlearningQueue
+    }
+    let quaestioSextus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
+    quaestioSextus.propertiesToFetch = ["uniqueID"]
+    quaestioSextus.predicate = NSPredicate(format: "(isKnown == NO) AND (isActive == YES)")
+    let sortKey1 =  NSSortDescriptor(key: "uniqueID", ascending: true)
+    quaestioSextus.sortDescriptors = [sortKey1]
+    do {
+        
+        let gatheringArrayOne = try context.fetch(quaestioSextus)
+        quaestioSextus.predicate = NSPredicate(format: "(studyToday == YES) AND (isActive == YES)")
+        let gatheringArrayTwo = try context.fetch(quaestioSextus)
+        
+        var gatheringArrayAll = Array(gatheringArrayOne)
+        gatheringArrayAll.append(contentsOf: gatheringArrayTwo)
+        
+        
+        if gatheringArrayAll.count == 0
+        {
+            return currentlearningQueue
+        }
+        
+        for result in gatheringArrayAll
+        {
+            let aQueueItem : String? = result.uniqueID
+            currentlearningQueue.append(aQueueItem!)
+        }
+    }
+    catch
+    {
+        fatalError("Couldn't fetch learning queue info from Core Data")
+    }
+    return currentlearningQueue
+    
+}

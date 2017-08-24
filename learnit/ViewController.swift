@@ -258,7 +258,7 @@ class ViewController: UIViewController {
  
     func refreshQueue()
     {
-        oggiQueue = negozioGrande!.refreshLearningQueue()
+        oggiQueue = refreshLearningQueue()
     }
  
     func updateForPointsIndicator()

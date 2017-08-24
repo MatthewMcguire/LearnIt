@@ -368,88 +368,35 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         refreshFetchedResultsController()
     }
     
-    
     func setCardActiveStateByTagActiveState(tag : TagManagedObject, state : Bool)
     {
-        if state == false
+        let cardsForTagManagedObject = tag.tagToCards as! Set<CardStackManagedObject>
+        for card in cardsForTagManagedObject
         {
             // logic: any card with this tag should be made inactive, since the tag is disabled
-            let cardsForTagManagedObject = tag.tagToCards as! Set<CardStackManagedObject>
-            for card in cardsForTagManagedObject
+            guard state == true
+                else
             {
                 card.isActive = false
+                continue
             }
-        }
-        else
-        {
+        
             // logic: for each card, set to active if all its tags are now active
-            let cardsForTagManagedObject = tag.tagToCards as! Set<CardStackManagedObject>
-            for card in cardsForTagManagedObject
+            let itsTags = card.cardToTags
+            var activateIt = true
+            for aTag in itsTags!
             {
-                let itsTags = card.cardToTags
-                var activateIt = true
-                for aTag in itsTags!
+                if (aTag as! TagManagedObject).enabled == false
                 {
-                    if (aTag as! TagManagedObject).enabled == false
-                    {
-                        activateIt = false
-                    }
+                    activateIt = false
                 }
-                if activateIt == true
-                {
-                    card.isActive = true
-                }
-                
             }
+            card.isActive = activateIt
         }
         saveContext()
     }
     
-    
-    func refreshLearningQueue() -> Array<String> {
-        
-        /*
-         The Learning Queue is an array of Unique ID strings that correspond to the cards that
-         should be shown to the learner on the current day. It is comprised of all cards marked as
-         due for study today, and also of all cards not currently known.
-         */
 
-        var currentlearningQueue = Array<String>()
-        let quaestioSextus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
-//        quaestioSextus.resultType = NSFetchRequestResultType.dictionaryResultType
-        quaestioSextus.propertiesToFetch = ["uniqueID"]
-        quaestioSextus.predicate = NSPredicate(format: "(isKnown == NO) AND (isActive == YES)")
-        let sortKey1 =  NSSortDescriptor(key: "uniqueID", ascending: true)
-        quaestioSextus.sortDescriptors = [sortKey1]
-        do {
-
-            let gatheringArrayOne = try manObjContext.fetch(quaestioSextus)
-            quaestioSextus.predicate = NSPredicate(format: "(studyToday == YES) AND (isActive == YES)")
-            let gatheringArrayTwo = try manObjContext.fetch(quaestioSextus)
-            
-            var gatheringArrayAll = Array(gatheringArrayOne)
-            gatheringArrayAll.append(contentsOf: gatheringArrayTwo)
-            
-            
-            if gatheringArrayAll.count == 0
-            {
-                return currentlearningQueue
-            }
-            
-            for result in gatheringArrayAll
-            {
-                let aQueueItem : String? = result.uniqueID
-                currentlearningQueue.append(aQueueItem!)
-            }
-        }
-        catch
-        {
-            fatalError("Couldn't fetch learning queue info from Core Data")
-        }
-        return currentlearningQueue
-        
-    }
-    
     func getCardWithID(uniqueID: String) -> CardObject
     {
         var returnedCard : CardObject = CardObject()
