@@ -41,23 +41,15 @@ extension UIViewController
     {
         // Context: A notification has been triggered that a keyboard has been shown or changed
         let uiObj = findFirstResponder(in: view)// as? SmartLanguageUITextField!
-        if uiObj != nil
+        if let inpMode = uiObj?.textInputMode
         {
-            if let inpMode = uiObj!.textInputMode
+            if inpMode.primaryLanguage?.prefix(2) == "el"
             {
-                let inpLang = inpMode.primaryLanguage
-                if inpLang!.prefix(2) == "el"
-                {
-                    showGreekToolbar(status: true, onThis:uiObj! as! UITextField)
-//                  if let theTextField = uiObj as! SmartLanguageUITextField?
-//                  {
-//                    theTextField.preferredLang = nil
-//                  }
-                }
-                else
-                {
-                    showGreekToolbar(status: false, onThis:uiObj! as! UITextField)
-                }
+                showGreekToolbar(status: true, onThis:uiObj! as! UITextField)
+            }
+            else
+            {
+                showGreekToolbar(status: false, onThis:uiObj! as! UITextField)
             }
         }
     }
@@ -91,23 +83,19 @@ extension UIViewController
     @IBAction func barButtonAddText(sender: UIBarButtonItem)
     {
         // obtain a reference to the first responder, since it can't be passed as a parameter
-        if let uiObj = findFirstResponder(in: view) as! SmartLanguageUITextField?
-        {
-            if let justBefore = uiObj.selectedTextRange  {
-                if let f2Text = uiObj.text   {
-                    if f2Text.characters.count > 0  {
-                        let endPoint = justBefore.start
-                        let startPoint = uiObj.position(from: endPoint, offset: -1)
-                        let startToEndPoint = uiObj.textRange(from: startPoint!, to: endPoint)
-                        let letterBeforeCursor = uiObj.text(in: startToEndPoint!)
-                        let replaceWithText = getReplacementSymbol(letter: letterBeforeCursor!, diacrit: greekDiacrits(rawValue: sender.title!)!)
-                        uiObj.deleteBackward()
-                        uiObj.insertText(replaceWithText)
-                    }
-                }
+        guard let uiObj = findFirstResponder(in: view) as! SmartLanguageUITextField?
+            else { return}
+        if let justBefore = uiObj.selectedTextRange, let f2Text = uiObj.text  {
+            if f2Text.characters.count > 0  {
+                let endPoint = justBefore.start
+                let startPoint = uiObj.position(from: endPoint, offset: -1)
+                let startToEndPoint = uiObj.textRange(from: startPoint!, to: endPoint)
+                let letterBeforeCursor = uiObj.text(in: startToEndPoint!)
+                let replaceWithText = getReplacementSymbol(letter: letterBeforeCursor!, diacrit: greekDiacrits(rawValue: sender.title!)!)
+                uiObj.deleteBackward()
+                uiObj.insertText(replaceWithText)
             }
         }
-        else { return }
     }
     
     func showGreekToolbar(status:Bool, onThis: UITextField) -> Void
@@ -130,9 +118,7 @@ extension UIViewController
             greekDiacriticsBox.addSubview(greekInputTool)
             greekInputTool.autoresizingMask = .flexibleWidth
             toolbarTextField.inputAccessoryView = greekDiacriticsBox
-            var r = greekInputTool.frame
-            r.origin.y += 6
-            greekInputTool.frame = r
+            greekInputTool.frame.origin.y += 6
         }
         toolbarTextField.reloadInputViews()
 
@@ -144,8 +130,7 @@ extension UIViewController
         greekInputTool.tintColor = UIColor.darkText
         greekInputTool.isTranslucent = true
         greekInputTool.barTintColor = UIColor.groupTableViewBackground
-        let uiFontName = UIFont(name: "Avenir-Black", size: CGFloat(24.0))
-        let diacritFontAttribs =  [NSFontAttributeName:uiFontName]
+        let diacritFontAttribs =  [NSFontAttributeName:UIFont(name: "Avenir-Black", size: CGFloat(24.0))]
         var barButtonArray = Array<UIBarButtonItem>()
         let diacritArray = [greekDiacrits.acute,greekDiacrits.acuteSmooth, greekDiacrits.acuteRough,
                             greekDiacrits.grave, greekDiacrits.graveSmooth, greekDiacrits.graveRough,
@@ -185,9 +170,7 @@ extension UIViewController
         if [greekDiacrits.acuteSmooth, greekDiacrits.graveSmooth,greekDiacrits.circumfSmooth].contains(diacrit)  {
             graphemeCluster = toSmooth(graphemeCluster)
         }
-        graphemeCluster = addMark(letter: graphemeCluster, mark: mod )
-        return graphemeCluster
-
+        return addMark(letter: graphemeCluster, mark: mod )
     }
     
     func  toRough (_ c : String) -> String
