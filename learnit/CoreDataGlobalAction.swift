@@ -145,10 +145,8 @@ func refreshLearningQueue() -> Array<String> {
     let quaestioSextus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
     quaestioSextus.propertiesToFetch = ["uniqueID"]
     quaestioSextus.predicate = NSPredicate(format: "(isKnown == NO) AND (isActive == YES)")
-    let sortKey1 =  NSSortDescriptor(key: "uniqueID", ascending: true)
-    quaestioSextus.sortDescriptors = [sortKey1]
+    quaestioSextus.sortDescriptors = [NSSortDescriptor(key: "uniqueID", ascending: true)]
     do {
-        
         let gatheringArrayOne = try context.fetch(quaestioSextus)
         quaestioSextus.predicate = NSPredicate(format: "(studyToday == YES) AND (isActive == YES)")
         let gatheringArrayTwo = try context.fetch(quaestioSextus)
@@ -156,16 +154,9 @@ func refreshLearningQueue() -> Array<String> {
         var gatheringArrayAll = Array(gatheringArrayOne)
         gatheringArrayAll.append(contentsOf: gatheringArrayTwo)
         
-        
-        if gatheringArrayAll.count == 0
-        {
-            return currentlearningQueue
-        }
-        
         for result in gatheringArrayAll
         {
-            let aQueueItem : String? = result.uniqueID
-            currentlearningQueue.append(aQueueItem!)
+            currentlearningQueue.append(result.uniqueID!)
         }
     }
     catch
