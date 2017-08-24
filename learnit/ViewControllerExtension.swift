@@ -74,8 +74,7 @@ extension UIViewController
     }
     
     // this enum makes the toolbar code a bit more readable and provides a pattern for doing this with other languages besides Greek
-    enum greekDiacrits : String
-    {
+    enum greekDiacrits : String  {
         case acute = "´"
         case acuteSmooth = "῎"
         case acuteRough = "῞"
@@ -94,12 +93,9 @@ extension UIViewController
         // obtain a reference to the first responder, since it can't be passed as a parameter
         if let uiObj = findFirstResponder(in: view) as! SmartLanguageUITextField?
         {
-            if let justBefore = uiObj.selectedTextRange
-            {
-                if let f2Text = uiObj.text
-                {
-                    if f2Text.characters.count > 0
-                    {
+            if let justBefore = uiObj.selectedTextRange  {
+                if let f2Text = uiObj.text   {
+                    if f2Text.characters.count > 0  {
                         let endPoint = justBefore.start
                         let startPoint = uiObj.position(from: endPoint, offset: -1)
                         let startToEndPoint = uiObj.textRange(from: startPoint!, to: endPoint)
@@ -121,14 +117,12 @@ extension UIViewController
             toolbarTextField.inputAccessoryView = nil
             return
         }
-        if status == false
-        {
+        if status == false  {
             toolbarTextField.inputAccessoryView = nil
             toolbarTextField.reloadInputViews()
             return
         }
-        if let windowWidth = view.window
-        {
+        if let windowWidth = view.window  {
             // Make a nice wee toolbar out of these buttons
             let barSize : CGRect = CGRect(x: 0.0, y: 0.0, width: CGFloat((windowWidth.frame.size.width)*0.5), height: 34.0)
             let greekInputTool = getToolbar(size: barSize)
@@ -140,7 +134,6 @@ extension UIViewController
             r.origin.y += 6
             greekInputTool.frame = r
         }
-
         toolbarTextField.reloadInputViews()
 
     }
@@ -174,73 +167,79 @@ extension UIViewController
     
     func getReplacementSymbol(letter: String, diacrit : greekDiacrits) -> String
     {
-        let toRough : Dictionary = ["α" : "\u{1F00}",
-                       "ε" : "\u{1F10}",
-                       "ι" : "\u{1F30}",
-                       "ο" : "\u{1F40}",
-                       "ω" : "\u{1F60}",
-                       "η" : "\u{1F20}",
-                       "υ" : "\u{1F50}",
-                       "Α" : "\u{1F08}",
-                       "Ε" : "\u{1F18}",
-                       "Ι" : "\u{1F38}",
-                       "Ο" : "\u{1F48}",
-                       "Ω" : "\u{1F68}",
-                       "Η" : "\u{1F28}"/*,
-                       "Υ" : "\u{1F58}"*/
-                       ]
-        let toSmooth : Dictionary = ["α" : "\u{1F01}",
-                       "ε" : "\u{1F11}",
-                       "ι" : "\u{1F31}",
-                       "ο" : "\u{1F41}",
-                       "ω" : "\u{1F61}",
-                       "η" : "\u{1F21}",
-                       "υ" : "\u{1F51}",
-                       "Α" : "\u{1F09}",
-                       "Ε" : "\u{1F19}",
-                       "Ι" : "\u{1F39}",
-                       "Ο" : "\u{1F49}",
-                       "Ω" : "\u{1F69}",
-                       "Η" : "\u{1F29}",
-                       "Υ" : "\u{1F59}"
-        ]
         var graphemeCluster = letter
         var mod : greekDiacrits = diacrit
-//        if [greekDiacrits.acute,greekDiacrits.grave,greekDiacrits.Rough,
-//            greekDiacrits.Smooth, greekDiacrits.circumf].contains(diacrit)
-//        {
-//            mod = diacrit
-//        }
-        if [greekDiacrits.acuteRough, greekDiacrits.acuteSmooth].contains(diacrit)
-        {
+
+        if [greekDiacrits.acuteRough, greekDiacrits.acuteSmooth].contains(diacrit)  {
             mod = greekDiacrits.acute
         }
-        if [greekDiacrits.graveRough, greekDiacrits.graveSmooth].contains(diacrit)
-        {
+        if [greekDiacrits.graveRough, greekDiacrits.graveSmooth].contains(diacrit)  {
             mod = greekDiacrits.grave
         }
-        if [greekDiacrits.circumfRough, greekDiacrits.circumfSmooth].contains(diacrit)
-        {
+        if [greekDiacrits.circumfRough, greekDiacrits.circumfSmooth].contains(diacrit)  {
             mod = greekDiacrits.circumf
         }
-        if [greekDiacrits.acuteRough, greekDiacrits.graveRough,greekDiacrits.circumfRough].contains(diacrit)
-        {
-            if let val = toRough[graphemeCluster]
-            {
-                graphemeCluster = val
-            }
+        if [greekDiacrits.acuteRough, greekDiacrits.graveRough,greekDiacrits.circumfRough].contains(diacrit)  {
+            graphemeCluster = toRough(graphemeCluster)
         }
-        if [greekDiacrits.acuteSmooth, greekDiacrits.graveSmooth,greekDiacrits.circumfSmooth].contains(diacrit)
-        {
-            if let val = toSmooth[graphemeCluster]
-            {
-                graphemeCluster = val
-            }
+        if [greekDiacrits.acuteSmooth, greekDiacrits.graveSmooth,greekDiacrits.circumfSmooth].contains(diacrit)  {
+            graphemeCluster = toSmooth(graphemeCluster)
         }
         graphemeCluster = addMark(letter: graphemeCluster, mark: mod )
         return graphemeCluster
 
     }
+    
+    func  toRough (_ c : String) -> String
+    {
+        var returnValue = ""
+        let rough : Dictionary = ["α" : "\u{1F00}",
+         "ε" : "\u{1F10}",
+         "ι" : "\u{1F30}",
+         "ο" : "\u{1F40}",
+         "ω" : "\u{1F60}",
+         "η" : "\u{1F20}",
+         "υ" : "\u{1F50}",
+         "Α" : "\u{1F08}",
+         "Ε" : "\u{1F18}",
+         "Ι" : "\u{1F38}",
+         "Ο" : "\u{1F48}",
+         "Ω" : "\u{1F68}",
+         "Η" : "\u{1F28}"/*,
+             "Υ" : "\u{1F58}"*/
+        ]
+        if rough.keys.contains(c) == true
+        {
+            returnValue = rough[c]!
+        }
+        return returnValue
+    }
+    
+    func  toSmooth (_ c : String) -> String
+    {
+        var returnValue = ""
+        let smooth : Dictionary = ["α" : "\u{1F01}",
+        "ε" : "\u{1F11}",
+        "ι" : "\u{1F31}",
+        "ο" : "\u{1F41}",
+        "ω" : "\u{1F61}",
+        "η" : "\u{1F21}",
+        "υ" : "\u{1F51}",
+        "Α" : "\u{1F09}",
+        "Ε" : "\u{1F19}",
+        "Ι" : "\u{1F39}",
+        "Ο" : "\u{1F49}",
+        "Ω" : "\u{1F69}",
+        "Η" : "\u{1F29}",
+        "Υ" : "\u{1F59}"
+        ]
+        if smooth.keys.contains(c) == true
+        {
+            returnValue = smooth[c]!
+        }
+        return returnValue
+    }
+
     
     // for adding (rough, smooth, accent, grave) to the character
     func addMark(letter: String, mark : greekDiacrits) -> String
