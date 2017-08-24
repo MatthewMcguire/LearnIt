@@ -18,29 +18,25 @@ class StatisticsTableViewController: UITableViewController {
         self.addTheBackButton()
 
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if let negG = negozioGrande
-        {
-            return negG.numberOfTagSections()
-        }
-        else
-        {
-            return 0
-        }
+        return sections(s: 0, kind: "tag sections")
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sections(s: section, kind: "tag rows")
+    }
+    
+    fileprivate func sections(s: Int, kind: String) -> Int
+    {
         if let negG = negozioGrande
         {
-            return negG.numberOfTagRows(section: section)
+            if kind == "tag sections" { return negG.numberOfTagSections()}
+            if kind == "tag rows" { return negG.numberOfTagRows(section: s)}
         }
-        else
-        {
-            return 0
-        }
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
