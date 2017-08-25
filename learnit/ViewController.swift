@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var forPointsLabel: UILabel!
     @IBOutlet weak var showHintButton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
-    @IBOutlet weak var hintLabel: KerningLabel!
+    @IBOutlet weak var hintLabel: UILabel!
     @IBOutlet weak var feedbackView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var addButton: UIButton!
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.storageSetup()
         self.refreshLearnerPreferences()
-        self.updateStudyToday()
+        negozioGrande?.updateStudyToday()
         self.uiSetup()
         self.updateTotalPoints()
         prepareKeyboardNotifications()
@@ -95,7 +95,18 @@ class ViewController: UIViewController {
     }
     @IBAction func enteredAnswer(_ sender: Any) {
         view.endEditing(true)
-        self.assessResponse()
+        var result = assessResponse(AnswerField, currentCard!, &currentAnswerValue)
+        if result < 0.0
+        {
+            if result < -10.00 { result = -10.00}
+            processIncorrectAnswer(uniqueID: currentCard!.uniqueID, distance: (result * -1.0))
+        }
+        else
+        {
+            processCorrectAnswer(uniqueID: currentCard!.uniqueID, distance: result)
+        }
+        
+        
         updateForPointsIndicator()
     }
     
@@ -126,14 +137,6 @@ class ViewController: UIViewController {
             maxAnswerValue = currentL.maximumAnswerValue
         }
     }
-    
-    func updateStudyToday()
-    {
-        if negozioGrande?.updateStudyToday() == true
-        {
-            print("Cards were added to the queue for the day")
-        }
-    }
 
     
     func updateCounter()
@@ -157,7 +160,7 @@ class ViewController: UIViewController {
     
     func refreshCardShown()
     {
-        refreshQueue()
+        oggiQueue = refreshLearningQueue()
         if let queueSize = oggiQueue?.count
         {
             if queueSize > 0 && currentPlaceInQueue < 1
@@ -180,40 +183,6 @@ class ViewController: UIViewController {
         showACard()
     }
  
-    func assessResponse()
-    {
-        let givenAnswer = AnswerField.text?.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-        if givenAnswer?.characters.count == 0
-        {
-            processIncorrectAnswer(uniqueID: (currentCard?.uniqueID)!, distance: 10.0)
-            return
-        }
-        var closestBestAnswer : String = "                 "
-        // calculate distance from a correct answer
-        var shortestDistance = 1000 // to begin, obviously way higher than any plausible input
-        if let possibleAnswers = currentCard?.cardInfo.faceTwoAsSet
-        {
-            for aCorrectAnswer in possibleAnswers
-            {
-                let d = levenshteinDistanceFrom(source: aCorrectAnswer, target: givenAnswer!)
-                if d < shortestDistance
-                {
-                    shortestDistance = d
-                    closestBestAnswer = givenAnswer!
-                }
-            }
-            // decide whether to mark closest answer as 'correct'
-            if isMarkedCorrect(storedAnswer: closestBestAnswer, dist: shortestDistance) == true
-            {
-                currentAnswerValue = currentAnswerValue * powf(Float(0.85),Float(shortestDistance))
-                processCorrectAnswer(uniqueID: (currentCard?.uniqueID)!, distance: Float(shortestDistance))
-            }
-            else
-            {
-                processIncorrectAnswer(uniqueID: (currentCard?.uniqueID)!, distance: Float(shortestDistance))
-            }
-        }
-    }
     
     func showACard()
     {
@@ -229,19 +198,6 @@ class ViewController: UIViewController {
                 faceOneLabel.text = currentCard?.cardInfo.faceOne
                 tagLabel.text = currentCard?.cardInfo.tags
                 currentAnswerValue = maxAnswerValue
-//                if let fTwo = currentCard?.faceTwo
-//                {
-//                    if answerContainsGreek(risposta: fTwo) == true
-//                    {
-
-//                        AnswerField.preferredLang = "el"
-//
-//                    }
-//                    else
-//                    {
-//                        AnswerField.preferredLang = "en"
-//                    }
-//                }
 
             }
             else
@@ -256,39 +212,10 @@ class ViewController: UIViewController {
         }
     }
  
-    func refreshQueue()
-    {
-        oggiQueue = refreshLearningQueue()
-    }
- 
     func updateForPointsIndicator()
     {
         let ptsString = String(format: "for %.1f points", currentAnswerValue)
         forPointsLabel.text = ptsString
-    }
-    
-    func isMarkedCorrect (storedAnswer:String, dist dis : Int )->Bool
-    {
-        let len = storedAnswer.characters.count
-        var returnVal = false
-        switch len {
-        case 0...2:
-            if dis < 1
-            {
-                returnVal = true
-            }
-        case 3...5:
-            if dis < 2
-            {
-                returnVal = true
-            }
-        default:
-            if dis < 3
-            {
-                returnVal = true
-            }
-        }
-    return returnVal
     }
     
     func updatePlaceInQueue()
@@ -312,28 +239,13 @@ class ViewController: UIViewController {
     {
         feedbackView.alpha = 1.0
         // notify the learner
-        messageLabel.text = "Wrong:  \(currentCard?.cardInfo.faceTwo ?? " ")"
-        if messageLabel.text!.characters.count > 25
-        {
-            UIView.animate(withDuration: 0.5, delay: 0.0, options:UIViewAnimationOptions.curveEaseInOut, animations: {
-//                self.feedbackHeight.constant = CGFloat(50.0)
-//                self.messageHeight.constant = CGFloat(50.0)
-            }, completion: nil)
-        }
+        messageLabel.text = "No:  \(currentCard?.cardInfo.faceTwo ?? " ")"
         // update statistics for the card
         negozioGrande!.updateCardAnsweredINCorrect(uniqueID: currentCard!.uniqueID, distance: dist)
         // move to next card & show it
         updatePlaceInQueue()
         refreshCardShown()
-        self.feedbackView.backgroundColor = UIColor.white
-        self.messageLabel.backgroundColor = UIColor.white
-        UIView.animate(withDuration: 0.5, delay: 0.0, options:UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.feedbackView.backgroundColor = UIColor.red
-            self.messageLabel.backgroundColor = UIColor.red
-        }, completion: nil)
-        UIView.animate(withDuration: TimeInterval(correctAnswerShownPause), delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
-                self.feedbackView.alpha = 0.0
-        }, completion: nil)
+        animateResponse(UIColor.red,  messageLabel, feedbackView, correctAnswerShownPause)
     }
     
     func processCorrectAnswer(uniqueID:String, distance dist:Float)
@@ -345,12 +257,7 @@ class ViewController: UIViewController {
         // notify the learner
         let ptsStr = String(format:"%.1f", currentAnswerValue)
         
-        messageLabel.text = "Yes (" + ptsStr + " pts): \(currentCard?.cardInfo.faceTwo ?? " ")"
-        if messageLabel.text!.characters.count > 25
-        {
-            UIView.animate(withDuration: 0.5, delay: 0.0, options:UIViewAnimationOptions.curveEaseInOut, animations: {
-            }, completion: nil)
-        }
+        messageLabel.text = "(" + ptsStr + " pts): \(currentCard?.cardInfo.faceTwo ?? " ")"
         
         // update statistics for the card
         negozioGrande!.updateCardAnsweredCorrect(uniqueID: currentCard!.uniqueID, distance: dist)
@@ -369,17 +276,7 @@ class ViewController: UIViewController {
 
         refreshCardShown()
         updateCounter()
-        self.messageLabel.backgroundColor = UIColor.white
-        self.feedbackView.backgroundColor = UIColor.white
-        
-        UIView.animate(withDuration: 0.5, delay: 0.0, options:UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.messageLabel.backgroundColor = UIColor.green
-            self.feedbackView.backgroundColor = UIColor.green
-        }, completion: nil)
-        UIView.animate(withDuration: TimeInterval(correctAnswerShownPause), delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.feedbackView.alpha = 0.0
-        }, completion: nil)
-
+        animateResponse(UIColor.green,  messageLabel, feedbackView, correctAnswerShownPause)
     }
     
 
@@ -392,58 +289,40 @@ class ViewController: UIViewController {
 
     func uiSetup()
     {
-        let borderWidth : CGFloat = 2.5
-        let cornerRadius : CGFloat = 9.0
-
-        
-        let bOfVenus_green = UIColor.init(red: (168.0/255), green: (192.0/255), blue: (168.0/255), alpha: 1.0)
-        let bOfVenus_red = UIColor.init(red: (212.0/255), green: (126.0/255), blue: (115.0/255), alpha: 1.0)
-        let bOfVenus_blue = UIColor.init(red: (120.0/255), green: (144.0/255), blue: (144.0/255), alpha: 1.0)
-        let bOfVenus_dark = UIColor.init(red: (48.0/255), green: (24.0/255), blue: (24.0/255), alpha: 1.0)
-        let bOfVenus_beige = UIColor.init(red: (240.0/255), green: (240.0/255), blue: (216.0/255), alpha: 1.0)
-
-        
+     
         let buttnsType1 : Array<UIButton> = [showHintButton, skipButton]
         let buttnsType2 : Array<UIButton> = [addButton, browseButton, configureButton, statisticsButton]
+        let bov = bOfVenusColors()
+        let bp = buttonParams()
         
-        view!.backgroundColor = bOfVenus_beige
+        view!.backgroundColor = bov.beige
         
-        faceOneLabel.backgroundColor = bOfVenus_blue
-        messageLabel.backgroundColor = bOfVenus_beige
-        AnswerField.backgroundColor = bOfVenus_blue
-        hintLabel.backgroundColor = bOfVenus_beige
-        forPointsLabel.textColor = bOfVenus_red
-        tagLabel.textColor = bOfVenus_red
-        pointsLabel.textColor = bOfVenus_red
-        cardsKnownLabel.textColor = bOfVenus_red
+        faceOneLabel.backgroundColor = bov.blue
+        messageLabel.backgroundColor = bov.beige
+        AnswerField.backgroundColor = bov.blue
+        hintLabel.backgroundColor = bov.beige
+        forPointsLabel.textColor = bov.red
+        tagLabel.textColor = bov.red
+        pointsLabel.textColor = bov.red
+        cardsKnownLabel.textColor = bov.red
         
-        for b in buttnsType1
+        let both : Array<UIButton> = buttnsType1 + buttnsType2
+        for b in both
         {
-            b.layer.borderWidth = borderWidth
-            b.layer.borderColor = bOfVenus_dark.cgColor
-            b.layer.cornerRadius = cornerRadius
-            b.layer.backgroundColor = bOfVenus_green.cgColor
+            b.layer.borderWidth = bp.borderWidth
+            b.layer.borderColor = bov.dark.cgColor
+            b.layer.cornerRadius = bp.cornerRadius
+            b.layer.backgroundColor = bov.green.cgColor
             b.tintColor = UIColor.white
         }
         for b in buttnsType2
         {
-            b.layer.borderWidth = borderWidth
-            b.layer.borderColor = bOfVenus_dark.cgColor
-            b.layer.cornerRadius = cornerRadius
-            b.layer.backgroundColor = bOfVenus_blue.cgColor
-            b.tintColor = UIColor.white
+            b.layer.backgroundColor = bov.blue.cgColor
         }
     }
 
 }
 
-class KerningLabel: UILabel {
-    func addKerning(kerningValue: Double) {
-        let attributedString = self.attributedText as! NSMutableAttributedString
-        attributedString.addAttribute(NSKernAttributeName, value: kerningValue, range: NSMakeRange(0, attributedString.length))
-        self.attributedText = attributedString
-}
-}
 
 
 

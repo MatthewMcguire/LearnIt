@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B901588C1F4F1D6400634485 /* ParseXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = B901588B1F4F1D6400634485 /* ParseXML.swift */; };
+		B920518C1F50BAA400B48FFC /* MainVCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B920518B1F50BAA400B48FFC /* MainVCHelper.swift */; };
 		B9217CC41F0E9DE1000F1798 /* AddCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */; };
 		B92A66171F1426C900DB3DAA /* BrowseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92A66161F1426C900DB3DAA /* BrowseTableViewController.swift */; };
 		B92A66191F14287A00DB3DAA /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92A66181F14287A00DB3DAA /* CardDetailViewController.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		B901588B1F4F1D6400634485 /* ParseXML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseXML.swift; sourceTree = "<group>"; };
+		B920518B1F50BAA400B48FFC /* MainVCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCHelper.swift; sourceTree = "<group>"; };
 		B9217CC31F0E9DE1000F1798 /* AddCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCardViewController.swift; sourceTree = "<group>"; };
 		B92A66161F1426C900DB3DAA /* BrowseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseTableViewController.swift; path = "/Users/gmcguire/Box Sync/objCWork/learnit/learnit/BrowseTableViewController.swift"; sourceTree = "<absolute>"; };
 		B92A66181F14287A00DB3DAA /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				B9C2A6151F10102B00E5E917 /* sampleGreek.xml */,
 				B98419631F0192810027B2B9 /* AppDelegate.swift */,
 				B98419651F0192810027B2B9 /* ViewController.swift */,
+				B920518B1F50BAA400B48FFC /* MainVCHelper.swift */,
 				B9C1A2861F4E230D0039C7CF /* LanguageHelperFunctions.swift */,
 				B966057A1F4C7D5E00300A36 /* ShareHint.swift */,
 				B96605781F43567600300A36 /* ViewControllerExtension.swift */,
@@ -250,6 +253,7 @@
 				B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */,
 				B96605791F43567600300A36 /* ViewControllerExtension.swift in Sources */,
 				B966057B1F4C7D5E00300A36 /* ShareHint.swift in Sources */,
+				B920518C1F50BAA400B48FFC /* MainVCHelper.swift in Sources */,
 				B9C1A2871F4E230D0039C7CF /* LanguageHelperFunctions.swift in Sources */,
 				B9AFF1AB1F0FEC4E0013A1AD /* ConfigurationViewController.swift in Sources */,
 				B901588C1F4F1D6400634485 /* ParseXML.swift in Sources */,

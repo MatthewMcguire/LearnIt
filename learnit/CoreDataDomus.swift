@@ -65,12 +65,11 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         }
     }
  
-    func updateStudyToday() -> Bool
+    func updateStudyToday()
     {
         // 1) Search for cards that should be added to today's queue
         // 2) Add them to the queue
         // 3) Return true if any such cards were found and added.
-        var cardsAddedToQueue = false
         if currentLearner != nil
         {
             // if a learner has never had his 'study today' flag checked... 
@@ -80,7 +79,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                 // set the flag to today's date
                 currentLearner!.studyTodayLastUpdated = NSDate()
                 currentLearner!.daysActive = currentLearner!.daysActive + 1
-                cardsAddedToQueue = updateStudyTodayFlagOnCards()
+                updateStudyTodayFlagOnCards()
             }
             else
             {
@@ -93,17 +92,15 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                 {
                     currentLearner!.studyTodayLastUpdated = NSDate()
                     currentLearner!.daysActive = currentLearner!.daysActive + 1
-                    cardsAddedToQueue = updateStudyTodayFlagOnCards()
+                    updateStudyTodayFlagOnCards()
                 }
             }
         }
         saveContext()
-        return cardsAddedToQueue
     }
     
-    func updateStudyTodayFlagOnCards() -> Bool
+    func updateStudyTodayFlagOnCards()
     {
-        var cardsAddedToQueue = false
         
         let quaestioDuoDecimus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
         quaestioDuoDecimus.predicate = NSPredicate(format: "(isKnown == YES) AND (isActive == YES) AND (studyToday == NO)")
@@ -131,7 +128,6 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
                 if (NSCalendar.current.isDateInToday(shouldStudyNext! as Date) == true) || (shouldStudyNext!.compare(Date()) != ComparisonResult.orderedDescending)
                 {
                     card.studyToday = true
-                    cardsAddedToQueue = true
                 }
             }
             saveContext()
@@ -140,7 +136,6 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         {
             fatalError("Error fetching objects from the persistent store")
         }
-        return cardsAddedToQueue
     }
     
     func getUserTotalPoints() -> Float
