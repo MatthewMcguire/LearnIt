@@ -11,6 +11,7 @@ import UIKit
 struct buttonParams {
     let borderWidth : CGFloat = 2.5
     let cornerRadius : CGFloat = 9.0
+    let fieldBorderWidth : CGFloat = 1.5
 }
 
 struct bOfVenusColors {

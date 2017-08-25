@@ -92,42 +92,27 @@ class AddCardViewController: UIViewController {
     // MARK: - UI jiggering -
     func uiSetup()
      {
-        let borderWidth : CGFloat = 2.5
-        let cornerRadius : CGFloat = 9.0
-//        let buttonInsideDGray = UIColor.darkGray.cgColor
-//        let buttonBorderLGray = UIColor.black.cgColor
-//        let fieldBorder = UIColor.init(red: 0.3, green: 0.3, blue: 0.9, alpha: 0.9).cgColor
-        let fieldBorderWidth : CGFloat = 1.5
-        
-//        let ermine_choco2 = UIColor.init(red: (32.0/255), green: (20.0/255), blue: (8.0/255), alpha: 1.0)
-//        let ermine_canoe_red = UIColor.init(red: (144.0/255), green: (36.0/255), blue: (11.0/255), alpha: 1.0)
-////        let ermine_renn_orange = UIColor.init(red: (238.0/255), green: (152.0/255), blue: (35.0/255), alpha: 1.0)
-//        let ermine_breaking_glass = UIColor.init(red: (254.0/255), green: (226.0/255), blue: (181.0/255), alpha: 1.0)
-//        let ermine_pistache_green = UIColor.init(red: (208.0/255), green: (226.0/255), blue: (177.0/255), alpha: 1.0)
-        let bOfVenus_green = UIColor.init(red: (168.0/255), green: (192.0/255), blue: (168.0/255), alpha: 1.0)
-//        let bOfVenus_red = UIColor.init(red: (212.0/255), green: (126.0/255), blue: (115.0/255), alpha: 1.0)
-        let bOfVenus_blue = UIColor.init(red: (120.0/255), green: (144.0/255), blue: (144.0/255), alpha: 1.0)
-        let bOfVenus_dark = UIColor.init(red: (48.0/255), green: (24.0/255), blue: (24.0/255), alpha: 1.0)
-        let bOfVenus_beige = UIColor.init(red: (240.0/255), green: (240.0/255), blue: (216.0/255), alpha: 1.0)
+        let bov = bOfVenusColors()
+        let bp = buttonParams()
         let buttns : Array<UIButton> = [cancelButton, saveButton]
         for b in buttns
         {
-            b.layer.borderWidth = borderWidth
-            b.layer.borderColor = bOfVenus_dark.cgColor
-            b.layer.cornerRadius = cornerRadius
-            b.backgroundColor = bOfVenus_blue
+            b.layer.borderWidth = bp.borderWidth
+            b.layer.borderColor = bov.dark.cgColor
+            b.layer.cornerRadius = bp.cornerRadius
+            b.backgroundColor = bov.blue
             b.tintColor = UIColor.white
         }
         
         let inputFields : Array<UITextField> = [faceOneField, faceTwoField, tagsField]
         for infi in inputFields
         {
-            infi.layer.borderWidth = fieldBorderWidth
-            infi.layer.borderColor = bOfVenus_dark.cgColor
-            infi.layer.cornerRadius = cornerRadius
-            infi.backgroundColor = bOfVenus_green
+            infi.layer.borderWidth = bp.fieldBorderWidth
+            infi.layer.borderColor = bov.dark.cgColor
+            infi.layer.cornerRadius = bp.cornerRadius
+            infi.backgroundColor = bov.green
         }
-        view!.backgroundColor = bOfVenus_beige
+        view!.backgroundColor = bov.beige
      }
 
 }
