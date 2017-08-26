@@ -93,3 +93,53 @@ func assessResponse(_ AnswerField : SmartLanguageUITextField, _ currentCard : Ca
     }
 }
 
+func buttonAppearance(_ buttnsType1: Array<UIButton>, _ buttnsType2: Array<UIButton>)
+{
+    let bov = bOfVenusColors()
+    let bp = buttonParams()
+    let both : Array<UIButton> = buttnsType1 + buttnsType2
+    for b in both
+    {
+        b.layer.borderWidth = bp.borderWidth
+        b.layer.borderColor = bov.dark.cgColor
+        b.layer.cornerRadius = bp.cornerRadius
+        b.layer.backgroundColor = bov.green.cgColor
+        b.tintColor = UIColor.white
+    }
+    for b in buttnsType2
+    {
+        b.layer.backgroundColor = bov.blue.cgColor
+    }
+}
+
+func updateForPointsIndicator(_ c: Float) -> String
+{
+    let ptsString = String(format: "for %.1f points", c)
+    return ptsString
+}
+
+func setEnableButtons(_ uiObj: Array<UIButton>,_ enable: Bool)
+{
+    for s in uiObj
+    {
+        s.isEnabled = enable
+    }
+}
+
+func updateTotalPoints() -> String
+{
+    let totalPoints = negozioGrande!.getUserTotalPoints()
+    let ptsString = String(format: "%.1f pts.", totalPoints)
+    return ptsString
+}
+
+func updateCounter() -> String
+{
+    // obtain the total number of active cards and the number to
+    // review or learn today, and show in the 'cards known' label
+    
+    let numCards = howManyActiveCards(context: negozioGrande!.manObjContext)
+    let numKnownCards = howManyActiveKnownCards(context: negozioGrande!.manObjContext)
+    let counterLabelText = "known: \(numKnownCards)/\(numCards)"
+    return counterLabelText
+}

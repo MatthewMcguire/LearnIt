@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         self.refreshLearnerPreferences()
         negozioGrande?.updateStudyToday()
         self.uiSetup()
-        self.updateTotalPoints()
+        self.pointsLabel.text = updateTotalPoints()
         prepareKeyboardNotifications()
         
 //        if oggiQueue  == nil
@@ -58,9 +58,9 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.view.endEditing(true)
         self.refreshLearnerPreferences()
-        updateCounter()
+        cardsKnownLabel.text = updateCounter()
         
-        updateForPointsIndicator()
+        forPointsLabel.text = updateForPointsIndicator(currentAnswerValue)
         faceOneLabel.isUserInteractionEnabled = true
     }
     
@@ -79,7 +79,7 @@ class ViewController: UIViewController {
             }
             let attHintText = NSAttributedString(string: hintLabel.text!, attributes: [NSKernAttributeName : 2.0])
             hintLabel.attributedText = attHintText
-            updateForPointsIndicator()
+            forPointsLabel.text = updateForPointsIndicator(currentAnswerValue)
         }
     }
 
@@ -105,9 +105,7 @@ class ViewController: UIViewController {
         {
             processCorrectAnswer(uniqueID: currentCard!.uniqueID, distance: result)
         }
-        
-        
-        updateForPointsIndicator()
+        forPointsLabel.text = updateForPointsIndicator(currentAnswerValue)
     }
     
     
@@ -138,99 +136,65 @@ class ViewController: UIViewController {
         }
     }
 
-    
-    func updateCounter()
-    {
-        // obtain the total number of active cards and the number to
-        // review or learn today, and show in the 'cards known' label
         
-        let numCards = howManyActiveCards(context: negozioGrande!.manObjContext)
-        let numKnownCards = howManyActiveKnownCards(context: negozioGrande!.manObjContext)
-        let counterLabelText = "known: \(numKnownCards)/\(numCards)"
-        cardsKnownLabel.text = counterLabelText
-    }
- 
-    func updateTotalPoints()
-    {
-        let totalPoints = negozioGrande!.getUserTotalPoints()
-        let ptsString = String(format: "%.1f pts.", totalPoints)
-        pointsLabel.text = ptsString
-    }
-    
-    
     func refreshCardShown()
     {
         oggiQueue = refreshLearningQueue()
-        if let queueSize = oggiQueue?.count
+        let queueSize = oggiQueue?.count
+        if queueSize! > 0 && currentPlaceInQueue < 1
         {
-            if queueSize > 0 && currentPlaceInQueue < 1
-            {
-                currentPlaceInQueue = 0
-                currentCard = negozioGrande!.getCardWithID(uniqueID: oggiQueue![currentPlaceInQueue])
-            }
-            if currentPlaceInQueue >= queueSize
-            {
-                currentPlaceInQueue = queueSize - 1
-            }
+            currentPlaceInQueue = 0
+            currentCard = negozioGrande!.getCardWithID(uniqueID: oggiQueue![currentPlaceInQueue])
+        }
+        if currentPlaceInQueue >= queueSize!
+        {
+            currentPlaceInQueue = queueSize! - 1
         }
         hintLabel.text = " "
         UIView.animate(withDuration: 1.5, delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
             self.AnswerField.text = ""
             }, completion: nil)
         hintLevel = 0
-        hintAnswer = currentCard?.cardInfo.faceTwoAsSet.first
-        updateTotalPoints()
+        pointsLabel.text = updateTotalPoints()
         showACard()
+        hintAnswer = currentCard?.cardInfo.faceTwoAsSet.first
     }
  
     
     func showACard()
     {
-        if let queueSize = oggiQueue?.count
+        guard let queueSize = oggiQueue?.count
+            else { fatalError("Cannot obtain learning queue size.") }
+        if queueSize > 0
         {
-            if queueSize > 0
-            {
-                skipButton.isEnabled = true
-                showHintButton.isEnabled = true
-                AnswerField.isEnabled = true
-                let uniqueID = oggiQueue?[currentPlaceInQueue]
-                currentCard = negozioGrande!.getCardWithID(uniqueID: uniqueID!)
-                faceOneLabel.text = currentCard?.cardInfo.faceOne
-                tagLabel.text = currentCard?.cardInfo.tags
-                currentAnswerValue = maxAnswerValue
-
-            }
-            else
-            {
-                skipButton.isEnabled = false
-                showHintButton.isEnabled = false
-                AnswerField.isEnabled = false
-                faceOneLabel.text = "-- All caught up --"
-                tagLabel.text = " "
-                messageLabel.text = " "
-            }
+            setEnableButtons([skipButton, showHintButton], true)
+            AnswerField.isEnabled = true
+            currentCard = negozioGrande!.getCardWithID(uniqueID: oggiQueue![currentPlaceInQueue])
+            faceOneLabel.text = currentCard?.cardInfo.faceOne
+            tagLabel.text = currentCard?.cardInfo.tags
+            currentAnswerValue = maxAnswerValue
+        }
+        else
+        {
+            setEnableButtons([skipButton, showHintButton], false)
+            AnswerField.isEnabled = false
+            faceOneLabel.text = "-- All caught up --"
+            tagLabel.text = " "
+            messageLabel.text = " "
         }
     }
  
-    func updateForPointsIndicator()
-    {
-        let ptsString = String(format: "for %.1f points", currentAnswerValue)
-        forPointsLabel.text = ptsString
-    }
     
     func updatePlaceInQueue()
     {
-        if let todaysQueue = oggiQueue
+        guard let todaysQueue = oggiQueue
+            else { fatalError("no learning queue available") }
+        if todaysQueue.count > 0
         {
-
-            let queueSize = todaysQueue.count
-            if queueSize > 0
+            currentPlaceInQueue += 1
+            if currentPlaceInQueue > (todaysQueue.count - 1) || (currentPlaceInQueue >= maxCardsInHand)
             {
-                currentPlaceInQueue = currentPlaceInQueue + 1
-                if currentPlaceInQueue > (queueSize - 1) || (currentPlaceInQueue >= maxCardsInHand)
-                {
-                    currentPlaceInQueue = 0
-                }
+                currentPlaceInQueue = 0
             }
         }
     }
@@ -252,12 +216,10 @@ class ViewController: UIViewController {
     {
         feedbackView.alpha = 1.0
         negozioGrande!.updateUserTotalPoints(addThese: currentAnswerValue)
-        updateTotalPoints()
+        pointsLabel.text = updateTotalPoints()
         
         // notify the learner
-        let ptsStr = String(format:"%.1f", currentAnswerValue)
-        
-        messageLabel.text = "(" + ptsStr + " pts): \(currentCard?.cardInfo.faceTwo ?? " ")"
+        messageLabel.text = "(" + String(format:"%.1f", currentAnswerValue) + " pts): \(currentCard?.cardInfo.faceTwo ?? " ")"
         
         // update statistics for the card
         negozioGrande!.updateCardAnsweredCorrect(uniqueID: currentCard!.uniqueID, distance: dist)
@@ -275,7 +237,7 @@ class ViewController: UIViewController {
         }
 
         refreshCardShown()
-        updateCounter()
+        cardsKnownLabel.text = updateCounter()
         animateResponse(UIColor.green,  messageLabel, feedbackView, correctAnswerShownPause)
     }
     
@@ -289,36 +251,18 @@ class ViewController: UIViewController {
 
     func uiSetup()
     {
-     
-        let buttnsType1 : Array<UIButton> = [showHintButton, skipButton]
-        let buttnsType2 : Array<UIButton> = [addButton, browseButton, configureButton, statisticsButton]
-        let bov = bOfVenusColors()
-        let bp = buttonParams()
+        buttonAppearance([showHintButton, skipButton],[addButton, browseButton, configureButton, statisticsButton])
+        view!.backgroundColor = bOfVenusColors().beige
+        faceOneLabel.backgroundColor = bOfVenusColors().blue
+        messageLabel.backgroundColor = bOfVenusColors().beige
+        AnswerField.backgroundColor = bOfVenusColors().blue
+        hintLabel.backgroundColor = bOfVenusColors().beige
+        forPointsLabel.textColor = bOfVenusColors().red
+        tagLabel.textColor = bOfVenusColors().red
+        pointsLabel.textColor = bOfVenusColors().red
+        cardsKnownLabel.textColor = bOfVenusColors().red
         
-        view!.backgroundColor = bov.beige
-        
-        faceOneLabel.backgroundColor = bov.blue
-        messageLabel.backgroundColor = bov.beige
-        AnswerField.backgroundColor = bov.blue
-        hintLabel.backgroundColor = bov.beige
-        forPointsLabel.textColor = bov.red
-        tagLabel.textColor = bov.red
-        pointsLabel.textColor = bov.red
-        cardsKnownLabel.textColor = bov.red
-        
-        let both : Array<UIButton> = buttnsType1 + buttnsType2
-        for b in both
-        {
-            b.layer.borderWidth = bp.borderWidth
-            b.layer.borderColor = bov.dark.cgColor
-            b.layer.cornerRadius = bp.cornerRadius
-            b.layer.backgroundColor = bov.green.cgColor
-            b.tintColor = UIColor.white
-        }
-        for b in buttnsType2
-        {
-            b.layer.backgroundColor = bov.blue.cgColor
-        }
+
     }
 
 }
