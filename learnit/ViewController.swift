@@ -31,30 +31,24 @@ class ViewController: UIViewController {
     @IBOutlet weak var feedbackHeight: NSLayoutConstraint!
     @IBOutlet weak var messageHeight: NSLayoutConstraint!
     
-    var maxCardsInHand : Int = 5
-    var correctAnswerShownPause : Float = 5.0
+
     var currentCard : CardObject?
-    var currentPlaceInQueue: Int = 0
     var hintLevel : Int = 0
-    var hintAnswer: String?
-    var maxAnswerValue : Float = 10.0
     var currentAnswerValue : Float = 10.0
+    var stateNow = userState()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.storageSetup()
+        let negozioGrande = CoreDataDomus()
+        negozioGrande.refreshFetchedResultsController()
+        negozioGrande.refreshFetchedTagsController()
         self.refreshLearnerPreferences()
-        negozioGrande?.updateStudyToday()
+        negozioGrande.updateStudyToday()
         self.uiSetup()
         self.pointsLabel.text = updateTotalPoints()
         prepareKeyboardNotifications()
-        
-//        if oggiQueue  == nil
-//        {
-//            self.refreshCardShown()
-//        }
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.view.endEditing(true)
         self.refreshLearnerPreferences()
@@ -68,31 +62,29 @@ class ViewController: UIViewController {
         AnswerField.preferredLang = nil
         refreshCardShown()
     }
-
+    
     @IBAction func hintButtonPress(_ sender: Any) {
-        if let hintA = hintAnswer
+        let hintA = stateNow.hintAnswer
+        let nextHint = shareHint(hintAnswer: hintA, hintLevel: &hintLevel, answerValue: &currentAnswerValue)
+        if nextHint.characters.count > 1
         {
-            let nextHint = shareHint(hintAnswer: hintA, hintLevel: &hintLevel, answerValue: &currentAnswerValue)
-            if nextHint.characters.count > 1
-            {
-              hintLabel.text = nextHint
-            }
-            let attHintText = NSAttributedString(string: hintLabel.text!, attributes: [NSKernAttributeName : 2.0])
-            hintLabel.attributedText = attHintText
-            forPointsLabel.text = updateForPointsIndicator(currentAnswerValue)
+            hintLabel.text = nextHint
         }
+        let attHintText = NSAttributedString(string: hintLabel.text!, attributes: [NSKernAttributeName : 2.0])
+        hintLabel.attributedText = attHintText
+        forPointsLabel.text = updateForPointsIndicator(currentAnswerValue)
     }
 
     @IBAction func skipButtonPress(_ sender: Any) {
-        updatePlaceInQueue()
+        stateNow = updatePlaceInQueue(oggiQueue!, stateNow)
         refreshCardShown()
     }
 
 
     @IBAction func beginTypingAnswer(_ sender: Any) {
         self.messageLabel.text = " "
-        
     }
+    
     @IBAction func enteredAnswer(_ sender: Any) {
         view.endEditing(true)
         var result = assessResponse(AnswerField, currentCard!, &currentAnswerValue)
@@ -108,31 +100,17 @@ class ViewController: UIViewController {
         forPointsLabel.text = updateForPointsIndicator(currentAnswerValue)
     }
     
-    
     @IBAction func dismissKeyb(_ sender: Any) {
         view.endEditing(true)
-    }
-    
-    func storageSetup()
-    {
-        negozioGrande = CoreDataDomus()
-        if negozioGrande == nil  {
-            fatalError("Error creating Core Data Object")
-        }
-        else  {
-            negozioGrande!.refreshFetchedResultsController()
-            negozioGrande!.refreshFetchedTagsController()
-        }
-
     }
     
     func refreshLearnerPreferences()
     {
         if let currentL = negozioGrande!.currentLearner  {
-            maxCardsInHand = Int(currentL.maxCardsInHand)
-            correctAnswerShownPause = currentL.correctAnswerShownPause
+            stateNow.maxCardsInHand = Int(currentL.maxCardsInHand)
+            stateNow.correctAnswerShownPause = currentL.correctAnswerShownPause
             currentAnswerValue = currentL.maximumAnswerValue
-            maxAnswerValue = currentL.maximumAnswerValue
+            stateNow.maxAnswerValue = currentL.maximumAnswerValue
         }
     }
 
@@ -141,14 +119,14 @@ class ViewController: UIViewController {
     {
         oggiQueue = refreshLearningQueue()
         let queueSize = oggiQueue?.count
-        if queueSize! > 0 && currentPlaceInQueue < 1
+        if queueSize! > 0 && stateNow.currentPlaceInQueue < 1
         {
-            currentPlaceInQueue = 0
-            currentCard = negozioGrande!.getCardWithID(uniqueID: oggiQueue![currentPlaceInQueue])
+            stateNow.currentPlaceInQueue = 0
+            currentCard = negozioGrande!.getCardWithID(uniqueID: oggiQueue![stateNow.currentPlaceInQueue])
         }
-        if currentPlaceInQueue >= queueSize!
+        if stateNow.currentPlaceInQueue >= queueSize!
         {
-            currentPlaceInQueue = queueSize! - 1
+            stateNow.currentPlaceInQueue = queueSize! - 1
         }
         hintLabel.text = " "
         UIView.animate(withDuration: 1.5, delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
@@ -157,10 +135,9 @@ class ViewController: UIViewController {
         hintLevel = 0
         pointsLabel.text = updateTotalPoints()
         showACard()
-        hintAnswer = currentCard?.cardInfo.faceTwoAsSet.first
+        stateNow.hintAnswer = (currentCard?.cardInfo.faceTwoAsSet.first!)!
     }
  
-    
     func showACard()
     {
         guard let queueSize = oggiQueue?.count
@@ -169,10 +146,10 @@ class ViewController: UIViewController {
         {
             setEnableButtons([skipButton, showHintButton], true)
             AnswerField.isEnabled = true
-            currentCard = negozioGrande!.getCardWithID(uniqueID: oggiQueue![currentPlaceInQueue])
+            currentCard = negozioGrande!.getCardWithID(uniqueID: oggiQueue![stateNow.currentPlaceInQueue])
             faceOneLabel.text = currentCard?.cardInfo.faceOne
             tagLabel.text = currentCard?.cardInfo.tags
-            currentAnswerValue = maxAnswerValue
+            currentAnswerValue = stateNow.maxAnswerValue
         }
         else
         {
@@ -185,20 +162,6 @@ class ViewController: UIViewController {
     }
  
     
-    func updatePlaceInQueue()
-    {
-        guard let todaysQueue = oggiQueue
-            else { fatalError("no learning queue available") }
-        if todaysQueue.count > 0
-        {
-            currentPlaceInQueue += 1
-            if currentPlaceInQueue > (todaysQueue.count - 1) || (currentPlaceInQueue >= maxCardsInHand)
-            {
-                currentPlaceInQueue = 0
-            }
-        }
-    }
-    
     func processIncorrectAnswer(uniqueID:String, distance dist: Float)
     {
         feedbackView.alpha = 1.0
@@ -207,9 +170,9 @@ class ViewController: UIViewController {
         // update statistics for the card
         negozioGrande!.updateCardAnsweredINCorrect(uniqueID: currentCard!.uniqueID, distance: dist)
         // move to next card & show it
-        updatePlaceInQueue()
+        stateNow = updatePlaceInQueue(oggiQueue!, stateNow)
         refreshCardShown()
-        animateResponse(UIColor.red,  messageLabel, feedbackView, correctAnswerShownPause)
+        animateResponse(UIColor.red,  messageLabel, feedbackView, stateNow.correctAnswerShownPause)
     }
     
     func processCorrectAnswer(uniqueID:String, distance dist:Float)
@@ -231,19 +194,16 @@ class ViewController: UIViewController {
         }
         
         // move to next card & show it
-        if currentPlaceInQueue >= oggiQueue!.count
+        if stateNow.currentPlaceInQueue >= oggiQueue!.count
         {
-            currentPlaceInQueue = 0
+            stateNow.currentPlaceInQueue = 0
         }
 
         refreshCardShown()
         cardsKnownLabel.text = updateCounter()
-        animateResponse(UIColor.green,  messageLabel, feedbackView, correctAnswerShownPause)
+        animateResponse(UIColor.green,  messageLabel, feedbackView, stateNow.correctAnswerShownPause)
     }
     
-
-    
-
     @IBAction func unwindToMain(sender : UIStoryboardSegue)
     {
        // if loq == true {print("Unwinding to the main view...")}
@@ -261,8 +221,6 @@ class ViewController: UIViewController {
         tagLabel.textColor = bOfVenusColors().red
         pointsLabel.textColor = bOfVenusColors().red
         cardsKnownLabel.textColor = bOfVenusColors().red
-        
-
     }
 
 }

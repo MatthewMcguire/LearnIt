@@ -8,6 +8,14 @@
 
 import UIKit
 
+struct userState {
+    var maxCardsInHand: Int = 5
+    var correctAnswerShownPause: Float = 5.0
+    var maxAnswerValue: Float = 10.0
+    var hintAnswer: String = ""
+    var currentPlaceInQueue: Int = 0
+}
+
 struct buttonParams {
     let borderWidth : CGFloat = 2.5
     let cornerRadius : CGFloat = 9.0
@@ -143,3 +151,20 @@ func updateCounter() -> String
     let counterLabelText = "known: \(numKnownCards)/\(numCards)"
     return counterLabelText
 }
+
+
+func updatePlaceInQueue(_ oggiQueue: Array<String>,_ state: userState) -> userState
+{
+    var stateNow = state
+    let todaysQueue = oggiQueue
+    if todaysQueue.count > 0
+    {
+        stateNow.currentPlaceInQueue += 1
+        if stateNow.currentPlaceInQueue > (todaysQueue.count - 1) || (stateNow.currentPlaceInQueue >= stateNow.maxCardsInHand)
+        {
+            stateNow.currentPlaceInQueue = 0
+        }
+    }
+    return stateNow
+}
+
