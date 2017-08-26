@@ -118,30 +118,26 @@ class ViewController: UIViewController {
     func refreshCardShown()
     {
         oggiQueue = refreshLearningQueue()
-        let queueSize = oggiQueue?.count
-        if queueSize! > 0 && stateNow.currentPlaceInQueue < 1
+        guard let queueSize = oggiQueue?.count
+            else { fatalError("there is no learning queue object") }
+        if queueSize > 0 && stateNow.currentPlaceInQueue < 1
         {
             stateNow.currentPlaceInQueue = 0
             currentCard = negozioGrande!.getCardWithID(uniqueID: oggiQueue![stateNow.currentPlaceInQueue])
         }
-        if stateNow.currentPlaceInQueue >= queueSize!
-        {
-            stateNow.currentPlaceInQueue = queueSize! - 1
-        }
+        stateNow.currentPlaceInQueue = min(stateNow.currentPlaceInQueue,queueSize - 1)
         hintLabel.text = " "
         UIView.animate(withDuration: 1.5, delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
             self.AnswerField.text = ""
             }, completion: nil)
         hintLevel = 0
         pointsLabel.text = updateTotalPoints()
-        showACard()
+        showACard(queueSize)
         stateNow.hintAnswer = (currentCard?.cardInfo.faceTwoAsSet.first!)!
     }
  
-    func showACard()
+    func showACard(_ queueSize: Int)
     {
-        guard let queueSize = oggiQueue?.count
-            else { fatalError("Cannot obtain learning queue size.") }
         if queueSize > 0
         {
             setEnableButtons([skipButton, showHintButton], true)
@@ -155,12 +151,9 @@ class ViewController: UIViewController {
         {
             setEnableButtons([skipButton, showHintButton], false)
             AnswerField.isEnabled = false
-            faceOneLabel.text = "-- All caught up --"
-            tagLabel.text = " "
-            messageLabel.text = " "
+            setLabelText([faceOneLabel,tagLabel,messageLabel], "--")
         }
     }
- 
     
     func processIncorrectAnswer(uniqueID:String, distance dist: Float)
     {
@@ -217,10 +210,7 @@ class ViewController: UIViewController {
         messageLabel.backgroundColor = bOfVenusColors().beige
         AnswerField.backgroundColor = bOfVenusColors().blue
         hintLabel.backgroundColor = bOfVenusColors().beige
-        forPointsLabel.textColor = bOfVenusColors().red
-        tagLabel.textColor = bOfVenusColors().red
-        pointsLabel.textColor = bOfVenusColors().red
-        cardsKnownLabel.textColor = bOfVenusColors().red
+        labelTextColor([forPointsLabel,tagLabel,pointsLabel,cardsKnownLabel], bOfVenusColors().red )
     }
 
 }

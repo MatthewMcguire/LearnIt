@@ -119,6 +119,21 @@ func buttonAppearance(_ buttnsType1: Array<UIButton>, _ buttnsType2: Array<UIBut
         b.layer.backgroundColor = bov.blue.cgColor
     }
 }
+func labelTextColor(_ label: Array<UILabel>, _ colr: UIColor )
+{
+    for l in label
+    {
+        l.textColor = colr
+    }
+}
+
+func  setLabelText(_ labels: [UILabel],_ text: String)
+{
+    for l in labels  {
+        l.text = text
+    }
+}
+
 
 func updateForPointsIndicator(_ c: Float) -> String
 {

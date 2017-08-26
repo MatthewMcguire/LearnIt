@@ -221,62 +221,40 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
  
     func updateCardAnsweredINCorrect(uniqueID: String, distance: Float)
     {
-        let quaestioTertiusDecius = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
-        quaestioTertiusDecius.predicate = NSPredicate(format: "uniqueID == %@", uniqueID)
-        
+        let quaestio = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
+        quaestio.predicate = NSPredicate(format: "uniqueID == %@", uniqueID)
+        var queryResult : Array<CardStackManagedObject>
         do {
             
-            let queryResult = try manObjContext.fetch(quaestioTertiusDecius)
-            
-            if queryResult.count > 0
-            {
-                let resultCard : CardStackManagedObject = (queryResult.first)!
-
-                if let cardStats = resultCard.cardToStats
-                {
-                    if resultCard.isKnown == true
-                    {
-                        if cardStats.numberTimesForgotten >= 1
-                        {
-                            cardStats.numberTimesForgotten += 1
-                        }
-                        else
-                        {
-                            cardStats.numberTimesForgotten = 1
-                        }
-                    }
-                    if cardStats.numberTimesIncorrect >= 1
-                    {
-                        cardStats.numberTimesIncorrect += 1
-                    }
-                    else
-                    {
-                        cardStats.numberTimesIncorrect = 1
-                    }
-                    cardStats.idealInterval = 1.0
-
-                    // update difficulty rating
-                    cardStats.difficultyRating = max(cardStats.difficultyRating, Float(1.3))
-                    let q = max(5.0 - distance, 0.0)
-                    
-                    cardStats.difficultyRating += (-0.8 + (0.28 * q) - 0.02 * q * q)
-                    cardStats.difficultyRating = max(cardStats.difficultyRating, Float(1.3))
-                    cardStats.difficultyRating = min(cardStats.difficultyRating, Float(2.5))
-                    
-                    resultCard.isKnown = false
-                    resultCard.studyToday = false
-                }
-                else
-                {
-                    fatalError("Couldn't fetch CardStack Stats objects from Core Data.")
-                }
-                saveContext()
-            }
+            queryResult = try manObjContext.fetch(quaestio)
         }
         catch
         {
             fatalError("Couldn't fetch CardStack object from Core Data")
         }
+        guard queryResult.count > 0 else { return }
+        let resultCard = (queryResult.first)!
+        if let cardStats = resultCard.cardToStats
+        {
+            if resultCard.isKnown == true
+            {
+                cardStats.numberTimesForgotten += 1
+            }
+            cardStats.numberTimesIncorrect += 1
+            cardStats.idealInterval = 1.0
+            
+            // update difficulty rating
+            cardStats.difficultyRating = max(cardStats.difficultyRating, Float(1.3))
+            let q = max(5.0 - distance, 0.0)
+            
+            cardStats.difficultyRating += (-0.8 + (0.28 * q) - 0.02 * q * q)
+            cardStats.difficultyRating = max(cardStats.difficultyRating, Float(1.3))
+            cardStats.difficultyRating = min(cardStats.difficultyRating, Float(2.5))
+            
+            resultCard.isKnown = false
+            resultCard.studyToday = false
+        }
+        saveContext()
     }
 
     func numberOfSectionsInTblVw() -> Int
