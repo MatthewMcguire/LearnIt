@@ -55,6 +55,7 @@ func isMarkedCorrect (storedAnswer:String, dist dis : Int )->Bool
 }
 func animateResponse(_ colr: UIColor,_  messageLabel: UILabel,_ feedbackView: UIView, _ correctAnswerShownPause: Float)
 {
+    feedbackView.alpha = 1.0
     messageLabel.backgroundColor = UIColor.white
     feedbackView.backgroundColor = UIColor.white
     
@@ -64,6 +65,13 @@ func animateResponse(_ colr: UIColor,_  messageLabel: UILabel,_ feedbackView: UI
     }, completion: nil)
     UIView.animate(withDuration: TimeInterval(correctAnswerShownPause), delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
         feedbackView.alpha = 0.0
+    }, completion: nil)
+}
+
+func animateShowCard(_  t: String,_ f: SmartLanguageUITextField)
+{
+    UIView.animate(withDuration: 1.5, delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
+        f.text = t
     }, completion: nil)
 }
 

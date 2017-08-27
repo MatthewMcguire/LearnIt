@@ -39,13 +39,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let negozioGrande = CoreDataDomus()
-        negozioGrande.refreshFetchedResultsController()
-        negozioGrande.refreshFetchedTagsController()
-        self.refreshLearnerPreferences()
-        negozioGrande.updateStudyToday()
-        self.uiSetup()
-        self.pointsLabel.text = updateTotalPoints()
+        negozioGrande = CoreDataDomus()
+        negozioGrande?.refreshFetchedResultsController()
+        negozioGrande?.refreshFetchedTagsController()
+        refreshLearnerPreferences()
+        negozioGrande?.updateStudyToday()
+        uiSetup()
+        pointsLabel.text = updateTotalPoints()
         prepareKeyboardNotifications()
     }
     
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
     @IBAction func hintButtonPress(_ sender: Any) {
         let hintA = stateNow.hintAnswer
         let nextHint = shareHint(hintAnswer: hintA, hintLevel: &hintLevel, answerValue: &currentAnswerValue)
-        if nextHint.characters.count > 1
+        if nextHint.characters.count > 0
         {
             hintLabel.text = nextHint
         }
@@ -97,7 +97,6 @@ class ViewController: UIViewController {
         {
             processCorrectAnswer(uniqueID: currentCard!.uniqueID, distance: result)
         }
-        forPointsLabel.text = updateForPointsIndicator(currentAnswerValue)
     }
     
     @IBAction func dismissKeyb(_ sender: Any) {
@@ -106,7 +105,8 @@ class ViewController: UIViewController {
     
     func refreshLearnerPreferences()
     {
-        if let currentL = negozioGrande!.currentLearner  {
+        print("Bojangles")
+        if let currentL = negozioGrande?.currentLearner  {
             stateNow.maxCardsInHand = Int(currentL.maxCardsInHand)
             stateNow.correctAnswerShownPause = currentL.correctAnswerShownPause
             currentAnswerValue = currentL.maximumAnswerValue
@@ -118,41 +118,35 @@ class ViewController: UIViewController {
     func refreshCardShown()
     {
         oggiQueue = refreshLearningQueue()
-        guard let queueSize = oggiQueue?.count
-            else { fatalError("there is no learning queue object") }
-        if queueSize > 0 && stateNow.currentPlaceInQueue < 1
+        if let queueSize = oggiQueue?.count, queueSize > 0
         {
-            stateNow.currentPlaceInQueue = 0
-            currentCard = negozioGrande!.getCardWithID(uniqueID: oggiQueue![stateNow.currentPlaceInQueue])
-        }
-        stateNow.currentPlaceInQueue = min(stateNow.currentPlaceInQueue,queueSize - 1)
-        hintLabel.text = " "
-        UIView.animate(withDuration: 1.5, delay: 0.5, options:UIViewAnimationOptions.curveEaseInOut, animations: {
-            self.AnswerField.text = ""
-            }, completion: nil)
-        hintLevel = 0
-        pointsLabel.text = updateTotalPoints()
-        showACard(queueSize)
-        stateNow.hintAnswer = (currentCard?.cardInfo.faceTwoAsSet.first!)!
-    }
- 
-    func showACard(_ queueSize: Int)
-    {
-        if queueSize > 0
-        {
-            setEnableButtons([skipButton, showHintButton], true)
-            AnswerField.isEnabled = true
-            currentCard = negozioGrande!.getCardWithID(uniqueID: oggiQueue![stateNow.currentPlaceInQueue])
-            faceOneLabel.text = currentCard?.cardInfo.faceOne
-            tagLabel.text = currentCard?.cardInfo.tags
-            currentAnswerValue = stateNow.maxAnswerValue
+            stateNow.currentPlaceInQueue = max(min(stateNow.currentPlaceInQueue,queueSize-1),0)
+            showACard()
         }
         else
         {
             setEnableButtons([skipButton, showHintButton], false)
             AnswerField.isEnabled = false
             setLabelText([faceOneLabel,tagLabel,messageLabel], "--")
+            stateNow.hintAnswer = (currentCard?.cardInfo.faceTwoAsSet.first!)!
         }
+        
+        hintLabel.text = " "
+        hintLevel = 0
+        pointsLabel.text = updateTotalPoints()
+        forPointsLabel.text = updateForPointsIndicator(currentAnswerValue)
+    }
+ 
+    func showACard()
+    {
+        animateShowCard("",AnswerField)
+        setEnableButtons([skipButton, showHintButton], true)
+        AnswerField.isEnabled = true
+        currentCard = negozioGrande!.getCardWithID(uniqueID: oggiQueue![stateNow.currentPlaceInQueue])
+        faceOneLabel.text = currentCard?.cardInfo.faceOne
+        tagLabel.text = currentCard?.cardInfo.tags
+        currentAnswerValue = stateNow.maxAnswerValue
+        
     }
     
     func processIncorrectAnswer(uniqueID:String, distance dist: Float)
@@ -170,7 +164,6 @@ class ViewController: UIViewController {
     
     func processCorrectAnswer(uniqueID:String, distance dist:Float)
     {
-        feedbackView.alpha = 1.0
         negozioGrande!.updateUserTotalPoints(addThese: currentAnswerValue)
         pointsLabel.text = updateTotalPoints()
         
