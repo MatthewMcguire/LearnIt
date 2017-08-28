@@ -39,7 +39,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        negozioGrande = CoreDataDomus()
+        if negozioGrande == nil
+        {
+           negozioGrande = CoreDataDomus()
+        }
         negozioGrande?.refreshFetchedResultsController()
         negozioGrande?.refreshFetchedTagsController()
         refreshLearnerPreferences()
@@ -128,7 +131,7 @@ class ViewController: UIViewController {
             setEnableButtons([skipButton, showHintButton], false)
             AnswerField.isEnabled = false
             setLabelText([faceOneLabel,tagLabel,messageLabel], "--")
-            stateNow.hintAnswer = (currentCard?.cardInfo.faceTwoAsSet.first!)!
+            
         }
         
         hintLabel.text = " "
@@ -146,7 +149,7 @@ class ViewController: UIViewController {
         faceOneLabel.text = currentCard?.cardInfo.faceOne
         tagLabel.text = currentCard?.cardInfo.tags
         currentAnswerValue = stateNow.maxAnswerValue
-        
+        stateNow.hintAnswer = (currentCard?.cardInfo.faceTwoAsSet.first!)!
     }
     
     func processIncorrectAnswer(uniqueID:String, distance dist: Float)

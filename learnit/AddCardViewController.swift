@@ -57,26 +57,22 @@ class AddCardViewController: UIViewController {
     func saveNewCard()
     {
         // obtain and validate the input fields
-        if let inputFaceOne = faceOneField.text {
-           if let inputFaceTwo = faceTwoField.text {
-            if let inputTags = tagsField.text {
-                if inputFaceOne.characters.count > 0 &&
-                    inputFaceTwo.characters.count > 0 &&
-                    inputTags.characters.count > 0
-                {
-                    // create a new cards object,
-                    // initialize to match input,
-                    // and send to Core Data
-                    let aNewCard : CardObject = CardObject()
-                    aNewCard.cardInfo.isActive = true
-                    aNewCard.cardInfo.isKnown = false
-                    aNewCard.cardInfo.studyToday = false
-                    aNewCard.cardInfo.faceOne = inputFaceOne
-                    aNewCard.cardInfo.faceTwo = inputFaceTwo
-                    aNewCard.cardInfo.tags = inputTags
-                    negozioGrande!.addNewObj(card: aNewCard)
-                }
-            }
+        if let inputFaceOne = faceOneField.text,let inputFaceTwo = faceTwoField.text,let inputTags = tagsField.text {
+            if inputFaceOne.characters.count > 0,
+                inputFaceTwo.characters.count > 0,
+                inputTags.characters.count > 0
+            {
+                // create a new cards object,
+                // initialize to match input,
+                // and send to Core Data
+                let aNewCard : CardObject = CardObject()
+                aNewCard.cardInfo.isActive = true
+                aNewCard.cardInfo.isKnown = false
+                aNewCard.cardInfo.studyToday = false
+                aNewCard.cardInfo.faceOne = inputFaceOne
+                aNewCard.cardInfo.faceTwo = inputFaceTwo
+                aNewCard.cardInfo.tags = inputTags
+                negozioGrande!.addNewObj(card: aNewCard)
             }
         }
     }

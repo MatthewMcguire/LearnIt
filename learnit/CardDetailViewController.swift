@@ -37,51 +37,15 @@ class CardDetailViewController: UIViewController {
 
     func  populateFields()
     {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        dateFormatter.locale = Locale(identifier:"en_US")
-        
-        if let cc = currentCard
-        {
-            faceOneField.text = cc.cardInfo.faceOne
-            faceTwoField.text = cc.cardInfo.faceTwo
-            tagsField.text = cc.cardInfo.tags
-            isActiveSwitch.isOn = cc.cardInfo.isActive
-            isKnownSwitch.isOn = cc.cardInfo.isKnown
-            studyTodaySwitch.isOn = cc.cardInfo.studyToday
-            if let ccdif = cc.cardInfo.diffRating
-            {
-                difficultyField.text = String(format:"%.2f", ccdif)
-                
-            }
-            else
-            {
-                difficultyField.text = "---"
-            }
-            if let ccII = cc.cardInfo.idealInterval
-            {
-                idealIntervalField.text = String(format:"%.2f", ccII)
-                
-            }
-            else
-            {
-                idealIntervalField.text = "---"
-            }
-            correctTimesField.text = "\(cc.cardInfo.numCorr)"
-            incorrectTimesFields.text = "\(cc.cardInfo.numIncorr)"
-            forgottenTimesField.text = "\(cc.cardInfo.numForgot)"
-
-            if let ccLastCorrect = cc.cardInfo.lastAnswerCorrect
-            {
-                lastCorrectField.text = dateFormatter.string(from: ccLastCorrect as Date)
-            }
-            else
-            {
-                lastCorrectField.text = "---"
-            }
-        }
-
+        guard let cc = currentCard
+            else { return }
+        faceOneField.text = cc.cardInfo.faceOne
+        faceTwoField.text = cc.cardInfo.faceTwo
+        tagsField.text = cc.cardInfo.tags
+        isActiveSwitch.isOn = cc.cardInfo.isActive
+        isKnownSwitch.isOn = cc.cardInfo.isKnown
+        studyTodaySwitch.isOn = cc.cardInfo.studyToday
+        showProgressDetails(cc)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -91,6 +55,25 @@ class CardDetailViewController: UIViewController {
             {
                     negozioGrande!.updateItem(indexPath: selectedIndexPath!, withValues: cc)
             }
+        }
+    }
+    
+    func showProgressDetails(_ cc: CardObject)
+    {
+        let dateFormatter = mediumDateFormat()
+        difficultyField.text = String(format:"%.2f", cc.cardInfo.diffRating!)
+        correctTimesField.text = "\(cc.cardInfo.numCorr)"
+        incorrectTimesFields.text = "\(cc.cardInfo.numIncorr)"
+        forgottenTimesField.text = "\(cc.cardInfo.numForgot)"
+        idealIntervalField.text = String(format:"%.2f", cc.cardInfo.idealInterval!)
+        
+        if let ccLastCorrect = cc.cardInfo.lastAnswerCorrect
+        {
+            lastCorrectField.text = dateFormatter.string(from: ccLastCorrect as Date)
+        }
+        else
+        {
+            lastCorrectField.text = "---"
         }
     }
     /*
