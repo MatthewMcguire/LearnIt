@@ -159,7 +159,7 @@ func setEnableButtons(_ uiObj: Array<UIButton>,_ enable: Bool)
 
 func updateTotalPoints() -> String
 {
-    let totalPoints = negozioGrande!.getUserTotalPoints()
+    let totalPoints = getUserTotalPoints()
     let ptsString = String(format: "%.1f pts.", totalPoints)
     return ptsString
 }

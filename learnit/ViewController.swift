@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var pointsLabel: UILabel!
     @IBOutlet weak var cardsKnownLabel: UILabel!
     @IBOutlet weak var AnswerField: SmartLanguageUITextField!
-
+    
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var forPointsLabel: UILabel!
     @IBOutlet weak var showHintButton: UIButton!
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var feedbackHeight: NSLayoutConstraint!
     @IBOutlet weak var messageHeight: NSLayoutConstraint!
     
-
+    
     var currentCard : CardObject?
     var hintLevel : Int = 0
     var currentAnswerValue : Float = 10.0
@@ -41,11 +41,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         if negozioGrande == nil
         {
-           negozioGrande = CoreDataDomus()
+            negozioGrande = CoreDataDomus()
         }
         negozioGrande?.refreshFetchedResultsController()
         negozioGrande?.refreshFetchedTagsController()
-//        refreshLearnerPreferences()
+        //        refreshLearnerPreferences()
         updateStudyToday()
         uiSetup()
         pointsLabel.text = updateTotalPoints()
@@ -76,13 +76,13 @@ class ViewController: UIViewController {
         hintLabel.attributedText = attHintText
         forPointsLabel.text = updateForPointsIndicator(currentAnswerValue)
     }
-
+    
     @IBAction func skipButtonPress(_ sender: Any) {
         stateNow = updatePlaceInQueue(oggiQueue!, stateNow)
         refreshCardShown()
     }
-
-
+    
+    
     @IBAction func beginTypingAnswer(_ sender: Any) {
         self.messageLabel.text = " "
     }
@@ -104,7 +104,7 @@ class ViewController: UIViewController {
     @IBAction func dismissKeyb(_ sender: Any) {
         view.endEditing(true)
     }
-        
+    
     func refreshCardShown()
     {
         oggiQueue = refreshLearningQueue()
@@ -125,7 +125,7 @@ class ViewController: UIViewController {
         pointsLabel.text = updateTotalPoints()
         forPointsLabel.text = updateForPointsIndicator(currentAnswerValue)
     }
- 
+    
     func showACard()
     {
         hintLevel = 0
@@ -154,7 +154,7 @@ class ViewController: UIViewController {
     
     func processCorrectAnswer(uniqueID:String, distance dist:Float)
     {
-        negozioGrande!.updateUserTotalPoints(addThese: currentAnswerValue)
+        updateUserTotalPoints(addThese: currentAnswerValue)
         pointsLabel.text = updateTotalPoints()
         
         // notify the learner
@@ -171,7 +171,7 @@ class ViewController: UIViewController {
         
         // move to next card & show it
         stateNow.currentPlaceInQueue = min(stateNow.currentPlaceInQueue,(oggiQueue!.count-1))
-
+        
         refreshCardShown()
         cardsKnownLabel.text = updateCounter()
         animateResponse(UIColor.green,  messageLabel, feedbackView, stateNow.correctAnswerShownPause)
@@ -179,9 +179,9 @@ class ViewController: UIViewController {
     
     @IBAction func unwindToMain(sender : UIStoryboardSegue)
     {
-       // if loq == true {print("Unwinding to the main view...")}
+        // if loq == true {print("Unwinding to the main view...")}
     }
-
+    
     func uiSetup()
     {
         buttonAppearance([showHintButton, skipButton],[addButton, browseButton, configureButton, statisticsButton])
@@ -192,7 +192,7 @@ class ViewController: UIViewController {
         hintLabel.backgroundColor = bOfVenusColors().beige
         labelTextColor([forPointsLabel,tagLabel,pointsLabel,cardsKnownLabel], bOfVenusColors().red )
     }
-
+    
 }
 
 

@@ -13,7 +13,7 @@ class CardDetailViewController: UIViewController {
     var selectedIndexPath : IndexPath?
     var currentCard : CardObject?
     var hasChangesToSave : Bool = false
-
+    
     @IBOutlet weak var faceOneField: UITextField!
     @IBOutlet weak var faceTwoField: UITextField!
     @IBOutlet weak var tagsField: UITextField!
@@ -34,7 +34,7 @@ class CardDetailViewController: UIViewController {
         populateFields()
         
     }
-
+    
     func  populateFields()
     {
         guard let cc = currentCard
@@ -47,13 +47,13 @@ class CardDetailViewController: UIViewController {
         studyTodaySwitch.isOn = cc.cardInfo.studyToday
         showProgressDetails(cc)
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         if hasChangesToSave == true
         {
             if let cc = currentCard
             {
-                    negozioGrande!.updateItem(indexPath: selectedIndexPath!, withValues: cc)
+                updateItem(indexPath: selectedIndexPath!, withValues: cc)
             }
         }
     }
@@ -77,13 +77,13 @@ class CardDetailViewController: UIViewController {
         }
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

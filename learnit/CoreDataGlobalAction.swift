@@ -13,8 +13,8 @@ func clearAllObjectsFromStore(context: NSManagedObjectContext)
 {
     let quaestio = [NSFetchRequest<CardStackManagedObject>(entityName: "CardStack"),
                     NSFetchRequest<FaceManagedObject>(entityName: "Face"),
-                     NSFetchRequest<TagManagedObject>(entityName: "Tag"),
-                     NSFetchRequest<CardStatsManagedObject>(entityName: "CardStats")]
+                    NSFetchRequest<TagManagedObject>(entityName: "Tag"),
+                    NSFetchRequest<CardStatsManagedObject>(entityName: "CardStats")]
     for q in quaestio
     {
         do {
@@ -28,7 +28,7 @@ func clearAllObjectsFromStore(context: NSManagedObjectContext)
             fatalError("Couldn't fetch CardStack info from Core Data")
         }
     }
-
+    
     negozioGrande!.saveContext()
     negozioGrande!.refreshFetchedTagsController()
 }
@@ -138,7 +138,7 @@ func refreshLearningQueue() -> Array<String> {
      */
     var currentlearningQueue = Array<String>()
     guard let context = negozioGrande?.manObjContext
-    else
+        else
     {
         return currentlearningQueue
     }

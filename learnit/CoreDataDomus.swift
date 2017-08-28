@@ -37,7 +37,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         
         do {
             try fetchedItems.performFetch()
-
+            
         }
         catch
         {
@@ -48,7 +48,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
     func refreshFetchedTagsController()
     {
         let quaestioTertiusDecimus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
-//        quaestioTertiusDecimus.predicate = NSPredicate(format: "isActive == YES")
+        //        quaestioTertiusDecimus.predicate = NSPredicate(format: "isActive == YES")
         let sortKey1 = NSSortDescriptor(key: "timesUsed", ascending: false)
         let sortKey2 = NSSortDescriptor(key: "tagText", ascending: true)
         quaestioTertiusDecimus.sortDescriptors = [sortKey1, sortKey2]
@@ -64,30 +64,18 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
             fatalError("Error fetching objects from the persistent store")
         }
     }
-
     
-    func getUserTotalPoints() -> Float
-    {
-        return currentLearner!.totalPoints
-    }
     
-    func updateUserTotalPoints(addThese: Float)
-    {
-        let points = currentLearner!.totalPoints
-        currentLearner!.totalPoints = points + addThese
-        saveContext()
-    }
-   
     func addNewObj(card : CardObject)
     {
         let helper = CoreDataManagement(manObjContext: manObjContext)
         helper.newCard(card: card)
-
+        
         saveContext()
         refreshFetchedTagsController()
         refreshFetchedResultsController()
     }
-
+    
     func numberOfSectionsInTblVw() -> Int
     {
         return fetchedItems!.sections!.count
@@ -98,12 +86,12 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         let returnValue = fetchedTagItems!.sections!.count
         return returnValue
     }
- 
+    
     func numberOfRowsInTblVwSection(section : Int) -> Int
     {
         return fetchedItems!.sections![section].numberOfObjects
     }
- 
+    
     func numberOfTagRows(section: Int) -> Int
     {
         let returnValue = fetchedTagItems!.sections![section].numberOfObjects
@@ -173,14 +161,14 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
     }
     
     
-
+    
     func getCardWithID(uniqueID: String) -> CardObject
     {
         var returnedCard : CardObject = CardObject()
         
         let quaestioSeptimus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
         quaestioSeptimus.predicate = NSPredicate(format: "uniqueID == %@", uniqueID)
-
+        
         do {
             
             let queryResult = try manObjContext.fetch(quaestioSeptimus)
@@ -197,55 +185,8 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         }
         return returnedCard
     }
- 
- 
-    // MARK: TODO - this function doesn't reuse existing face or tag items (or maintain their use stats) -
-    func updateItem(indexPath : IndexPath, withValues : CardObject)
-    {
-        let oneCard : CardStackManagedObject = fetchedItems.sections![indexPath.section].objects![indexPath.row] as! CardStackManagedObject
-        oneCard.timeUpdated = NSDate()
-        
-         // UPDATE FACE ONE
-        var stringSet = Set(withValues.cardInfo.faceOne.components(separatedBy: ","))
-        var setOfFaces = Set<FaceManagedObject>()
-         // for each string, create a FaceMO Managed Obj and add to the set
-        for faceOneValue in stringSet
-        {
-            let newFaceObject = NSEntityDescription.insertNewObject(forEntityName: "Face", into: manObjContext!) as! FaceManagedObject
-            newFaceObject.faceText = faceOneValue.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            setOfFaces.insert(newFaceObject)
-        }
-        oneCard.faceOne = setOfFaces as NSSet
-        
-        // UPDATE FACE TWO
-        stringSet = Set(withValues.cardInfo.faceTwo.components(separatedBy: ","))
-        setOfFaces.removeAll()
-        setOfFaces = Set<FaceManagedObject>()
-        // for each string, create a FaceMO Managed Obj and add to the set
-        for faceTwoValue in stringSet
-        {
-            let newFaceObject = NSEntityDescription.insertNewObject(forEntityName: "Face", into: manObjContext!) as! FaceManagedObject
-            newFaceObject.faceText = faceTwoValue.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            setOfFaces.insert(newFaceObject)
-        }
-        oneCard.faceTwo = setOfFaces as NSSet
-        
-        // UPDATE TAGS
-        stringSet = Set(withValues.cardInfo.tags.components(separatedBy: ","))
-        setOfFaces.removeAll()
-        var setOfTags = Set<TagManagedObject>()
-        // for each string, create a FaceMO Managed Obj and add to the set
-        for tagValue in stringSet
-        {
-            let newTagObject = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: manObjContext!) as! TagManagedObject
-            newTagObject.tagText = tagValue.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-            setOfTags.insert(newTagObject)
-        }
-        oneCard.cardToTags = setOfTags as NSSet
-        saveContext()
-        refreshFetchedResultsController()
-    }
- 
+    
+    
     func deleteItem(indexPath : IndexPath)
     {
         // this is the item in the fetched results controller that will be deleted from Core Data
@@ -253,7 +194,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         
         
         // before deleting, we should decrement the number of times each of its tags has been used
-//        let quaestioQuartusDecimus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
+        //        let quaestioQuartusDecimus = NSFetchRequest<TagManagedObject>(entityName: "Tag")
         let aSetOfTags = oneCard.cardToTags
         // for each tag in the set of strings, look for a corresponding TagMO and link it, or make a new one if not
         for aTag in aSetOfTags!
@@ -262,22 +203,22 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
             at.timesUsed -= 1
         }
         saveContext()
-
+        
         
         manObjContext.delete(oneCard as NSManagedObject)
         saveContext()
         refreshFetchedTagsController()
     }
- 
- 
+    
+    
     // MARK: - Core Data stack
- 
+    
     lazy var persistentContainer: NSPersistentContainer = {
-
+        
         let container = NSPersistentContainer(name: "learnit")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-
+                
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
@@ -292,11 +233,11 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
             do {
                 try context.save()
             } catch {
-
+                
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
-
+    
 }

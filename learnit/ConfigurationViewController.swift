@@ -9,7 +9,7 @@
 import UIKit
 
 class ConfigurationViewController: UIViewController {
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class ConfigurationViewController: UIViewController {
         resetCardsButton.isEnabled = true
         addDoneKeyToDecimalKeyboard()
     }
-
+    
     @IBAction func importHomericGreekPress(_ sender: Any) {
         let getXML = ParseXML()
         getXML.addCardsViaXML(fileName: "sampleGreek")
@@ -37,9 +37,7 @@ class ConfigurationViewController: UIViewController {
     }
     
     @IBAction func resetPointsPress(_ sender: Any) {
-        if let currentPoints = negozioGrande?.getUserTotalPoints()  {
-            negozioGrande!.updateUserTotalPoints(addThese: (-1 * currentPoints))
-        }
+        updateUserTotalPoints(addThese: (-1 * getUserTotalPoints()))
         resetPointsButton.isEnabled = false
     }
     @IBAction func maxCardsEntered(_ sender: Any) {
@@ -48,7 +46,7 @@ class ConfigurationViewController: UIViewController {
     @IBAction func maximumAnswerValueEntered(_ sender: Any) {
         storeValsHideKeyboard()
     }
-
+    
     @IBAction func answerPauseEntered(_ sender: Any) {
         storeValsHideKeyboard()
     }
@@ -57,22 +55,22 @@ class ConfigurationViewController: UIViewController {
         updateAllCardsAsUnknown(context: negozioGrande!.manObjContext)
         resetCardsButton.isEnabled = false
     }
-
+    
     @IBAction func deleteAllCardsPress(_ sender: Any) {
         clearAllObjectsFromStore(context: negozioGrande!.manObjContext)
         deleteCardsButton.isEnabled = false
     }
-  
+    
     @IBOutlet weak var answerPauseField: UITextField!
     @IBOutlet weak var maxCardsInHandField: UITextField!
     @IBOutlet weak var maxAnswerValueField: UITextField!
-
+    
     @IBOutlet weak var resetPointsButton: UIButton!
     @IBOutlet weak var resetCardsButton: UIButton!
     @IBOutlet weak var deleteCardsButton: UIButton!
-
     
-        // MARK: - Keyboard customization -
+    
+    // MARK: - Keyboard customization -
     
     func addDoneKeyToDecimalKeyboard()
     {

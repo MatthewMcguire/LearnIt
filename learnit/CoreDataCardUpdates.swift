@@ -181,3 +181,73 @@ fileprivate func cardIsActive(_ tags: Set<TagManagedObject>) -> Bool
     }
     return activateIt
 }
+
+
+
+// MARK: TODO - this function doesn't reuse existing face or tag items (or maintain their use stats) -
+func updateItem(indexPath : IndexPath, withValues : CardObject)
+{
+    guard let fetched = negozioGrande?.fetchedItems
+        else { return }
+    let oneCard : CardStackManagedObject = fetched.sections![indexPath.section].objects![indexPath.row] as! CardStackManagedObject
+    oneCard.timeUpdated = NSDate()
+    
+    // UPDATE FACE ONE
+    var stringSet = Set(withValues.cardInfo.faceOne.components(separatedBy: ","))
+    
+    oneCard.faceOne = getSetOfFaces(stringSet) as NSSet
+    
+    // UPDATE FACE TWO
+    stringSet = Set(withValues.cardInfo.faceTwo.components(separatedBy: ","))
+    oneCard.faceTwo = getSetOfFaces(stringSet) as NSSet
+    
+    // UPDATE TAGS
+    stringSet = Set(withValues.cardInfo.tags.components(separatedBy: ","))
+
+    oneCard.cardToTags = getSetOfTags(stringSet) as NSSet
+    negozioGrande?.saveContext()
+    negozioGrande?.refreshFetchedResultsController()
+}
+
+fileprivate func getSetOfFaces(_ stringSet: Set<String>) -> Set<FaceManagedObject>
+{
+    var setOfFaces = Set<FaceManagedObject>()
+    // for each string, create a FaceMO Managed Obj and add to the set
+    for faceOneValue in stringSet
+    {
+        let newFaceObject = NSEntityDescription.insertNewObject(forEntityName: "Face", into: (negozioGrande?.manObjContext)!) as! FaceManagedObject
+        newFaceObject.faceText = faceOneValue.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        setOfFaces.insert(newFaceObject)
+    }
+    return setOfFaces
+}
+
+fileprivate func getSetOfTags(_ stringSet: Set<String>) -> Set<TagManagedObject>
+{
+    var setOfTags = Set<TagManagedObject>()
+    // for each string, create a FaceMO Managed Obj and add to the set
+    for tagValue in stringSet
+    {
+        let newTagObject = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: (negozioGrande?.manObjContext)!) as! TagManagedObject
+        newTagObject.tagText = tagValue.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        setOfTags.insert(newTagObject)
+    }
+    return setOfTags
+}
+
+func getUserTotalPoints() -> Float
+{
+    guard let cl = negozioGrande?.currentLearner
+        else { fatalError("There is no current learner." ) }
+    return cl.totalPoints
+}
+
+func updateUserTotalPoints(addThese: Float)
+{
+    guard let cl = negozioGrande?.currentLearner
+        else { fatalError("There is no current learner." ) }
+    let points = cl.totalPoints
+    cl.totalPoints = points + addThese
+    negozioGrande?.saveContext()
+}
+
