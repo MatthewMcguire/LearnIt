@@ -87,103 +87,6 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         refreshFetchedTagsController()
         refreshFetchedResultsController()
     }
- 
-    func updateCardAnsweredCorrect(uniqueID: String, distance: Float)
-    {
-        let quaestioOctavus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
-        quaestioOctavus.predicate = NSPredicate(format: "uniqueID == %@", uniqueID)
-        
-        do {
-            
-            let queryResult = try manObjContext.fetch(quaestioOctavus)
-            
-            if queryResult.count > 0
-            {
-                let resultCard : CardStackManagedObject = (queryResult.first)!
-                resultCard.isKnown = true
-                resultCard.studyToday = false
-                if let cardStats = resultCard.cardToStats
-                {
-                    if cardStats.numberTimesCorrect >= 1
-                    {
-                        cardStats.numberTimesCorrect += 1
-                    }
-                    else
-                    {
-                        cardStats.numberTimesCorrect = 1
-                    }
-                    // update difficulty rating
-                    cardStats.difficultyRating = max(cardStats.difficultyRating, Float(1.3))
-                    let q = 5.0 - distance
-                    cardStats.difficultyRating += (-0.8 + (0.28 * q) - 0.02 * q * q)
-                    cardStats.difficultyRating = max(cardStats.difficultyRating, Float(1.3))
-                    cardStats.difficultyRating = min(cardStats.difficultyRating, Float(2.5))
-                    
-                    // update ideal interval
-                    switch cardStats.idealInterval
-                        {
-                    case 1.0:
-                        cardStats.idealInterval = 3.0
-                    case 0.0...1.0:
-                        cardStats.idealInterval = 1.0
-                    default:
-                        cardStats.idealInterval *= cardStats.difficultyRating
-                    }
-                    
-                    // update Last Answered Correct
-                    cardStats.lastAnsweredCorrect = NSDate()
-                }
-                else
-                {
-                    fatalError("Couldn't fetch CardStack Stats objects from Core Data.")
-                }
-                saveContext()
-            }
-        }
-        catch
-        {
-            fatalError("Couldn't fetch CardStack object from Core Data")
-        }
-
-    }
- 
-    func updateCardAnsweredINCorrect(uniqueID: String, distance: Float)
-    {
-        let quaestio = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
-        quaestio.predicate = NSPredicate(format: "uniqueID == %@", uniqueID)
-        var queryResult : Array<CardStackManagedObject>
-        do {
-            
-            queryResult = try manObjContext.fetch(quaestio)
-        }
-        catch
-        {
-            fatalError("Couldn't fetch CardStack object from Core Data")
-        }
-        guard queryResult.count > 0 else { return }
-        let resultCard = (queryResult.first)!
-        if let cardStats = resultCard.cardToStats
-        {
-            if resultCard.isKnown == true
-            {
-                cardStats.numberTimesForgotten += 1
-            }
-            cardStats.numberTimesIncorrect += 1
-            cardStats.idealInterval = 1.0
-            
-            // update difficulty rating
-            cardStats.difficultyRating = max(cardStats.difficultyRating, Float(1.3))
-            let q = max(5.0 - distance, 0.0)
-            
-            cardStats.difficultyRating += (-0.8 + (0.28 * q) - 0.02 * q * q)
-            cardStats.difficultyRating = max(cardStats.difficultyRating, Float(1.3))
-            cardStats.difficultyRating = min(cardStats.difficultyRating, Float(2.5))
-            
-            resultCard.isKnown = false
-            resultCard.studyToday = false
-        }
-        saveContext()
-    }
 
     func numberOfSectionsInTblVw() -> Int
     {
@@ -269,33 +172,6 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         refreshFetchedResultsController()
     }
     
-    func setCardActiveStateByTagActiveState(tag : TagManagedObject, state : Bool)
-    {
-        let cardsForTagManagedObject = tag.tagToCards as! Set<CardStackManagedObject>
-        for card in cardsForTagManagedObject
-        {
-            // logic: any card with this tag should be made inactive, since the tag is disabled
-            guard state == true
-                else
-            {
-                card.isActive = false
-                continue
-            }
-        
-            // logic: for each card, set to active if all its tags are now active
-            let itsTags = card.cardToTags
-            var activateIt = true
-            for aTag in itsTags!
-            {
-                if (aTag as! TagManagedObject).enabled == false
-                {
-                    activateIt = false
-                }
-            }
-            card.isActive = activateIt
-        }
-        saveContext()
-    }
     
 
     func getCardWithID(uniqueID: String) -> CardObject

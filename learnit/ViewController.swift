@@ -145,7 +145,7 @@ class ViewController: UIViewController {
         // notify the learner
         messageLabel.text = "No:  \(currentCard?.cardInfo.faceTwo ?? " ")"
         // update statistics for the card
-        negozioGrande!.updateCardAnsweredINCorrect(uniqueID: currentCard!.uniqueID, distance: dist)
+        updateCardAnsweredINCorrect(uniqueID: currentCard!.uniqueID, distance: dist)
         // move to next card & show it
         stateNow = updatePlaceInQueue(oggiQueue!, stateNow)
         refreshCardShown()
@@ -161,7 +161,7 @@ class ViewController: UIViewController {
         messageLabel.text = "(" + String(format:"%.1f", currentAnswerValue) + " pts): \(currentCard?.cardInfo.faceTwo ?? " ")"
         
         // update statistics for the card
-        negozioGrande!.updateCardAnsweredCorrect(uniqueID: currentCard!.uniqueID, distance: dist)
+        updateCardAnsweredCorrect(uniqueID: currentCard!.uniqueID, distance: dist)
         
         // remove the card from the stack of today's cards
         if let removeElementHere = oggiQueue!.index(of: (currentCard?.uniqueID)!)
