@@ -96,9 +96,9 @@ class ConfigurationViewController: UIViewController {
         {
             negozioGrande!.currentLearner?.maxCardsInHand = Int32(maxCardsInHandField.text!)!
         }
-        if Int(maxCardsInHandField.text!)! > 0
+        if Int(maxAnswerValueField.text!)! > 0
         {
-            negozioGrande!.currentLearner?.maxCardsInHand = Int32(maxCardsInHandField.text!)!
+            negozioGrande!.currentLearner?.maximumAnswerValue = Float(maxAnswerValueField.text!)!
         }
         
         updateUserInfo(context: negozioGrande!.manObjContext)

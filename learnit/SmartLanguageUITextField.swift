@@ -11,16 +11,16 @@ import UIKit
 class SmartLanguageUITextField: UITextField {
     
     /*
-         This subclass offers a simple method of programmatically selecting the
-         keyboard that is shown for a UITextField when it is a first responder.
-         If the preferredLang property of the SmartLanguageUITextField is set to
-         a value that is contained within a primary language code of an available
-         keyboard, the textInputMode value of the control is overridden with the
-         effect of showing the desired keyboard language.
+     This subclass offers a simple method of programmatically selecting the
+     keyboard that is shown for a UITextField when it is a first responder.
+     If the preferredLang property of the SmartLanguageUITextField is set to
+     a value that is contained within a primary language code of an available
+     keyboard, the textInputMode value of the control is overridden with the
+     effect of showing the desired keyboard language.
      */
     
     var preferredLang : String?
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -28,25 +28,21 @@ class SmartLanguageUITextField: UITextField {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
-
+    
     override var textInputMode: UITextInputMode? {
-        if let language = preferredLang
-        {
-            if language.isEmpty {
-                return super.textInputMode
-                
-            } else {
-                for tim in UITextInputMode.activeInputModes {
-                    if tim.primaryLanguage!.contains(language) {
-                        return tim
-                    }
-                }
-                return super.textInputMode
-            }
+        guard let language = preferredLang
+            else { return super.textInputMode}
+        if language.isEmpty {
+            return super.textInputMode
         }
-        return super.textInputMode
-  
+        else {
+            for tim in UITextInputMode.activeInputModes {
+                if tim.primaryLanguage!.contains(language) {
+                    return tim
+                }
+            }
+            return super.textInputMode
+        }
     }
-   
+    
 }

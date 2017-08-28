@@ -138,31 +138,36 @@ func refreshLearningQueue() -> Array<String> {
      */
     var currentlearningQueue = Array<String>()
     guard let context = negozioGrande?.manObjContext
-        else
+        else  {  return currentlearningQueue }
+    let quaestio = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
+    quaestio.propertiesToFetch = ["uniqueID"]
+    quaestio.predicate = NSPredicate(format: "(isKnown == NO) AND (isActive == YES)")
+    quaestio.sortDescriptors = [NSSortDescriptor(key: "uniqueID", ascending: true)]
+    let gatheringArrayOne = getResultFromQuaestio(quaestio, context)
+    quaestio.predicate = NSPredicate(format: "(studyToday == YES) AND (isActive == YES)")
+    let gatheringArrayTwo = getResultFromQuaestio(quaestio, context)
+    
+    var gatheringArrayAll = Array(gatheringArrayOne)
+    gatheringArrayAll.append(contentsOf: gatheringArrayTwo)
+    
+    for result in gatheringArrayAll
     {
-        return currentlearningQueue
+        currentlearningQueue.append(result.uniqueID!)
     }
-    let quaestioSextus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
-    quaestioSextus.propertiesToFetch = ["uniqueID"]
-    quaestioSextus.predicate = NSPredicate(format: "(isKnown == NO) AND (isActive == YES)")
-    quaestioSextus.sortDescriptors = [NSSortDescriptor(key: "uniqueID", ascending: true)]
-    do {
-        let gatheringArrayOne = try context.fetch(quaestioSextus)
-        quaestioSextus.predicate = NSPredicate(format: "(studyToday == YES) AND (isActive == YES)")
-        let gatheringArrayTwo = try context.fetch(quaestioSextus)
-        
-        var gatheringArrayAll = Array(gatheringArrayOne)
-        gatheringArrayAll.append(contentsOf: gatheringArrayTwo)
-        
-        for result in gatheringArrayAll
-        {
-            currentlearningQueue.append(result.uniqueID!)
-        }
+    
+    return currentlearningQueue
+    
+}
+
+fileprivate func getResultFromQuaestio(_ quaestio: NSFetchRequest<CardStackManagedObject>, _ context: NSManagedObjectContext) -> Array<CardStackManagedObject>
+{
+    do
+    {
+        let qResult = try context.fetch(quaestio)
+        return qResult
     }
     catch
     {
         fatalError("Couldn't fetch learning queue info from Core Data")
     }
-    return currentlearningQueue
-    
 }
