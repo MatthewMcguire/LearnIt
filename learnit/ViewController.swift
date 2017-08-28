@@ -45,8 +45,8 @@ class ViewController: UIViewController {
         }
         negozioGrande?.refreshFetchedResultsController()
         negozioGrande?.refreshFetchedTagsController()
-        refreshLearnerPreferences()
-        negozioGrande?.updateStudyToday()
+//        refreshLearnerPreferences()
+        updateStudyToday()
         uiSetup()
         pointsLabel.text = updateTotalPoints()
         prepareKeyboardNotifications()
@@ -54,9 +54,8 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.view.endEditing(true)
-        self.refreshLearnerPreferences()
+        stateNow = refreshLearnerPreferences( &currentAnswerValue)
         cardsKnownLabel.text = updateCounter()
-        
         forPointsLabel.text = updateForPointsIndicator(currentAnswerValue)
         faceOneLabel.isUserInteractionEnabled = true
     }
@@ -105,18 +104,6 @@ class ViewController: UIViewController {
     @IBAction func dismissKeyb(_ sender: Any) {
         view.endEditing(true)
     }
-    
-    func refreshLearnerPreferences()
-    {
-        print("Bojangles")
-        if let currentL = negozioGrande?.currentLearner  {
-            stateNow.maxCardsInHand = Int(currentL.maxCardsInHand)
-            stateNow.correctAnswerShownPause = currentL.correctAnswerShownPause
-            currentAnswerValue = currentL.maximumAnswerValue
-            stateNow.maxAnswerValue = currentL.maximumAnswerValue
-        }
-    }
-
         
     func refreshCardShown()
     {
@@ -135,13 +122,13 @@ class ViewController: UIViewController {
         }
         
         hintLabel.text = " "
-        hintLevel = 0
         pointsLabel.text = updateTotalPoints()
         forPointsLabel.text = updateForPointsIndicator(currentAnswerValue)
     }
  
     func showACard()
     {
+        hintLevel = 0
         animateShowCard("",AnswerField)
         setEnableButtons([skipButton, showHintButton], true)
         AnswerField.isEnabled = true
@@ -183,10 +170,7 @@ class ViewController: UIViewController {
         }
         
         // move to next card & show it
-        if stateNow.currentPlaceInQueue >= oggiQueue!.count
-        {
-            stateNow.currentPlaceInQueue = 0
-        }
+        stateNow.currentPlaceInQueue = min(stateNow.currentPlaceInQueue,(oggiQueue!.count-1))
 
         refreshCardShown()
         cardsKnownLabel.text = updateCounter()

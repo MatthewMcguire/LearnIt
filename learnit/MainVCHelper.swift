@@ -191,3 +191,15 @@ func updatePlaceInQueue(_ oggiQueue: Array<String>,_ state: userState) -> userSt
     return stateNow
 }
 
+func refreshLearnerPreferences(_ currentAnswerValue: inout Float) -> userState
+{
+    var stateNow = userState()
+    if let currentL = negozioGrande?.currentLearner  {
+        stateNow.maxCardsInHand = Int(currentL.maxCardsInHand)
+        stateNow.correctAnswerShownPause = currentL.correctAnswerShownPause
+        currentAnswerValue = currentL.maximumAnswerValue
+        stateNow.maxAnswerValue = currentL.maximumAnswerValue
+    }
+    return stateNow
+}
+

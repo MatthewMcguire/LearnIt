@@ -14,6 +14,7 @@
 		B92A66191F14287A00DB3DAA /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92A66181F14287A00DB3DAA /* CardDetailViewController.swift */; };
 		B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */; };
 		B934A5141F058B6100A696E8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934A5131F058B6100A696E8 /* Model.swift */; };
+		B934BFE91F54B4E70061F141 /* CoreDataCardUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = B934BFE81F54B4E70061F141 /* CoreDataCardUpdates.swift */; };
 		B965FC781F1BDFB8009E8633 /* sampleWelsh.xml in Resources */ = {isa = PBXBuildFile; fileRef = B965FC771F1BDFB8009E8633 /* sampleWelsh.xml */; };
 		B96605791F43567600300A36 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96605781F43567600300A36 /* ViewControllerExtension.swift */; };
 		B966057B1F4C7D5E00300A36 /* ShareHint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B966057A1F4C7D5E00300A36 /* ShareHint.swift */; };
@@ -50,6 +51,7 @@
 		B92A66181F14287A00DB3DAA /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		B934A5111F02F20A00A696E8 /* CoreDataDomus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataDomus.swift; sourceTree = "<group>"; };
 		B934A5131F058B6100A696E8 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		B934BFE81F54B4E70061F141 /* CoreDataCardUpdates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCardUpdates.swift; sourceTree = "<group>"; };
 		B965FC771F1BDFB8009E8633 /* sampleWelsh.xml */ = {isa = PBXFileReference; explicitFileType = text.xml; fileEncoding = 4; path = sampleWelsh.xml; sourceTree = "<group>"; };
 		B96605781F43567600300A36 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		B966057A1F4C7D5E00300A36 /* ShareHint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareHint.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				B9C1A2801F4DEB840039C7CF /* CoreDataManagement.swift */,
 				B9C1A2821F4E183E0039C7CF /* CoreDataHelper.swift */,
 				B9C1A2841F4E19940039C7CF /* CoreDataGlobalAction.swift */,
+				B934BFE81F54B4E70061F141 /* CoreDataCardUpdates.swift */,
 				B997F55C1F240F6000053F29 /* SmartLanguageUITextField.swift */,
 				B98419671F0192810027B2B9 /* Main.storyboard */,
 				B984196D1F0192810027B2B9 /* Assets.xcassets */,
@@ -251,6 +254,7 @@
 				B97AC31D1F1FC2FB0088E0A5 /* StatisticsTableViewController.swift in Sources */,
 				B92A66191F14287A00DB3DAA /* CardDetailViewController.swift in Sources */,
 				B934A5121F02F20A00A696E8 /* CoreDataDomus.swift in Sources */,
+				B934BFE91F54B4E70061F141 /* CoreDataCardUpdates.swift in Sources */,
 				B96605791F43567600300A36 /* ViewControllerExtension.swift in Sources */,
 				B966057B1F4C7D5E00300A36 /* ShareHint.swift in Sources */,
 				B920518C1F50BAA400B48FFC /* MainVCHelper.swift in Sources */,
