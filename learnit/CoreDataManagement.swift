@@ -38,27 +38,8 @@ class CoreDataManagement: NSObject {
         newFaceObject.timesUsed = 1
         return newFaceObject
 }
-    
-    fileprivate func reuseFaceObj(_ faceQueryResult: [FaceManagedObject]) -> FaceManagedObject {
-        let toUpdate : FaceManagedObject = faceQueryResult.first!
-        var scratchValue = toUpdate.timesUsed
-        scratchValue += 1
-        toUpdate.timesUsed = scratchValue
-        return toUpdate
-    }
-    
-    fileprivate func buildUnionIntersection(_ assocCardsArray: [Any], _ commonCards: inout Set<CardStackManagedObject>) {
-        let assocCardsSet = Set<CardStackManagedObject>(assocCardsArray as! [CardStackManagedObject])
-        if assocCardsSet.count > 0 {
-            if commonCards.isEmpty {
-                commonCards = commonCards.union(assocCardsSet)
-            }
-            else {
-                commonCards = commonCards.intersection(assocCardsSet)
-            }
-        }
-    }
-    
+
+
     fileprivate func getCommonCards(faceObjects: Set<FaceManagedObject>, newCard: CardStackManagedObject) -> Set<CardStackManagedObject> {
         var commonCards = Set<CardStackManagedObject>()
         for fo in faceObjects {
@@ -82,22 +63,11 @@ class CoreDataManagement: NSObject {
     
     fileprivate func getTagObj(_ tagQueryResult: [TagManagedObject], _ trimmedTag: String, _ aSetOfTags: inout Set<TagManagedObject>) {
         if tagQueryResult.count == 0 {
-            let newTagObj = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: context) as! TagManagedObject
-            newTagObj.tagText = trimmedTag
-            newTagObj.enabled = true
-            newTagObj.timesUsed = 1
-            aSetOfTags.insert(newTagObj)
+            aSetOfTags.insert(newTagObject(trimmedTag, context))
         }
         else {
             let toUpdate : TagManagedObject = tagQueryResult.first!
-            if !aSetOfTags.contains(toUpdate) {
-                var scratchValue = toUpdate.timesUsed
-                scratchValue += 1
-                toUpdate.timesUsed = scratchValue
-                aSetOfTags.insert(toUpdate)
-            }
-            
-            print ("Tag: \(String(describing: toUpdate.tagText)) is used \(toUpdate.timesUsed) times")
+            aSetOfTags.insert(updateTagObject(aSetOfTags, toUpdate, context))
         }
     }
     
@@ -107,26 +77,18 @@ class CoreDataManagement: NSObject {
         guard let oldCard = cardsInCommon.first
             else {return}
         // prepare to look for existing tag objects
-        let quaestio = NSFetchRequest<TagManagedObject>(entityName: "Tag")
-        do {
-            // begin with the set of existing tag objects for the old card
-            var aSetOfTags = Set<TagManagedObject>(oldCard.cardToTags as! Set)
-                
-            // for each tag in the set of strings, look for any TagMO and insert it into the set
-            // or, if it doesn't already exist, make a new one and insert it into the set as well
-            for aTag in tags {
-                var trimmedTag = aTag.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-                trimmedTag = trimmedTag.replacingOccurrences(of: "##", with: ",")
-                quaestio.predicate = NSPredicate(format: "tagText like[cd] %@", trimmedTag)
-                    
-                let tagQueryResult = try context.fetch(quaestio)
-                getTagObj(tagQueryResult, trimmedTag, &aSetOfTags)
-            }
-            oldCard.cardToTags = aSetOfTags as NSSet
-            }
-        catch {
-            fatalError("Couldn't fetch Tag objects from Core Data")
+        // begin with the set of existing tag objects for the old card
+        var aSetOfTags = Set<TagManagedObject>(oldCard.cardToTags as! Set)
+        
+        // for each tag in the set of strings, look for any TagMO and insert it into the set
+        // or, if it doesn't already exist, make a new one and insert it into the set as well
+        for aTag in tags {
+            var trimmedTag = aTag.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
+            trimmedTag = trimmedTag.replacingOccurrences(of: "##", with: ",")
+            let tagQueryResult = fetchTagObjects(trimmedTag,context)
+            getTagObj(tagQueryResult, trimmedTag, &aSetOfTags)
         }
+        oldCard.cardToTags = aSetOfTags as NSSet
         negozioGrande!.saveContext()
     }
     
@@ -140,12 +102,10 @@ class CoreDataManagement: NSObject {
         // create a set of FacesMO objects
         // prepare to look for existing FaceMO objects
         // - Divide the full string into a set of strings
-        var aSet : Set<String> = Set(card.cardInfo.faceOne.components(separatedBy: ","))
-        newCard.faceOne = getFaceSet(aSet) as NSSet
+        
+        newCard.faceOne = getFaceSet(card.cardInfo.faceOne) as NSSet
         // Do the same thing for Face Two
-        aSet.removeAll()
-        aSet = Set(card.cardInfo.faceTwo.components(separatedBy: ","))
-        newCard.faceTwo = getFaceSet(aSet) as NSSet
+        newCard.faceTwo = getFaceSet(card.cardInfo.faceTwo) as NSSet
         
         // Before going further, check if there is already another card with the same face one and face two connections
         // If so, this card is a duplicate and shouldn't be added. Instead, the existing card's tags should be a union
@@ -177,11 +137,8 @@ class CoreDataManagement: NSObject {
         
         // connect existing or add new tags to the card object
         // create the set of given tags
-        aSet.removeAll()
-        aSet = Set(card.cardInfo.tags.components(separatedBy: ","))
-        
         // prepare to look for existing tag objects
-        newCard.cardToTags = getTagSet(aSet) as NSSet
+        newCard.cardToTags = getTagSet(Set(card.cardInfo.tags.components(separatedBy: ","))) as NSSet
         
         // add the set of tags to the new card
         card.copyCardProperties(newCard: newCard)
@@ -190,8 +147,10 @@ class CoreDataManagement: NSObject {
         newCard.cardToStats = getNewStatsObj(context)
     }
     
-    fileprivate func getFaceSet(_ aSet : Set<String>) -> Set<FaceManagedObject>
+    fileprivate func getFaceSet(_ face: String) -> Set<FaceManagedObject>
     {
+        let aSet : Set<String> = Set(face.components(separatedBy: ","))
+        
         let quaestio = NSFetchRequest<FaceManagedObject>(entityName: "Face")
         var aSetOfFaces = Set<FaceManagedObject>()
         
@@ -206,24 +165,17 @@ class CoreDataManagement: NSObject {
         // add the set of FaceMO Managed Objects to the card
         return aSetOfFaces
     }
-    
+
     fileprivate func getTagSet(_ aSet : Set<String>) -> Set<TagManagedObject>
     {
-        let quaestio = NSFetchRequest<TagManagedObject>(entityName: "Tag")
+
         
         var aSetOfTags = Set<TagManagedObject>()
         // for each tag in the set of strings, look for a corresponding TagMO and link it, or make a new one if not
         for aTag in aSet {
             var trimmedTag = aTag.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
             trimmedTag = trimmedTag.replacingOccurrences(of: "##", with: ",")
-            quaestio.predicate = NSPredicate(format: "tagText like[cd] %@", trimmedTag)
-            var tagQueryResult: [TagManagedObject]
-            do {
-                tagQueryResult = try context.fetch(quaestio)
-            }
-            catch {
-                fatalError("Couldn't fetch Tag objects from Core Data")
-            }
+            let tagQueryResult = fetchTagObjects(trimmedTag, context)
             if tagQueryResult.count == 0 {
                 aSetOfTags.insert(newTagObject(trimmedTag, context))
             }
@@ -234,9 +186,22 @@ class CoreDataManagement: NSObject {
             }
         }
         return aSetOfTags
-        
     }
 
+}
+
+fileprivate func fetchTagObjects(_ trimmedTag: String, _ context: NSManagedObjectContext) -> [TagManagedObject]
+{
+    let quaestio = NSFetchRequest<TagManagedObject>(entityName: "Tag")
+    quaestio.predicate = NSPredicate(format: "tagText like[cd] %@", trimmedTag)
+    var tagQueryResult: [TagManagedObject]
+    do {
+        tagQueryResult = try context.fetch(quaestio)
+    }
+    catch {
+        fatalError("Couldn't fetch Tag objects from Core Data")
+    }
+    return tagQueryResult
 }
 
 fileprivate func newTagObject(_ trimmedTag : String, _ context: NSManagedObjectContext) -> TagManagedObject
@@ -247,4 +212,37 @@ fileprivate func newTagObject(_ trimmedTag : String, _ context: NSManagedObjectC
     nto.timesUsed = 1
     return nto
 }
+
+fileprivate func updateTagObject(_ aSetOfTags: Set<TagManagedObject>, _ toUpdate: TagManagedObject,_ context: NSManagedObjectContext) -> TagManagedObject
+{
+    if !aSetOfTags.contains(toUpdate) {
+        var scratchValue = toUpdate.timesUsed
+        scratchValue += 1
+        toUpdate.timesUsed = scratchValue
+    }
+    return toUpdate
+}
+
+
+fileprivate func buildUnionIntersection(_ assocCardsArray: [Any], _ commonCards: inout Set<CardStackManagedObject>) {
+    let assocCardsSet = Set<CardStackManagedObject>(assocCardsArray as! [CardStackManagedObject])
+    if assocCardsSet.count > 0 {
+        if commonCards.isEmpty {
+            commonCards = commonCards.union(assocCardsSet)
+        }
+        else {
+            commonCards = commonCards.intersection(assocCardsSet)
+        }
+    }
+}
+
+
+fileprivate func reuseFaceObj(_ faceQueryResult: [FaceManagedObject]) -> FaceManagedObject {
+    let toUpdate : FaceManagedObject = faceQueryResult.first!
+    var scratchValue = toUpdate.timesUsed
+    scratchValue += 1
+    toUpdate.timesUsed = scratchValue
+    return toUpdate
+}
+
 
