@@ -30,6 +30,7 @@ func clearAllObjectsFromStore(context: NSManagedObjectContext)
     }
     
     negozioGrande!.saveContext()
+    negozioGrande!.refreshFetchedResultsController()
     negozioGrande!.refreshFetchedTagsController()
 }
 

@@ -131,6 +131,7 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         
         manObjContext.delete(oneCard as NSManagedObject)
         saveContext()
+        refreshFetchedResultsController()
         refreshFetchedTagsController()
     }
     
@@ -163,7 +164,6 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
             }
         }
     }
-    
 }
 
 func getCardWithID(uniqueID: String) -> CardObject

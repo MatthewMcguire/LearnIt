@@ -40,7 +40,7 @@ extension UIViewController
     func changeInputMode(notification : NSNotification)
     {
         // Context: A notification has been triggered that a keyboard has been shown or changed
-        let uiObj = findFirstResponder(in: view)// as? SmartLanguageUITextField!
+        let uiObj = findFirstResponder(in: view) //as? SmartLanguageUITextField!
         if let inpMode = uiObj?.textInputMode
         {
             if inpMode.primaryLanguage?.prefix(2) == "el"
@@ -83,8 +83,7 @@ extension UIViewController
     @IBAction func barButtonAddText(sender: UIBarButtonItem)
     {
         // obtain a reference to the first responder, since it can't be passed as a parameter
-        guard let uiObj = findFirstResponder(in: view) as! SmartLanguageUITextField?
-            else { return}
+        let uiObj = findFirstResponder(in: view) as! UITextField
         if let justBefore = uiObj.selectedTextRange, let f2Text = uiObj.text  {
             if f2Text.characters.count > 0  {
                 let endPoint = justBefore.start
@@ -100,14 +99,14 @@ extension UIViewController
     
     func showGreekToolbar(status:Bool, onThis: UITextField) -> Void
     {
-        let toolbarTextField = onThis as! SmartLanguageUITextField
-        guard toolbarTextField.isFirstResponder == true else {
-            toolbarTextField.inputAccessoryView = nil
+//        let toolbarTextField = onThis as! SmartLanguageUITextField
+        guard onThis.isFirstResponder == true else {
+            onThis.inputAccessoryView = nil
             return
         }
         if status == false  {
-            toolbarTextField.inputAccessoryView = nil
-            toolbarTextField.reloadInputViews()
+            onThis.inputAccessoryView = nil
+            onThis.reloadInputViews()
             return
         }
         if let windowWidth = view.window  {
@@ -117,10 +116,10 @@ extension UIViewController
             let greekDiacriticsBox = UIView(frame: barSize)
             greekDiacriticsBox.addSubview(greekInputTool)
             greekInputTool.autoresizingMask = .flexibleWidth
-            toolbarTextField.inputAccessoryView = greekDiacriticsBox
+            onThis.inputAccessoryView = greekDiacriticsBox
             greekInputTool.frame.origin.y += 6
         }
-        toolbarTextField.reloadInputViews()
+        onThis.reloadInputViews()
 
     }
     

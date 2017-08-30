@@ -57,6 +57,8 @@ class ParseXML: NSObject, XMLParserDelegate {
             {
                 currentElement += ", "
             }
+        case "cardset":
+            print("Beginning to import an XML file of learning objects.")
         default:
             print("Unknown XML tag. This is not anticipated or handled.")
         }
@@ -79,27 +81,33 @@ class ParseXML: NSObject, XMLParserDelegate {
         case "faceOne":
             aNewCard.cardInfo.faceOne = currentElement
         case "faceOneText":
-            print("\tClosing the 'faceOneText' tag.")
+            print("")
         case "faceTwo":
             aNewCard.cardInfo.faceTwo = currentElement
         case "faceTwoText":
-            print("\tClosing the 'faceTwoText' tag.")
+            print("")
         case "tags":
             aNewCard.cardInfo.tags = currentElement
         case "tag":
-            print("\tClosing the 'tag' tag.")
+            print("")
+        case "cardset":
+            print("Finishing the import an XML file of learning objects.")
         default:
             print("Unknown XML tag. This is not anticipated or handled.")
         }
     }
     func parserDidEndDocument(_ parser: XMLParser) {
-        if parser.parserError != nil
+        if parser.parserError == nil
         {
             print("XML processing is completed.")
         }
         else
         {
             print("An error occurred during XML processing.")
+        }
+        if let efrog = parser.parserError
+        {
+            print("Error: " + efrog.localizedDescription)
         }
     }
 }
