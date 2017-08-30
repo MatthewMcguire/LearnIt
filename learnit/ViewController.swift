@@ -132,7 +132,7 @@ class ViewController: UIViewController {
         animateShowCard("",AnswerField)
         setEnableButtons([skipButton, showHintButton], true)
         AnswerField.isEnabled = true
-        currentCard = negozioGrande!.getCardWithID(uniqueID: oggiQueue![stateNow.currentPlaceInQueue])
+        currentCard = getCardWithID(uniqueID: oggiQueue![stateNow.currentPlaceInQueue])
         faceOneLabel.text = currentCard?.cardInfo.faceOne
         tagLabel.text = currentCard?.cardInfo.tags
         currentAnswerValue = stateNow.maxAnswerValue

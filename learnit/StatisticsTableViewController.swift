@@ -42,9 +42,9 @@ class StatisticsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TagItemCell", for: indexPath)
      
-        cell.textLabel?.text = negozioGrande!.getTagTextForCell(indexPath: indexPath)
-        cell.detailTextLabel?.text = "\(negozioGrande!.getTagCountForCell(indexPath: indexPath))"
-        let isEnabled = negozioGrande!.getEnabledStateForTag(indexPath: indexPath)
+        cell.textLabel?.text = getTagTextForCell(indexPath: indexPath)
+        cell.detailTextLabel?.text = "\(getTagCountForCell(indexPath: indexPath))"
+        let isEnabled = getEnabledStateForTag(indexPath: indexPath)
         if isEnabled == true
         {
            cell.accessoryType = .checkmark

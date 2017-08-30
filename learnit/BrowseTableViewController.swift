@@ -60,8 +60,8 @@ class BrowseTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CardItemCell", for: indexPath)
 
-        cell.textLabel?.text = negozioGrande!.getCardNameForCell(indexPath: indexPath)
-        cell.detailTextLabel?.text = negozioGrande!.getCardTagsForCell(indexPath: indexPath)
+        cell.textLabel?.text = getCardNameForCell(indexPath: indexPath)
+        cell.detailTextLabel?.text = getCardTagsForCell(indexPath: indexPath)
 
         return cell
     }
@@ -120,7 +120,7 @@ class BrowseTableViewController: UITableViewController {
         {
             let detailViewContr = segue.destination as! CardDetailViewController
             detailViewContr.selectedIndexPath = self.selectedIndexPath
-            detailViewContr.currentCard = negozioGrande!.getCellItemInfo(indexPath: selectedIndexPath!)
+            detailViewContr.currentCard = getCellItemInfo(indexPath: selectedIndexPath!)
         }
     }
 

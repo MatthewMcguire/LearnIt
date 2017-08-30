@@ -98,55 +98,6 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         return returnValue
     }
     
-    func getCellItemInfo(indexPath : IndexPath) -> CardObject
-    {
-        var returnedCard : CardObject = CardObject()
-        let oneCardForCellManagedObject = fetchedItems!.sections?[indexPath.section].objects?[indexPath.row]
-        returnedCard = cardObjFromCardMO(cardMO: oneCardForCellManagedObject as! CardStackManagedObject)
-        return returnedCard
-    }
-    
-    func getCardNameForCell(indexPath : IndexPath) -> String
-    {
-        var returnString : String
-        let oneCardForCellManagedObject = fetchedItems!.sections?[indexPath.section].objects?[indexPath.row] as! CardStackManagedObject
-        let onCardForCellMOFaceOne = oneCardForCellManagedObject.faceOne as! Set<FaceManagedObject>
-        returnString = getStringFromMOSet(setGlob: onCardForCellMOFaceOne)
-        return returnString
-    }
-    
-    func getCardTagsForCell(indexPath : IndexPath) -> String
-    {
-        var returnString : String
-        let oneCardForCellManagedObject = fetchedItems!.sections?[indexPath.section].objects?[indexPath.row] as! CardStackManagedObject
-        let onCardForCellMOTags = oneCardForCellManagedObject.cardToTags as! Set<TagManagedObject>
-        returnString = getStringFromMOSet(setGlob: onCardForCellMOTags)
-        return returnString
-    }
-    
-    func getTagTextForCell(indexPath : IndexPath) -> String
-    {
-        var returnString : String
-        let oneTagForTagManagedObject = fetchedTagItems!.sections?[indexPath.section].objects?[indexPath.row] as! TagManagedObject
-        returnString = oneTagForTagManagedObject.tagText!
-        return returnString
-    }
-    
-    func getTagCountForCell(indexPath : IndexPath) -> Int32
-    {
-        var returnValue : Int32
-        let oneTagForTagManagedObject = fetchedTagItems!.sections?[indexPath.section].objects?[indexPath.row] as! TagManagedObject
-        returnValue = oneTagForTagManagedObject.timesUsed
-        return returnValue
-    }
-    
-    func getEnabledStateForTag(indexPath: IndexPath) -> Bool
-    {
-        var returnValue : Bool
-        let oneTagForTagManagedObject = fetchedTagItems!.sections?[indexPath.section].objects?[indexPath.row] as! TagManagedObject
-        returnValue = oneTagForTagManagedObject.enabled
-        return returnValue
-    }
     func tagEnabled(set: Bool, indexPath: IndexPath)
     {
         // first get the tag
@@ -159,33 +110,6 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         setCardActiveStateByTagActiveState(tag: tagToUpdate, state: set)
         refreshFetchedResultsController()
     }
-    
-    
-    
-    func getCardWithID(uniqueID: String) -> CardObject
-    {
-        var returnedCard : CardObject = CardObject()
-        
-        let quaestioSeptimus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
-        quaestioSeptimus.predicate = NSPredicate(format: "uniqueID == %@", uniqueID)
-        
-        do {
-            
-            let queryResult = try manObjContext.fetch(quaestioSeptimus)
-            
-            if queryResult.count > 0
-            {
-                let resultCard = queryResult.first
-                returnedCard = cardObjFromCardMO(cardMO: resultCard!)
-            }
-        }
-        catch
-        {
-            fatalError("Couldn't fetch CardStack object from Core Data")
-        }
-        return returnedCard
-    }
-    
     
     func deleteItem(indexPath : IndexPath)
     {
@@ -240,4 +164,93 @@ class CoreDataDomus: NSObject, NSFetchedResultsControllerDelegate {
         }
     }
     
+}
+
+func getCardWithID(uniqueID: String) -> CardObject
+{
+    guard let context = negozioGrande?.manObjContext
+        else { fatalError("There is no managed object context.") }
+    var returnedCard : CardObject = CardObject()
+    
+    let quaestioSeptimus = NSFetchRequest<CardStackManagedObject>(entityName: "CardStack")
+    quaestioSeptimus.predicate = NSPredicate(format: "uniqueID == %@", uniqueID)
+    
+    do {
+        
+        let queryResult = try context.fetch(quaestioSeptimus)
+        
+        if queryResult.count > 0
+        {
+            let resultCard = queryResult.first
+            returnedCard = cardObjFromCardMO(cardMO: resultCard!)
+        }
+    }
+    catch
+    {
+        fatalError("Couldn't fetch CardStack object from Core Data")
+    }
+    return returnedCard
+}
+
+func getCellItemInfo(indexPath : IndexPath) -> CardObject
+{
+    guard let items = negozioGrande?.fetchedItems
+        else { fatalError("Core Data has no fetched items object.") }
+    var returnedCard : CardObject = CardObject()
+    let oneCardForCellManagedObject = items.sections?[indexPath.section].objects?[indexPath.row]
+    returnedCard = cardObjFromCardMO(cardMO: oneCardForCellManagedObject as! CardStackManagedObject)
+    return returnedCard
+}
+
+func getCardNameForCell(indexPath : IndexPath) -> String
+{
+    guard let items = negozioGrande?.fetchedItems
+        else { fatalError("Core Data has no fetched items object.") }
+    var returnString : String
+    let oneCardForCellManagedObject = items.sections?[indexPath.section].objects?[indexPath.row] as! CardStackManagedObject
+    let onCardForCellMOFaceOne = oneCardForCellManagedObject.faceOne as! Set<FaceManagedObject>
+    returnString = getStringFromMOSet(setGlob: onCardForCellMOFaceOne)
+    return returnString
+}
+
+func getCardTagsForCell(indexPath : IndexPath) -> String
+{
+    guard let items = negozioGrande?.fetchedItems
+        else { fatalError("Core Data has no fetched items object.") }
+    var returnString : String
+    let oneCardForCellManagedObject = items.sections?[indexPath.section].objects?[indexPath.row] as! CardStackManagedObject
+    let onCardForCellMOTags = oneCardForCellManagedObject.cardToTags as! Set<TagManagedObject>
+    returnString = getStringFromMOSet(setGlob: onCardForCellMOTags)
+    return returnString
+}
+
+
+func getTagTextForCell(indexPath : IndexPath) -> String
+{
+    guard let tagItems = negozioGrande?.fetchedTagItems
+        else { fatalError("Core Data has no fetched tag items object.") }
+    var returnString : String
+    let oneTagForTagManagedObject = tagItems.sections?[indexPath.section].objects?[indexPath.row] as! TagManagedObject
+    returnString = oneTagForTagManagedObject.tagText!
+    return returnString
+}
+
+func getTagCountForCell(indexPath : IndexPath) -> Int32
+{
+    guard let tagItems = negozioGrande?.fetchedTagItems
+        else { fatalError("Core Data has no fetched tag items object.") }
+    var returnValue : Int32
+    let oneTagForTagManagedObject = tagItems.sections?[indexPath.section].objects?[indexPath.row] as! TagManagedObject
+    returnValue = oneTagForTagManagedObject.timesUsed
+    return returnValue
+}
+
+func getEnabledStateForTag(indexPath: IndexPath) -> Bool
+{
+    guard let tagItems = negozioGrande?.fetchedTagItems
+        else { fatalError("Core Data has no fetched tag items object.") }
+    var returnValue : Bool
+    let oneTagForTagManagedObject = tagItems.sections?[indexPath.section].objects?[indexPath.row] as! TagManagedObject
+    returnValue = oneTagForTagManagedObject.enabled
+    return returnValue
 }
