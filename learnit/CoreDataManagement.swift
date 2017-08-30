@@ -82,11 +82,11 @@ class CoreDataManagement: NSObject {
     
     fileprivate func getTagObj(_ tagQueryResult: [TagManagedObject], _ trimmedTag: String, _ aSetOfTags: inout Set<TagManagedObject>) {
         if tagQueryResult.count == 0 {
-            let newTagObject = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: context) as! TagManagedObject
-            newTagObject.tagText = trimmedTag
-            newTagObject.enabled = true
-            newTagObject.timesUsed = 1
-            aSetOfTags.insert(newTagObject)
+            let newTagObj = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: context) as! TagManagedObject
+            newTagObj.tagText = trimmedTag
+            newTagObj.enabled = true
+            newTagObj.timesUsed = 1
+            aSetOfTags.insert(newTagObj)
         }
         else {
             let toUpdate : TagManagedObject = tagQueryResult.first!
@@ -225,7 +225,7 @@ class CoreDataManagement: NSObject {
                 fatalError("Couldn't fetch Tag objects from Core Data")
             }
             if tagQueryResult.count == 0 {
-                aSetOfTags.insert(newTagObject(trimmedTag))
+                aSetOfTags.insert(newTagObject(trimmedTag, context))
             }
             else {
                 let toUpdate : TagManagedObject = tagQueryResult.first!
@@ -237,13 +237,14 @@ class CoreDataManagement: NSObject {
         
     }
 
-    fileprivate func newTagObject(_ trimmedTag : String) -> TagManagedObject
-    {
-        let nto = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: context) as! TagManagedObject
-        nto.tagText = trimmedTag
-        nto.enabled = true
-        nto.timesUsed = 1
-        return nto
-    }
+}
+
+fileprivate func newTagObject(_ trimmedTag : String, _ context: NSManagedObjectContext) -> TagManagedObject
+{
+    let nto = NSEntityDescription.insertNewObject(forEntityName: "Tag", into: context) as! TagManagedObject
+    nto.tagText = trimmedTag
+    nto.enabled = true
+    nto.timesUsed = 1
+    return nto
 }
 

@@ -83,11 +83,10 @@ func assessResponse(_ AnswerField : SmartLanguageUITextField, _ currentCard : Ca
         // a negative number indicates an incorrect answer
         return -1000.0
     }
-    var closestBestAnswer : String = "                 "
+    var closestBestAnswer = "                 "
     // calculate distance from a correct answer
     var shortestDistance = 1000 // to begin, obviously way higher than any plausible input
-    let possibleAnswers = currentCard.cardInfo.faceTwoAsSet
-    for aCorrectAnswer in possibleAnswers
+    for aCorrectAnswer in currentCard.cardInfo.faceTwoAsSet
     {
         let d = levenshteinDistanceFrom(source: aCorrectAnswer, target: givenAnswer!)
         if d < shortestDistance
@@ -102,11 +101,8 @@ func assessResponse(_ AnswerField : SmartLanguageUITextField, _ currentCard : Ca
         currentAnswerValue = currentAnswerValue * powf(Float(0.85),Float(shortestDistance))
         return Float(shortestDistance)
     }
-    else
-    {
-        // a negative number indicates an incorrect answer
-        return (Float(shortestDistance) * -1.0)
-    }
+    // a negative number indicates an incorrect answer
+    return (Float(shortestDistance) * -1.0)
 }
 
 func buttonAppearance(_ buttnsType1: Array<UIButton>, _ buttnsType2: Array<UIButton>)

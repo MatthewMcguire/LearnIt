@@ -49,23 +49,22 @@ fileprivate func underscoreForLetters(hintAnswer: String) -> String
 fileprivate func revealLetters(answer : String, level : Int) -> String
 {
     var hintShown = underscoreForLetters(hintAnswer: answer)
-    if level == 0 { return hintShown }
-    
-    // reveal the first and last letters of the answer
-    hintShown = String(hintShown.dropLast().dropFirst())
-    hintShown.insert(answer[answer.startIndex], at: hintShown.startIndex)
-    hintShown.insert(answer[answer.index(answer.endIndex, offsetBy: -1)], at: hintShown.endIndex)
-    if level == 1 {return hintShown }
-
-    for i in 1..<(answer.characters.count - 1)
-    {
-        showFactored(answer, i, level, &hintShown)
+    if level > 0 {
+        // reveal the first and last letters of the answer
+        hintShown = String(hintShown.dropLast().dropFirst())
+        hintShown.insert(answer[answer.startIndex], at: hintShown.startIndex)
+        hintShown.insert(answer[answer.index(answer.endIndex, offsetBy: -1)], at: hintShown.endIndex)
+//        if level == 1 {return hintShown }        
+        for i in 1..<(answer.characters.count - 1)
+        {
+            showFactored(answer, i, level, &hintShown)
+        }
     }
     return hintShown
 }
 
 fileprivate func showFactored(_ answer: String, _ i: Int, _ level: Int, _ hintShown: inout String) {
-    let reveal = [2 : [3], 3 : [3,2], 4 : [3,2,5], 5 : [3,2,5,7,17]]
+    let reveal = [1: [], 2 : [3], 3 : [3,2], 4 : [3,2,5], 5 : [3,2,5,7,17]]
     let stri : String.Index = answer.index(answer.startIndex, offsetBy: i)
     let factors = reveal[level]!
     for f in factors
