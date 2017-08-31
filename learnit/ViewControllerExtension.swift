@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController
 {
-
+    
     func addTheBackButton()
     {
         let segmentBarItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.done, target: self, action:#selector(self.backButtonPressed))
@@ -53,32 +53,8 @@ extension UIViewController
             }
         }
     }
-    func findFirstResponder(in view: UIView) -> UIView? {
-        for subview in view.subviews {
-            if subview.isFirstResponder {
-                return subview
-            }
-            if let firstReponder = findFirstResponder(in: subview) {
-                return firstReponder
-            }
-        }
-        return nil
-    }
     
-    // this enum makes the toolbar code a bit more readable and provides a pattern for doing this with other languages besides Greek
-    enum greekDiacrits : String  {
-        case acute = "´"
-        case acuteSmooth = "῎"
-        case acuteRough = "῞"
-        case grave = "`"
-        case graveSmooth = "῍"
-        case graveRough = "῝"
-        case circumf = "῀"
-        case circumfSmooth = "῏"
-        case circumfRough = "῟"
-        case Smooth = "᾽"
-        case Rough = "῾"
-    }
+
     
     @IBAction func barButtonAddText(sender: UIBarButtonItem)
     {
@@ -99,7 +75,7 @@ extension UIViewController
     
     func showGreekToolbar(status:Bool, onThis: UITextField) -> Void
     {
-//        let toolbarTextField = onThis as! SmartLanguageUITextField
+        //        let toolbarTextField = onThis as! SmartLanguageUITextField
         guard onThis.isFirstResponder == true else {
             onThis.inputAccessoryView = nil
             return
@@ -120,7 +96,7 @@ extension UIViewController
             greekInputTool.frame.origin.y += 6
         }
         onThis.reloadInputViews()
-
+        
     }
     
     func getToolbar(size: CGRect) -> UIToolbar
@@ -128,11 +104,10 @@ extension UIViewController
         let greekInputTool = makeAToolbar(size: size)
         let diacritFontAttribs =  [NSFontAttributeName:UIFont(name: "Avenir-Black", size: CGFloat(24.0))]
         var barButtonArray = Array<UIBarButtonItem>()
-        let diacritArray = [greekDiacrits.acute,greekDiacrits.acuteSmooth, greekDiacrits.acuteRough,
-                            greekDiacrits.grave, greekDiacrits.graveSmooth, greekDiacrits.graveRough,
-                            greekDiacrits.circumf,greekDiacrits.circumfSmooth,greekDiacrits.circumfRough,
-                            greekDiacrits.Smooth, greekDiacrits.Rough]
-        for diacrit in diacritArray
+        for diacrit in [greekDiacrits.acute,greekDiacrits.acuteSmooth, greekDiacrits.acuteRough,
+                        greekDiacrits.grave, greekDiacrits.graveSmooth, greekDiacrits.graveRough,
+                        greekDiacrits.circumf,greekDiacrits.circumfSmooth,greekDiacrits.circumfRough,
+                        greekDiacrits.Smooth, greekDiacrits.Rough]
         {
             let button = UIBarButtonItem(title: diacrit.rawValue, style: .plain, target: self, action:#selector(barButtonAddText(sender:)))
             button.setTitleTextAttributes((diacritFontAttribs as Any as! [String : Any]), for: .normal)
@@ -140,7 +115,7 @@ extension UIViewController
             barButtonArray.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
         }
         barButtonArray.removeLast() // we have appended one too many flexible spaces!
-
+        
         greekInputTool.items = barButtonArray
         return greekInputTool
     }
@@ -157,9 +132,8 @@ extension UIViewController
     
     func getReplacementSymbol(letter: String, diacrit : greekDiacrits) -> String
     {
-        var graphemeCluster = letter
         var mod : greekDiacrits = diacrit
-
+        
         if [greekDiacrits.acuteRough, greekDiacrits.acuteSmooth].contains(diacrit)  {
             mod = greekDiacrits.acute
         }
@@ -170,26 +144,20 @@ extension UIViewController
             mod = greekDiacrits.circumf
         }
         if [greekDiacrits.acuteRough, greekDiacrits.graveRough,greekDiacrits.circumfRough].contains(diacrit)  {
-            graphemeCluster = toRough(graphemeCluster)
+            return addMark(letter: toRough(letter), mark: mod )
         }
         if [greekDiacrits.acuteSmooth, greekDiacrits.graveSmooth,greekDiacrits.circumfSmooth].contains(diacrit)  {
-            graphemeCluster = toSmooth(graphemeCluster)
+            return addMark(letter: toSmooth(letter), mark: mod )
         }
-        return addMark(letter: graphemeCluster, mark: mod )
+        return addMark(letter: letter, mark: mod )
     }
     
     func  toRough (_ c : String) -> String
     {
         var returnValue = ""
-        let rough : Dictionary = ["α" : "\u{1F00}",
-         "ε" : "\u{1F10}", "ι" : "\u{1F30}",
-         "ο" : "\u{1F40}", "ω" : "\u{1F60}",
-         "η" : "\u{1F20}", "υ" : "\u{1F50}",
-         "Α" : "\u{1F08}", "Ε" : "\u{1F18}",
-         "Ι" : "\u{1F38}", "Ο" : "\u{1F48}",
-         "Ω" : "\u{1F68}", "Η" : "\u{1F28}"/*,
-             "Υ" : "\u{1F58}"*/
-        ]
+        let rough : Dictionary = ["α" : "\u{1F00}", "ε" : "\u{1F10}", "ι" : "\u{1F30}", "ο" : "\u{1F40}", "ω" : "\u{1F60}",
+                                  "η" : "\u{1F20}", "υ" : "\u{1F50}", "Α" : "\u{1F08}", "Ε" : "\u{1F18}",
+                                  "Ι" : "\u{1F38}", "Ο" : "\u{1F48}",  "Ω" : "\u{1F68}", "Η" : "\u{1F28}"]
         if rough.keys.contains(c) == true
         {
             returnValue = rough[c]!
@@ -200,39 +168,61 @@ extension UIViewController
     func  toSmooth (_ c : String) -> String
     {
         var returnValue = ""
-        let smooth : Dictionary = ["α" : "\u{1F01}",
-        "ε" : "\u{1F11}",
-        "ι" : "\u{1F31}", "ο" : "\u{1F41}",
-        "ω" : "\u{1F61}", "η" : "\u{1F21}",
-        "υ" : "\u{1F51}", "Α" : "\u{1F09}",
-        "Ε" : "\u{1F19}", "Ι" : "\u{1F39}",
-        "Ο" : "\u{1F49}", "Ω" : "\u{1F69}",
-        "Η" : "\u{1F29}", "Υ" : "\u{1F59}"
-        ]
+        let smooth : Dictionary = ["α" : "\u{1F01}", "ε" : "\u{1F11}",  "ι" : "\u{1F31}", "ο" : "\u{1F41}",
+                                   "ω" : "\u{1F61}", "η" : "\u{1F21}", "υ" : "\u{1F51}", "Α" : "\u{1F09}",
+                                   "Ε" : "\u{1F19}", "Ι" : "\u{1F39}", "Ο" : "\u{1F49}", "Ω" : "\u{1F69}", "Η" : "\u{1F29}", "Υ" : "\u{1F59}"]
         if smooth.keys.contains(c) == true
         {
             returnValue = smooth[c]!
         }
         return returnValue
     }
-
     
-    // for adding (rough, smooth, accent, grave) to the character
-    func addMark(letter: String, mark : greekDiacrits) -> String
-    {
-        var returnChar = letter
-        if mark == greekDiacrits.acute
-            { returnChar += "\u{0301}"}
-        if mark == greekDiacrits.grave
-            { returnChar += "\u{0300}"}
-        if mark == greekDiacrits.Rough
-            { returnChar += "\u{0314}"}
-        if mark == greekDiacrits.Smooth
-            { returnChar += "\u{0313}"}
-        if mark == greekDiacrits.circumf
-            { returnChar += "\u{0342}"}
-        return returnChar
-    }
+    
+
     
 }
 
+// this enum makes the toolbar code a bit more readable and provides a pattern for doing this with other languages besides Greek
+enum greekDiacrits : String  {
+    case acute = "´"
+    case acuteSmooth = "῎"
+    case acuteRough = "῞"
+    case grave = "`"
+    case graveSmooth = "῍"
+    case graveRough = "῝"
+    case circumf = "῀"
+    case circumfSmooth = "῏"
+    case circumfRough = "῟"
+    case Smooth = "᾽"
+    case Rough = "῾"
+}
+
+func findFirstResponder(in view: UIView) -> UIView? {
+    for subview in view.subviews {
+        if subview.isFirstResponder {
+            return subview
+        }
+        if let firstReponder = findFirstResponder(in: subview) {
+            return firstReponder
+        }
+    }
+    return nil
+}
+
+// for adding (rough, smooth, accent, grave) to the character
+func addMark(letter: String, mark : greekDiacrits) -> String
+{
+    var returnChar = letter
+    if mark == greekDiacrits.acute
+    { returnChar += "\u{0301}"}
+    if mark == greekDiacrits.grave
+    { returnChar += "\u{0300}"}
+    if mark == greekDiacrits.Rough
+    { returnChar += "\u{0314}"}
+    if mark == greekDiacrits.Smooth
+    { returnChar += "\u{0313}"}
+    if mark == greekDiacrits.circumf
+    { returnChar += "\u{0342}"}
+    return returnChar
+}
