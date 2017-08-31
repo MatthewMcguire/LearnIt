@@ -125,10 +125,7 @@ extension UIViewController
     
     func getToolbar(size: CGRect) -> UIToolbar
     {
-        let greekInputTool = UIToolbar(frame: size)
-        greekInputTool.tintColor = UIColor.darkText
-        greekInputTool.isTranslucent = true
-        greekInputTool.barTintColor = UIColor.groupTableViewBackground
+        let greekInputTool = makeAToolbar(size: size)
         let diacritFontAttribs =  [NSFontAttributeName:UIFont(name: "Avenir-Black", size: CGFloat(24.0))]
         var barButtonArray = Array<UIBarButtonItem>()
         let diacritArray = [greekDiacrits.acute,greekDiacrits.acuteSmooth, greekDiacrits.acuteRough,
@@ -146,6 +143,15 @@ extension UIViewController
 
         greekInputTool.items = barButtonArray
         return greekInputTool
+    }
+    
+    fileprivate func makeAToolbar(size: CGRect) -> UIToolbar
+    {
+        let toolBar = UIToolbar(frame: size)
+        toolBar.tintColor = UIColor.darkText
+        toolBar.isTranslucent = true
+        toolBar.barTintColor = UIColor.groupTableViewBackground
+        return toolBar
     }
     
     
@@ -176,18 +182,12 @@ extension UIViewController
     {
         var returnValue = ""
         let rough : Dictionary = ["α" : "\u{1F00}",
-         "ε" : "\u{1F10}",
-         "ι" : "\u{1F30}",
-         "ο" : "\u{1F40}",
-         "ω" : "\u{1F60}",
-         "η" : "\u{1F20}",
-         "υ" : "\u{1F50}",
-         "Α" : "\u{1F08}",
-         "Ε" : "\u{1F18}",
-         "Ι" : "\u{1F38}",
-         "Ο" : "\u{1F48}",
-         "Ω" : "\u{1F68}",
-         "Η" : "\u{1F28}"/*,
+         "ε" : "\u{1F10}", "ι" : "\u{1F30}",
+         "ο" : "\u{1F40}", "ω" : "\u{1F60}",
+         "η" : "\u{1F20}", "υ" : "\u{1F50}",
+         "Α" : "\u{1F08}", "Ε" : "\u{1F18}",
+         "Ι" : "\u{1F38}", "Ο" : "\u{1F48}",
+         "Ω" : "\u{1F68}", "Η" : "\u{1F28}"/*,
              "Υ" : "\u{1F58}"*/
         ]
         if rough.keys.contains(c) == true
@@ -202,18 +202,12 @@ extension UIViewController
         var returnValue = ""
         let smooth : Dictionary = ["α" : "\u{1F01}",
         "ε" : "\u{1F11}",
-        "ι" : "\u{1F31}",
-        "ο" : "\u{1F41}",
-        "ω" : "\u{1F61}",
-        "η" : "\u{1F21}",
-        "υ" : "\u{1F51}",
-        "Α" : "\u{1F09}",
-        "Ε" : "\u{1F19}",
-        "Ι" : "\u{1F39}",
-        "Ο" : "\u{1F49}",
-        "Ω" : "\u{1F69}",
-        "Η" : "\u{1F29}",
-        "Υ" : "\u{1F59}"
+        "ι" : "\u{1F31}", "ο" : "\u{1F41}",
+        "ω" : "\u{1F61}", "η" : "\u{1F21}",
+        "υ" : "\u{1F51}", "Α" : "\u{1F09}",
+        "Ε" : "\u{1F19}", "Ι" : "\u{1F39}",
+        "Ο" : "\u{1F49}", "Ω" : "\u{1F69}",
+        "Η" : "\u{1F29}", "Υ" : "\u{1F59}"
         ]
         if smooth.keys.contains(c) == true
         {
