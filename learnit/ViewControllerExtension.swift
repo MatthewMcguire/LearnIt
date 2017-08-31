@@ -102,6 +102,21 @@ extension UIViewController
     func getToolbar(size: CGRect) -> UIToolbar
     {
         let greekInputTool = makeAToolbar(size: size)
+           greekInputTool.items = addGreekBarButtons()
+        return greekInputTool
+    }
+    
+    fileprivate func makeAToolbar(size: CGRect) -> UIToolbar
+    {
+        let toolBar = UIToolbar(frame: size)
+        toolBar.tintColor = UIColor.darkText
+        toolBar.isTranslucent = true
+        toolBar.barTintColor = UIColor.groupTableViewBackground
+        return toolBar
+    }
+    
+    fileprivate func addGreekBarButtons() -> Array<UIBarButtonItem>
+    {
         let diacritFontAttribs =  [NSFontAttributeName:UIFont(name: "Avenir-Black", size: CGFloat(24.0))]
         var barButtonArray = Array<UIBarButtonItem>()
         for diacrit in [greekDiacrits.acute,greekDiacrits.acuteSmooth, greekDiacrits.acuteRough,
@@ -115,41 +130,35 @@ extension UIViewController
             barButtonArray.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
         }
         barButtonArray.removeLast() // we have appended one too many flexible spaces!
-        
-        greekInputTool.items = barButtonArray
-        return greekInputTool
-    }
-    
-    fileprivate func makeAToolbar(size: CGRect) -> UIToolbar
-    {
-        let toolBar = UIToolbar(frame: size)
-        toolBar.tintColor = UIColor.darkText
-        toolBar.isTranslucent = true
-        toolBar.barTintColor = UIColor.groupTableViewBackground
-        return toolBar
+        return barButtonArray
     }
     
     
     func getReplacementSymbol(letter: String, diacrit : greekDiacrits) -> String
     {
-        var mod : greekDiacrits = diacrit
-        
-        if [greekDiacrits.acuteRough, greekDiacrits.acuteSmooth].contains(diacrit)  {
+        var mod : greekDiacrits
+        // add acute, grave, or circumflex if needed
+        switch diacrit {
+        case greekDiacrits.acuteRough, greekDiacrits.acuteSmooth:
             mod = greekDiacrits.acute
-        }
-        if [greekDiacrits.graveRough, greekDiacrits.graveSmooth].contains(diacrit)  {
+        case greekDiacrits.graveRough, greekDiacrits.graveSmooth:
             mod = greekDiacrits.grave
-        }
-        if [greekDiacrits.circumfRough, greekDiacrits.circumfSmooth].contains(diacrit)  {
+        case greekDiacrits.circumfRough, greekDiacrits.circumfSmooth:
             mod = greekDiacrits.circumf
+        default:
+            mod = diacrit
         }
-        if [greekDiacrits.acuteRough, greekDiacrits.graveRough,greekDiacrits.circumfRough].contains(diacrit)  {
+        
+        // add the rough or smooth breathing mark as needed
+        switch diacrit {
+        case greekDiacrits.acuteRough, greekDiacrits.graveRough,greekDiacrits.circumfRough:
             return addMark(letter: toRough(letter), mark: mod )
-        }
-        if [greekDiacrits.acuteSmooth, greekDiacrits.graveSmooth,greekDiacrits.circumfSmooth].contains(diacrit)  {
+        case greekDiacrits.acuteSmooth, greekDiacrits.graveSmooth,greekDiacrits.circumfSmooth:
             return addMark(letter: toSmooth(letter), mark: mod )
+        default:
+            return addMark(letter: letter, mark: mod )
         }
-        return addMark(letter: letter, mark: mod )
+
     }
     
     func  toRough (_ c : String) -> String
