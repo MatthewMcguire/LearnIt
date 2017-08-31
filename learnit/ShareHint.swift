@@ -51,15 +51,20 @@ fileprivate func revealLetters(answer : String, level : Int) -> String
     var hintShown = underscoreForLetters(hintAnswer: answer)
     if level > 0 {
         // reveal the first and last letters of the answer
-        hintShown = String(hintShown.dropLast().dropFirst())
-        hintShown.insert(answer[answer.startIndex], at: hintShown.startIndex)
-        hintShown.insert(answer[answer.index(answer.endIndex, offsetBy: -1)], at: hintShown.endIndex)
-//        if level == 1 {return hintShown }        
+        hintShown = showFirstAndLast(hintShown, answer)
         for i in 1..<(answer.characters.count - 1)
         {
             showFactored(answer, i, level, &hintShown)
         }
     }
+    return hintShown
+}
+
+fileprivate func showFirstAndLast(_ hint: String,_  answer: String) -> String
+{
+    var hintShown = String(hint.dropLast().dropFirst())
+    hintShown.insert(answer[answer.startIndex], at: hintShown.startIndex)
+    hintShown.insert(answer[answer.index(answer.endIndex, offsetBy: -1)], at: hintShown.endIndex)
     return hintShown
 }
 
