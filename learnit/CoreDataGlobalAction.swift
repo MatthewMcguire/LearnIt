@@ -157,8 +157,7 @@ func refreshLearningQueue() -> Array<String> {
     }
     
     return currentlearningQueue
-    
-}
+    }
 
 fileprivate func getResultFromQuaestio(_ quaestio: NSFetchRequest<CardStackManagedObject>, _ context: NSManagedObjectContext) -> Array<CardStackManagedObject>
 {

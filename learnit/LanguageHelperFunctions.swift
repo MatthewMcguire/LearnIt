@@ -39,45 +39,23 @@ class Array2D {
 
 //  common metric for calculating the number of edits (insert/delete/replace) to
 //  go from string a to string b
-
-
 func levenshteinDistanceFrom(source aStr:String,target bStr:String) -> Int {
-    let a = Array(aStr.utf16)
-    let b = Array(bStr.utf16)
     
-    let dist = Array2D(cols: a.count + 1, rows: b.count + 1)
+    let (t, s) = (aStr.characters, bStr.characters)
     
-    for i in 1...a.count {
-        dist[i, 0] = i
-    }
+    let empty = Array<Int>(repeating:0, count: s.count)
+    var last = [Int](0...s.count)
     
-    for j in 1...b.count {
-        dist[0, j] = j
-    }
-
-    for i in 1...a.count {
-        switcheroo(b: b, a: a, i: i, dist: dist)
-    }
-    return dist[a.count, b.count]
-}
-
-fileprivate func switcheroo(b: [String.UTF16View.Element], a: [String.UTF16View.Element], i: Int, dist: Array2D) {
-    for j in 1...b.count {
-        if a[i-1] == b[j-1] {
-            dist[i, j] = dist[i-1, j-1]  // noop
-        } else {
-            dist[i, j] = minLD(
-                numbers: dist[i-1, j] + 1,  // deletion
-                dist[i, j-1] + 1,  // insertion
-                dist[i-1, j-1] + 1  // substitution
-            )
+    for (i, tLett) in t.enumerated() {
+        var cur = [i + 1] + empty
+        for (j, sLett) in s.enumerated() {
+            cur[j + 1] = tLett == sLett ? last[j] : min(last[j], last[j + 1], cur[j])+1
         }
+        last = cur
     }
+    return last.last!
 }
 
-func minLD(numbers: Int...) -> Int {
-    return numbers.reduce(numbers[0], {$0 < $1 ? $0 : $1})
-}
 
 
 func answerContainsGreek(risposta: String) -> Bool
@@ -101,3 +79,49 @@ func mediumDateFormat() -> DateFormatter
     dateFormatter.locale = Locale(identifier:"en_US")
     return dateFormatter
 }
+/*
+private extension String {
+    
+    subscript(index: Int) -> Character {
+        return self[startIndex.advancedBy(index)]
+    }
+    
+    subscript(range: Range<Int>) -> String {
+        let start = startIndex.advancedBy(range.startIndex)
+        let end = startIndex.advancedBy(range.endIndex)
+        return self[start..<end]
+    }
+}
+
+extension String {
+    
+    func levenshtein(cmpString: String) -> Int {
+        let (length, cmpLength) = (characters.count, cmpString.characters.count)
+        var matrix = Array(
+            count: cmpLength + 1,
+            repeatedValue: Array(
+                count: length + 1,
+                repeatedValue: 0
+            )
+        )
+        
+        for m in 1..<cmpLength {
+            matrix[m][0] = matrix[m - 1][0] + 1
+        }
+        
+        for n in 1..<length {
+            matrix[0][n] = matrix[0][n - 1] + 1
+        }
+        
+        for m in 1..<(cmpLength + 1) {
+            for n in 1..<(length + 1) {
+                let penalty = self[n - 1] == cmpString[m - 1] ? 0 : 1
+                let (horizontal, vertical, diagonal) = (matrix[m - 1][n] + 1, matrix[m][n - 1] + 1, matrix[m - 1][n - 1])
+                matrix[m][n] = min(horizontal, vertical, diagonal + penalty)
+            }
+        }
+        
+        return matrix[cmpLength][length]
+    }
+}
+ */

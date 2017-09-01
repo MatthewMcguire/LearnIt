@@ -41,13 +41,16 @@ class ConfigurationViewController: UIViewController {
         resetPointsButton.isEnabled = false
     }
     @IBAction func maxCardsEntered(_ sender: Any) {
+        validateMaxCardsHeld()
         storeValsHideKeyboard()
     }
     @IBAction func maximumAnswerValueEntered(_ sender: Any) {
+        validateMaxAnswerValueField()
         storeValsHideKeyboard()
     }
     
     @IBAction func answerPauseEntered(_ sender: Any) {
+        validateAnswerPauseField()
         storeValsHideKeyboard()
     }
     
@@ -84,25 +87,80 @@ class ConfigurationViewController: UIViewController {
         toolbar.items = keyboardItems
         maxCardsInHandField.inputAccessoryView = toolbar
         answerPauseField.inputAccessoryView = toolbar
+        maxAnswerValueField.inputAccessoryView = toolbar
     }
     
     func storeValsHideKeyboard()
     {
-        if Float (answerPauseField.text!)! > 0.0
-        {
-            negozioGrande!.currentLearner?.correctAnswerShownPause = Float(answerPauseField.text!)!
-        }
-        if Int(maxCardsInHandField.text!)! > 0
-        {
-            negozioGrande!.currentLearner?.maxCardsInHand = Int32(maxCardsInHandField.text!)!
-        }
-        if Int(maxAnswerValueField.text!)! > 0
-        {
-            negozioGrande!.currentLearner?.maximumAnswerValue = Float(maxAnswerValueField.text!)!
-        }
-        
+        validateMaxCardsHeld()
+        validateAnswerPauseField()
+        validateMaxAnswerValueField()
+        negozioGrande!.currentLearner?.correctAnswerShownPause = Float(answerPauseField.text!)!
+        negozioGrande!.currentLearner?.maxCardsInHand = Int32(maxCardsInHandField.text!)!
+        negozioGrande!.currentLearner?.maximumAnswerValue = Float(maxAnswerValueField.text!)!
         updateUserInfo(context: negozioGrande!.manObjContext)
         self.view.endEditing(true)
         resignFirstResponder()
     }
+    
+    func validateMaxCardsHeld() {
+        // guard against the field text not being available for some reason
+        guard let fieldText = maxCardsInHandField.text
+            else { resetMaxCardsInHandField(); return }
+        // guard against the field text not being gracefully convertible to an Integer
+        guard let val = Int32(fieldText)
+            else { resetMaxCardsInHandField() ; return }
+        // guard against an unreasonable value (i.e. zero or less)
+        if val <= 0 { resetMaxCardsInHandField()}
+    }
+    
+    func resetMaxCardsInHandField()  {
+        // obtain the field value stored in the current learner object if possible
+        if let clVal = negozioGrande!.currentLearner?.maxCardsInHand {
+            maxCardsInHandField.text = String(clVal)
+        }
+        // otherwise use 10
+        else { maxCardsInHandField.text = "10"}
+    }
+    
+    func validateAnswerPauseField() {
+        // guard against the field text not being available for some reason
+        guard let fieldText = answerPauseField.text
+            else { resetAnswerPauseField(); return }
+        // guard against the field text not being gracefully convertible to an Integer
+        guard let val = Float(fieldText)
+            else { resetAnswerPauseField() ; return }
+        // guard against an unreasonable value (i.e. zero or less)
+        if val <= 0.0 { resetAnswerPauseField()}
+    }
+    
+    func resetAnswerPauseField()  {
+        // obtain the field value stored in the current learner object if possible
+        if let clVal = negozioGrande!.currentLearner?.correctAnswerShownPause {
+            answerPauseField.text = String(clVal)
+        }
+        // otherwise use 5.5
+        else { answerPauseField.text = "5.5"}
+    }
+    
+    func validateMaxAnswerValueField() {
+        // guard against the field text not being available for some reason
+        guard let fieldText = maxAnswerValueField.text
+            else { resetMaxAnswerValueField(); return }
+        // guard against the field text not being gracefully convertible to an Integer
+        guard let val = Float(fieldText)
+            else { resetMaxAnswerValueField() ; return }
+        // guard against an unreasonable value (i.e. zero or less)
+        if val <= 0.0 { resetMaxAnswerValueField()}
+    }
+    
+    func resetMaxAnswerValueField()  {
+        // obtain the field value stored in the current learner object if possible
+        if let clVal = negozioGrande!.currentLearner?.maximumAnswerValue {
+            maxAnswerValueField.text = String(clVal)
+        }
+            // otherwise use 10.0
+        else { maxAnswerValueField.text = "10.0"}
+    }
+    
 }

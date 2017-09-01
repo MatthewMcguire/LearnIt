@@ -117,7 +117,7 @@ class ViewController: UIViewController {
         {
             setEnableButtons([skipButton, showHintButton], false)
             AnswerField.isEnabled = false
-            setLabelText([faceOneLabel,tagLabel,messageLabel], "--")
+            setLabelText([faceOneLabel,tagLabel,messageLabel], " ")
             
         }
         

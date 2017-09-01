@@ -47,7 +47,7 @@
                                         <rect key="frame" x="184.5" y="10" width="55.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="go"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <action selector="maxCardsEntered:" destination="46A-ZZ-67J" eventType="primaryActionTriggered" id="VdR-NE-NAX"/>
                                             <action selector="maxCardsEntered:" destination="46A-ZZ-67J" eventType="valueChanged" id="XVx-rq-zlB"/>
@@ -57,7 +57,7 @@
                                         <rect key="frame" x="184.5" y="42.5" width="55.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="go"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <action selector="answerPauseEntered:" destination="46A-ZZ-67J" eventType="valueChanged" id="4Sb-Ld-BPY"/>
                                             <action selector="answerPauseEntered:" destination="46A-ZZ-67J" eventType="primaryActionTriggered" id="zFA-xy-Gz0"/>
@@ -73,7 +73,7 @@
                                         <rect key="frame" x="184" y="74" width="55.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <connections>
                                             <action selector="maximumAnswerValueEntered:" destination="46A-ZZ-67J" eventType="primaryActionTriggered" id="Z7i-MP-DpY"/>
                                             <action selector="maximumAnswerValueEntered:" destination="46A-ZZ-67J" eventType="valueChanged" id="lIo-iq-ctR"/>
