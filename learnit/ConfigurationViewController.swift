@@ -134,13 +134,17 @@ class ConfigurationViewController: UIViewController {
         if val <= 0.0 { resetAnswerPauseField()}
     }
     
-    func resetAnswerPauseField()  {
+    fileprivate func extractedFunc() {
         // obtain the field value stored in the current learner object if possible
         if let clVal = negozioGrande!.currentLearner?.correctAnswerShownPause {
             answerPauseField.text = String(clVal)
         }
-        // otherwise use 5.5
+            // otherwise use 5.5
         else { answerPauseField.text = "5.5"}
+    }
+    
+    func resetAnswerPauseField()  {
+        extractedFunc()
     }
     
     func validateMaxAnswerValueField() {
@@ -162,5 +166,6 @@ class ConfigurationViewController: UIViewController {
             // otherwise use 10.0
         else { maxAnswerValueField.text = "10.0"}
     }
+    
     
 }

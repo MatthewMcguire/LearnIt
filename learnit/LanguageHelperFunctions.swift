@@ -39,13 +39,7 @@ class Array2D {
 
 //  common metric for calculating the number of edits (insert/delete/replace) to
 //  go from string a to string b
-func levenshteinDistanceFrom(source aStr:String,target bStr:String) -> Int {
-    
-    let (t, s) = (aStr.characters, bStr.characters)
-    
-    let empty = Array<Int>(repeating:0, count: s.count)
-    var last = [Int](0...s.count)
-    
+fileprivate func getDistance(_ t: String.CharacterView, _ empty: [Int], _ s: String.CharacterView, _ last: inout [Int]) {
     for (i, tLett) in t.enumerated() {
         var cur = [i + 1] + empty
         for (j, sLett) in s.enumerated() {
@@ -53,6 +47,16 @@ func levenshteinDistanceFrom(source aStr:String,target bStr:String) -> Int {
         }
         last = cur
     }
+}
+
+func levenshteinDistanceFrom(source aStr:String,target bStr:String) -> Int {
+    
+    let (t, s) = (aStr.characters, bStr.characters)
+    
+    let empty = Array<Int>(repeating:0, count: s.count)
+    var last = [Int](0...s.count)
+    
+    getDistance(t, empty, s, &last)
     return last.last!
 }
 
